@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{% include "_head.html" %}
+
+<body>
+    <div class="container-fluid position-relative d-flex p-0">
+        {% include "_spinner.html" %}
+        {% include "_side_bar.html" %}
+
+        <div class="content">
+            {% include "_nav_bar.html" %}
+            {% block content %}{% endblock content %}
+        </div>
+    </div>
+    {% include "_plugin.html" %}
+</body>
+
+</html>
