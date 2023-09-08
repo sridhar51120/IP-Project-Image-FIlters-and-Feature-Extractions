@@ -3,13 +3,14 @@ from flask import Flask, redirect, url_for, request, render_template, session,Bl
 
 app = Flask(__name__,static_folder='assets',static_url_path='/')
 
-@app.route("/",methods=['GET','POST'])
+@app.route("/",methods=['GET'])
 def dashboard():
    return render_template("dashboard.html")
 
-@app.route("/filter",methods=['GET','POST'])
+@app.route("/Histogram_Equalization",methods=['GET'])
 def filter():
-   return render_template("filter.html")
+   return render_template("Histogram_Equalization.html")
+
 
 
 if __name__ == '__main__':

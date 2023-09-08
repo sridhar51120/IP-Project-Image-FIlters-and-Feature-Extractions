@@ -1,0 +1,50 @@
+<h1>
+    Contrast stretching, also known as contrast enhancement or normalization, is a simple image processing technique
+    used to improve the contrast in an image. It works by stretching the range of intensity values in an image so that
+    the full range from minimum to maximum values is utilized. This can make dark areas of an image darker and bright
+    areas brighter, effectively enhancing the overall visual quality.
+</h1>
+
+<p>
+    Here's a brief overview of how contrast stretching works:
+
+    Find the minimum and maximum pixel values in the image.
+    Apply a linear transformation to the pixel values to stretch them to the full range of intensity values (usually 0
+    to 255 for an 8-bit image).
+</p>
+<p>
+    import cv2
+    import numpy as np
+
+    # Load an image
+    image = cv2.imread('input_image.jpg', cv2.IMREAD_GRAYSCALE)
+
+    # Find the minimum and maximum pixel values
+    min_val = np.min(image)
+    max_val = np.max(image)
+
+    # Apply contrast stretching
+    stretched_image = np.uint8((image - min_val) / (max_val - min_val) * 255)
+
+    # Save the stretched image
+    cv2.imwrite('stretched_image.jpg', stretched_image)
+
+    # Display the original and stretched images (optional)
+    cv2.imshow('Original Image', image)
+    cv2.imshow('Stretched Image', stretched_image)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
+    <!--  -->
+</p>
+<p>
+    In this code:
+
+We load an input grayscale image using cv2.imread.
+We find the minimum and maximum pixel values in the image using np.min and np.max.
+We apply the contrast stretching formula to each pixel in the image.
+Finally, we save the stretched image and optionally display both the original and stretched images using OpenCV.
+</p>
+
+<p>
+    Make sure to replace 'input_image.jpg' with the path to your own input image file. This code is for grayscale images; if you want to apply contrast stretching to color images, you'll need to modify it accordingly.
+</p>
