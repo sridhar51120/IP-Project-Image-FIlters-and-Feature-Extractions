@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Viewer.js Example</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.10.1/viewer.min.css">
+    <script src="https://code.jquery.com/jquery-3.7.0.js"
+        integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
+        <style>
+            #image{
+                display: none;
+            }
+        </style>
+</head>
+
+<body>
+
+    <button class="btn btn-primary btn-click">Click</button>
+    <img src="uploads/enhancement/histogram/test.jpg" id="image" alt="Image to open">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.10.1/viewer.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.0.js"
+        integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
+    <script>
+
+
+        $('.btn-click').click(function () {
+            var viewer = new Viewer(document.getElementById('image'), {
+                loop: true,
+                interval: 500
+            }).show();
+        });
+
+    </script>
+</body>
+
+</html>

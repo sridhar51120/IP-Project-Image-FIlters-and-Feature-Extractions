@@ -20,16 +20,39 @@ $(document).ready(function () {
             const histogram_input_image = document.getElementById('histogram-input-image');
             if (histogram_input_image.files.length > 0) {
                 const fileName = histogram_input_image.files[0].name;
-                // alert(fileName);
-                // TODO: Only acceptable file formate is .jpg and .png
-                $('#histogram-image-modal').modal('hide');
-                $(".output-histogram-toggle-groups").collapse("toggle");
-                var toggleState = $(".output-histogram-toggle-groups").hasClass("show");
-                if (toggleState) {
-                    $(".output-histogram-toggle-groups").attr("data-toggle", "");
+                if (/\.(jpg|png)$/i.test(fileName)) {
+                    // alert(fileName); 
+                    $.ajax({
+                        url: '/Histogram_Equalization_output',
+                        type: 'POST',
+                        data: new FormData(document.getElementById('uploadForm')), // formdata only work in 'document.getElementById()' 
+                        processData: false,
+                        contentType: false,
+                        success: function (data, response) {
+                            // console.log('Server response:', response);
+                            // console.log('Data : ', data);
+                            $('.histo_image_collapse').append(data);
+                            $(".output-histogram-toggle-groups").collapse("toggle");
+                            var toggleState = $(".output-histogram-toggle-groups").hasClass("show");
+                            if (toggleState) {
+                                $(".output-histogram-toggle-groups").attr("data-toggle", "");
+                            } else {
+                                $(".output-histogram-toggle-groups").attr("data-toggle", "collapse");
+                            }
+                        },
+                        error: function (xhr, status, error) {
+                            // console.log('XHR status:', status);
+                            // console.log('XHR error:', error);
+                        },
+                        complete: function (xhr, status) {
+                            // console.log('Request complete. XHR status:', status);
+                        }
+                    });
+
                 } else {
-                    $(".output-histogram-toggle-groups").attr("data-toggle", "collapse");
+                    alert("Error: Invalid file extension");
                 }
+                $('#histogram-image-modal').modal('hide');
             } else {
                 alert('No file selected.');
             }

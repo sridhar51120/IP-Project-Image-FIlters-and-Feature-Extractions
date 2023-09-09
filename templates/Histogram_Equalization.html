@@ -9,21 +9,13 @@
                 <h5 class="modal-title text-secondary" id="histogram-image-modalLabel">Histogram</h5>
             </div>
             <div class="modal-body">
-                <form>
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">Upload</span>
-                        </div>
-                        <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="histogram-input-image"
-                                name="fileInput-image">
-                        </div>
-                    </div>
+                <form id="uploadForm" enctype="multipart/form-data">
+                    <input type="file" name="histogram-input-image-file" id="histogram-input-image">
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" id="btn-histogram-modal-close">Close</button>
-                <button type="button" class="btn btn-primary" id="btn-histogram-modal-submit">Save changes</button>
+                <button type="submit" class="btn btn-primary" id="btn-histogram-modal-submit">Save changes</button>
             </div>
         </div>
     </div>
@@ -219,45 +211,8 @@
         </div>
     </div>
 </div>
-<div class="collapse output-histogram-toggle-groups">
-    <div class="container-fluid pt-4 px-4">
-        <div class="bg-secondary text-center rounded p-4">
-            <div class="card card-body bg-dark text-secondary">
-                <div class="d-flex align-items-center justify-content-between">
-                    <h6 class="mb-0 text-primary">Outputs Images</h6>
-                </div>
-            </div>
-            <div class="mb-3"></div>
-            <div class="bg-secondary ">
-                <div class="card card-body bg-dark text-secondary">
-                    <div class="row g-3">
-                        <div class="col-sm-12 col-xl-6">
-                            <div class="bg-secondary text-center rounded p-4">
-                                <div class="card card-body text-center text-white bg-dark">
-                                    Original Image
-                                </div>
-                                <div class="mb-1"></div>
-                                <div class="card card-body bg-dark">
-                                    <button class="btn btn-success">Show Image</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-12 col-xl-6">
-                            <div class="bg-secondary text-center rounded p-4">
-                                <div class="card card-body text-center text-white bg-dark">
-                                    Histogram Equalisaztion Image
-                                </div>
-                                <div class="mb-1"></div>
-                                <div class="card card-body bg-dark">
-                                    <button class="btn btn-success">Show Image</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+<div class="histo_image_collapse">
+    
 </div>
 <br>
 
