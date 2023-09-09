@@ -20,15 +20,19 @@ def Histogram_Equalization_output():
       if request.method == 'POST':
          if 'histogram-input-image-file' in request.files:
             file = request.files['histogram-input-image-file']
-            file.save(os.path.join('uploads/enhancement/histogram', file.filename))
-            img_path = f'uploads/enhancement/histogram/{file.filename}'
+            img_path = f'assets/uploads/enhancement/histogram/{file.filename}'
+            file.save(os.path.join(img_path)) 
             enhancement = Enhancement(img_path)
             hist_img = enhancement.histogram()
-            file_details = {
+            data = {
                   'img_url': img_path,
                   'histo_img' : hist_img
                }
-            return render_template('enhancement/histogram.html',data = file_details)
+            return {
+               'template' : render_template('enhancement/histogram.html',data = data),
+               'img_url': img_path.replace("assets", ""),
+               'histo_img' : hist_img.replace("assets", "")
+               }
          else:
             return 'No file part in the request'
          
