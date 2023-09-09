@@ -23,7 +23,7 @@ $(document).ready(function () {
                 if (/\.(jpg|png)$/i.test(fileName)) {
                     // alert(fileName); 
                     $.ajax({
-                        url: '/Histogram_Equalization_output',
+                        url: '/enhancement/Histogram_Equalization_output',
                         type: 'POST',
                         data: new FormData(document.getElementById('uploadForm')), // formdata only work in 'document.getElementById()' 
                         processData: false,
