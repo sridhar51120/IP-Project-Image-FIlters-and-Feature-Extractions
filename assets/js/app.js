@@ -6,14 +6,6 @@ $(document).ready(function () {
         $('#histogram-image-modal').modal('hide');
     });
 
-    // $('.btn-histogram-modal-submit').click(function () {
-    //     const name = $('#histogram-input-image')
-    //     const imageName = name.files[0].name;
-    //     $.post('/upload', { imageName: imageName }, function (data) {
-    //         console.log(data);
-    //     });
-    // });
-
     $(document).ready(function () {
         const btn_histogram_submit_image = document.getElementById('btn-histogram-modal-submit');
         $(btn_histogram_submit_image).click(function () {
@@ -69,12 +61,54 @@ $(document).ready(function () {
                         }
                     });
                     $('#histogram-image-modal').modal('hide');
-
+                    var template = `
+                        <div class="toast-container top-0 start-0 p-3 ">
+                            <div class="toast file-selected-alert bg-success" role="alert" aria-live="assertive" aria-atomic="true">
+                                <div class="toast-body">
+                                    <strong> ${fileName} file Selected</strong>
+                                </div>
+                            </div>
+                        </div>
+                        `
+                    $('.toast-container-alert').append(template);
+                    $('.file-selected-alert').toast('show');
+                    setTimeout(function () {
+                        $('.file-selected-alert').toast('hide');
+                    }, 6000);
+                    // $('.toast-container-alert').remove();
                 } else {
-                    alert("Error: Invalid file extension");
+                    var template = `
+                    <div class="toast-container top-0 start-0 p-3 ">
+                        <div class="toast invalid-extension-alert bg-danger" role="alert" aria-live="assertive" aria-atomic="true">
+                            <div class="toast-body">
+                                <strong>Error: Invalid File Extension</strong>
+                            </div>
+                        </div>
+                    </div>
+                    `
+                    $('.toast-container-alert').append(template);
+                    $('.invalid-extension-alert').toast('show');
+                    setTimeout(function () {
+                        $('.invalid-extension-alert').toast('hide');
+                    }, 6000);
+                    // $('.toast-container-alert').remove();
                 }
             } else {
-                alert('No file selected.');
+                var template = `
+                <div class="toast-container top-0 start-0 p-3 ">
+                    <div class="toast file-not-found-alert bg-danger" role="alert" aria-live="assertive" aria-atomic="true">
+                        <div class="toast-body">
+                            <strong>Error: No file selected.</strong>
+                        </div>
+                    </div>
+                </div>
+                `
+                $('.toast-container-alert').append(template);
+                $('.file-not-found-alert').toast('show');
+                setTimeout(function () {
+                    $('.file-not-found-alert').toast('hide');
+                }, 6000);
+                // $('.toast-container-alert').remove();
             }
         })
     });
