@@ -62,10 +62,10 @@ $(document).ready(function () {
                     });
                     $('#histogram-image-modal').modal('hide');
                     var template = `
-                        <div class="toast-container top-0 start-0 p-3 ">
+                        <div class="toast-container bottom-0 end-0 p-3 ">
                             <div class="toast file-selected-alert bg-success" role="alert" aria-live="assertive" aria-atomic="true">
                                 <div class="toast-body">
-                                    <strong> ${fileName} file Selected</strong>
+                                    <strong class='text-white'> ${fileName} file Selected</strong>
                                 </div>
                             </div>
                         </div>
@@ -78,10 +78,10 @@ $(document).ready(function () {
                     // $('.toast-container-alert').remove();
                 } else {
                     var template = `
-                    <div class="toast-container top-0 start-0 p-3 ">
-                        <div class="toast invalid-extension-alert bg-danger" role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="toast-container bottom-0 end-0 p-3 ">
+                        <div class="toast invalid-extension-alert bg-danger" id='invalid-extension-alert' role="alert" aria-live="assertive" aria-atomic="true">
                             <div class="toast-body">
-                                <strong>Error: Invalid File Extension</strong>
+                                <strong class='text-white'>Error: Invalid File Extension</strong>
                             </div>
                         </div>
                     </div>
@@ -95,10 +95,10 @@ $(document).ready(function () {
                 }
             } else {
                 var template = `
-                <div class="toast-container top-0 start-0 p-3 ">
+                <div class="toast-container bottom-0 end-0 p-3 ">
                     <div class="toast file-not-found-alert bg-danger" role="alert" aria-live="assertive" aria-atomic="true">
                         <div class="toast-body">
-                            <strong>Error: No file selected.</strong>
+                            <strong class='text-white'>Error: No file selected.</strong>
                         </div>
                     </div>
                 </div>
