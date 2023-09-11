@@ -1,14 +1,33 @@
 $(document).ready(function () {
     $('.btn-load-img-histogram-equal').click(function () {
-        $('#histogram-image-modal').modal('show');
-    });
-    $('#btn-histogram-modal-close').click(function () {
-        $('#histogram-image-modal').modal('hide');
-    });
+        var template = `
+        <div class="container-fluid pt-4 px-4">
+                <div class="collapse histo-input-image-collapse-template">
+                    <div class="card bg-secondary">
+                        <div class="card-header">
+                            Upload your Image
+                        </div>
+                        <div class="card-body">
+                            <form id="uploadForm" enctype="multipart/form-data">
+                                <input type="file" name="histogram-input-image-file" id="histogram-input-image"
+                                    autocomplete="email">
+                            </form>
+                        </div>
+                        <div class="card-footer">
+                            <button class="btn btn-success" id="btn-histogram-input-image-submit">Upload</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `
+        $('.histo-input-image-collapse').append(template);
+        $('.histo-input-image-collapse-template').collapse({
+            toggle: false
+        }).show();
 
-    $(document).ready(function () {
-        const btn_histogram_submit_image = document.getElementById('btn-histogram-modal-submit');
+        const btn_histogram_submit_image = document.getElementById('btn-histogram-input-image-submit');
         $(btn_histogram_submit_image).click(function () {
+            // alert("hello world");
             const histogram_input_image = document.getElementById('histogram-input-image');
             if (histogram_input_image.files.length > 0) {
                 const fileName = histogram_input_image.files[0].name;
@@ -21,12 +40,27 @@ $(document).ready(function () {
                         processData: false,
                         contentType: false,
                         success: function (data, response) {
-                            // console.log('Server response:', response);
+                            var template = `
+                                    <div class="toast-container bottom-0 end-0 p-3 ">
+                                        <div class="toast file-selected-alert bg-success" role="alert" aria-live="assertive" aria-atomic="true">
+                                            <div class="toast-body">
+                                                <strong class='text-white'> ${fileName} file Selected</strong>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    `
+                            $('.toast-container-alert').append(template);
+                            $('.file-selected-alert').toast('show');
+                            setTimeout(function () {
+                                $('.file-selected-alert').toast('hide');
+                            }, 6000);
+
+                            console.log('Server response:', response);
                             console.log('Data : ', data);
+
                             $('.histo_image_collapse').append(data['template']);
                             $(".output-histogram-toggle-groups").collapse("toggle");
                             var toggleState = $(".output-histogram-toggle-groups").hasClass("show");
-
                             if (toggleState) {
                                 $(".output-histogram-toggle-groups").attr("data-toggle", "");
                             } else {
@@ -53,28 +87,13 @@ $(document).ready(function () {
                             });
                         },
                         error: function (xhr, status, error) {
-                            // console.log('XHR status:', status);
-                            // console.log('XHR error:', error);
+                            console.log('XHR status:', status);
+                            console.log('XHR error:', error);
                         },
                         complete: function (xhr, status) {
-                            // console.log('Request complete. XHR status:', status);
+                            console.log('Request complete. XHR status:', status);
                         }
                     });
-                    $('#histogram-image-modal').modal('hide');
-                    var template = `
-                        <div class="toast-container bottom-0 end-0 p-3 ">
-                            <div class="toast file-selected-alert bg-success" role="alert" aria-live="assertive" aria-atomic="true">
-                                <div class="toast-body">
-                                    <strong class='text-white'> ${fileName} file Selected</strong>
-                                </div>
-                            </div>
-                        </div>
-                        `
-                    $('.toast-container-alert').append(template);
-                    $('.file-selected-alert').toast('show');
-                    setTimeout(function () {
-                        $('.file-selected-alert').toast('hide');
-                    }, 6000);
                     // $('.toast-container-alert').remove();
                 } else {
                     var template = `
@@ -112,5 +131,4 @@ $(document).ready(function () {
             }
         })
     });
-
 });

@@ -1,26 +1,6 @@
 {% extends '__master.html' %}
 
 {% block content %}
-<div class="modal fade" id="histogram-image-modal"  data-bs-backdrop="static" tabindex="-1" role="dialog"
-    aria-labelledby="histogram-image-modalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title text-secondary" id="histogram-image-modalLabel">Histogram</h5>
-            </div>
-            <div class="modal-body">
-                <form id="uploadForm" enctype="multipart/form-data">
-                    <input type="file" name="histogram-input-image-file" id="histogram-input-image">
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" id="btn-histogram-modal-close">Close</button>
-                <button type="submit" class="btn btn-primary" id="btn-histogram-modal-submit">Save changes</button>
-            </div>
-        </div>
-    </div>
-</div>
-
 <div class="container-fluid pt-4 px-4">
     <div class="card bg-secondary">
         <div class="card-body">
@@ -212,8 +192,9 @@
     </div>
 </div>
 <div class="toast-container-alert"></div>
-<div class="histo_image_collapse">   
-</div>
+<div class="histo-input-image-collapse"></div>
+<div class="histo_image_collapse"></div>
 <br>
+
 
 {% endblock content %}

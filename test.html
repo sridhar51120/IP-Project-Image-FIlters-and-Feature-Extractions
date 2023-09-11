@@ -1,33 +1,92 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 
 <head>
-    <title>Viewer.js Example</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.10.1/viewer.min.css">
-    <script src="https://code.jquery.com/jquery-3.7.0.js"
-        integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
-        <style>
-            #image{
-                display: none;
-            }
-        </style>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="https://cdn.jsdelivr.net/npm/@coreui/coreui@4.3.0/dist/css/coreui.min.css" rel="stylesheet"
+        integrity="sha384-2E9/b2fZ+VJoP6eRIpzzMFkuqbh0qDkIFVLzJJwkESsdKPEwzb0n6E55enZ+Ee8V" crossorigin="anonymous">
+
+    <title>Hello, world!</title>
 </head>
 
 <body>
+    <br>
+    <div class="container">
+        <!-- <div class="card">
+            <div class="card-header">
+                
+            </div>
+            <div class="body">
+                <div class="card-title">
+                    <div>
+                        File <span class="text-danger"><strong>*</strong></span>
+                    </div>
+                </div>
+                <div class="card-text">
+                    <div class="container d-flex justify-content-center">
+                        <div class="input-group">
+                            <input type="file" class="form-control" id="inputGroupFile04"
+                                aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div> -->
 
-    <button class="btn btn-primary btn-click">Click</button>
-    <img src="uploads/enhancement/histogram/test.jpg" id="image" alt="Image to open">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.10.1/viewer.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.7.0.js"
-        integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
-    <script>
-        $('.btn-click').click(function () {
-            var viewer = new Viewer(document.getElementById('image'), {
-                loop: true,
-                interval: 500
-            }).show();
-        });
-    </script>
+        <!-- <div class="card">
+            <div class="card-header">
+                Upload your Image
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">File <span class="text-danger"><strong>*</strong></span></h5>
+                <div class="container d-flex justify-content-center">
+                    <div class="input-group">
+                        <input type="file" class="form-control" id="inputGroupFile04"
+                            aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+                    </div>
+                </div>
+                <div class="mb-3"></div>
+            </div>
+            <div class="card-footer">
+                <button class="btn btn-success">Upload</button>
+            </div>
+        </div> -->
+
+        <div class="container-fluid pt-4 px-4">
+            <div class="collapse histo-input-image-collapse-template">
+                <div class="card bg-secondary">
+                    <div class="card-header">
+                        Upload your Image
+                    </div>
+                    <div class="card-body">
+                        <form id="uploadForm" enctype="multipart/form-data">
+                            <input type="file" name="histogram-input-image-file" id="histogram-input-image"
+                                autocomplete="email">
+                        </form>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn btn-success" id="btn-histogram-input-image-submit">Upload</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/@coreui/coreui@4.3.0/dist/js/coreui.bundle.min.js"
+        integrity="sha384-Iqk8EE7ao72xAVBuuQTEwrU5N2IdvpJER5ZzM6LxwcXHqj2WstttaOvopXziv0nU"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@coreui/coreui-pro@4.6.2/dist/js/coreui.bundle.min.js"
+        integrity="sha384-MGnlekWgu70pfTJWjKL2rXoeUNhBVZ6Gh3XLc5UCM1Sid3iv+v3d4DpfiQq0qoQi"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@coreui/coreui@4.3.0/dist/js/coreui.min.js"
+        integrity="sha384-Ccu4pXX7m9x5nOmnhLGyxq3pqYWoc67qHmnJwC20bxJvdziB6gZtOAb9BLN5bOOb"
+        crossorigin="anonymous"></script>
 </body>
 
 </html>

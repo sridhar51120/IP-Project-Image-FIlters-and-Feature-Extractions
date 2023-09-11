@@ -4,7 +4,6 @@ import os
 
 bp = Blueprint("enhancement", __name__, url_prefix="/enhancement")
 
-
 @bp.route("/Histogram_Equalization",methods=['GET'])
 def Histogram_Equalization_temp():
    return render_template("Histogram_Equalization.html")
@@ -30,11 +29,9 @@ def Histogram_Equalization_output():
          else:
             return 'No file part in the request'
          
-
 @bp.route("/Gamma_correction",methods=['GET'])
 def Gamma_correction_temp():
    return render_template("Gamma_correction.html")
-
 
 @bp.route("/Contrast_Stretching",methods=['GET'])
 def Contrast_Stretching_temp():
