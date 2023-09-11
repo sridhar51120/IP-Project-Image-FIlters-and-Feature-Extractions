@@ -1,20 +1,33 @@
 $(document).ready(function () {
     $('.btn-load-img-histogram-equal').click(function () {
+        // $('#btn-histogram-input-image-submit').removeClass('disabled');
         var template = `
-        <div class="container-fluid pt-4 px-4">
+            <div class="container-fluid pt-4 px-4">
                 <div class="collapse histo-input-image-collapse-template">
-                    <div class="card bg-secondary">
-                        <div class="card-header">
-                            Upload your Image
+                    <div class="bg-secondary text-center rounded p-4">
+                        <div class="card card-body bg-dark text-secondary">
+                            <div class="d-flex align-items-start justify-content-start">
+                                <h6 class="text-primary">Upload your Image</h6>
+                            </div>
                         </div>
-                        <div class="card-body">
-                            <form id="uploadForm" enctype="multipart/form-data">
-                                <input type="file" name="histogram-input-image-file" id="histogram-input-image"
-                                    autocomplete="email">
-                            </form>
-                        </div>
-                        <div class="card-footer">
-                            <button class="btn btn-success" id="btn-histogram-input-image-submit">Upload</button>
+                        <div class="mb-3"></div>
+                        <div class="bg-secondary ">
+                            <div class="card bg-dark">
+                                <div class="card-body">
+                                    <h5 class="card-title text-danger d-flex justify-content-start">
+                                        File
+                                        <span class="text-danger"><strong> *</strong></span>
+                                    </h5>
+                                    <form id="uploadForm" enctype="multipart/form-data">
+                                        <input class="form-control d-flex justify-content-start border border-success" type="file"
+                                            name="histogram-input-image-file" id="histogram-input-image" autocomplete="Image">
+                                    </form>
+                                </div>
+                                <div class="card-footer ">
+                                    <button class="btn btn-success d-flex justify-content-start"
+                                        id="btn-histogram-input-image-submit">Upload</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -27,12 +40,10 @@ $(document).ready(function () {
 
         const btn_histogram_submit_image = document.getElementById('btn-histogram-input-image-submit');
         $(btn_histogram_submit_image).click(function () {
-            // alert("hello world");
             const histogram_input_image = document.getElementById('histogram-input-image');
             if (histogram_input_image.files.length > 0) {
                 const fileName = histogram_input_image.files[0].name;
                 if (/\.(jpg|png)$/i.test(fileName)) {
-                    // alert(fileName); 
                     $.ajax({
                         url: '/enhancement/Histogram_Equalization_output',
                         type: 'POST',
@@ -44,17 +55,19 @@ $(document).ready(function () {
                                     <div class="toast-container bottom-0 end-0 p-3 ">
                                         <div class="toast file-selected-alert bg-success" role="alert" aria-live="assertive" aria-atomic="true">
                                             <div class="toast-body">
-                                                <strong class='text-white'> ${fileName} file Selected</strong>
+                                                <strong class='text-white'> ${fileName} file has been Selected</strong>
                                             </div>
                                         </div>
                                     </div>
                                     `
+
+                            // $('#btn-histogram-input-image-submit').addClass('disabled');
                             $('.toast-container-alert').append(template);
                             $('.file-selected-alert').toast('show');
                             setTimeout(function () {
                                 $('.file-selected-alert').toast('hide');
                             }, 6000);
-
+                            // alert(fileName);
                             console.log('Server response:', response);
                             console.log('Data : ', data);
 
