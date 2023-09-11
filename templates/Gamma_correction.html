@@ -1,26 +1,6 @@
 {% extends '__master.html' %}
 
 {% block content %}
-<div class="modal fade" id="gamma-correction-image-modal" tabindex="-1" role="dialog"
-    aria-labelledby="gamma-correction-image-modalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title text-secondary" id="gamma-correction-image-modalLabel">gamma-correction</h5>
-            </div>
-            <div class="modal-body">
-                <form id="uploadForm" enctype="multipart/form-data">
-                    <input type="file" name="gamma-correction-input-image-file" id="gamma-correction-input-image">
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" id="btn-gamma-correction-modal-close">Close</button>
-                <button type="submit" class="btn btn-primary" id="btn-gamma-correction-modal-submit">Save changes</button>
-            </div>
-        </div>
-    </div>
-</div>
-
 <div class="container-fluid pt-4 px-4">
     <div class="card bg-secondary">
         <div class="card-body">
@@ -188,9 +168,10 @@
         </div>
     </div>
 </div>
-<div class="gammma-correction-image-collapse">
+<div class="toast-container-alert"></div>
+<div class="gamma-input-image-collapse"></div>
+<div class="gammma-correction-image-collapse"></div>
 
-</div>
 <br>
 
 {% endblock content %}
