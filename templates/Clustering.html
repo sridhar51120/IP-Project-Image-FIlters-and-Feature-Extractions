@@ -1,0 +1,295 @@
+{% extends '__master.html' %}
+
+{% block content %}
+<div class="container-fluid pt-4 px-4">
+    <div class="card bg-secondary">
+        <div class="card-body">
+            <h4 class="text-primary">Clustering image</h4>
+        </div>
+    </div>
+</div>
+<div class="container-fluid pt-4 px-4">
+    <div class="bg-secondary text-center rounded p-4">
+        <div class="card card-body bg-dark text-secondary">
+            <div class="d-flex align-items-center justify-content-between">
+                <h6 class="mb-0 text-primary">Definition</h6>
+            </div>
+        </div>
+        <div class="mb-3"></div>
+        <div class="bg-secondary ">
+            <div class="card card-body bg-dark text-secondary">
+                <p class="lead text-muted text-left">
+                    Clustering images is a common task in image processing and computer vision, where you group similar
+                    pixels or regions together based on certain criteria. One popular method for image clustering is
+                    K-means clustering. Here's a brief overview and a workflow for clustering images using Python with
+                    the K-means algorithm:
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid pt-4 px-4">
+    <div class="bg-secondary text-center rounded p-4">
+        <div class="card card-body bg-dark text-secondary">
+            <div class="d-flex align-items-center justify-content-between">
+                <h6 class="mb-0 text-primary">Overview</h6>
+            </div>
+        </div>
+        <div class="mb-3"></div>
+        <div class="bg-secondary ">
+            <div class="card card-body bg-dark text-secondary">
+                <p class="lead text-muted text-left">
+                    K-means clustering is an unsupervised machine learning algorithm used for partitioning a set of data
+                    points into K clusters based on their similarity. In the context of image clustering, each pixel's
+                    color or feature values are treated as data points, and the algorithm groups them into K clusters,
+                    where K is a user-defined parameter.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid pt-4 px-4">
+    <div class="bg-secondary text-center rounded p-4">
+        <div class="bg-secondary">
+
+            <div class="card card-body bg-dark text-secondary">
+                <div class="d-flex align-items-center justify-content-between">
+                    <h6 class="mb-0 text-primary">Brief overview of how Gamma correction works</h6>
+                </div>
+            </div>
+            <div class="mb-3"></div>
+            <div class="card card-body bg-dark text-secondary">
+                <h6 class="mb-0 d-flex justify-content-start">1. Data Preparation</h6>
+            </div>
+            <div class="mb-1"></div>
+            <div class="card card-body bg-dark text-secondary">
+                <p class="lead text-muted text-left">
+                    Load the image you want to cluster using a library like OpenCV or PIL (Python Imaging Library).
+                </p>
+                <hr class="bg-white">
+                <p class="lead text-muted text-left">
+                    Convert the image to a numerical format where each pixel is represented as a data point with feature
+                    values. For RGB images, you might represent each pixel as a 3D vector (R, G, B values) or use other
+                    feature extraction techniques.
+                </p>
+            </div>
+            <br>
+            <div class="card card-body bg-dark text-secondary">
+                <h6 class="mb-0 d-flex justify-content-start">2. Feature Extraction (if needed):
+                </h6>
+            </div>
+            <div class="mb-1"></div>
+            <div class="card card-body bg-dark text-secondary">
+                <p class="lead text-muted text-left">
+                    Depending on your image clustering goals, you may want to extract meaningful features from the
+                    image, such as color histograms, texture descriptors, or deep learning features using pre-trained
+                    neural networks.
+                </p>
+            </div>
+            <br>
+            <div class="card card-body bg-dark text-secondary">
+                <h6 class="mb-0 d-flex justify-content-start">3. K-means Clustering</h6>
+            </div>
+            <div class="mb-1"></div>
+            <div class="card card-body bg-dark">
+                <p class="lead text-muted text-left">
+                    Import the scikit-learn library in Python, which provides a robust implementation of the K-means
+                    algorithm. </p>
+                <hr class="bg-white text-muted ">
+                <p>Choose the number of clusters (K) you want to create. This may require prior knowledge or
+                    experimentation.</p>
+                <hr class="bg-white text-muted">
+                <p>Fit the K-means model to your image data using the KMeans class. You can specify various
+                    initialization methods and hyperparameters.</p>
+                <hr class="bg-white text-muted">
+                <p>
+                    Perform clustering by calling the fit method on your image data.
+                </p>
+            </div>
+            <br>
+            <div class="card card-body bg-dark text-secondary">
+                <h6 class="mb-0 d-flex justify-content-start">4. Cluster Assignment</h6>
+            </div>
+            <div class="mb-1"></div>
+            <div class="card card-body bg-dark text-secondary">
+                <p class="lead text-muted text-left">
+                    Once the K-means model is trained, each pixel in the image will be assigned to one of the K clusters
+                    based on its similarity to cluster centroids.</p>
+            </div>
+            <br>
+            <div class="card card-body bg-dark text-secondary">
+                <h6 class="mb-0 d-flex justify-content-start">4. Cluster Assignment</h6>
+            </div>
+            <div class="mb-1"></div>
+            <div class="card card-body bg-dark text-secondary">
+                <p class="lead text-muted text-left">
+                    Once the K-means model is trained, each pixel in the image will be assigned to one of the K clusters
+                    based on its similarity to cluster centroids.</p>
+            </div>
+            <br>
+            <div class="card card-body bg-dark text-secondary">
+                <h6 class="mb-0 d-flex justify-content-start">5. Visualize Results (Optional)</h6>
+            </div>
+            <div class="mb-1"></div>
+            <div class="card card-body bg-dark text-secondary">
+                <p class="lead text-muted text-left">
+                    You can create a new image where each pixel's color is replaced with the color of the centroid it
+                    belongs to. This will give you a visual representation of the clustering results.</p>
+            </div>
+            <br>
+            <div class="card card-body bg-dark text-secondary">
+                <h6 class="mb-0 d-flex justify-content-start">6. Analysis and Post-processing (Optional)</h6>
+            </div>
+            <div class="mb-1"></div>
+            <div class="card card-body bg-dark text-secondary">
+                <p class="lead text-muted text-left">
+                    Analyze the clustering results, which may involve evaluating cluster quality or further processing
+                    based on your application.</p>
+            </div>
+            <br>
+            <div class="card card-body bg-dark text-secondary">
+                <h6 class="mb-0 d-flex justify-content-start">7. Save or Display Results</h6>
+            </div>
+            <div class="mb-1"></div>
+            <div class="card card-body bg-dark text-secondary">
+                <p class="lead text-muted text-left">
+                    Save the clustered image or display it to visualize the final output.</p>
+            </div>
+            <br>
+        </div>
+    </div>
+</div>
+<div class="container-fluid pt-4 px-4">
+    <div class="bg-secondary text-center rounded p-4">
+        <div class="card card-body bg-dark text-secondary">
+            <div class="d-flex align-items-center justify-content-between">
+                <h6 class="mb-0 text-primary">Code</h6>
+            </div>
+        </div>
+        <br>
+        <div class="card bg-primary">
+            <div class="card-header bg-secondary d-flex justify-content-start">
+                Python Code
+            </div>
+            <div class="card bg-dark">
+                <div class="container">
+                    <div class="mb-1"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span># Import Cv2 Library</span></div>
+                    <div class="mb-1"></div>
+                    <div class="col col-12 d-flex justify-content-start"><code>import cv2</code></div>
+                    <div class="col col-12 d-flex justify-content-start"><code>import numpy as np</code></div>
+                    <div class="col col-12 d-flex justify-content-start"><code>from sklearn.cluster import KMeans</code>
+                    </div>
+                    <br>
+                    <div class="col col-12 d-flex justify-content-start"><span># Load the image</span></div>
+                    <div class="mb-1"></div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>image = cv2.imread('input_image.jpg')</code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start"><code>height, width, _ = image.shape</code>
+                    </div>
+                    <br>
+                    <div class="col col-12 d-flex justify-content-start"><span># Reshape the image into a flat array of
+                            pixels</span>
+                    </div>
+                    <div class="mb-1"></div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>image_data = image.reshape(-1, 3)</code>
+                    </div>
+                    <br>
+                    <div class="col col-12 d-flex justify-content-start"><span># Choose the number of clusters
+                            (K)</span></div>
+                    <div class="mb-1"></div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>K = 5
+                        </code>
+                    </div>
+                    <br>
+                    <div class="col col-12 d-flex justify-content-start"><span># Create and fit the K-means model
+                        </span>
+                    </div>
+                    <div class="mb-1"></div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>kmeans = KMeans(n_clusters=K)</code>
+                    </div>
+                    <div class="mb-1"></div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>kmeans.fit(image_data)
+                        </code>
+                    </div>
+                    <br>
+                    <div class="col col-12 d-flex justify-content-start"><span># Get cluster labels for each pixel
+                        </span>
+                    </div>
+                    <div class="mb-1"></div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>labels = kmeans.predict(image_data)
+                        </code>
+                    </div>
+                    <br>
+                    <div class="col col-12 d-flex justify-content-start"><span># Replace pixel values with cluster
+                            centroid values
+                        </span>
+                    </div>
+                    <div class="mb-1"></div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>segmented_image = kmeans.cluster_centers_[labels].reshape(height, width, 3).astype(np.uint8)
+                        </code>
+                    </div>
+                    <br>
+                    <div class="col col-12 d-flex justify-content-start"><span># Display or save the segmented image
+                        </span>
+                    </div>
+                    <div class="mb-1"></div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>cv2.imshow('Segmented Image', segmented_image)
+                        </code>
+                    </div>
+                    <div class="mb-1"></div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>cv2.waitKey(0)
+                        </code>
+                    </div>
+                    <div class="mb-1"></div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>cv2.destroyAllWindows()
+                        </code>
+                    </div>
+                    <div class="mb-3"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid pt-4 px-4">
+    <div class="bg-secondary text-center rounded p-4">
+        <div class="card card-body bg-dark text-secondary">
+            <div class="d-flex align-items-center justify-content-between">
+                <h6 class="mb-0 text-primary">Live Demo</h6>
+            </div>
+        </div>
+        <div class="mb-3"></div>
+        <div class="bg-secondary ">
+            <div class="card card-body bg-dark text-secondary">
+                <p class="lead text-muted text-left">
+                    The following code will take a live image feed from your machine and apply Clustering Images to
+                    it, then display both original frame as well as its
+                </p>
+            </div>
+        </div>
+        <div class="bg-secondary ">
+            <div class="card card-body bg-dark text-secondary">
+                <div class="d-flex justify-content-center">
+                    <button class="btn btn-success btn-load-img-clustering-img">Load Image</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="cluster-container-alert"></div>
+<div class="cluster-input-image-collapse"></div>
+<div class="gammma-correction-image-collapse"></div>
+
+<br>
+
+{% endblock content %}
