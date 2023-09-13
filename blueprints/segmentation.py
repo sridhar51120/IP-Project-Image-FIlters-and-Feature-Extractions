@@ -13,10 +13,22 @@ def Clustering_output():
       if request.method == 'POST':
          if 'cluster-input-image-file' in request.files:
             file = request.files['cluster-input-image-file']
-            img_path = f'assets/uploads/segmantation/clustering/{file.filename}'
+            img_path = f'assets/uploads/segmantation/cluster/{file.filename}'
             file.save(os.path.join(img_path)) 
             segmantation = Segmentation(img_path)
-            # TODO: Continue
+            clustered_img = segmantation.clustering()
+
+            data = {
+                  'img_url': img_path,
+                  'clustered_img' : clustered_img
+               }
+            return {
+               'template' : render_template('segmentation/clustering.html',data = data),
+               'img_url': img_path.replace("assets", ""),
+               'clustered_img' : clustered_img.replace("assets", "")
+               }
+         else:
+            return 'No file part in the request'
          
 @bp.route("/Edge_detection",methods=['GET'])
 def Edge_detection_temp():

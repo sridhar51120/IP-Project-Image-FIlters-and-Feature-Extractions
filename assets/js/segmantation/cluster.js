@@ -33,7 +33,7 @@ $(document).ready(function () {
             </div>
         `
         $('.cluster-input-image-collapse').append(template);
-        $('#output-clustering-toggle-groups').collapse({
+        $('.cluster-input-image-collapse-template').collapse({
             toggle: false
         }).show();
 
@@ -42,9 +42,10 @@ $(document).ready(function () {
             const cluster_input_image = document.getElementById('cluster-input-image');
             if (cluster_input_image.files.length > 0) {
                 const fileName = cluster_input_image.files[0].name;
+                alert(fileName);
                 if (/\.(jpg|png)$/i.test(fileName)) {
                     $.ajax({
-                        url: '/segmentation/Gamma_correction_output',
+                        url: '/segmentation/Clustering_output',
                         type: 'POST',
                         data: new FormData(document.getElementById('uploadForm')),
                         processData: false,
@@ -67,25 +68,25 @@ $(document).ready(function () {
                             console.log('Server response:', response);
                             console.log('Data : ', data);
 
-                            $('.gammma-correction-image-collapse').append(data['template']);
-                            $('#output-gamma-correction-toggle-groups').collapse({
+                            $('.cluster-image-collapse').append(data['template']);
+                            $('#output-clustering-toggle-groups').collapse({
                                 toggle: false
                             }).show();
 
                             var image_template = `
                             <img src="${data['img_url']}" id="${data['img_url']}" alt="original Image" style="display:none;">
-                            <img src="${data['gamm_img']}" id="${data['gamm_img']}" alt="Gamma Correction Image" style="display:none;">
+                            <img src="${data['clustered_img']}" id="${data['clustered_img']}" alt="Gamma Correction Image" style="display:none;">
                             `;
                             $(document.body).append(image_template);
 
-                            $('.btn-gamma-correction-output-original-image-show').click(function () {
+                            $('.btn-clustering-output-original-image-show').click(function () {
                                 var viewer = new Viewer(document.getElementById(`${data['img_url']}`), {
                                     loop: true,
                                     interval: 500
                                 }).show();
                             });
-                            $('.btn-gamma-correction-output-image-show').click(function () {
-                                var viewer = new Viewer(document.getElementById(`${data['gamm_img']}`), {
+                            $('.btn-clustering-output-image-show').click(function () {
+                                var viewer = new Viewer(document.getElementById(`${data['clustered_img']}`), {
                                     loop: true,
                                     interval: 500
                                 }).show();
