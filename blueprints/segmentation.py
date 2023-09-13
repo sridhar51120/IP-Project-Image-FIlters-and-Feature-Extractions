@@ -30,9 +30,33 @@ def Clustering_output():
          else:
             return 'No file part in the request'
          
+         
 @bp.route("/Edge_detection",methods=['GET'])
 def Edge_detection_temp():
    return render_template("Edge_detection.html")
+
+@bp.route("/Edge_detection_output",methods=['POST'])
+def Edge_detection_output():
+      if request.method == 'POST':
+         if 'edge-detect-input-image-file' in request.files:
+            file = request.files['edge-detect-input-image-file']
+            img_path = f'assets/uploads/segmantation/cluster/{file.filename}'
+            file.save(os.path.join(img_path)) 
+            segmantation = Segmentation(img_path)
+            edge_detection = segmantation.edge_detection()
+            
+            data = {
+                  'img_url': img_path,
+                  'edge_detection' : edge_detection
+               }
+            
+            return {
+               'template' : render_template('segmentation/clustering.html',data = data),
+               'img_url': img_path.replace("assets", ""),
+               'edge_detection' : edge_detection.replace("assets", "")
+               }
+         else:
+            return 'No file part in the request'
 
 @bp.route("/Region_growing",methods=['GET'])
 def Region_growing_temp():

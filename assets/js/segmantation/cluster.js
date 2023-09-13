@@ -75,7 +75,7 @@ $(document).ready(function () {
 
                             var image_template = `
                             <img src="${data['img_url']}" id="${data['img_url']}" alt="original Image" style="display:none;">
-                            <img src="${data['clustered_img']}" id="${data['clustered_img']}" alt="Gamma Correction Image" style="display:none;">
+                            <img src="${data['clustered_img']}" id="${data['clustered_img']}" alt="Clustered Image" style="display:none;">
                             `;
                             $(document.body).append(image_template);
 
