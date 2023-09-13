@@ -40,7 +40,7 @@ def Edge_detection_output():
       if request.method == 'POST':
          if 'edge-detect-input-image-file' in request.files:
             file = request.files['edge-detect-input-image-file']
-            img_path = f'assets/uploads/segmantation/cluster/{file.filename}'
+            img_path = f'assets/uploads/segmantation/edge_detection/{file.filename}'
             file.save(os.path.join(img_path)) 
             segmantation = Segmentation(img_path)
             edge_detection = segmantation.edge_detection()
@@ -51,7 +51,7 @@ def Edge_detection_output():
                }
             
             return {
-               'template' : render_template('segmentation/clustering.html',data = data),
+               'template' : render_template('segmentation/edge_detection.html',data = data),
                'img_url': img_path.replace("assets", ""),
                'edge_detection' : edge_detection.replace("assets", "")
                }
@@ -62,7 +62,54 @@ def Edge_detection_output():
 def Region_growing_temp():
    return render_template("Region_growing.html")
 
+@bp.route("/Region_growing_output",methods=['POST'])
+def Region_growing_output():
+      if request.method == 'POST':
+         if 'region-growing-input-image-file' in request.files:
+            file = request.files['region-growing-input-image-file']
+            img_path = f'assets/uploads/segmantation/region_detection/{file.filename}'
+            file.save(os.path.join(img_path)) 
+            segmantation = Segmentation(img_path)
+            region_detection = segmantation.region_detection()
+            
+            data = {
+                  'img_url': img_path,
+                  'region_detection' : region_detection
+               }
+            
+            return {
+               'template' : render_template('segmentation/region_detection.html',data = data),
+               'img_url': img_path.replace("assets", ""),
+               'region_detection' : region_detection.replace("assets", "")
+               }
+         else:
+            return 'No file part in the request'
+
 
 @bp.route("/Thresholding",methods=['GET'])
 def Thresholding_temp():
    return render_template("Thresholding.html")
+
+
+@bp.route("/Thresolding_output",methods=['POST'])
+def Thresolding_output():
+      if request.method == 'POST':
+         if 'thresolding-input-image-file' in request.files:
+            file = request.files['thresolding-input-image-file']
+            img_path = f'assets/uploads/segmantation/thresholding/{file.filename}'
+            file.save(os.path.join(img_path)) 
+            segmantation = Segmentation(img_path)
+            thresholding = segmantation.thresholding()
+            
+            data = {
+                  'img_url': img_path,
+                  'thresholding' : thresholding
+               }
+            
+            return {
+               'template' : render_template('segmentation/thresholding.html',data = data),
+               'img_url': img_path.replace("assets", ""),
+               'thresholding' : thresholding.replace("assets", "")
+               }
+         else:
+            return 'No file part in the request'

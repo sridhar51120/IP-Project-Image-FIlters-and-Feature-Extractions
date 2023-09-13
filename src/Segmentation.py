@@ -21,5 +21,11 @@ class Segmentation:
 
     def region_detection(slef):
         pass
+        # image = cv2.imread(self.name,cv2.IMREAD_GRAYSCALE)
+        # edges = cv2.Canny(image, threshold1=30, threshold2=100)
+        # path = "assets/uploads/segmantation/region_detection/region_detection.jpg"
+        # cv2.imwrite(path,edges)
+        # return path
+
     def thresholding(self):
         pass

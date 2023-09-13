@@ -1,0 +1,177 @@
+{% extends '__master.html' %}
+
+{% block content %}
+<div class="container-fluid pt-4 px-4">
+    <div class="card bg-secondary">
+        <div class="card-body">
+            <h4 class="text-primary">Thresholding</h4>
+        </div>
+    </div>
+</div>
+<div class="container-fluid pt-4 px-4">
+    <div class="bg-secondary text-center rounded p-4">
+        <div class="card card-body bg-dark text-secondary">
+            <div class="d-flex align-items-center justify-content-between">
+                <h6 class="mb-0 text-primary">Definition</h6>
+            </div>
+        </div>
+        <div class="mb-3"></div>
+        <div class="bg-secondary ">
+            <div class="card card-body bg-dark text-secondary">
+                <p class="lead text-muted text-left">
+                    Thresholding is a technique used in image processing to adjust the brightness of an image. It is
+                    often applied to compensate for the non-linearity of human perception of brightness. The gamma
+                    correction function maps the input pixel values to new values, making dark areas of the image
+                    lighter and bright areas darker.
+
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid pt-4 px-4">
+    <div class="bg-secondary text-center rounded p-4">
+        <div class="bg-secondary">
+
+            <div class="card card-body bg-dark text-secondary">
+                <div class="d-flex align-items-center justify-content-between">
+                    <h6 class="mb-0 text-primary">Brief overview of how Thresholding works</h6>
+                </div>
+            </div>
+            <div class="mb-3"></div>
+            <div class="card card-body bg-dark text-secondary">
+                <h6 class="mb-0 d-flex justify-content-start">1. Gamma Value Selection:</h6>
+            </div>
+            <div class="mb-1"></div>
+            <div class="card card-body bg-dark text-secondary">
+                <p class="lead text-muted text-left">
+                    You need to choose an appropriate gamma value. A gamma value less than 1 (e.g., 0.5) will brighten
+                    the image, while a value greater than 1 (e.g., 2.0) will darken it. A gamma of 1 will leave the
+                    image unchanged.
+                </p>
+            </div>
+
+            <br>
+
+            <div class="card card-body bg-dark text-secondary">
+                <h6 class="mb-0 d-flex justify-content-start">2. Apply Thresholding</h6>
+            </div>
+            <div class="mb-1"></div>
+            <div class="card card-body bg-dark text-secondary">
+                <p class="lead text-muted text-left">
+                    For each pixel in the image, raise the original pixel value to the power of the gamma value.
+                </p>
+            </div>
+
+            <br>
+
+            <div class="card card-body bg-dark text-secondary">
+                <h6 class="mb-0 d-flex justify-content-start">3. Normalize</h6>
+            </div>
+            <div class="mb-1"></div>
+            <div class="card card-body bg-dark text-secondary">
+                <p class="lead text-muted text-left">
+                    Optionally, you can normalize the pixel values to the desired output range (e.g., 0-255 for an 8-bit
+                    image) to ensure the corrected image maintains the same dynamic range as the original.
+                </p>
+            </div>
+            <br>
+        </div>
+    </div>
+</div>
+<div class="container-fluid pt-4 px-4">
+    <div class="bg-secondary text-center rounded p-4">
+        <div class="card card-body bg-dark text-secondary">
+            <div class="d-flex align-items-center justify-content-between">
+                <h6 class="mb-0 text-primary">Code</h6>
+            </div>
+        </div>
+        <br>
+        <div class="card bg-primary">
+            <div class="card-header bg-secondary d-flex justify-content-start">
+                Python Code
+            </div>
+            <div class="card bg-dark">
+                <div class="container">
+                    <div class="mb-1"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span># Import Cv2 Library</span></div>
+                    <div class="mb-1"></div>
+                    <div class="col col-12 d-flex justify-content-start"><code>import cv2</code></div>
+                    <div class="col col-12 d-flex justify-content-start"><code>import numpy as np</code></div>
+                    <br>
+                    <div class="col col-12 d-flex justify-content-start"><span># Load the image</span></div>
+                    <div class="mb-1"></div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>image = cv2.imread('input_image.jpg')</code>
+                    </div>
+                    <br>
+                    <div class="col col-12 d-flex justify-content-start"><span># Define the gamma value (e.g., 1.5 for
+                            brightening, 0.5 for darkening)</span>
+                    </div>
+                    <div class="mb-1"></div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>gamma = 1.5</code>
+                    </div>
+                    <br>
+                    <div class="col col-12 d-flex justify-content-start"><span># Apply Thresholding</span></div>
+                    <div class="mb-1"></div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>gamma_corrected = np.power(image/255.0, gamma)
+                        </code>
+                    </div>
+                    <br>
+                    <div class="col col-12 d-flex justify-content-start"><span># Normalize the pixel values to the 0-255
+                            range
+                        </span>
+                    </div>
+                    <div class="mb-1"></div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>gamma_corrected = (gamma_corrected * 255).astype(np.uint8)</code>
+                    </div>
+                    <br>
+                    <div class="col col-12 d-flex justify-content-start"><span># Save the gamma-corrected image
+                        </span>
+                    </div>
+                    <div class="mb-1"></div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>cv2.imwrite('gamma_corrected_image.jpg', gamma_corrected)
+                        </code>
+                    </div>
+                    <div class="mb-1"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid pt-4 px-4">
+    <div class="bg-secondary text-center rounded p-4">
+        <div class="card card-body bg-dark text-secondary">
+            <div class="d-flex align-items-center justify-content-between">
+                <h6 class="mb-0 text-primary">Live Demo</h6>
+            </div>
+        </div>
+        <div class="mb-3"></div>
+        <div class="bg-secondary ">
+            <div class="card card-body bg-dark text-secondary">
+                <p class="lead text-muted text-left">
+                    The following code will take a live image feed from your machine and apply Region Growing to
+                    it, then display both original frame as well as its
+                </p>
+            </div>
+        </div>
+        <div class="bg-secondary ">
+            <div class="card card-body bg-dark text-secondary">
+                <div class="d-flex justify-content-center">
+                    <button class="btn btn-success btn-load-img-thresholding">Load Image</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="thresolding-container-alert"></div>
+<div class="thresolding-input-image-collapse"></div>
+<div class="thresolding-image-collapse"></div>
+
+<br>
+
+{% endblock content %}

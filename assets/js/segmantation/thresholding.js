@@ -1,8 +1,8 @@
 $(document).ready(function () {
-    $('.btn-load-img-edge-detection').click(function () {
+    $('.btn-load-img-thresholding').click(function () {
         var template = `
             <div class="container-fluid pt-4 px-4">
-                <div class="collapse edge-detection-input-image-collapse-template">
+                <div class="collapse thresolding-input-image-collapse-template">
                     <div class="bg-secondary text-center rounded p-4">
                         <div class="card card-body bg-dark text-secondary">
                             <div class="d-flex align-items-start justify-content-start">
@@ -19,12 +19,12 @@ $(document).ready(function () {
                                     </h5>
                                     <form id="uploadForm" enctype="multipart/form-data">
                                         <input class="form-control d-flex justify-content-start border border-success" type="file"
-                                            name="edge-detect-input-image-file" id="edge-input-image" autocomplete="Image">
+                                            name="thresolding-input-image-file" id="thresolding-input-image" autocomplete="Image">
                                     </form>
                                 </div>
                                 <div class="card-footer ">
                                     <button class="btn btn-success d-flex justify-content-start"
-                                        id="btn-edge-detect-input-image-submit">Upload</button>
+                                        id="btn-thresolding-input-image-submit">Upload</button>
                                 </div>
                             </div>
                         </div>
@@ -32,19 +32,19 @@ $(document).ready(function () {
                 </div>
             </div>
         `
-        $('.edge-input-image-collapse').append(template);
-        $('.edge-detection-input-image-collapse-template').collapse({
+        $('.region-input-image-collapse').append(template);
+        $('.thresolding-input-image-collapse-template').collapse({
             toggle: false
         }).show();
 
-        const btn_edge_submit_image = document.getElementById('btn-edge-detect-input-image-submit');
+        const btn_edge_submit_image = document.getElementById('btn-region-growing-input-image-submit');
         $(btn_edge_submit_image).click(function () {
-            const edge_input_image = document.getElementById('edge-input-image');
-            if (edge_input_image.files.length > 0) {
-                const fileName = edge_input_image.files[0].name;
+            const region_input_image = document.getElementById('region-growing-input-image');
+            if (region_input_image.files.length > 0) {
+                const fileName = region_input_image.files[0].name;
                 if (/\.(jpg|png)$/i.test(fileName)) {
                     $.ajax({
-                        url: '/segmentation/Edge_detection_output',
+                        url: '/segmentation/Thresolding_output',
                         type: 'POST',
                         data: new FormData(document.getElementById('uploadForm')),
                         processData: false,
@@ -59,32 +59,31 @@ $(document).ready(function () {
                                         </div>
                                     </div>
                                 `
-                            $('.edge-container-alert').append(template);
+                            $('.thresolding-container-alert').append(template);
                             $('.file-selected-alert').toast('show');
                             setTimeout(function () {
                                 $('.file-selected-alert').toast('hide');
                             }, 6000);
                             console.log('Server response:', response);
                             console.log('Data : ', data);
-                            $('.edge-detect-image-collapse').append(data['template']);
-                            $('.output-edge-detection-toggle-groups').collapse({
+                            $('.thresolding-input-image-collapse').append(data['template']);
+                            $('#output-thresholding-toggle-groups').collapse({
                                 toggle: false
                             }).show();
 
                             var image_template = `
                             <img src="${data['img_url']}" id="${data['img_url']}" alt="original Image" style="display:none;">
-                            <img src="${data['edge_detection']}" id="${data['edge_detection']}" alt="Edge Detection Image" style="display:none;">
+                            <img src="${data['thresholding']}" id="${data['thresholding']}" alt="Edge Detection Image" style="display:none;">
                             `;
                             $(document.body).append(image_template);
-
-                            $('.btn-edge-detection-output-original-image-show').click(function () {
+                            $('.btn-thresholding-output-original-image-show').click(function () {
                                 var viewer = new Viewer(document.getElementById(`${data['img_url']}`), {
                                     loop: true,
                                     interval: 500
                                 }).show();
                             });
-                            $('.btn-edge-detection-output-image-show').click(function () {
-                                var viewer = new Viewer(document.getElementById(`${data['edge_detection']}`), {
+                            $('.btn-thresholding-output-image-show').click(function () {
+                                var viewer = new Viewer(document.getElementById(`${data['thresholding']}`), {
                                     loop: true,
                                     interval: 500
                                 }).show();
@@ -108,7 +107,7 @@ $(document).ready(function () {
                         </div>
                     </div>
                     `
-                    $('.edge-container-alert').append(template);
+                    $('.thresolding-container-alert').append(template);
                     $('.invalid-extension-alert').toast('show');
                     setTimeout(function () {
                         $('.invalid-extension-alert').toast('hide');
@@ -124,7 +123,7 @@ $(document).ready(function () {
                     </div>
                 </div>
                 `
-                $('.edge-container-alert').append(template);
+                $('.thresolding-container-alert').append(template);
                 $('.file-not-found-alert').toast('show');
                 setTimeout(function () {
                     $('.file-not-found-alert').toast('hide');
