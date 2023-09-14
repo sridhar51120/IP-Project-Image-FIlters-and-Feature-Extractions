@@ -76,7 +76,6 @@ def Region_growing_output():
                   'img_url': img_path,
                   'region_detection' : region_detection
                }
-            
             return {
                'template' : render_template('segmentation/region_detection.html',data = data),
                'img_url': img_path.replace("assets", ""),

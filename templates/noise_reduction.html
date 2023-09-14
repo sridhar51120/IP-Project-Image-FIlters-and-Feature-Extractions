@@ -4,7 +4,7 @@
 <div class="container-fluid pt-4 px-4">
     <div class="card bg-secondary">
         <div class="card-body">
-            <h4 class="text-primary">Thresholding</h4>
+            <h4 class="text-primary">Contrast stretching</h4>
         </div>
     </div>
 </div>
@@ -19,13 +19,13 @@
         <div class="bg-secondary ">
             <div class="card card-body bg-dark text-secondary">
                 <p class="lead text-muted text-left">
-
-                    Thresholding is a fundamental image processing technique used to separate objects or regions of
-                    interest from the background in an image by dividing pixel values into two categories: foreground
-                    and background. It's a common technique used in various computer vision and image analysis
-                    applications. In thresholding, you choose a threshold value, and pixels with values above the
-                    threshold are assigned to one category (usually white), while pixels with values below the threshold
-                    are assigned to the other category (usually black).</p>
+                    Contrast stretching, also known as contrast enhancement or normalization, is a technique used in
+                    image processing to improve the visibility of details in an image by expanding the range of pixel
+                    values. It's particularly useful when an image has poor contrast, meaning that the difference
+                    between the darkest and brightest pixels is limited. Contrast stretching works by linearly
+                    stretching the pixel values so that the minimum pixel value becomes darker, and the maximum pixel
+                    value becomes brighter, while maintaining the relative differences between the other pixel values.
+                </p>
             </div>
         </div>
     </div>
@@ -36,42 +36,55 @@
 
             <div class="card card-body bg-dark text-secondary">
                 <div class="d-flex align-items-center justify-content-between">
-                    <h6 class="mb-0 text-primary">Brief overview of how Thresholding works</h6>
+                    <h6 class="mb-0 text-primary">Brief overview of how contrast stretching works</h6>
                 </div>
             </div>
             <div class="mb-3"></div>
             <div class="card card-body bg-dark text-secondary">
-                <h6 class="mb-0 d-flex justify-content-start">1. Import Libraries</h6>
+                <h6 class="mb-0 d-flex justify-content-start">1. Find the Minimum and Maximum Pixel Values</h6>
             </div>
             <div class="mb-1"></div>
             <div class="card card-body bg-dark text-secondary">
                 <p class="lead text-muted text-left">
-                    Import the necessary libraries, primarily OpenCV and NumPy.
+                    First, you find the minimum and maximum pixel values in the input image.
                 </p>
             </div>
 
             <br>
 
             <div class="card card-body bg-dark text-secondary">
-                <h6 class="mb-0 d-flex justify-content-start">2. Load the Image: </h6>
+                <h6 class="mb-0 d-flex justify-content-start">2. Define the New Minimum and Maximum Values</h6>
             </div>
             <div class="mb-1"></div>
             <div class="card card-body bg-dark text-secondary">
                 <p class="lead text-muted text-left">
-                    Load the image on which you want to apply thresholding. </p>
+                    Decide on the desired minimum and maximum values for the output image. Typically, the minimum is set
+                    to 0, and the maximum is set to 255 for an 8-bit image. These values define the new range for pixel
+                    values.
+                </p>
             </div>
             <br>
             <div class="card card-body bg-dark text-secondary">
-                <h6 class="mb-0 d-flex justify-content-start">3. Apply Thresholding</h6>
+                <h6 class="mb-0 d-flex justify-content-start">3. Apply Contrast Stretching</h6>
             </div>
             <div class="mb-1"></div>
             <div class="card card-body bg-dark text-secondary">
                 <p class="lead text-muted text-left">
-                    There are various thresholding methods available in OpenCV, but one of the simplest is binary
-                    thresholding. In this example, we'll use binary thresholding, which divides the pixels into two
-                    categories based on a threshold value. </p>
+                    For each pixel in the input image, apply the following formula to stretch the pixel value to the new
+                    range:
+                </p>
             </div>
             <br>
+            <div class="card card-body bg-dark text-secondary">
+                <h6 class="mb-0 d-flex justify-content-start">4. Normalize</h6>
+            </div>
+            <div class="mb-1"></div>
+            <div class="card card-body bg-dark text-secondary">
+                <p class="lead text-muted text-left">
+                    Optionally, you can normalize the pixel values to ensure the corrected image maintains the same
+                    dynamic range as the original.
+                </p>
+            </div>
         </div>
     </div>
 </div>
@@ -93,7 +106,6 @@
                     <div class="col col-12 d-flex justify-content-start"><span># Import Cv2 Library</span></div>
                     <div class="mb-1"></div>
                     <div class="col col-12 d-flex justify-content-start"><code>import cv2</code></div>
-                    <div class="col col-12 d-flex justify-content-start"><code>import numpy as np</code></div>
                     <br>
                     <div class="col col-12 d-flex justify-content-start"><span># Load the image</span></div>
                     <div class="mb-1"></div>
@@ -101,40 +113,48 @@
                         <code>image = cv2.imread('input_image.jpg', cv2.IMREAD_GRAYSCALE)</code>
                     </div>
                     <br>
-                    <div class="col col-12 d-flex justify-content-start"><span># Set a threshold value (you can
-                            experiment with different values)</span>
+                    <div class="col col-12 d-flex justify-content-start"><span># Find the minimum and maximum pixel
+                            values in the input image</span>
                     </div>
                     <div class="mb-1"></div>
                     <div class="col col-12 d-flex justify-content-start">
-                        <code>threshold_value = 128</code>
+                        <code>min_in = np.min(image)</code>
+                    </div>
+                    <div class="mb-1"></div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>max_in = np.max(image)</code>
                     </div>
                     <br>
-                    <div class="col col-12 d-flex justify-content-start"><span># Apply binary thresholding</span>
+                    <div class="col col-12 d-flex justify-content-start"><span># Define the desired minimum and maximum
+                            values for the output image</span></div>
+                    <div class="mb-1"></div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>min_out = 0</code>
                     </div>
                     <div class="mb-1"></div>
                     <div class="col col-12 d-flex justify-content-start">
-                        <code>ret, thresholded_image = cv2.threshold(image, threshold_value, 255, cv2.THRESH_BINARY)</code>
+                        <code>max_out = 255</code>
                     </div>
                     <br>
-                    <div class="col col-12 d-flex justify-content-start"><span># Display the thresholded image</span>
-                    </div>
+                    <div class="col col-12 d-flex justify-content-start"><span># Apply contrast stretching</span></div>
                     <div class="mb-1"></div>
                     <div class="col col-12 d-flex justify-content-start">
-                        <code>gamma_corrected = np.power(image/255.0, gamma)
-                        </code>
+                        <code>contrast_stretched = ((image - min_in) / (max_in - min_in)) * (max_out - min_out) + min_out</code>
                     </div>
-                    <dv class="mb-1"></dv>
+                    <br>
+                    <div class="col col-12 d-flex justify-content-start"><span># Convert the image to 8-bit unsigned
+                            integer (optional normalization)
+                        </span></div>
+                    <div class="mb-1"></div>
                     <div class="col col-12 d-flex justify-content-start">
-                        <code>cv2.imshow('Thresholded Image', thresholded_image)</code>
+                        <code>contrast_stretched = contrast_stretched.astype(np.uint8)</code>
                     </div>
-                    <dv class="mb-1"></dv>
+                    <br>
+                    <div class="col col-12 d-flex justify-content-start"><span># Save the contrast-stretched image
+                        </span></div>
+                    <div class="mb-1"></div>
                     <div class="col col-12 d-flex justify-content-start">
-                        <code>cv2.waitKey(0)</code>
-                    </div>
-                    <dv class="mb-1"></dv>
-                    <div class="col col-12 d-flex justify-content-start">
-                        <code>cv2.destroyAllWindows()
-                        </code>
+                        <code>cv2.imwrite('contrast_stretched_image.jpg', contrast_stretched)</code>
                     </div>
                     <div class="mb-2"></div>
                 </div>
@@ -153,7 +173,7 @@
         <div class="bg-secondary ">
             <div class="card card-body bg-dark text-secondary">
                 <p class="lead text-muted text-left">
-                    The following code will take a live image feed from your machine and apply Thresholded image to
+                    The following code will take a live image feed from your machine and apply Contrast Striching to
                     it, then display both original frame as well as its
                 </p>
             </div>
@@ -161,16 +181,14 @@
         <div class="bg-secondary ">
             <div class="card card-body bg-dark text-secondary">
                 <div class="d-flex justify-content-center">
-                    <button class="btn btn-success btn-load-img-thresholding">Load Image</button>
+                    <button class="btn btn-success btn-load-img-contrast-strching">Load Image</button>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<div class="thresolding-container-alert"></div>
-<div class="thresolding-image-collapse"></div>
-<div class="thresolding-input-image-collapse"></div>
-
+<div class="contrast-toast-container-alert"></div>
+<div class="contrast-strching-input-image-collapse"></div>
+<div class="contrast-strching-image-collapse"></div>
 <br>
-
 {% endblock content %}

@@ -4,7 +4,7 @@
 <div class="container-fluid pt-4 px-4">
     <div class="card bg-secondary">
         <div class="card-body">
-            <h4 class="text-primary">Clustering image</h4>
+            <h4 class="text-primary">Region detection</h4>
         </div>
     </div>
 </div>
@@ -19,30 +19,11 @@
         <div class="bg-secondary ">
             <div class="card card-body bg-dark text-secondary">
                 <p class="lead text-muted text-left">
-                    Clustering images is a common task in image processing and computer vision, where you group similar
-                    pixels or regions together based on certain criteria. One popular method for image clustering is
-                    K-means clustering. Here's a brief overview and a workflow for clustering images using Python with
-                    the K-means algorithm:
-                </p>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="container-fluid pt-4 px-4">
-    <div class="bg-secondary text-center rounded p-4">
-        <div class="card card-body bg-dark text-secondary">
-            <div class="d-flex align-items-center justify-content-between">
-                <h6 class="mb-0 text-primary">Overview</h6>
-            </div>
-        </div>
-        <div class="mb-3"></div>
-        <div class="bg-secondary ">
-            <div class="card card-body bg-dark text-secondary">
-                <p class="lead text-muted text-left">
-                    K-means clustering is an unsupervised machine learning algorithm used for partitioning a set of data
-                    points into K clusters based on their similarity. In the context of image clustering, each pixel's
-                    color or feature values are treated as data points, and the algorithm groups them into K clusters,
-                    where K is a user-defined parameter.
+                    Region detection, also known as image segmentation, is a crucial step in image processing that
+                    involves partitioning an image into different regions or segments, with each region representing a
+                    meaningful part of the image. This can be useful for various applications like object recognition,
+                    image analysis, and computer vision tasks.
+
                 </p>
             </div>
         </div>
@@ -59,101 +40,56 @@
             </div>
             <div class="mb-3"></div>
             <div class="card card-body bg-dark text-secondary">
-                <h6 class="mb-0 d-flex justify-content-start">1. Data Preparation</h6>
+                <h6 class="mb-0 d-flex justify-content-start">1. Import Necessary Libraries:</h6>
             </div>
             <div class="mb-1"></div>
             <div class="card card-body bg-dark text-secondary">
                 <p class="lead text-muted text-left">
-                    Load the image you want to cluster using a library like OpenCV or PIL (Python Imaging Library).
-                </p>
-                <hr class="bg-white">
-                <p class="lead text-muted text-left">
-                    Convert the image to a numerical format where each pixel is represented as a data point with feature
-                    values. For RGB images, you might represent each pixel as a 3D vector (R, G, B values) or use other
-                    feature extraction techniques.
+                    Begin by importing the libraries you'll need. You will primarily use OpenCV and NumPy for this task.
                 </p>
             </div>
+
             <br>
+
             <div class="card card-body bg-dark text-secondary">
-                <h6 class="mb-0 d-flex justify-content-start">2. Feature Extraction (if needed):
-                </h6>
+                <h6 class="mb-0 d-flex justify-content-start">2. Load the Image:</h6>
             </div>
             <div class="mb-1"></div>
             <div class="card card-body bg-dark text-secondary">
                 <p class="lead text-muted text-left">
-                    Depending on your image clustering goals, you may want to extract meaningful features from the
-                    image, such as color histograms, texture descriptors, or deep learning features using pre-trained
-                    neural networks.
-                </p>
+                    Load the image that you want to perform region detection on using cv2.imread(). </p>
             </div>
+
             <br>
             <div class="card card-body bg-dark text-secondary">
-                <h6 class="mb-0 d-flex justify-content-start">3. K-means Clustering</h6>
-            </div>
-            <div class="mb-1"></div>
-            <div class="card card-body bg-dark">
-                <p class="lead text-muted text-left">
-                    Import the scikit-learn library in Python, which provides a robust implementation of the K-means
-                    algorithm. </p>
-                <hr class="bg-white text-muted ">
-                <p>Choose the number of clusters (K) you want to create. This may require prior knowledge or
-                    experimentation.</p>
-                <hr class="bg-white text-muted">
-                <p>Fit the K-means model to your image data using the KMeans class. You can specify various
-                    initialization methods and hyperparameters.</p>
-                <hr class="bg-white text-muted">
-                <p>
-                    Perform clustering by calling the fit method on your image data.
-                </p>
-            </div>
-            <br>
-            <div class="card card-body bg-dark text-secondary">
-                <h6 class="mb-0 d-flex justify-content-start">4. Cluster Assignment</h6>
+                <h6 class="mb-0 d-flex justify-content-start">3. Preprocess the Image (Optional):</h6>
             </div>
             <div class="mb-1"></div>
             <div class="card card-body bg-dark text-secondary">
                 <p class="lead text-muted text-left">
-                    Once the K-means model is trained, each pixel in the image will be assigned to one of the K clusters
-                    based on its similarity to cluster centroids.</p>
+                    Depending on the quality of your input image and the specific segmentation algorithm you plan to
+                    use, you might need to preprocess the image. Common preprocessing steps include noise reduction,
+                    smoothing, and adjusting the image's color space.</p>
             </div>
             <br>
             <div class="card card-body bg-dark text-secondary">
-                <h6 class="mb-0 d-flex justify-content-start">4. Cluster Assignment</h6>
+                <h6 class="mb-0 d-flex justify-content-start">4. Perform Region Detection</h6>
             </div>
             <div class="mb-1"></div>
             <div class="card card-body bg-dark text-secondary">
                 <p class="lead text-muted text-left">
-                    Once the K-means model is trained, each pixel in the image will be assigned to one of the K clusters
-                    based on its similarity to cluster centroids.</p>
+                    There are various algorithms for image segmentation. One commonly used method is the Watershed
+                    algorithm, which can be applied to grayscale images. Here's an example of applying the Watershed
+                    algorithm:</p>
             </div>
             <br>
             <div class="card card-body bg-dark text-secondary">
-                <h6 class="mb-0 d-flex justify-content-start">5. Visualize Results (Optional)</h6>
+                <h6 class="mb-0 d-flex justify-content-start">5. Save or Display the Region-Detected Image:</h6>
             </div>
             <div class="mb-1"></div>
             <div class="card card-body bg-dark text-secondary">
                 <p class="lead text-muted text-left">
-                    You can create a new image where each pixel's color is replaced with the color of the centroid it
-                    belongs to. This will give you a visual representation of the clustering results.</p>
-            </div>
-            <br>
-            <div class="card card-body bg-dark text-secondary">
-                <h6 class="mb-0 d-flex justify-content-start">6. Analysis and Post-processing (Optional)</h6>
-            </div>
-            <div class="mb-1"></div>
-            <div class="card card-body bg-dark text-secondary">
-                <p class="lead text-muted text-left">
-                    Analyze the clustering results, which may involve evaluating cluster quality or further processing
-                    based on your application.</p>
-            </div>
-            <br>
-            <div class="card card-body bg-dark text-secondary">
-                <h6 class="mb-0 d-flex justify-content-start">7. Save or Display Results</h6>
-            </div>
-            <div class="mb-1"></div>
-            <div class="card card-body bg-dark text-secondary">
-                <p class="lead text-muted text-left">
-                    Save the clustered image or display it to visualize the final output.</p>
+                    You can save the segmented image to a file or display it using OpenCV</p>
             </div>
             <br>
         </div>
@@ -178,84 +114,80 @@
                     <div class="mb-1"></div>
                     <div class="col col-12 d-flex justify-content-start"><code>import cv2</code></div>
                     <div class="col col-12 d-flex justify-content-start"><code>import numpy as np</code></div>
-                    <div class="col col-12 d-flex justify-content-start"><code>from sklearn.cluster import KMeans</code>
-                    </div>
                     <br>
                     <div class="col col-12 d-flex justify-content-start"><span># Load the image</span></div>
                     <div class="mb-1"></div>
                     <div class="col col-12 d-flex justify-content-start">
                         <code>image = cv2.imread('input_image.jpg')</code>
                     </div>
-                    <div class="col col-12 d-flex justify-content-start"><code>height, width, _ = image.shape</code>
-                    </div>
                     <br>
-                    <div class="col col-12 d-flex justify-content-start"><span># Reshape the image into a flat array of
-                            pixels</span>
+                    <div class="col col-12 d-flex justify-content-start"><span># Example: Convert to grayscale for
+                            simplicity</span>
                     </div>
                     <div class="mb-1"></div>
                     <div class="col col-12 d-flex justify-content-start">
-                        <code>image_data = image.reshape(-1, 3)</code>
+                        <code>gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)</code>
                     </div>
                     <br>
-                    <div class="col col-12 d-flex justify-content-start"><span># Choose the number of clusters
-                            (K)</span></div>
+                    <div class="col col-12 d-flex justify-content-start"><span># Apply Watershed algorithm</span></div>
                     <div class="mb-1"></div>
                     <div class="col col-12 d-flex justify-content-start">
-                        <code>K = 5
+                        <code>markers = np.zeros_like(gray_image)
                         </code>
                     </div>
+                    <div class="mb-1"></div>
+                    <div class="row">
+                        <div class="col col-6 d-flex justify-content-start">
+                            <code>markers[gray_image < threshold] = 1
+                            </code>
+                        </div>
+                        <div class="col col-6 d-flex justify-content-start">
+                            <span># Set markers for background</span>
+                        </div>
+                    </div>
+                    <div class="mb-1"></div>
+                    <div class="row">
+                        <div class="col col-6 d-flex justify-content-start">
+                            <code>markers[gray_image > threshold] = 2 
+                            </code>
+                        </div>
+                        <div class="col col-6 d-flex justify-content-start">
+                            <span># Set markers for foreground</span>
+                        </div>
+                    </div>
                     <br>
-                    <div class="col col-12 d-flex justify-content-start"><span># Create and fit the K-means model
+                    <div class="col col-12 d-flex justify-content-start"><span># Apply the Watershed transformation
                         </span>
                     </div>
                     <div class="mb-1"></div>
                     <div class="col col-12 d-flex justify-content-start">
-                        <code>kmeans = KMeans(n_clusters=K)</code>
-                    </div>
-                    <div class="mb-1"></div>
-                    <div class="col col-12 d-flex justify-content-start">
-                        <code>kmeans.fit(image_data)
-                        </code>
+                        <code>markers = cv2.watershed(image, markers)</code>
                     </div>
                     <br>
-                    <div class="col col-12 d-flex justify-content-start"><span># Get cluster labels for each pixel
+                    <div class="col col-12 d-flex justify-content-start"><span># Color the segmented regions
+                        </span>
+                    </div>
+                    <div class="mb-1"></div>
+                    <div class="row">
+                        <div class="col col-6 d-flex justify-content-start">
+                            <code>image[markers == -1] = [0, 0, 255]  
+                            </code>
+                        </div>
+                        <div class="col col-6 d-flex justify-content-start">
+                            <span>
+                                # Outline the regions
+                            </span>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="col col-12 d-flex justify-content-start"><span>Save or Display the Region-Detected Image
                         </span>
                     </div>
                     <div class="mb-1"></div>
                     <div class="col col-12 d-flex justify-content-start">
-                        <code>labels = kmeans.predict(image_data)
-                        </code>
+                        <code>cv2.imwrite('segmented_image.jpg', image)</code>
                     </div>
                     <br>
-                    <div class="col col-12 d-flex justify-content-start"><span># Replace pixel values with cluster
-                            centroid values
-                        </span>
-                    </div>
-                    <div class="mb-1"></div>
-                    <div class="col col-12 d-flex justify-content-start">
-                        <code>segmented_image = kmeans.cluster_centers_[labels].reshape(height, width, 3).astype(np.uint8)
-                        </code>
-                    </div>
-                    <br>
-                    <div class="col col-12 d-flex justify-content-start"><span># Display or save the segmented image
-                        </span>
-                    </div>
-                    <div class="mb-1"></div>
-                    <div class="col col-12 d-flex justify-content-start">
-                        <code>cv2.imshow('Segmented Image', segmented_image)
-                        </code>
-                    </div>
-                    <div class="mb-1"></div>
-                    <div class="col col-12 d-flex justify-content-start">
-                        <code>cv2.waitKey(0)
-                        </code>
-                    </div>
-                    <div class="mb-1"></div>
-                    <div class="col col-12 d-flex justify-content-start">
-                        <code>cv2.destroyAllWindows()
-                        </code>
-                    </div>
-                    <div class="mb-3"></div>
                 </div>
             </div>
         </div>
@@ -272,7 +204,7 @@
         <div class="bg-secondary ">
             <div class="card card-body bg-dark text-secondary">
                 <p class="lead text-muted text-left">
-                    The following code will take a live image feed from your machine and apply Clustering Images to
+                    The following code will take a live image feed from your machine and apply Region detection to
                     it, then display both original frame as well as its
                 </p>
             </div>
@@ -280,7 +212,7 @@
         <div class="bg-secondary ">
             <div class="card card-body bg-dark text-secondary">
                 <div class="d-flex justify-content-center">
-                    <button class="btn btn-success btn-load-img-region-img">Load Image</button>
+                    <button class="btn btn-success btn-load-img-region-detection">Load Image</button>
                 </div>
             </div>
         </div>
@@ -288,7 +220,7 @@
 </div>
 <div class="region-container-alert"></div>
 <div class="region-input-image-collapse"></div>
-<div class="region-image-collapse"></div>
+<div class="gregion-image-collapse"></div>
 
 <br>
 

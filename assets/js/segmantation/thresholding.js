@@ -32,16 +32,16 @@ $(document).ready(function () {
                 </div>
             </div>
         `
-        $('.region-input-image-collapse').append(template);
+        $('.thresolding-image-collapse').append(template);
         $('.thresolding-input-image-collapse-template').collapse({
             toggle: false
         }).show();
 
-        const btn_edge_submit_image = document.getElementById('btn-region-growing-input-image-submit');
-        $(btn_edge_submit_image).click(function () {
-            const region_input_image = document.getElementById('region-growing-input-image');
-            if (region_input_image.files.length > 0) {
-                const fileName = region_input_image.files[0].name;
+        const btn_thresold_submit_image = document.getElementById('btn-thresolding-input-image-submit');
+        $(btn_thresold_submit_image).click(function () {
+            const thresold_input_image = document.getElementById('thresolding-input-image');
+            if (thresold_input_image.files.length > 0) {
+                const fileName = thresold_input_image.files[0].name;
                 if (/\.(jpg|png)$/i.test(fileName)) {
                     $.ajax({
                         url: '/segmentation/Thresolding_output',
@@ -73,7 +73,7 @@ $(document).ready(function () {
 
                             var image_template = `
                             <img src="${data['img_url']}" id="${data['img_url']}" alt="original Image" style="display:none;">
-                            <img src="${data['thresholding']}" id="${data['thresholding']}" alt="Edge Detection Image" style="display:none;">
+                            <img src="${data['thresholding']}" id="${data['thresholding']}" alt="Thresolded Image" style="display:none;">
                             `;
                             $(document.body).append(image_template);
                             $('.btn-thresholding-output-original-image-show').click(function () {

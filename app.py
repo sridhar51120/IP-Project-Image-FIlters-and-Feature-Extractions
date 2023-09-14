@@ -4,12 +4,13 @@ import cv2
 import numpy as np
 import os
 from src.Enhancement import Enhancement
-from blueprints import enhancement, segmentation
+from blueprints import enhancement, segmentation, restoring
 
 app = Flask(__name__,static_folder='assets',static_url_path='/')
 
 app.register_blueprint(enhancement.bp)
 app.register_blueprint(segmentation.bp)
+app.register_blueprint(restoring.bp)
 
 
 @app.route("/",methods=['GET'])

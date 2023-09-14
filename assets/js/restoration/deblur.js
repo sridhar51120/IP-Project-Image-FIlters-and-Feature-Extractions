@@ -1,8 +1,8 @@
 $(document).ready(function () {
-    $('.btn-load-img-region-detection').click(function () {
+    $('.btn-load-img-deblur').click(function () {
         var template = `
             <div class="container-fluid pt-4 px-4">
-                <div class="collapse region-growing-input-image-collapse-template">
+                <div class="collapse deblur-input-image-collapse-template">
                     <div class="bg-secondary text-center rounded p-4">
                         <div class="card card-body bg-dark text-secondary">
                             <div class="d-flex align-items-start justify-content-start">
@@ -19,12 +19,12 @@ $(document).ready(function () {
                                     </h5>
                                     <form id="uploadForm" enctype="multipart/form-data">
                                         <input class="form-control d-flex justify-content-start border border-success" type="file"
-                                            name="region-growing-input-image-file" id="region-growing-input-image" autocomplete="Image">
+                                            name="deblur-input-image-file" id="deblur-input-image" autocomplete="Image">
                                     </form>
                                 </div>
                                 <div class="card-footer ">
                                     <button class="btn btn-success d-flex justify-content-start"
-                                        id="btn-region-growing-input-image-submit">Upload</button>
+                                        id="btn-deblur-input-image-submit">Upload</button>
                                 </div>
                             </div>
                         </div>
@@ -32,19 +32,20 @@ $(document).ready(function () {
                 </div>
             </div>
         `
-        $('.region-input-image-collapse').append(template);
-        $('.region-growing-input-image-collapse-template').collapse({
+        $('.deblur-strching-input-image-collapse').append(template);
+        $('.deblur-input-image-collapse-template').collapse({
             toggle: false
         }).show();
 
-        const btn_region_detect_submit_image = document.getElementById('btn-region-growing-input-image-submit');
-        $(btn_region_detect_submit_image).click(function () {
-            const region_input_image = document.getElementById('region-growing-input-image');
-            if (region_input_image.files.length > 0) {
-                const fileName = region_input_image.files[0].name;
+        const btn_deblur_submit_image = document.getElementById('btn-deblur-input-image-submit');
+        $(btn_deblur_submit_image).click(function () {
+            const deblur_input_image = document.getElementById('deblur-input-image');
+            if (deblur_input_image.files.length > 0) {
+                const fileName = deblur_input_image.files[0].name;
+                alert(fileName);
                 if (/\.(jpg|png)$/i.test(fileName)) {
                     $.ajax({
-                        url: '/segmentation/Region_growing_output',
+                        url: '/restoring/deblur_output',
                         type: 'POST',
                         data: new FormData(document.getElementById('uploadForm')),
                         processData: false,
@@ -59,31 +60,33 @@ $(document).ready(function () {
                                         </div>
                                     </div>
                                 `
-                            $('.region-container-alert').append(template);
+                            $('.deblur-toast-container-alert').append(template);
                             $('.file-selected-alert').toast('show');
                             setTimeout(function () {
                                 $('.file-selected-alert').toast('hide');
                             }, 6000);
                             console.log('Server response:', response);
                             console.log('Data : ', data);
-                            $('.region-input-image-collapse').append(data['template']);
-                            $('#output-region-detection-toggle-groups').collapse({
+
+                            $('.deblur-image-collapse').append(data['template']);
+                            $('#output-deblur-toggle-groups').collapse({
                                 toggle: false
                             }).show();
 
                             var image_template = `
                             <img src="${data['img_url']}" id="${data['img_url']}" alt="original Image" style="display:none;">
-                            <img src="${data['region_detection']}" id="${data['region_detection']}" alt="Region Detection Image" style="display:none;">
+                            <img src="${data['deblur_img']}" id="${data['deblur_img']}" alt="Deblured Image" style="display:none;">
                             `;
                             $(document.body).append(image_template);
-                            $('.btn-region-detection-output-original-image-show').click(function () {
+
+                            $('.btn-deblur-output-original-image-show').click(function () {
                                 var viewer = new Viewer(document.getElementById(`${data['img_url']}`), {
                                     loop: true,
                                     interval: 500
                                 }).show();
                             });
-                            $('.btn-region-detection-output-image-show').click(function () {
-                                var viewer = new Viewer(document.getElementById(`${data['region_detection']}`), {
+                            $('.btn-deblur-output-image-show').click(function () {
+                                var viewer = new Viewer(document.getElementById(`${data['deblur_img']}`), {
                                     loop: true,
                                     interval: 500
                                 }).show();
@@ -107,7 +110,7 @@ $(document).ready(function () {
                         </div>
                     </div>
                     `
-                    $('.region-container-alert').append(template);
+                    $('.deblur-toast-container-alert').append(template);
                     $('.invalid-extension-alert').toast('show');
                     setTimeout(function () {
                         $('.invalid-extension-alert').toast('hide');
@@ -123,7 +126,7 @@ $(document).ready(function () {
                     </div>
                 </div>
                 `
-                $('.region-container-alert').append(template);
+                $('.deblur-toast-container-alert').append(template);
                 $('.file-not-found-alert').toast('show');
                 setTimeout(function () {
                     $('.file-not-found-alert').toast('hide');

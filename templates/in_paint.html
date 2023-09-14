@@ -4,7 +4,7 @@
 <div class="container-fluid pt-4 px-4">
     <div class="card bg-secondary">
         <div class="card-body">
-            <h4 class="text-primary">Thresholding</h4>
+            <h4 class="text-primary">IN Painting</h4>
         </div>
     </div>
 </div>
@@ -19,13 +19,12 @@
         <div class="bg-secondary ">
             <div class="card card-body bg-dark text-secondary">
                 <p class="lead text-muted text-left">
-
-                    Thresholding is a fundamental image processing technique used to separate objects or regions of
-                    interest from the background in an image by dividing pixel values into two categories: foreground
-                    and background. It's a common technique used in various computer vision and image analysis
-                    applications. In thresholding, you choose a threshold value, and pixels with values above the
-                    threshold are assigned to one category (usually white), while pixels with values below the threshold
-                    are assigned to the other category (usually black).</p>
+                    Image inpainting is a technique in image processing that involves filling in missing or damaged
+                    regions of an image with plausible content. This can be useful for repairing damaged photographs,
+                    removing unwanted objects or text, or even generating realistic content in the missing regions of an
+                    image. Inpainting is often used in restoration and image editing tasks. Here's an overview of the
+                    inpainting process and a step-by-step guide on how to perform inpainting using Python and OpenCV:
+                </p>
             </div>
         </div>
     </div>
@@ -36,42 +35,75 @@
 
             <div class="card card-body bg-dark text-secondary">
                 <div class="d-flex align-items-center justify-content-between">
-                    <h6 class="mb-0 text-primary">Brief overview of how Thresholding works</h6>
+                    <h6 class="mb-0 text-primary">Brief overview of how contrast stretching works</h6>
                 </div>
             </div>
             <div class="mb-3"></div>
             <div class="card card-body bg-dark text-secondary">
-                <h6 class="mb-0 d-flex justify-content-start">1. Import Libraries</h6>
+                <h6 class="mb-0 d-flex justify-content-start">1. Import Required Libraries:</h6>
             </div>
             <div class="mb-1"></div>
             <div class="card card-body bg-dark text-secondary">
                 <p class="lead text-muted text-left">
-                    Import the necessary libraries, primarily OpenCV and NumPy.
+                    First, you need to import the neccessary python libraries
                 </p>
             </div>
 
             <br>
 
             <div class="card card-body bg-dark text-secondary">
-                <h6 class="mb-0 d-flex justify-content-start">2. Load the Image: </h6>
+                <h6 class="mb-0 d-flex justify-content-start">2. Load the Image:</h6>
             </div>
             <div class="mb-1"></div>
             <div class="card card-body bg-dark text-secondary">
                 <p class="lead text-muted text-left">
-                    Load the image on which you want to apply thresholding. </p>
+                    which type of image you want to inpaint
+                </p>
             </div>
             <br>
             <div class="card card-body bg-dark text-secondary">
-                <h6 class="mb-0 d-flex justify-content-start">3. Apply Thresholding</h6>
+                <h6 class="mb-0 d-flex justify-content-start">3. Mask the Region to Inpaint:</h6>
             </div>
             <div class="mb-1"></div>
             <div class="card card-body bg-dark text-secondary">
                 <p class="lead text-muted text-left">
-                    There are various thresholding methods available in OpenCV, but one of the simplest is binary
-                    thresholding. In this example, we'll use binary thresholding, which divides the pixels into two
-                    categories based on a threshold value. </p>
+                    Create a mask that defines the region you want to inpaint. This mask should have the same dimensions
+                    as the image and should have the region to inpaint set to 255 (white) and the rest set to 0 (black).
+                    You can create the mask manually or use tools to generate it. </p>
             </div>
             <br>
+            <div class="card card-body bg-dark text-secondary">
+                <h6 class="mb-0 d-flex justify-content-start">4. Perform Inpainting:</h6>
+            </div>
+            <div class="mb-1"></div>
+            <div class="card card-body bg-dark text-secondary">
+                <p class="lead text-muted text-left">
+                    <strong>inpaintRadius </strong>This parameter controls the size of the neighborhood around each
+                    pixel that is used
+                    for inpainting. Adjust it based on your specific image and inpainting requirements.
+                </p>
+            </div>
+            <br>
+            <div class="card card-body bg-dark text-secondary">
+                <h6 class="mb-0 d-flex justify-content-start">5. Display and Save the Inpainted Image</h6>
+            </div>
+            <div class="mb-1"></div>
+            <div class="card card-body bg-dark text-secondary">
+                <p class="lead text-muted text-left">
+                    Display and save the inpainted image using OpenCV
+            </div>
+            <br>
+            <div class="card card-body bg-dark text-secondary">
+                <h6 class="mb-0 d-flex justify-content-start">6. Fine-Tune and Experiment</h6>
+            </div>
+            <div class="mb-1"></div>
+            <div class="card card-body bg-dark text-secondary">
+                <p class="lead text-muted text-left">
+                    Inpainting can produce good results, but the quality depends on the mask, inpainting method, and
+                    parameters you choose. Experiment with different settings and adjust the mask to achieve the desired
+                    inpainting effect. </p>
+            </div>
+            <div class="mb-2"></div>
         </div>
     </div>
 </div>
@@ -93,7 +125,6 @@
                     <div class="col col-12 d-flex justify-content-start"><span># Import Cv2 Library</span></div>
                     <div class="mb-1"></div>
                     <div class="col col-12 d-flex justify-content-start"><code>import cv2</code></div>
-                    <div class="col col-12 d-flex justify-content-start"><code>import numpy as np</code></div>
                     <br>
                     <div class="col col-12 d-flex justify-content-start"><span># Load the image</span></div>
                     <div class="mb-1"></div>
@@ -101,40 +132,32 @@
                         <code>image = cv2.imread('input_image.jpg', cv2.IMREAD_GRAYSCALE)</code>
                     </div>
                     <br>
-                    <div class="col col-12 d-flex justify-content-start"><span># Set a threshold value (you can
-                            experiment with different values)</span>
+                    <div class="col col-12 d-flex justify-content-start"><span># Create a mask (white rectangle) to
+                            inpaint a specific region</span>
                     </div>
                     <div class="mb-1"></div>
                     <div class="col col-12 d-flex justify-content-start">
-                        <code>threshold_value = 128</code>
-                    </div>
-                    <br>
-                    <div class="col col-12 d-flex justify-content-start"><span># Apply binary thresholding</span>
+                        <code>mask = np.zeros_like(image)</code>
                     </div>
                     <div class="mb-1"></div>
                     <div class="col col-12 d-flex justify-content-start">
-                        <code>ret, thresholded_image = cv2.threshold(image, threshold_value, 255, cv2.THRESH_BINARY)</code>
-                    </div>
-                    <br>
-                    <div class="col col-12 d-flex justify-content-start"><span># Display the thresholded image</span>
-                    </div>
-                    <div class="mb-1"></div>
-                    <div class="col col-12 d-flex justify-content-start">
-                        <code>gamma_corrected = np.power(image/255.0, gamma)
+                        <code>cv2.rectangle(mask, (100, 100), (300, 300), (255, 255, 255), thickness=cv2.FILLED)
                         </code>
                     </div>
-                    <dv class="mb-1"></dv>
-                    <div class="col col-12 d-flex justify-content-start">
-                        <code>cv2.imshow('Thresholded Image', thresholded_image)</code>
+                    <br>
+                    <div class="col col-12 d-flex justify-content-start"><span># Display the mask (optional)</span>
                     </div>
-                    <dv class="mb-1"></dv>
+                    <div class="mb-1"></div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>cv2.imshow('Mask', mask)</code>
+                    </div>
+                    <div class="mb-1"></div>
                     <div class="col col-12 d-flex justify-content-start">
                         <code>cv2.waitKey(0)</code>
                     </div>
-                    <dv class="mb-1"></dv>
+                    <div class="mb-1"></div>
                     <div class="col col-12 d-flex justify-content-start">
-                        <code>cv2.destroyAllWindows()
-                        </code>
+                        <code>cv2.destroyAllWindows()</code>
                     </div>
                     <div class="mb-2"></div>
                 </div>
@@ -153,7 +176,7 @@
         <div class="bg-secondary ">
             <div class="card card-body bg-dark text-secondary">
                 <p class="lead text-muted text-left">
-                    The following code will take a live image feed from your machine and apply Thresholded image to
+                    The following code will take a live image feed from your machine and apply Contrast Striching to
                     it, then display both original frame as well as its
                 </p>
             </div>
@@ -161,16 +184,14 @@
         <div class="bg-secondary ">
             <div class="card card-body bg-dark text-secondary">
                 <div class="d-flex justify-content-center">
-                    <button class="btn btn-success btn-load-img-thresholding">Load Image</button>
+                    <button class="btn btn-success btn-load-img-contrast-strching">Load Image</button>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<div class="thresolding-container-alert"></div>
-<div class="thresolding-image-collapse"></div>
-<div class="thresolding-input-image-collapse"></div>
-
+<div class="contrast-toast-container-alert"></div>
+<div class="contrast-strching-input-image-collapse"></div>
+<div class="contrast-strching-image-collapse"></div>
 <br>
-
 {% endblock content %}
