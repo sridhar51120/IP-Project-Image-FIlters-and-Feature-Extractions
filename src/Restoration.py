@@ -15,7 +15,20 @@ class Restoration:
         return path
     
     def inpainting(self):
-        pass
+        image=cv2.imread(self.name,cv2.IMREAD_GRAYSCALE)
+        mask = np.zeros_like(image)
+        cv2.rectangle(mask, (100, 100), (300, 300), (255, 255, 255), thickness=cv2.FILLED) 
+        inpaint_image = cv2.inpaint(image, mask, inpaintRadius=5, flags=cv2.INPAINT_TELEA)
+        path = "assets/uploads/restoration/inpaint/inpaint_img.jpg"
+        cv2.imwrite(path,inpaint_image)
+        return path
 
     def noise_reduction(self):
-        pass
+        image=cv2.imread(self.name,cv2.IMREAD_GRAYSCALE)
+        mask = np.zeros_like(image)
+        cv2.rectangle(mask, (100, 100), (300, 300), (255, 255, 255), thickness=cv2.FILLED) 
+        inpaint_image = cv2.inpaint(image, mask, inpaintRadius=5, flags=cv2.INPAINT_TELEA)
+        path = "assets/uploads/restoration/noise_reduction/noise_reduction_img.jpg"
+        cv2.imwrite(path,inpaint_image)
+        return path
+

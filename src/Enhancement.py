@@ -26,8 +26,8 @@ class Enhancement:
         stretched_image = ((image - min_in) / (max_in - min_in)) * (max_out - min_out) + min_out
         stretched_image = ((image - min_in) / (max_in - min_in)) * (max_out - min_out) + min_out
         stretched_image = np.round(stretched_image).astype(np.uint8)
-        cv2.imwrite(path,stretched_image)
         path = "assets/uploads/enhancement/contrast_strching/contrast_strching_img.jpg"
+        cv2.imwrite(path,stretched_image)
         return path
 
     def spatial_filter(self):

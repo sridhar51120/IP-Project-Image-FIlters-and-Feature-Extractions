@@ -39,22 +39,21 @@ def in_paint_temp():
 @bp.route("/in_paint_output",methods=['POST'])
 def in_paint_output():
       if request.method == 'POST':
-         if 'deblur-input-image-file' in request.files:
-            file = request.files['deblur-input-image-file']
-            img_path = f'assets/uploads/restoration/deblur/{file.filename}'
+         if 'inpaint-input-image-file' in request.files:
+            file = request.files['inpaint-input-image-file']
+            img_path = f'assets/uploads/restoration/inpaint/{file.filename}'
             file.save(os.path.join(img_path)) 
             restoration = Restoration(img_path)
-            deblur_img = restoration.debluring()
-            
+            inpaint_img = restoration.inpainting()
             data = {
                   'img_url': img_path,
-                  'deblur_img' : deblur_img
+                  'inpaint_img' : inpaint_img
                }
             
             return {
-               'template' : render_template('restoring/deblur.html',data = data),
+               'template' : render_template('restoring/in_paint.html',data = data),
                'img_url': img_path.replace("assets", ""),
-               'deblur_img' : deblur_img.replace("assets", "")
+               'inpaint_img' : inpaint_img.replace("assets", "")
                }
          else:
             return 'No file part in the request'
@@ -62,4 +61,27 @@ def in_paint_output():
 @bp.route("/noise_reduction",methods=['GET'])
 def noise_reduction_temp():
    return render_template("noise_reduction.html")
+
+
+@bp.route("/noise_reduction_output",methods=['POST'])
+def noise_reduction_output():
+      if request.method == 'POST':
+         if 'noise-input-image-file' in request.files:
+            file = request.files['noise-input-image-file']
+            img_path = f'assets/uploads/restoration/noise_reduction/{file.filename}'
+            file.save(os.path.join(img_path)) 
+            restoration = Restoration(img_path)
+            noise_img = restoration.noise_reduction()
+
+            data = {
+                  'img_url': img_path,
+                  'noise_img' : noise_img
+               } 
+            return {
+               'template' : render_template('restoring/noise_reduction.html',data = data),
+               'img_url': img_path.replace("assets", ""),
+               'noise_img' : noise_img.replace("assets", "")
+               }
+         else:
+            return 'No file part in the request'
 

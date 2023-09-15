@@ -1,8 +1,8 @@
 $(document).ready(function () {
-    $('.btn-load-img-clustering-img').click(function () {
+    $('.btn-load-img-inpaint-img').click(function () {
         var template = `
             <div class="container-fluid pt-4 px-4">
-                <div class="collapse cluster-input-image-collapse-template">
+                <div class="collapse inpaint-input-image-collapse-template">
                     <div class="bg-secondary text-center rounded p-4">
                         <div class="card card-body bg-dark text-secondary">
                             <div class="d-flex align-items-start justify-content-start">
@@ -19,12 +19,12 @@ $(document).ready(function () {
                                     </h5>
                                     <form id="uploadForm" enctype="multipart/form-data">
                                         <input class="form-control d-flex justify-content-start border border-success" type="file"
-                                            name="cluster-input-image-file" id="cluster-input-image" autocomplete="Image">
+                                            name="inpaint-input-image-file" id="inpaint-input-image" autocomplete="Image">
                                     </form>
                                 </div>
                                 <div class="card-footer ">
                                     <button class="btn btn-success d-flex justify-content-start"
-                                        id="btn-cluster-input-image-submit">Upload</button>
+                                        id="btn-inpaint-input-image-submit">Upload</button>
                                 </div>
                             </div>
                         </div>
@@ -32,20 +32,20 @@ $(document).ready(function () {
                 </div>
             </div>
         `
-        $('.cluster-input-image-collapse').append(template);
-        $('.cluster-input-image-collapse-template').collapse({
+        $('.inpaint-input-image-collapse').append(template);
+        $('.inpaint-input-image-collapse-template').collapse({
             toggle: false
         }).show();
 
-        const btn_cluster_submit_image = document.getElementById('btn-cluster-input-image-submit');
-        $(btn_cluster_submit_image).click(function () {
-            const cluster_input_image = document.getElementById('cluster-input-image');
-            if (cluster_input_image.files.length > 0) {
-                const fileName = cluster_input_image.files[0].name;
-                alert(fileName);
+        const btn_inpaint_submit_image = document.getElementById('btn-inpaint-input-image-submit');
+        $(btn_inpaint_submit_image).click(function () {
+            const inpaint_input_image = document.getElementById('inpaint-input-image');
+            if (inpaint_input_image.files.length > 0) {
+                const fileName = inpaint_input_image.files[0].name;
+                // alert(fileName);
                 if (/\.(jpg|png)$/i.test(fileName)) {
                     $.ajax({
-                        url: '/segmentation/Clustering_output',
+                        url: '/restoring/in_paint_output',
                         type: 'POST',
                         data: new FormData(document.getElementById('uploadForm')),
                         processData: false,
@@ -60,7 +60,7 @@ $(document).ready(function () {
                                         </div>
                                     </div>
                                 `
-                            $('.cluster-container-alert').append(template);
+                            $('.inpaint-container-alert').append(template);
                             $('.file-selected-alert').toast('show');
                             setTimeout(function () {
                                 $('.file-selected-alert').toast('hide');
@@ -68,14 +68,14 @@ $(document).ready(function () {
                             console.log('Server response:', response);
                             console.log('Data : ', data);
 
-                            $('.cluster-image-collapse').append(data['template']);
-                            $('#output-clustering-toggle-groups').collapse({
+                            $('.inpaint-image-collapse').append(data['template']);
+                            $('#output-inpainting-toggle-groups').collapse({
                                 toggle: false
                             }).show();
 
                             var image_template = `
                             <img src="${data['img_url']}" id="${data['img_url']}" alt="original Image" style="display:none;">
-                            <img src="${data['clustered_img']}" id="${data['clustered_img']}" alt="Clustered Image" style="display:none;">
+                            <img src="${data['inpaint_img']}" id="${data['inpaint_img']}" alt="inpainted Image" style="display:none;">
                             `;
                             $(document.body).append(image_template);
 
@@ -86,7 +86,7 @@ $(document).ready(function () {
                                 }).show();
                             });
                             $('.btn-clustering-output-image-show').click(function () {
-                                var viewer = new Viewer(document.getElementById(`${data['clustered_img']}`), {
+                                var viewer = new Viewer(document.getElementById(`${data['inpaint_img']}`), {
                                     loop: true,
                                     interval: 500
                                 }).show();
@@ -110,7 +110,7 @@ $(document).ready(function () {
                         </div>
                     </div>
                     `
-                    $('.cluster-container-alert').append(template);
+                    $('.inpaint-container-alert').append(template);
                     $('.invalid-extension-alert').toast('show');
                     setTimeout(function () {
                         $('.invalid-extension-alert').toast('hide');
@@ -126,7 +126,7 @@ $(document).ready(function () {
                     </div>
                 </div>
                 `
-                $('.cluster-container-alert').append(template);
+                $('.inpaint-container-alert').append(template);
                 $('.file-not-found-alert').toast('show');
                 setTimeout(function () {
                     $('.file-not-found-alert').toast('hide');

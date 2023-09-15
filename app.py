@@ -24,13 +24,5 @@ def home():
       "message" : "Success"
    },200
 
-@app.route("/get",methods=['GET'])
-def get():
-   return jsonify({
-      'Status': True,
-      "messgae": "Success"
-   })
-
-
 if __name__ == '__main__':
    app.run(host='127.0.0.1', port=5000, debug=True)
