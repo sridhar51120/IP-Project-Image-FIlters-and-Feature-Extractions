@@ -8,6 +8,11 @@ bp = Blueprint("enhancement", __name__, url_prefix="/enhancement")
 def Histogram_Equalization_temp():
    return render_template("Histogram_Equalization.html")
 
+@bp.route("/Histogram_Equalization_modal",methods=['GET'])
+def Histogram_Equalization_modal():
+   return render_template("modals\histo.html")
+
+
 @bp.route("/Histogram_Equalization_output",methods=['POST'])
 def Histogram_Equalization_output():
       if request.method == 'POST':

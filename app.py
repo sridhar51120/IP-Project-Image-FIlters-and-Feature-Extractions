@@ -4,14 +4,14 @@ import cv2
 import numpy as np
 import os
 from src.Enhancement import Enhancement
-from blueprints import enhancement, segmentation, restoring
+from blueprints import enhancement, segmentation, restoring, modals
 
 app = Flask(__name__,static_folder='assets',static_url_path='/')
 
 app.register_blueprint(enhancement.bp)
 app.register_blueprint(segmentation.bp)
 app.register_blueprint(restoring.bp)
-
+app.register_blueprint(modals.bp)
 
 @app.route("/",methods=['GET'])
 def dashboard():
