@@ -1,10 +1,10 @@
 $(document).ready(function () {
     $('.btn-load-img-thresholding').click(function () {
         $.get("/modals/thresolding", function (data) {
-            console.log("Data received:", data);
+            // console.log("Data received:", data);
             $('.modal-content').append(data);
             $('#thresolding-image-modal').modal('show');
-            $('#btn-histogram-modal-close').click(function () {
+            $('#btn-thresolding-modal-close').click(function () {
                 $('#thresolding-image-modal').modal('hide');
             });
             const btn_thresold_submit_image = document.getElementById('btn-thresolding-input-image-submit');
@@ -21,22 +21,8 @@ $(document).ready(function () {
                             processData: false,
                             contentType: false,
                             success: function (data, response) {
-                                // var template = `
-                                //         <div class="toast-container bottom-0 end-0 p-3 ">
-                                //             <div class="toast file-selected-alert bg-success" role="alert" aria-live="assertive" aria-atomic="true">
-                                //                 <div class="toast-body">
-                                //                     <strong class='text-muted'> ${fileName} file has been Selected</strong>
-                                //                 </div>
-                                //             </div>
-                                //         </div>
-                                //     `
-                                // $('.thresolding-container-alert').append(template);
-                                // $('.file-selected-alert').toast('show');
-                                // setTimeout(function () {
-                                //     $('.file-selected-alert').toast('hide');
-                                // }, 6000);
-                                console.log('Server response:', response);
-                                console.log('Data : ', data);
+                                // console.log('Server response:', response);
+                                // console.log('Data : ', data);
                                 $('.thresolding-input-image-collapse').append(data['template']);
                                 $('#output-thresholding-toggle-groups').collapse({
                                     toggle: false
@@ -61,44 +47,25 @@ $(document).ready(function () {
                                 });
                             },
                             error: function (xhr, status, error) {
-                                console.log('XHR status:', status);
-                                console.log('XHR error:', error);
+                                // console.log('XHR status:', status);
+                                // console.log('XHR error:', error);
                             },
                             complete: function (xhr, status) {
-                                console.log('Request complete. XHR status:', status);
+                                // console.log('Request complete. XHR status:', status);
                             }
                         });
                     } else {
-                        // var template = `
-                        // <div class="toast-container bottom-0 end-0 p-3 ">
-                        //     <div class="toast invalid-extension-alert bg-danger" id='invalid-extension-alert' role="alert" aria-live="assertive" aria-atomic="true">
-                        //         <div class="toast-body">
-                        //             <strong class='text-muted'>Error: Invalid File Extension</strong>
-                        //         </div>
-                        //     </div>
-                        // </div>
-                        // `
-                        // $('.thresolding-container-alert').append(template);
-                        // $('.invalid-extension-alert').toast('show');
-                        // setTimeout(function () {
-                        //     $('.invalid-extension-alert').toast('hide');
-                        // }, 6000);
+                        const alert_msg = `
+                        <div class="card bg-primary">
+                            <div class="card-body text-center text-dark">
+                                Invalid File Extension
+                            </div>
+                        </div>`
+                        $('.alert-container').append(alert_msg);
+
                     }
                 } else {
-                    // var template = `
-                    // <div class="toast-container bottom-0 end-0 p-3 ">
-                    //     <div class="toast file-not-found-alert bg-danger" role="alert" aria-live="assertive" aria-atomic="true">
-                    //         <div class="toast-body">
-                    //             <strong class='text-muted'>Error: No file selected.</strong>
-                    //         </div>
-                    //     </div>
-                    // </div>
-                    // `
-                    // $('.thresolding-container-alert').append(template);
-                    // $('.file-not-found-alert').toast('show');
-                    // setTimeout(function () {
-                    //     $('.file-not-found-alert').toast('hide');
-                    // }, 6000);
+                    alert("File Not Selected!");
                 }
             })
         });

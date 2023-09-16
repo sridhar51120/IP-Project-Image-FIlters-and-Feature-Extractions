@@ -4,7 +4,8 @@ $(document).ready(function () {
             console.log("Data received:", data);
             $('.modal-content').append(data);
             $('#deblur-image-modal').modal('show');
-            $('#btn-deblur-input-image-submit').click(function () {
+
+            $('#btn-deblur-modal-close').click(function () {
                 $('#deblur-image-modal').modal('hide');
             });
             const btn_deblur_submit_image = document.getElementById('btn-deblur-input-image-submit');
@@ -22,20 +23,6 @@ $(document).ready(function () {
                             processData: false,
                             contentType: false,
                             success: function (data, response) {
-                                // var template = `
-                                //         <div class="toast-container bottom-0 end-0 p-3 ">
-                                //             <div class="toast file-selected-alert bg-success" role="alert" aria-live="assertive" aria-atomic="true">
-                                //                 <div class="toast-body">
-                                //                     <strong class='text-muted'> ${fileName} file has been Selected</strong>
-                                //                 </div>
-                                //             </div>
-                                //         </div>
-                                //     `
-                                // $('.deblur-toast-container-alert').append(template);
-                                // $('.file-selected-alert').toast('show');
-                                // setTimeout(function () {
-                                //     $('.file-selected-alert').toast('hide');
-                                // }, 6000);
                                 console.log('Server response:', response);
                                 console.log('Data : ', data);
 
@@ -72,36 +59,17 @@ $(document).ready(function () {
                             }
                         });
                     } else {
-                        // var template = `
-                        // <div class="toast-container bottom-0 end-0 p-3 ">
-                        //     <div class="toast invalid-extension-alert bg-danger" id='invalid-extension-alert' role="alert" aria-live="assertive" aria-atomic="true">
-                        //         <div class="toast-body">
-                        //             <strong class='text-muted'>Error: Invalid File Extension</strong>
-                        //         </div>
-                        //     </div>
-                        // </div>
-                        // `
-                        // $('.deblur-toast-container-alert').append(template);
-                        // $('.invalid-extension-alert').toast('show');
-                        // setTimeout(function () {
-                        //     $('.invalid-extension-alert').toast('hide');
-                        // }, 6000);
+                        const alert_msg = `
+                        <div class="card bg-primary">
+                            <div class="card-body text-center text-dark">
+                                Invalid File Extension
+                            </div>
+                        </div>`
+                        $('.alert-container').append(alert_msg);
+
                     }
                 } else {
-                    // var template = `
-                    // <div class="toast-container bottom-0 end-0 p-3 ">
-                    //     <div class="toast file-not-found-alert bg-danger" role="alert" aria-live="assertive" aria-atomic="true">
-                    //         <div class="toast-body">
-                    //             <strong class='text-muted'>Error: No file selected.</strong>
-                    //         </div>
-                    //     </div>
-                    // </div>
-                    // `
-                    // $('.deblur-toast-container-alert').append(template);
-                    // $('.file-not-found-alert').toast('show');
-                    // setTimeout(function () {
-                    //     $('.file-not-found-alert').toast('hide');
-                    // }, 6000);
+                    alert("File Not Selected!");
                 }
             })
         });

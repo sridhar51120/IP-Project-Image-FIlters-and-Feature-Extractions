@@ -1,7 +1,7 @@
 $(document).ready(function () {
     $('.btn-load-img-clustering-img').click(function () {
         $.get("/modals/cluster", function (data) {
-            console.log("Data received:", data);
+            // console.log("Data received:", data);
             $('.modal-content').append(data);
             $('#histogram-image-modal').modal('show');
             $('#btn-histogram-modal-close').click(function () {
@@ -9,12 +9,12 @@ $(document).ready(function () {
             });
             const btn_cluster_submit_image = document.getElementById('btn-cluster-input-image-submit');
             $(btn_cluster_submit_image).click(function () {
-                $('#histogram-image-modal').modal('hide');
                 const cluster_input_image = document.getElementById('cluster-input-image');
                 if (cluster_input_image.files.length > 0) {
                     const fileName = cluster_input_image.files[0].name;
                     // alert(fileName);
                     if (/\.(jpg|png)$/i.test(fileName)) {
+                        $('#histogram-image-modal').modal('hide');
                         $.ajax({
                             url: '/segmentation/Clustering_output',
                             type: 'POST',
@@ -22,22 +22,9 @@ $(document).ready(function () {
                             processData: false,
                             contentType: false,
                             success: function (data, response) {
-                                // var template = `
-                                //     <div class="toast-container bottom-0 end-0 p-3 ">
-                                //         <div class="toast file-selected-alert bg-success" role="alert" aria-live="assertive" aria-atomic="true">
-                                //             <div class="toast-body">
-                                //                 <strong class='text-muted'> ${fileName} file has been Selected</strong>
-                                //             </div>
-                                //         </div>
-                                //     </div>
-                                // `
-                                // $('.cluster-container-alert').append(template);
-                                // $('.file-selected-alert').toast('show');
-                                // setTimeout(function () {
-                                //     $('.file-selected-alert').toast('hide');
-                                // }, 6000);
-                                console.log('Server response:', response);
-                                console.log('Data : ', data);
+
+                                // console.log('Server response:', response);
+                                // console.log('Data : ', data);
 
                                 $('.cluster-image-collapse').append(data['template']);
                                 $('#output-clustering-toggle-groups').collapse({
@@ -64,46 +51,25 @@ $(document).ready(function () {
                                 });
                             },
                             error: function (xhr, status, error) {
-                                console.log('XHR status:', status);
-                                console.log('XHR error:', error);
+                                // console.log('XHR status:', status);
+                                // console.log('XHR error:', error);
                             },
                             complete: function (xhr, status) {
-                                console.log('Request complete. XHR status:', status);
+                                // console.log('Request complete. XHR status:', status);
                             }
                         });
                     } else {
-                        alert("Invalid Extension....");
-                    //     var template = `
-                    // <div class="toast-container bottom-0 end-0 p-3 ">
-                    //     <div class="toast invalid-extension-alert bg-danger" id='invalid-extension-alert' role="alert" aria-live="assertive" aria-atomic="true">
-                    //         <div class="toast-body">
-                    //             <strong class='text-muted'>Error: Invalid File Extension</strong>
-                    //         </div>
-                    //     </div>
-                    // </div>
-                    // `
-                    //     $('.cluster-container-alert').append(template);
-                    //     $('.invalid-extension-alert').toast('show');
-                    //     setTimeout(function () {
-                    //         $('.invalid-extension-alert').toast('hide');
-                    //     }, 6000);
+                        const alert_msg = `
+                        <div class="card bg-primary">
+                            <div class="card-body text-center text-dark">
+                                Invalid File Extension
+                            </div>
+                        </div>`
+                        $('.alert-container').append(alert_msg);
+
                     }
                 } else {
-                    alert("File not Found Error");
-                //     var template = `
-                // <div class="toast-container bottom-0 end-0 p-3 ">
-                //     <div class="toast file-not-found-alert bg-danger" role="alert" aria-live="assertive" aria-atomic="true">
-                //         <div class="toast-body">
-                //             <strong class='text-muted'>Error: No file selected.</strong>
-                //         </div>
-                //     </div>
-                // </div>
-                // `
-                //     $('.cluster-container-alert').append(template);
-                //     $('.file-not-found-alert').toast('show');
-                //     setTimeout(function () {
-                //         $('.file-not-found-alert').toast('hide');
-                //     }, 6000);
+                    alert("File Not Selected!");
                 }
             })
         });

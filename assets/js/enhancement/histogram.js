@@ -1,8 +1,8 @@
 $(document).ready(function () {
     $('.btn-load-img-histogram-equal').click(function () {
         $.get("/modals/histogram", function (data) {
-            console.log("Data received:", data);
             $('.modal-content').append(data);
+            const temp = data;
             $('#histogram-image-modal').modal('show');
             $('#btn-histogram-modal-close').click(function () {
                 $('#histogram-image-modal').modal('hide');
@@ -21,8 +21,8 @@ $(document).ready(function () {
                             processData: false,
                             contentType: false,
                             success: function (data, response) {
-                                console.log('Server response:', response);
-                                console.log('Data : ', data);
+                                // console.log('Server response:', response);
+                                // console.log('Data : ', data);
 
                                 $('.histo_image_collapse').append(data['template']);
                                 $(".output-histogram-toggle-groups").collapse("toggle");
@@ -53,47 +53,24 @@ $(document).ready(function () {
                                 });
                             },
                             error: function (xhr, status, error) {
-                                console.log('XHR status:', status);
-                                console.log('XHR error:', error);
+                                // console.log('XHR status:', status);
+                                // console.log('XHR error:', error);
                             },
                             complete: function (xhr, status) {
-                                console.log('Request complete. XHR status:', status);
+                                // console.log('Request complete. XHR status:', status);
                             }
                         });
-                        // $('.toast-container-alert').remove();
                     } else {
-                        // var template = `
-                        // <div class="toast-container bottom-0 end-0 p-3 ">
-                        //     <div class="toast invalid-extension-alert bg-danger" id='invalid-extension-alert' role="alert" aria-live="assertive" aria-atomic="true">
-                        //         <div class="toast-body">
-                        //             <strong class='text-muted'>Error: Invalid File Extension</strong>
-                        //         </div>
-                        //     </div>
-                        // </div>
-                        // `
-                        // $('.toast-container-alert').append(template);
-                        // $('.invalid-extension-alert').toast('show');
-                        // setTimeout(function () {
-                        //     $('.invalid-extension-alert').toast('hide');
-                        // }, 6000);
-                        // $('.toast-container-alert').remove();
+                        const alert_msg = `
+                        <div class="card bg-primary">
+                            <div class="card-body text-center text-dark">
+                                Invalid File Extension
+                            </div>
+                        </div>`
+                        $('.alert-container').append(alert_msg);
                     }
                 } else {
-                    // var template = `
-                    // <div class="toast-container bottom-0 end-0 p-3 ">
-                    //     <div class="toast file-not-found-alert bg-danger" role="alert" aria-live="assertive" aria-atomic="true">
-                    //         <div class="toast-body">
-                    //             <strong class='text-muted'>Error: No file selected.</strong>
-                    //         </div>
-                    //     </div>
-                    // </div>
-                    // `
-                    // $('.toast-container-alert').append(template);
-                    // $('.file-not-found-alert').toast('show');
-                    // setTimeout(function () {
-                    //     $('.file-not-found-alert').toast('hide');
-                    // }, 6000);
-                    // $('.toast-container-alert').remove();
+                    alert("File Not Selected!");
                 }
             })
         });

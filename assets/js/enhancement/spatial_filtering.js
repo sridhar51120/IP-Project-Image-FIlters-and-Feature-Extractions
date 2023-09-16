@@ -1,12 +1,11 @@
 $(document).ready(function () {
     $('.btn-load-img-spatial-filter').click(function () {
         $.get("/modals/spatial", function (data) {
-            // console.log("Data received:", data);
             $('.modal-content').append(data);
             $('#spatial-image-modal').modal('show');
             $('#btn-spatial-modal-close').click(function () {
                 $('#spatial-image-modal').modal('hide');
-            });
+            });''
             const btn_spatial_filter_submit_image = document.getElementById('btn-spatial-filter-input-image-submit');
             $(btn_spatial_filter_submit_image).click(function () {
                 const spatial_filter_input_image = document.getElementById('spatial-filter-input-image');
@@ -21,22 +20,8 @@ $(document).ready(function () {
                             processData: false,
                             contentType: false,
                             success: function (data, response) {
-                                // var template = `
-                                //         <div class="toast-container bottom-0 end-0 p-3 ">
-                                //             <div class="toast file-selected-alert bg-success" role="alert" aria-live="assertive" aria-atomic="true">
-                                //                 <div class="toast-body">
-                                //                     <strong class='text-muted'> ${fileName} file has been Selected</strong>
-                                //                 </div>
-                                //             </div>
-                                //         </div>
-                                //     `
-                                // $('.spatial-toast-container-alert').append(template);
-                                // $('.file-selected-alert').toast('show');
-                                // setTimeout(function () {
-                                //     $('.file-selected-alert').toast('hide');
-                                // }, 6000);
-                                console.log('Server response:', response);
-                                console.log('Data : ', data);
+                                // console.log('Server response:', response);
+                                // console.log('Data : ', data);
 
                                 $('.spatial-filter-image-collapse').append(data['template']);
                                 $('#output-spatial-filter-toggle-groups').collapse({
@@ -71,23 +56,17 @@ $(document).ready(function () {
                             }
                         });
                     } else {
-                       console.log("Extension not valid")
+                        const alert_msg = `
+                        <div class="card bg-primary">
+                            <div class="card-body text-center text-dark">
+                                Invalid File Extension
+                            </div>
+                        </div>`
+                        $('.alert-container').append(alert_msg);
+
                     }
                 } else {
-                    // var template = `
-                    // <div class="toast-container bottom-0 end-0 p-3 ">
-                    //     <div class="toast file-not-found-alert bg-danger" role="alert" aria-live="assertive" aria-atomic="true">
-                    //         <div class="toast-body">
-                    //             <strong class='text-muted'>Error: No file selected.</strong>
-                    //         </div>
-                    //     </div>
-                    // </div>
-                    // `
-                    // $('.spatial-toast-container-alert').append(template);
-                    // $('.file-not-found-alert').toast('show');
-                    // setTimeout(function () {
-                    //     $('.file-not-found-alert').toast('hide');
-                    // }, 6000);
+                    alert("File Not Selected!");
                 }
             })
         });

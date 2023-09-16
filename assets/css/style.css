@@ -5,6 +5,9 @@
     --light: #6C7293;
     --dark: #000000;
 }
+.form-control{
+    border-color: #3106f0;
+}
 
 .back-to-top {
     position: fixed;
