@@ -8,6 +8,8 @@ from blueprints import enhancement, segmentation, restoring, modals
 
 app = Flask(__name__,static_folder='assets',static_url_path='/')
 
+app.config['FLASK_DEBUG'] = True
+
 app.register_blueprint(enhancement.bp)
 app.register_blueprint(segmentation.bp)
 app.register_blueprint(restoring.bp)
