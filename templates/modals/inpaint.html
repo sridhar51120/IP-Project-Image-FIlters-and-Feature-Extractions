@@ -1,0 +1,36 @@
+<div class="modal fade" id="inpaint-image-modal" tabindex="-1" role="dialog" aria-labelledby="inpaint-image-modalLabel"
+    aria-hidden="true" data-bs-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="container">
+                    <div class="float-right">
+                        <h5 class="text-success">Upload Your Image</h5>
+                    </div>
+                    <div class="float-left">
+                        <div class="alert-container "></div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-body">
+                        <h5 class="card-title text-danger d-flex justify-content-start">
+                            File
+                            <span class="text-danger"><strong> *</strong></span>
+                        </h5>
+                        <form id="uploadForm" enctype="multipart/form-data">
+                            <input class="form-control d-flex justify-content-start border border-success" type="file"
+                                name="inpaint-input-image-file" id="inpaint-input-image" autocomplete="Image">
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" id="btn-inpaint-modal-close">Close</button>
+                <button class="btn btn-success d-flex justify-content-start"
+                    id="btn-inpaint-input-image-submit">Upload</button>
+            </div>
+        </div>
+    </div>
+</div>
