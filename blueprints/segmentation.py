@@ -23,7 +23,7 @@ def Clustering_output():
                   'clustered_img' : clustered_img
                }
             return {
-               'template' : render_template('segmentation/clustering.html',data = data),
+               'template' : render_template('InputCollapse/segmentation/clustering.html',data = data),
                'img_url': img_path.replace("assets", ""),
                'clustered_img' : clustered_img.replace("assets", "")
                }
@@ -51,7 +51,7 @@ def Edge_detection_output():
                }
             
             return {
-               'template' : render_template('segmentation/edge_detection.html',data = data),
+               'template' : render_template('InputCollapse/segmentation/edge_detection.html',data = data),
                'img_url': img_path.replace("assets", ""),
                'edge_detection' : edge_detection.replace("assets", "")
                }
@@ -77,7 +77,7 @@ def Region_growing_output():
                   'region_detection' : region_detection
                }
             return {
-               'template' : render_template('segmentation/region_detection.html',data = data),
+               'template' : render_template('InputCollapse/segmentation/region_detection.html',data = data),
                'img_url': img_path.replace("assets", ""),
                'region_detection' : region_detection.replace("assets", "")
                }
@@ -106,7 +106,7 @@ def Thresolding_output():
                }
             
             return {
-               'template' : render_template('segmentation/thresholding.html',data = data),
+               'template' : render_template('InputCollapse/segmentation/thresholding.html',data = data),
                'img_url': img_path.replace("assets", ""),
                'thresholding' : thresholding.replace("assets", "")
                }

@@ -24,7 +24,7 @@ def deblur_output():
                }
             
             return {
-               'template' : render_template('restoring/deblur.html',data = data),
+               'template' : render_template('InputCollapse/restoring/deblur.html',data = data),
                'img_url': img_path.replace("assets", ""),
                'deblur_img' : deblur_img.replace("assets", "")
                }
@@ -51,7 +51,7 @@ def in_paint_output():
                }
             
             return {
-               'template' : render_template('restoring/in_paint.html',data = data),
+               'template' : render_template('InputCollapse/restoring/in_paint.html',data = data),
                'img_url': img_path.replace("assets", ""),
                'inpaint_img' : inpaint_img.replace("assets", "")
                }
@@ -78,7 +78,7 @@ def noise_reduction_output():
                   'noise_img' : noise_img
                } 
             return {
-               'template' : render_template('restoring/noise_reduction.html',data = data),
+               'template' : render_template('InputCollapse/restoring/noise_reduction.html',data = data),
                'img_url': img_path.replace("assets", ""),
                'noise_img' : noise_img.replace("assets", "")
                }
