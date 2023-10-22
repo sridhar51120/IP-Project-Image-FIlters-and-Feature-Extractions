@@ -1,212 +1,248 @@
 {% extends '__master.html' %}
 
 {% block content %}
-<div class="container-fluid pt-4 px-4">
+  <div class="container-fluid pt-4 px-4">
     <div class="card bg-secondary">
-        <div class="card-body">
-            <h4 class="text-primary">Debluring Technique</h4>
-        </div>
+      <div class="card-body">
+        <h4 class="text-primary">Debluring Technique</h4>
+      </div>
     </div>
-</div>
-<div class="container-fluid pt-4 px-4">
-    <div class="bg-secondary text-center rounded p-4">
+  </div>
+  <div class="container-fluid pt-4 px-4">
+    <div class="bg-secondary text-center rounded p-1">
+      <div class="card card-body bg-dark text-secondary">
+        <div class="d-flex align-items-center justify-content-between">
+          <h6 class="mb-0 text-primary">Definition</h6>
+        </div>
+      </div>
+      <div class="mb-3"></div>
+      <div class="bg-secondary">
         <div class="card card-body bg-dark text-secondary">
-            <div class="d-flex align-items-center justify-content-between">
-                <h6 class="mb-0 text-primary">Definition</h6>
-            </div>
+          <p class="lead text-muted text-left">Deblurring is a common problem in image processing, and there are various techniques to address it. In this response, I'll provide you with a basic workflow for deblurring an image using Python and OpenCV. Keep in mind that deblurring can be a complex task, and the success of the process depends on factors like the type of blur, the quality of the original image, and the chosen deblurring method. Here's a step-by-step workflow to deblur an image using Python and OpenCV:</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid pt-4 px-4">
+    <div class="bg-secondary text-center rounded p-1">
+      <div class="bg-secondary">
+        <div class="card card-body bg-dark text-secondary">
+          <div class="d-flex align-items-center justify-content-between">
+            <h6 class="mb-0 text-primary">Brief overview of how contrast stretching works</h6>
+          </div>
         </div>
         <div class="mb-3"></div>
-        <div class="bg-secondary ">
-            <div class="card card-body bg-dark text-secondary">
-                <p class="lead text-muted text-left">
-                    Deblurring is a common problem in image processing, and there are various techniques to address it.
-                    In this response, I'll provide you with a basic workflow for deblurring an image using Python and
-                    OpenCV. Keep in mind that deblurring can be a complex task, and the success of the process depends
-                    on factors like the type of blur, the quality of the original image, and the chosen deblurring
-                    method.
-                    Here's a step-by-step workflow to deblur an image using Python and OpenCV:
-                </p>
-            </div>
+        <div class="card card-body bg-dark text-secondary">
+          <h6 class="mb-0 d-flex justify-content-start">1. Import Libraries:</h6>
         </div>
+        <div class="mb-1"></div>
+        <div class="card card-body bg-dark text-secondary">
+          <p class="lead text-muted text-left">Import the necessary libraries, which in this case are OpenCV and NumPy.</p>
+        </div>
+        <br />
+        <div class="card card-body bg-dark text-secondary">
+          <h6 class="mb-0 d-flex justify-content-start">2. Load the Blurred Image:</h6>
+        </div>
+        <div class="mb-1"></div>
+        <div class="card card-body bg-dark text-secondary">
+          <p class="lead text-muted text-left">Load the image that you want to deblur using the cv2.imread() function. Make sure to specify the correct file path.</p>
+        </div>
+        <br />
+        <div class="card card-body bg-dark text-secondary">
+          <h6 class="mb-0 d-flex justify-content-start">3. Choose a Deblurring Method</h6>
+        </div>
+        <div class="mb-1"></div>
+        <div class="card card-body bg-dark text-secondary">
+          <p class="lead text-muted text-left">There are various deblurring methods available in OpenCV. One common method is Wiener deconvolution. You can choose a method based on your requirements. For this example, we'll use Wiener deconvolution.</p>
+        </div>
+        <br />
+        <div class="card card-body bg-dark text-secondary">
+          <h6 class="mb-0 d-flex justify-content-start">4. Convert Image to Grayscale:</h6>
+        </div>
+        <div class="mb-1"></div>
+        <div class="card card-body bg-dark text-secondary">
+          <p class="lead text-muted text-left">Deblurring is often performed on grayscale images, so convert your image to grayscale if it's not already.</p>
+        </div>
+        <br />
+        <div class="card card-body bg-dark text-secondary">
+          <h6 class="mb-0 d-flex justify-content-start">5. Apply Deblurring</h6>
+        </div>
+        <div class="mb-1"></div>
+        <div class="card card-body bg-dark text-secondary">
+          <p class="lead text-muted text-left">Apply the chosen deblurring method to the grayscale image. Here's an example using Wiener deconvolution:</p>
+        </div>
+        <br />
+        <div class="card card-body bg-dark text-secondary">
+          <h6 class="mb-0 d-flex justify-content-start">6. Display the Deblurred Image:</h6>
+        </div>
+        <div class="mb-1"></div>
+        <div class="card card-body bg-dark text-secondary">
+          <p class="lead text-muted text-left">Display the image using python inbuild libraries like opencv</p>
+        </div>
+        <br />
+      </div>
     </div>
-</div>
-<div class="container-fluid pt-4 px-4">
-    <div class="bg-secondary text-center rounded p-4">
-        <div class="bg-secondary">
-
-            <div class="card card-body bg-dark text-secondary">
-                <div class="d-flex align-items-center justify-content-between">
-                    <h6 class="mb-0 text-primary">Brief overview of how contrast stretching works</h6>
-                </div>
+  </div>
+  <div class="container-fluid pt-4 px-4">
+    <div class="bg-secondary text-center rounded p-1">
+      <div class="card card-body bg-dark text-secondary">
+        <div class="d-flex align-items-center justify-content-between">
+          <h6 class="mb-0 text-primary">Code</h6>
+        </div>
+      </div>
+      <br />
+      <div class="card bg-primary">
+        <div class="card-header bg-secondary d-flex justify-content-start">Python Code</div>
+        <div class="card bg-dark">
+          <div class="container">
+            <div class="mb-1"></div>
+            <div class="col col-12 d-flex justify-content-start">
+              <span># Import Cv2 Library</span>
+            </div>
+            <div class="mb-1"></div>
+            <div class="col col-12 d-flex justify-content-start">
+              <code>import cv2</code>
+            </div>
+            <br />
+            <div class="col col-12 d-flex justify-content-start">
+              <span># Load the image</span>
+            </div>
+            <div class="mb-1"></div>
+            <div class="col col-12 d-flex justify-content-start">
+              <code>image = cv2.imread('input_image.jpg', cv2.IMREAD_GRAYSCALE)</code>
+            </div>
+            <br />
+            <div class="col col-12 d-flex justify-content-start">
+              <span># Convert Image to Grayscale</span>
+            </div>
+            <div class="mb-1"></div>
+            <div class="col col-12 d-flex justify-content-start">
+              <code>blurred_gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)</code>
+            </div>
+            <br />
+            <div class="col col-12 d-flex justify-content-start">
+              <span># Specify the kernel size for blurring (you may need to adjust this)</span>
+            </div>
+            <div class="mb-1"></div>
+            <div class="col col-12 d-flex justify-content-start">
+              <code>kernel_size = 5</code>
+            </div>
+            <br />
+            <div class="col col-12 d-flex justify-content-start">
+              <span># Apply Gaussian blur to the grayscale image</span>
+            </div>
+            <div class="mb-1"></div>
+            <div class="col col-12 d-flex justify-content-start">
+              <code>blurred_gray = cv2.GaussianBlur(blurred_gray, (kernel_size, kernel_size), 0)</code>
+            </div>
+            <br />
+            <div class="col col-12 d-flex justify-content-start">
+              <span># Specify the Wiener filter parameters (you may need to adjust these)</span>
+            </div>
+            <div class="mb-1"></div>
+            <div class="col col-12 d-flex justify-content-start">
+              <code>deblur_image = cv2.deconvolve(blurred_gray, kernel_size, 0.01)</code>
+            </div>
+            <br />
+            <div class="col col-12 d-flex justify-content-start">
+              <span># Display the Deblurred Image</span>
+            </div>
+            <div class="mb-1"></div>
+            <div class="col col-12 d-flex justify-content-start">
+              <code>cv2.imshow('Deblurred Image', deblur_image)</code>
+            </div>
+            <div class="mb-1"></div>
+            <div class="col col-12 d-flex justify-content-start">
+              <code>cv2.waitKey(0)</code>
+            </div>
+            <div class="mb-1"></div>
+            <div class="col col-12 d-flex justify-content-start">
+              <code>cv2.destroyAllWindows()</code>
             </div>
             <div class="mb-3"></div>
-            <div class="card card-body bg-dark text-secondary">
-                <h6 class="mb-0 d-flex justify-content-start">1. Import Libraries:</h6>
-            </div>
-            <div class="mb-1"></div>
-            <div class="card card-body bg-dark text-secondary">
-                <p class="lead text-muted text-left">
-                    Import the necessary libraries, which in this case are OpenCV and NumPy.</p>
-            </div>
-            <br>
-            <div class="card card-body bg-dark text-secondary">
-                <h6 class="mb-0 d-flex justify-content-start">2. Load the Blurred Image:</h6>
-            </div>
-            <div class="mb-1"></div>
-            <div class="card card-body bg-dark text-secondary">
-                <p class="lead text-muted text-left">
-                    Load the image that you want to deblur using the cv2.imread() function. Make sure to specify the
-                    correct file path.</p>
-            </div>
-            <br>
-            <div class="card card-body bg-dark text-secondary">
-                <h6 class="mb-0 d-flex justify-content-start">3. Choose a Deblurring Method</h6>
-            </div>
-            <div class="mb-1"></div>
-            <div class="card card-body bg-dark text-secondary">
-                <p class="lead text-muted text-left">
-                    There are various deblurring methods available in OpenCV. One common method is Wiener deconvolution.
-                    You can choose a method based on your requirements. For this example, we'll use Wiener
-                    deconvolution.
-                </p>
-            </div>
-            <br>
-            <div class="card card-body bg-dark text-secondary">
-                <h6 class="mb-0 d-flex justify-content-start">4. Convert Image to Grayscale:</h6>
-            </div>
-            <div class="mb-1"></div>
-            <div class="card card-body bg-dark text-secondary">
-                <p class="lead text-muted text-left">
-                    Deblurring is often performed on grayscale images, so convert your image to grayscale if it's not
-                    already.</p>
-            </div>
-            <br>
-            <div class="card card-body bg-dark text-secondary">
-                <h6 class="mb-0 d-flex justify-content-start">5. Apply Deblurring</h6>
-            </div>
-            <div class="mb-1"></div>
-            <div class="card card-body bg-dark text-secondary">
-                <p class="lead text-muted text-left">
-                    Apply the chosen deblurring method to the grayscale image. Here's an example using Wiener
-                    deconvolution:</p>
-            </div>
-            <br>
-            <div class="card card-body bg-dark text-secondary">
-                <h6 class="mb-0 d-flex justify-content-start">6. Display the Deblurred Image:</h6>
-            </div>
-            <div class="mb-1"></div>
-            <div class="card card-body bg-dark text-secondary">
-                <p class="lead text-muted text-left">
-                    Display the image using python inbuild libraries like opencv</p>
-            </div>
-            <br>
+          </div>
         </div>
+      </div>
     </div>
-</div>
-<div class="container-fluid pt-4 px-4">
-    <div class="bg-secondary text-center rounded p-4">
+  </div>
+  <div class="container-fluid pt-4 px-4">
+    <div class="bg-secondary text-center rounded p-1">
+      <div class="card card-body bg-dark text-secondary">
+        <div class="d-flex align-items-center justify-content-between">
+          <h6 class="mb-0 text-primary">Live Demo</h6>
+        </div>
+      </div>
+      <div class="mb-3"></div>
+      <div class="bg-secondary">
         <div class="card card-body bg-dark text-secondary">
-            <div class="d-flex align-items-center justify-content-between">
-                <h6 class="mb-0 text-primary">Code</h6>
-            </div>
+          <p class="lead text-muted text-left">The following code will take a live image feed from your machine and apply Deblured image to it, then display both original frame as well as its</p>
         </div>
-        <br>
-        <div class="card bg-primary">
-            <div class="card-header bg-secondary d-flex justify-content-start">
-                Python Code
-            </div>
-            <div class="card bg-dark">
-                <div class="container">
-                    <div class="mb-1"></div>
-                    <div class="col col-12 d-flex justify-content-start"><span># Import Cv2 Library</span></div>
-                    <div class="mb-1"></div>
-                    <div class="col col-12 d-flex justify-content-start"><code>import cv2</code></div>
-                    <br>
-                    <div class="col col-12 d-flex justify-content-start"><span># Load the image</span></div>
-                    <div class="mb-1"></div>
-                    <div class="col col-12 d-flex justify-content-start">
-                        <code>image = cv2.imread('input_image.jpg', cv2.IMREAD_GRAYSCALE)</code>
-                    </div>
-                    <br>
-                    <div class="col col-12 d-flex justify-content-start"><span># Convert Image to Grayscale</span>
-                    </div>
-                    <div class="mb-1"></div>
-                    <div class="col col-12 d-flex justify-content-start">
-                        <code>blurred_gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-                        </code>
-                    </div>
-                    <br>
-                    <div class="col col-12 d-flex justify-content-start"><span># Specify the kernel size for blurring
-                            (you may need to adjust this)</span></div>
-                    <div class="mb-1"></div>
-                    <div class="col col-12 d-flex justify-content-start">
-                        <code>kernel_size = 5</code>
-                    </div>
-                    <br>
-                    <div class="col col-12 d-flex justify-content-start"><span># Apply Gaussian blur to the grayscale
-                            image</span></div>
-                    <div class="mb-1"></div>
-                    <div class="col col-12 d-flex justify-content-start">
-                        <code>blurred_gray = cv2.GaussianBlur(blurred_gray, (kernel_size, kernel_size), 0)
-                        </code>
-                    </div>
-                    <br>
-                    <div class="col col-12 d-flex justify-content-start"><span># Specify the Wiener filter parameters
-                            (you may need to adjust these)
-                        </span></div>
-                    <div class="mb-1"></div>
-                    <div class="col col-12 d-flex justify-content-start">
-                        <code>deblur_image = cv2.deconvolve(blurred_gray, kernel_size, 0.01)</code>
-                    </div>
-                    <br>
-                    <div class="col col-12 d-flex justify-content-start"><span># Display the Deblurred Image
-                        </span></div>
-                    <div class="mb-1"></div>
-                    <div class="col col-12 d-flex justify-content-start">
-                        <code>cv2.imshow('Deblurred Image', deblur_image)</code>
-                    </div>
-                    <div class="mb-1"></div>
-                    <div class="col col-12 d-flex justify-content-start">
-                        <code>cv2.waitKey(0)</code>
-                    </div>
-                    <div class="mb-1"></div>
-                    <div class="col col-12 d-flex justify-content-start">
-                        <code>cv2.destroyAllWindows()</code>
-                    </div>
-                    <div class="mb-3"></div>
-                </div>
-            </div>
+      </div>
+      <div class="bg-secondary">
+        <div class="card card-body bg-dark text-secondary">
+          <div class="d-flex justify-content-center">
+            <button class="btn btn-success btn-sm btn-load-img-deblur">Lets Start Live Demo</button>
+          </div>
         </div>
+      </div>
     </div>
-</div>
-<div class="container-fluid pt-4 px-4">
-    <div class="bg-secondary text-center rounded p-4">
+  </div>
+  <div class="" id="output-deblur-toggle-groups">
+    <div class="container-fluid pt-4 px-4">
+      <div class="bg-secondary text-center rounded p-4">
         <div class="card card-body bg-dark text-secondary">
-            <div class="d-flex align-items-center justify-content-between">
-                <h6 class="mb-0 text-primary">Live Demo</h6>
-            </div>
+          <div class="d-flex align-items-center justify-content-between">
+            <h6 class="mb-0 text-primary">Outputs Images</h6>
+          </div>
         </div>
         <div class="mb-3"></div>
-        <div class="bg-secondary ">
-            <div class="card card-body bg-dark text-secondary">
-                <p class="lead text-muted text-left">
-                    The following code will take a live image feed from your machine and apply Deblured image to
-                    it, then display both original frame as well as its
-                </p>
-            </div>
-        </div>
-        <div class="bg-secondary ">
-            <div class="card card-body bg-dark text-secondary">
-                <div class="d-flex justify-content-center">
-                    <button class="btn btn-success btn-sm  btn-load-img-deblur">Lets Start Live Demo</button>
+        <div class="bg-secondary">
+          <div class="card card-body bg-dark text-secondary">
+            <div class="row">
+              <div class="col-4">
+                <div class="text-center rounded p-1">
+                  <div class="card card-body text-center text-muted bg-secondary">Original Image</div>
+                  <div class="mb-1"></div>
+                  <div class="card card-body bg-secondary">
+                    <button class="btn btn-success btn-deblur-output-original-image-show">Show Image</button>
+                  </div>
                 </div>
+              </div>
+              <div class="col-4">
+                <div class="text-center rounded p-1">
+                  <div class="card card-body text-center text-muted bg-secondary">Clustered Image</div>
+                  <div class="mb-1"></div>
+                  <div class="card card-body bg-secondary">
+                    <button class="btn btn-success btn-deblur-output-image-show">Show Image</button>
+                  </div>
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="text-center rounded p-1">
+                  <div class="card card-body text-center text-muted bg-secondary">Download Output Image</div>
+                  <div class="mb-1"></div>
+                  <div class="card-body bg-secondary">
+                    <div class="row">
+                      <div class="col col-8">
+                        <input type="text" name="" id="" />
+                      </div>
+                      <div class="col col-3">
+                        <button class="btn btn-success btn-sm btn-download-img">Download</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
+          </div>
         </div>
+      </div>
     </div>
-</div>
-<div class="modal-content"></div>
-<div class="deblur-toast-container-alert"></div>
-<div class="deblur-strching-input-image-collapse"></div>
-<div class="deblur-image-collapse"></div>
-<br>
-{% endblock content %}
+  </div>
+
+  <div class="modal-content"></div>
+  <div class="deblur-toast-container-alert"></div>
+  <div class="deblur-strching-input-image-collapse"></div>
+  <div class="deblur-image-collapse"></div>
+  <br />
+{% endblock %}
