@@ -4,7 +4,7 @@
 <div class="container-fluid pt-4 px-4">
     <div class="card bg-secondary">
         <div class="card-body">
-            <h4 class="text-primary">Histogram Equalization</h4>
+            <h4 class="text-primary">{{ data.title }}</h4>
         </div>
     </div>
 </div>
@@ -19,12 +19,7 @@
         <div class="bg-secondary ">
             <div class="card card-body bg-dark text-secondary">
                 <p class="lead text-muted text-left">
-                    Histogram Equalization is a technique used in image processing to enhance the contrast
-                    of an image by redistributing the intensity levels of pixels in such a way that the histogram of the
-                    resulting image is approximately
-                    uniform. This can be particularly useful when dealing with images that have poor contrast, making it
-                    easier to
-                    identify details and features.
+                    {{ data.def }}
                 </p>
             </div>
         </div>
@@ -36,90 +31,22 @@
 
             <div class="card card-body bg-dark text-secondary">
                 <div class="d-flex align-items-center justify-content-between">
-                    <h6 class="mb-0 text-primary">Brief overview of how Histogram Equalization Works</h6>
+                    <h6 class="mb-0 text-primary"> {{ workflowtitle  }}</h6>
                 </div>
             </div>
             <div class="mb-3"></div>
+            {% for workflow in workflows %}
             <div class="card card-body bg-dark text-secondary">
-                <h6 class="mb-0 d-flex justify-content-start">1. Histogram</h6>
+                <h6 class="mb-0 d-flex justify-content-start">{{ workflow['title'] }}</h6>
             </div>
             <div class="mb-1"></div>
             <div class="card card-body bg-dark text-secondary">
                 <p class="lead text-muted text-left">
-                    Start with an input grayscale image and compute its histogram. The histogram represents the
-                    frequency of each pixel intensity level in the image. It shows how many pixels have a
-                    particular intensity.
+                    {{ workflow['description'] }}
                 </p>
             </div>
-
             <br>
-
-            <div class="card card-body bg-dark text-secondary">
-                <h6 class="mb-0 d-flex justify-content-start">2. Cumulative Distribution Function (CDF)</h6>
-            </div>
-            <div class="mb-1"></div>
-            <div class="card card-body bg-dark text-secondary">
-                <p class="lead text-muted text-left">
-                    Calculate the Cumulative Distribution Function (CDF) from the histogram. The CDF represents
-                    the cumulative sum of histogram values, normalized to the range of pixel intensities
-                    (typically 0 to 255 in an 8-bit image).
-                </p>
-            </div>
-
-            <br>
-
-            <div class="card card-body bg-dark text-secondary">
-                <h6 class="mb-0 d-flex justify-content-start">3. Transformation Function</h6>
-            </div>
-            <div class="mb-1"></div>
-            <div class="card card-body bg-dark text-secondary">
-                <p class="lead text-muted text-left">
-                    Create a transformation function that maps the original pixel intensities to new values.
-                    This function is derived from the CDF and aims to stretch the intensity levels to cover the
-                    full range evenly.
-                </p>
-            </div>
-
-            <br>
-
-            <div class="card card-body bg-dark text-secondary">
-                <h6 class="mb-0 d-flex justify-content-start">4. Pixel Mapping</h6>
-            </div>
-            <div class="mb-1"></div>
-            <div class="card card-body bg-dark text-secondary">
-                <p class="lead text-muted text-left">
-                    Apply the transformation function to each pixel in the original image. This maps the
-                    original pixel values to new values, effectively redistributing the intensities.
-                </p>
-            </div>
-
-            <br>
-
-            <div class="card card-body bg-dark text-secondary">
-                <h6 class="mb-0 d-flex justify-content-start">5. Output Image</h6>
-            </div>
-            <div class="mb-1"></div>
-            <div class="card card-body bg-dark text-secondary">
-                <p class="lead text-muted text-left">
-                    The result is an output image where the pixel intensities are adjusted to have a more
-                    uniform distribution. Dark and light areas are enhanced, and details become more visible.
-                </p>
-            </div>
-
-            <br>
-
-            <div class="card card-body bg-dark text-secondary">
-                <h6 class="mb-0 d-flex justify-content-start">6. Enhanced Contrast</h6>
-            </div>
-            <div class="mb-1"></div>
-            <div class="card card-body bg-dark text-secondary">
-                <p class="lead text-muted text-left">
-                    The output image has improved contrast and is visually more appealing. It brings out subtle
-                    details and makes it easier to distinguish objects in the image.
-                </p>
-            </div>
-
-            <br>
+            {% endfor %}
         </div>
     </div>
 </div>
@@ -138,30 +65,15 @@
             <div class="card bg-dark">
                 <div class="container">
                     <div class="mb-1"></div>
-                    <div class="col col-12 d-flex justify-content-start"><span># Import Cv2 Library</span></div>
-                    <div class="mb-1"></div>
-                    <div class="col col-12 d-flex justify-content-start"><code>import cv2</code></div>
-                    <br>
-                    <div class="col col-12 d-flex justify-content-start"><span># Load the image</span></div>
-                    <div class="mb-1"></div>
+                    {% for i in code %}
+                    <div class="col col-12 d-flex justify-content-start"><span></span>{{ i['comment'] }}</div>
                     <div class="col col-12 d-flex justify-content-start">
-                        <code>original_image = cv2.imread('your_image.jpg', cv2.IMREAD_GRAYSCALE)</code>
+                        <code>{{ i['code'] }}</code>
                     </div>
-                    <br>
-                    <div class="col col-12 d-flex justify-content-start"><span># Apply histogram equalization</span>
-                    </div>
-                    <div class="mb-1"></div>
-                    <div class="col col-12 d-flex justify-content-start">
-                        <code>equalized_image = cv2.equalizeHist(original_image)</code>
-                    </div>
-                    <br>
-                    <div class="col col-12 d-flex justify-content-start"><span># Save the equalized image</span></div>
-                    <div class="mb-1"></div>
-                    <div class="col col-12 d-flex justify-content-start">
-                        <code>cv2.imwrite('equalized_image.jpg', equalized_image)</code>
-                    </div>
-                    <div class="mb-1"></div>
+                    <div class="mb-3"></div>
+                    {% endfor %}
                 </div>
+                <div class="mb-1"></div>
             </div>
         </div>
     </div>
