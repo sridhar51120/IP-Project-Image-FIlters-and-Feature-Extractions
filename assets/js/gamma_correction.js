@@ -46,6 +46,14 @@ $(document).ready(function () {
                                         interval: 500
                                     }).show();
                                 });
+                                $('.btn-download-img-gamma-correction').click(function () {
+                                    const a = document.createElement("a");
+                                    a.href = `${data['gamm_img']}`;
+                                    a.download = "gamma_correction_img.jpg";
+                                    document.body.appendChild(a);
+                                    a.click();
+                                    document.body.removeChild(a);
+                                });
                             },
                             error: function (xhr, status, error) {
                                 console.log('XHR status:', status);

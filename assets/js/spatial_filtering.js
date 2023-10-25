@@ -46,6 +46,14 @@ $(document).ready(function () {
                                         interval: 500
                                     }).show();
                                 });
+                                $('.btn-download-img-spatial-img').click(function () {
+                                    const a = document.createElement("a");
+                                    a.href = `${data['spatial_filter']}`;
+                                    a.download = "spatial_img.jpg";
+                                    document.body.appendChild(a);
+                                    a.click();
+                                    document.body.removeChild(a);
+                                });
                             },
                             error: function (xhr, status, error) {
                                 console.log('XHR status:', status);

@@ -48,6 +48,14 @@ $(document).ready(function () {
                                         interval: 500
                                     }).show();
                                 });
+                                $('.btn-download-img-inpaint-img').click(function () {
+                                    const a = document.createElement("a");
+                                    a.href = `${data['inpaint_img']}`;
+                                    a.download = "inpaint_img.jpg";
+                                    document.body.appendChild(a);
+                                    a.click();
+                                    document.body.removeChild(a);
+                                });
                             },
                             error: function (xhr, status, error) {
                                 // console.log('XHR status:', status);

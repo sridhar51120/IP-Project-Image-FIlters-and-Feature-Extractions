@@ -46,6 +46,14 @@ $(document).ready(function () {
                                         interval: 500
                                     }).show();
                                 });
+                                $('.btn-download-img-edge-detection').click(function () {
+                                    const a = document.createElement("a");
+                                    a.href = `${data['edge_detection']}`;
+                                    a.download = "cedge_detection_img.jpg";
+                                    document.body.appendChild(a);
+                                    a.click();
+                                    document.body.removeChild(a);
+                                });
                             },
                             error: function (xhr, status, error) {
                                 // console.log('XHR status:', status);
