@@ -4,7 +4,7 @@
 <div class="container-fluid pt-4 px-4">
     <div class="card bg-secondary">
         <div class="card-body">
-            <h4 class="text-primary">In Painting Technique</h4>
+            <h4 class="text-primary">{{ data.title }}</h4>
         </div>
     </div>
 </div>
@@ -19,11 +19,7 @@
         <div class="bg-secondary ">
             <div class="card card-body bg-dark text-secondary">
                 <p class="lead text-muted text-left">
-                    Image inpainting is a technique in image processing that involves filling in missing or damaged
-                    regions of an image with plausible content. This can be useful for repairing damaged photographs,
-                    removing unwanted objects or text, or even generating realistic content in the missing regions of an
-                    image. Inpainting is often used in restoration and image editing tasks. Here's an overview of the
-                    inpainting process and a step-by-step guide on how to perform inpainting using Python and OpenCV:
+                    {{ data.def }}
                 </p>
             </div>
         </div>
@@ -35,75 +31,22 @@
 
             <div class="card card-body bg-dark text-secondary">
                 <div class="d-flex align-items-center justify-content-between">
-                    <h6 class="mb-0 text-primary">Brief overview of how contrast stretching works</h6>
+                    <h6 class="mb-0 text-primary"> {{ workflowtitle }}</h6>
                 </div>
             </div>
             <div class="mb-3"></div>
+            {% for workflow in workflows %}
             <div class="card card-body bg-dark text-secondary">
-                <h6 class="mb-0 d-flex justify-content-start">1. Import Required Libraries:</h6>
+                <h6 class="mb-0 d-flex justify-content-start">{{ workflow['title'] }}</h6>
             </div>
             <div class="mb-1"></div>
             <div class="card card-body bg-dark text-secondary">
                 <p class="lead text-muted text-left">
-                    First, you need to import the neccessary python libraries
-                </p>
-            </div>
-
-            <br>
-
-            <div class="card card-body bg-dark text-secondary">
-                <h6 class="mb-0 d-flex justify-content-start">2. Load the Image:</h6>
-            </div>
-            <div class="mb-1"></div>
-            <div class="card card-body bg-dark text-secondary">
-                <p class="lead text-muted text-left">
-                    which type of image you want to inpaint
+                    {{ workflow['description'] }}
                 </p>
             </div>
             <br>
-            <div class="card card-body bg-dark text-secondary">
-                <h6 class="mb-0 d-flex justify-content-start">3. Mask the Region to Inpaint:</h6>
-            </div>
-            <div class="mb-1"></div>
-            <div class="card card-body bg-dark text-secondary">
-                <p class="lead text-muted text-left">
-                    Create a mask that defines the region you want to inpaint. This mask should have the same dimensions
-                    as the image and should have the region to inpaint set to 255 (white) and the rest set to 0 (black).
-                    You can create the mask manually or use tools to generate it. </p>
-            </div>
-            <br>
-            <div class="card card-body bg-dark text-secondary">
-                <h6 class="mb-0 d-flex justify-content-start">4. Perform Inpainting:</h6>
-            </div>
-            <div class="mb-1"></div>
-            <div class="card card-body bg-dark text-secondary">
-                <p class="lead text-muted text-left">
-                    <strong>inpaintRadius </strong>This parameter controls the size of the neighborhood around each
-                    pixel that is used
-                    for inpainting. Adjust it based on your specific image and inpainting requirements.
-                </p>
-            </div>
-            <br>
-            <div class="card card-body bg-dark text-secondary">
-                <h6 class="mb-0 d-flex justify-content-start">5. Display and Save the Inpainted Image</h6>
-            </div>
-            <div class="mb-1"></div>
-            <div class="card card-body bg-dark text-secondary">
-                <p class="lead text-muted text-left">
-                    Display and save the inpainted image using OpenCV
-            </div>
-            <br>
-            <div class="card card-body bg-dark text-secondary">
-                <h6 class="mb-0 d-flex justify-content-start">6. Fine-Tune and Experiment</h6>
-            </div>
-            <div class="mb-1"></div>
-            <div class="card card-body bg-dark text-secondary">
-                <p class="lead text-muted text-left">
-                    Inpainting can produce good results, but the quality depends on the mask, inpainting method, and
-                    parameters you choose. Experiment with different settings and adjust the mask to achieve the desired
-                    inpainting effect. </p>
-            </div>
-            <div class="mb-2"></div>
+            {% endfor %}
         </div>
     </div>
 </div>
@@ -122,45 +65,15 @@
             <div class="card bg-dark">
                 <div class="container">
                     <div class="mb-1"></div>
-                    <div class="col col-12 d-flex justify-content-start"><span># Import Cv2 Library</span></div>
-                    <div class="mb-1"></div>
-                    <div class="col col-12 d-flex justify-content-start"><code>import cv2</code></div>
-                    <br>
-                    <div class="col col-12 d-flex justify-content-start"><span># Load the image</span></div>
-                    <div class="mb-1"></div>
+                    {% for i in code %}
+                    <div class="col col-12 d-flex justify-content-start"><span></span>{{ i['comment'] }}</div>
                     <div class="col col-12 d-flex justify-content-start">
-                        <code>image = cv2.imread('input_image.jpg', cv2.IMREAD_GRAYSCALE)</code>
+                        <code>{{ i['code'] }}</code>
                     </div>
-                    <br>
-                    <div class="col col-12 d-flex justify-content-start"><span># Create a mask (white rectangle) to
-                            inpaint a specific region</span>
-                    </div>
-                    <div class="mb-1"></div>
-                    <div class="col col-12 d-flex justify-content-start">
-                        <code>mask = np.zeros_like(image)</code>
-                    </div>
-                    <div class="mb-1"></div>
-                    <div class="col col-12 d-flex justify-content-start">
-                        <code>cv2.rectangle(mask, (100, 100), (300, 300), (255, 255, 255), thickness=cv2.FILLED)
-                        </code>
-                    </div>
-                    <br>
-                    <div class="col col-12 d-flex justify-content-start"><span># Display the mask (optional)</span>
-                    </div>
-                    <div class="mb-1"></div>
-                    <div class="col col-12 d-flex justify-content-start">
-                        <code>cv2.imshow('Mask', mask)</code>
-                    </div>
-                    <div class="mb-1"></div>
-                    <div class="col col-12 d-flex justify-content-start">
-                        <code>cv2.waitKey(0)</code>
-                    </div>
-                    <div class="mb-1"></div>
-                    <div class="col col-12 d-flex justify-content-start">
-                        <code>cv2.destroyAllWindows()</code>
-                    </div>
-                    <div class="mb-2"></div>
+                    <div class="mb-3"></div>
+                    {% endfor %}
                 </div>
+                <div class="mb-1"></div>
             </div>
         </div>
     </div>

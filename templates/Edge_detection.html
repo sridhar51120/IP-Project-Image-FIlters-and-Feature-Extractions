@@ -4,7 +4,7 @@
 <div class="container-fluid pt-4 px-4">
     <div class="card bg-secondary">
         <div class="card-body">
-            <h4 class="text-primary">Edge detection Technique</h4>
+            <h4 class="text-primary">{{ data.title }}</h4>
         </div>
     </div>
 </div>
@@ -19,11 +19,8 @@
         <div class="bg-secondary ">
             <div class="card card-body bg-dark text-secondary">
                 <p class="lead text-muted text-left">
-
-                    Edge detection is a fundamental technique in image processing that is used to identify the
-                    boundaries of objects within an image. It works by highlighting abrupt changes in pixel intensity,
-                    which often correspond to edges in the image. There are several algorithms for edge detection, with
-                    the Canny edge detector being one of the most widely used.</p>
+                    {{ data.def }}
+                </p>
             </div>
         </div>
     </div>
@@ -34,58 +31,22 @@
 
             <div class="card card-body bg-dark text-secondary">
                 <div class="d-flex align-items-center justify-content-between">
-                    <h6 class="mb-0 text-primary">Brief overview of how Edge Detection works</h6>
+                    <h6 class="mb-0 text-primary"> {{ workflowtitle }}</h6>
                 </div>
             </div>
             <div class="mb-3"></div>
+            {% for workflow in workflows %}
             <div class="card card-body bg-dark text-secondary">
-                <h6 class="mb-0 d-flex justify-content-start">1. Canny Edge Detector</h6>
+                <h6 class="mb-0 d-flex justify-content-start">{{ workflow['title'] }}</h6>
             </div>
             <div class="mb-1"></div>
             <div class="card card-body bg-dark text-secondary">
                 <p class="lead text-muted text-left">
-                    A widely-used algorithm that finds edges by looking for areas of rapid change in intensity.
+                    {{ workflow['description'] }}
                 </p>
             </div>
             <br>
-            <div class="card card-body bg-dark text-secondary">
-                <h6 class="mb-0 d-flex justify-content-start">2. Sobel Operator</h6>
-            </div>
-            <div class="mb-1"></div>
-            <div class="card card-body bg-dark text-secondary">
-                <p class="lead text-muted text-left">
-                    Uses convolution to compute the gradient of the image, highlighting areas of rapid intensity change.
-                </p>
-            </div>
-            <br>
-            <div class="card card-body bg-dark text-secondary">
-                <h6 class="mb-0 d-flex justify-content-start">3. Prewitt Operator</h6>
-            </div>
-            <div class="mb-1"></div>
-            <div class="card card-body bg-dark text-secondary">
-                <p class="lead text-muted text-left">
-                    Similar to Sobel, used for gradient computation.
-                </p>
-            </div>
-            <br>
-            <div class="card card-body bg-dark text-secondary">
-                <h6 class="mb-0 d-flex justify-content-start">4. Laplacian of Gaussian (LoG)</h6>
-            </div>
-            <div class="mb-1"></div>
-            <div class="card card-body bg-dark text-secondary">
-                <p class="lead text-muted text-left">
-                    Applies Gaussian smoothing followed by the Laplacian operator to detect edges. </p>
-            </div>
-            <br>
-            <div class="card card-body bg-dark text-secondary">
-                <h6 class="mb-0 d-flex justify-content-start">5. Zero Crossing Detector</h6>
-            </div>
-            <div class="mb-1"></div>
-            <div class="card card-body bg-dark text-secondary">
-                <p class="lead text-muted text-left">
-                    Identifies zero crossings in the second derivative of the image to find edges. </p>
-            </div>
-            <br>
+            {% endfor %}
         </div>
     </div>
 </div>
@@ -104,33 +65,15 @@
             <div class="card bg-dark">
                 <div class="container">
                     <div class="mb-1"></div>
-                    <div class="col col-12 d-flex justify-content-start"><span># Import Cv2 Library</span></div>
-                    <div class="mb-1"></div>
-                    <div class="col col-12 d-flex justify-content-start"><code>import cv2</code></div>
-                    <div class="col col-12 d-flex justify-content-start"><code>import numpy as np</code></div>
-                    <br>
-                    <div class="col col-12 d-flex justify-content-start"><span># Load the image</span></div>
-                    <div class="mb-1"></div>
+                    {% for i in code %}
+                    <div class="col col-12 d-flex justify-content-start"><span></span>{{ i['comment'] }}</div>
                     <div class="col col-12 d-flex justify-content-start">
-                        <code>image = cv2.imread('input_image.jpg')</code>
+                        <code>{{ i['code'] }}</code>
                     </div>
-                    <br>
-                    <div class="col col-12 d-flex justify-content-start"><span># Apply Canny edge detection</span>
-                    </div>
-                    <div class="mb-1"></div>
-                    <div class="col col-12 d-flex justify-content-start">
-                        <code>edges = cv2.Canny(image, threshold1, threshold2)</code>
-                    </div>
-                    <br>
-                    <div class="col col-12 d-flex justify-content-start"><span># Save the image
-                        </span>
-                    </div>
-                    <div class="mb-1"></div>
-                    <div class="col col-12 d-flex justify-content-start">
-                        <code>cv2.imwrite('edge_detected_image.jpg', edges)</code>
-                    </div>
-                    <div class="mb-2"></div>
+                    <div class="mb-3"></div>
+                    {% endfor %}
                 </div>
+                <div class="mb-1"></div>
             </div>
         </div>
     </div>

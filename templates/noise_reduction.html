@@ -4,7 +4,7 @@
 <div class="container-fluid pt-4 px-4">
     <div class="card bg-secondary">
         <div class="card-body">
-            <h4 class="text-primary">Noise reduction Technique</h4>
+            <h4 class="text-primary">{{ data.title }}</h4>
         </div>
     </div>
 </div>
@@ -19,11 +19,7 @@
         <div class="bg-secondary ">
             <div class="card card-body bg-dark text-secondary">
                 <p class="lead text-muted text-left">
-                    Noise reduction is a digital image processing technique used to reduce unwanted artifacts or
-                    disturbances in an image, often referred to as "noise." Noise can manifest as random variations in
-                    brightness or color in an image and can result from various sources such as electronic sensor
-                    limitations, low light conditions, or transmission errors. Reducing noise can enhance the visual
-                    quality and clarity of an image.
+                    {{ data.def }}
                 </p>
             </div>
         </div>
@@ -32,145 +28,25 @@
 <div class="container-fluid pt-4 px-4">
     <div class="bg-secondary text-center rounded p-4">
         <div class="bg-secondary">
+
             <div class="card card-body bg-dark text-secondary">
                 <div class="d-flex align-items-center justify-content-between">
-                    <h6 class="mb-0 text-primary">Brief overview of how Gamma correction works</h6>
+                    <h6 class="mb-0 text-primary"> {{ workflowtitle }}</h6>
                 </div>
             </div>
             <div class="mb-3"></div>
+            {% for workflow in workflows %}
             <div class="card card-body bg-dark text-secondary">
-                <h6 class="mb-0 d-flex justify-content-start">1. Image Acquisition</h6>
+                <h6 class="mb-0 d-flex justify-content-start">{{ workflow['title'] }}</h6>
             </div>
             <div class="mb-1"></div>
             <div class="card card-body bg-dark text-secondary">
                 <p class="lead text-muted text-left">
-                    Capture or load the noisy image that you want to process. You can use libraries like OpenCV or PIL
-                    (Pillow) to read and display images in Python </p>
-                <hr class="bg-white">
-                <p class="lead text-muted text-left">
-                    Convert the image to a numerical format where each pixel is represented as a data point with feature
-                    values. For RGB images, you might represent each pixel as a 3D vector (R, G, B values) or use other
-                    feature extraction techniques.
+                    {{ workflow['description'] }}
                 </p>
             </div>
             <br>
-            <div class="card card-body bg-dark text-secondary">
-                <h6 class="mb-0 d-flex justify-content-start">2. Noise Characterization
-                </h6>
-            </div>
-            <div class="mb-1"></div>
-            <div class="card card-body bg-dark text-secondary">
-                <p class="lead text-muted text-left">
-                    Before applying noise reduction, it's essential to understand the type of noise present in the
-                    image. Common types of noise include Gaussian noise, salt-and-pepper noise, and speckle noise.
-                    Knowing the noise characteristics helps in selecting the appropriate noise reduction technique. </p>
-            </div>
-            <br>
-            <div class="card card-body bg-dark text-secondary">
-                <h6 class="mb-0 d-flex justify-content-start">3. Noise Reduction Techniques</h6>
-            </div>
-            <div class="mb-1"></div>
-            <div class="card card-body bg-dark">
-                <div class="card bg-secondary">
-                    <div class="card-body text-left text-secondary">
-                        <div class="d-flex justify-content-start">
-                            <h5>a. Spatial Filtering</h5>
-                        </div>
-                    </div>
-                    <div class="mb-2"></div>
-                    <div class="card-body text-left text-secondary">
-                        <div class="d-flex justify-content-center">
-                            <p class="text-muted">Spatial filtering methods operate on individual pixels or small
-                                neighborhoods of pixels
-                                within the image. Common spatial filtering techniques include:</p>
-                        </div>
-                    </div>
-                    <hr class="bg-white text-muted ">
-                    <div class="card-body bg-secondary">
-                        <div class="card bg-secondary border border-primary">
-                            <div class="card-header text-primary">
-                                Median Filtering ::
-                            </div>
-                            <div class="card-body">
-                                <p>Spatial filtering methods operate on individual pixels or small neighborhoods of
-                                    pixels within the image. Common spatial filtering techniques include:</p>
-                            </div>
-                        </div>
-                        <hr class="bg-white text-muted ">
-                        <div class="card bg-secondary border border-primary">
-                            <div class="card-header text-primary">
-                                Gaussian Filtering ::
-                            </div>
-                            <div class="card-body">
-                                <p>Applies a weighted average to pixels within a neighborhood, which is effective for
-                                    Gaussian noise. </p>
-                            </div>
-                        </div>
-                        <hr class="bg-white text-muted ">
-                        <div class="card bg-secondary border border-primary">
-                            <div class="card-header text-primary">
-                                Bilateral Filtering ::
-                            </div>
-                            <div class="card-body">
-                                <p>A more sophisticated technique that preserves edges while smoothing noise.
-                                </p>
-                            </div>
-                        </div>
-                        <hr class="bg-white text-muted ">
-
-                    </div>
-                </div>
-                <div class="mb-2"></div>
-                <div class="card bg-secondary">
-                    <div class="card-body text-left text-secondary">
-                        <div class="d-flex justify-content-start">
-                            <h5>b. Frequency Domain Filtering</h5>
-                        </div>
-                    </div>
-                    <div class="mb-2"></div>
-                    <div class="card-body text-left text-secondary">
-                        <div class="d-flex justify-content-center">
-                            <p class="text-muted"> Techniques like Fourier Transform can be used to convert the image
-                                into the frequency domain. Noise can then be filtered out in the frequency domain, and
-                                the inverse transform can be applied to obtain the noise-reduced image. </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="mb-2"></div>
-                <div class="card bg-secondary">
-                    <div class="card-body text-left text-secondary">
-                        <div class="d-flex justify-content-start">
-                            <h5>c. Deep Learning</h5>
-                        </div>
-                    </div>
-                    <div class="mb-2"></div>
-                    <div class="card-body text-left text-secondary">
-                        <div class="d-flex justify-content-center">
-                            <p class="text-muted">Convolutional Neural Networks (CNNs) can be trained to learn and
-                                remove noise from images. Denoising autoencoders and various pre-trained models are
-                                available for this purpose. </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="mb-2"></div>
-                <div class="card bg-secondary">
-                    <div class="card-body text-left text-secondary">
-                        <div class="d-flex justify-content-start">
-                            <h5>D. Applying Noise Reduction</h5>
-                        </div>
-                    </div>
-                    <div class="mb-2"></div>
-                    <div class="card-body text-left text-secondary">
-                        <div class="d-flex justify-content-center">
-                            <p class="text-muted"> Implement the chosen noise reduction technique on the noisy image
-                                using Python and relevant libraries. Below is an example using median filtering with
-                                OpenCV:
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <br>
+            {% endfor %}
         </div>
     </div>
 </div>
@@ -189,51 +65,15 @@
             <div class="card bg-dark">
                 <div class="container">
                     <div class="mb-1"></div>
-                    <div class="col col-12 d-flex justify-content-start"><span># Import Cv2 Library</span></div>
-                    <div class="mb-1"></div>
-                    <div class="col col-12 d-flex justify-content-start"><code>import cv2</code></div>
-                    <br>
-                    <div class="col col-12 d-flex justify-content-start"><span># Load the image</span></div>
-                    <div class="mb-1"></div>
+                    {% for i in code %}
+                    <div class="col col-12 d-flex justify-content-start"><span></span>{{ i['comment'] }}</div>
                     <div class="col col-12 d-flex justify-content-start">
-                        <code>image = cv2.imread('input_image.jpg', cv2.IMREAD_GRAYSCALE)</code>
-                    </div>
-                    <br>
-                    <div class="col col-12 d-flex justify-content-start"><span># Apply median filtering for noise
-                            reduction
-                        </span>
-                    </div>
-                    <div class="mb-1"></div>
-                    <div class="row d-flex justify-content-start">
-                        <div class="col col-6 d-flex justify-content-start">
-                            <code>filtered_image = cv2.medianBlur(noisy_image, 3)</code>
-                        </div>
-                        <div class="col col-6 d-flex justify-content-start">
-                            <span># Adjust the kernel size as needed</span>
-                        </div>
-                    </div>
-                    <br>
-                    <div class="col col-12 d-flex justify-content-start"><span># Save or display the filtered image
-                        </span></div>
-                    <div class="mb-1"></div>
-                    <div class="col col-12 d-flex justify-content-start">
-                        <code>cv2.imwrite('filtered_image.jpg', filtered_image)                        </code>
-                    </div>
-                    <div class="mb-1"></div>
-                    <div class="col col-12 d-flex justify-content-start">
-                        <code>cv2.imshow('Filtered Image', filtered_image)</code>
-                    </div>
-                    <div class="mb-1"></div>
-                    <div class="col col-12 d-flex justify-content-start">
-                        <code>cv2.waitKey(0)
-                        </code>
-                    </div>
-                    <div class="mb-1"></div>
-                    <div class="col col-12 d-flex justify-content-start">
-                        <code>cv2.destroyAllWindows()</code>
+                        <code>{{ i['code'] }}</code>
                     </div>
                     <div class="mb-3"></div>
+                    {% endfor %}
                 </div>
+                <div class="mb-1"></div>
             </div>
         </div>
     </div>

@@ -4,7 +4,7 @@
 <div class="container-fluid pt-4 px-4">
     <div class="card bg-secondary">
         <div class="card-body">
-            <h4 class="text-primary">Contrast stretching Technique</h4>
+            <h4 class="text-primary">{{ data.title }}</h4>
         </div>
     </div>
 </div>
@@ -15,16 +15,11 @@
                 <h6 class="mb-0 text-primary">Definition</h6>
             </div>
         </div>
-        <div class="mb-1"></div>
+        <div class="mb-3"></div>
         <div class="bg-secondary ">
             <div class="card card-body bg-dark text-secondary">
                 <p class="lead text-muted text-left">
-                    Contrast stretching, also known as contrast enhancement or normalization, is a technique used in
-                    image processing to improve the visibility of details in an image by expanding the range of pixel
-                    values. It's particularly useful when an image has poor contrast, meaning that the difference
-                    between the darkest and brightest pixels is limited. Contrast stretching works by linearly
-                    stretching the pixel values so that the minimum pixel value becomes darker, and the maximum pixel
-                    value becomes brighter, while maintaining the relative differences between the other pixel values.
+                    {{ data.def }}
                 </p>
             </div>
         </div>
@@ -36,55 +31,22 @@
 
             <div class="card card-body bg-dark text-secondary">
                 <div class="d-flex align-items-center justify-content-between">
-                    <h6 class="mb-0 text-primary">Brief overview of how contrast stretching works</h6>
+                    <h6 class="mb-0 text-primary"> {{ workflowtitle }}</h6>
                 </div>
             </div>
             <div class="mb-3"></div>
+            {% for workflow in workflows %}
             <div class="card card-body bg-dark text-secondary">
-                <h6 class="mb-0 d-flex justify-content-start">1. Find the Minimum and Maximum Pixel Values</h6>
+                <h6 class="mb-0 d-flex justify-content-start">{{ workflow['title'] }}</h6>
             </div>
             <div class="mb-1"></div>
             <div class="card card-body bg-dark text-secondary">
                 <p class="lead text-muted text-left">
-                    First, you find the minimum and maximum pixel values in the input image.
-                </p>
-            </div>
-
-            <br>
-
-            <div class="card card-body bg-dark text-secondary">
-                <h6 class="mb-0 d-flex justify-content-start">2. Define the New Minimum and Maximum Values</h6>
-            </div>
-            <div class="mb-1"></div>
-            <div class="card card-body bg-dark text-secondary">
-                <p class="lead text-muted text-left">
-                    Decide on the desired minimum and maximum values for the output image. Typically, the minimum is set
-                    to 0, and the maximum is set to 255 for an 8-bit image. These values define the new range for pixel
-                    values.
+                    {{ workflow['description'] }}
                 </p>
             </div>
             <br>
-            <div class="card card-body bg-dark text-secondary">
-                <h6 class="mb-0 d-flex justify-content-start">3. Apply Contrast Stretching</h6>
-            </div>
-            <div class="mb-1"></div>
-            <div class="card card-body bg-dark text-secondary">
-                <p class="lead text-muted text-left">
-                    For each pixel in the input image, apply the following formula to stretch the pixel value to the new
-                    range:
-                </p>
-            </div>
-            <br>
-            <div class="card card-body bg-dark text-secondary">
-                <h6 class="mb-0 d-flex justify-content-start">4. Normalize</h6>
-            </div>
-            <div class="mb-1"></div>
-            <div class="card card-body bg-dark text-secondary">
-                <p class="lead text-muted text-left">
-                    Optionally, you can normalize the pixel values to ensure the corrected image maintains the same
-                    dynamic range as the original.
-                </p>
-            </div>
+            {% endfor %}
         </div>
     </div>
 </div>
@@ -95,67 +57,23 @@
                 <h6 class="mb-0 text-primary">Code</h6>
             </div>
         </div>
-        <div class="mb-1"></div>
-        <div class="card bg-dark">
-            
+        <br>
+        <div class="card bg-primary">
+            <div class="card-header bg-secondary d-flex justify-content-start">
+                Python Code
+            </div>
             <div class="card bg-dark">
                 <div class="container">
                     <div class="mb-1"></div>
-                    <div class="col col-12 d-flex justify-content-start"><span># Import Cv2 Library</span></div>
-                    <div class="mb-1"></div>
-                    <div class="col col-12 d-flex justify-content-start"><code>import cv2</code></div>
-                    <br>
-                    <div class="col col-12 d-flex justify-content-start"><span># Load the image</span></div>
-                    <div class="mb-1"></div>
+                    {% for i in code %}
+                    <div class="col col-12 d-flex justify-content-start"><span></span>{{ i['comment'] }}</div>
                     <div class="col col-12 d-flex justify-content-start">
-                        <code>image = cv2.imread('input_image.jpg', cv2.IMREAD_GRAYSCALE)</code>
-                    </div>
-                    <br>
-                    <div class="col col-12 d-flex justify-content-start"><span># Find the minimum and maximum pixel
-                            values in the input image</span>
-                    </div>
-                    <div class="mb-1"></div>
-                    <div class="col col-12 d-flex justify-content-start">
-                        <code>min_in = np.min(image)</code>
-                    </div>
-                    <div class="mb-1"></div>
-                    <div class="col col-12 d-flex justify-content-start">
-                        <code>max_in = np.max(image)</code>
-                    </div>
-                    <br>
-                    <div class="col col-12 d-flex justify-content-start"><span># Define the desired minimum and maximum
-                            values for the output image</span></div>
-                    <div class="mb-1"></div>
-                    <div class="col col-12 d-flex justify-content-start">
-                        <code>min_out = 0</code>
-                    </div>
-                    <div class="mb-1"></div>
-                    <div class="col col-12 d-flex justify-content-start">
-                        <code>max_out = 255</code>
-                    </div>
-                    <br>
-                    <div class="col col-12 d-flex justify-content-start"><span># Apply contrast stretching</span></div>
-                    <div class="mb-1"></div>
-                    <div class="col col-12 d-flex justify-content-start">
-                        <code>contrast_stretched = ((image - min_in) / (max_in - min_in)) * (max_out - min_out) + min_out</code>
-                    </div>
-                    <br>
-                    <div class="col col-12 d-flex justify-content-start"><span># Convert the image to 8-bit unsigned
-                            integer (optional normalization)
-                        </span></div>
-                    <div class="mb-1"></div>
-                    <div class="col col-12 d-flex justify-content-start">
-                        <code>contrast_stretched = contrast_stretched.astype(np.uint8)</code>
-                    </div>
-                    <br>
-                    <div class="col col-12 d-flex justify-content-start"><span># Save the contrast-stretched image
-                        </span></div>
-                    <div class="mb-1"></div>
-                    <div class="col col-12 d-flex justify-content-start">
-                        <code>cv2.imwrite('contrast_stretched_image.jpg', contrast_stretched)</code>
+                        <code>{{ i['code'] }}</code>
                     </div>
                     <div class="mb-3"></div>
+                    {% endfor %}
                 </div>
+                <div class="mb-1"></div>
             </div>
         </div>
     </div>

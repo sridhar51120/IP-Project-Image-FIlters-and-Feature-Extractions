@@ -4,7 +4,7 @@
 <div class="container-fluid pt-4 px-4">
     <div class="card bg-secondary">
         <div class="card-body">
-            <h4 class="text-primary">Thresholding Technique</h4>
+            <h4 class="text-primary">{{ data.title }}</h4>
         </div>
     </div>
 </div>
@@ -15,17 +15,12 @@
                 <h6 class="mb-0 text-primary">Definition</h6>
             </div>
         </div>
-        <div class="mb-1"></div>
+        <div class="mb-3"></div>
         <div class="bg-secondary ">
             <div class="card card-body bg-dark text-secondary">
                 <p class="lead text-muted text-left">
-
-                    Thresholding is a fundamental image processing technique used to separate objects or regions of
-                    interest from the background in an image by dividing pixel values into two categories: foreground
-                    and background. It's a common technique used in various computer vision and image analysis
-                    applications. In thresholding, you choose a threshold value, and pixels with values above the
-                    threshold are assigned to one category (usually white), while pixels with values below the threshold
-                    are assigned to the other category (usually black).</p>
+                    {{ data.def }}
+                </p>
             </div>
         </div>
     </div>
@@ -36,42 +31,22 @@
 
             <div class="card card-body bg-dark text-secondary">
                 <div class="d-flex align-items-center justify-content-between">
-                    <h6 class="mb-0 text-primary">Brief overview of how Thresholding works</h6>
+                    <h6 class="mb-0 text-primary"> {{ workflowtitle }}</h6>
                 </div>
             </div>
             <div class="mb-3"></div>
+            {% for workflow in workflows %}
             <div class="card card-body bg-dark text-secondary">
-                <h6 class="mb-0 d-flex justify-content-start">1. Import Libraries</h6>
+                <h6 class="mb-0 d-flex justify-content-start">{{ workflow['title'] }}</h6>
             </div>
             <div class="mb-1"></div>
             <div class="card card-body bg-dark text-secondary">
                 <p class="lead text-muted text-left">
-                    Import the necessary libraries, primarily OpenCV and NumPy.
+                    {{ workflow['description'] }}
                 </p>
             </div>
-
             <br>
-
-            <div class="card card-body bg-dark text-secondary">
-                <h6 class="mb-0 d-flex justify-content-start">2. Load the Image: </h6>
-            </div>
-            <div class="mb-1"></div>
-            <div class="card card-body bg-dark text-secondary">
-                <p class="lead text-muted text-left">
-                    Load the image on which you want to apply thresholding. </p>
-            </div>
-            <br>
-            <div class="card card-body bg-dark text-secondary">
-                <h6 class="mb-0 d-flex justify-content-start">3. Apply Thresholding</h6>
-            </div>
-            <div class="mb-1"></div>
-            <div class="card card-body bg-dark text-secondary">
-                <p class="lead text-muted text-left">
-                    There are various thresholding methods available in OpenCV, but one of the simplest is binary
-                    thresholding. In this example, we'll use binary thresholding, which divides the pixels into two
-                    categories based on a threshold value. </p>
-            </div>
-            <br>
+            {% endfor %}
         </div>
     </div>
 </div>
@@ -82,59 +57,23 @@
                 <h6 class="mb-0 text-primary">Code</h6>
             </div>
         </div>
-        <div class="mb-2"></div>
+        <br>
         <div class="card bg-primary">
+            <div class="card-header bg-secondary d-flex justify-content-start">
+                Python Code
+            </div>
             <div class="card bg-dark">
                 <div class="container">
                     <div class="mb-1"></div>
-                    <div class="col col-12 d-flex justify-content-start"><span># Import Cv2 Library</span></div>
-                    <div class="mb-1"></div>
-                    <div class="col col-12 d-flex justify-content-start"><code>import cv2</code></div>
-                    <div class="col col-12 d-flex justify-content-start"><code>import numpy as np</code></div>
-                    <br>
-                    <div class="col col-12 d-flex justify-content-start"><span># Load the image</span></div>
-                    <div class="mb-1"></div>
+                    {% for i in code %}
+                    <div class="col col-12 d-flex justify-content-start"><span></span>{{ i['comment'] }}</div>
                     <div class="col col-12 d-flex justify-content-start">
-                        <code>image = cv2.imread('input_image.jpg', cv2.IMREAD_GRAYSCALE)</code>
+                        <code>{{ i['code'] }}</code>
                     </div>
-                    <br>
-                    <div class="col col-12 d-flex justify-content-start"><span># Set a threshold value (you can
-                            experiment with different values)</span>
-                    </div>
-                    <div class="mb-1"></div>
-                    <div class="col col-12 d-flex justify-content-start">
-                        <code>threshold_value = 128</code>
-                    </div>
-                    <br>
-                    <div class="col col-12 d-flex justify-content-start"><span># Apply binary thresholding</span>
-                    </div>
-                    <div class="mb-1"></div>
-                    <div class="col col-12 d-flex justify-content-start">
-                        <code>ret, thresholded_image = cv2.threshold(image, threshold_value, 255, cv2.THRESH_BINARY)</code>
-                    </div>
-                    <br>
-                    <div class="col col-12 d-flex justify-content-start"><span># Display the thresholded image</span>
-                    </div>
-                    <div class="mb-1"></div>
-                    <div class="col col-12 d-flex justify-content-start">
-                        <code>gamma_corrected = np.power(image/255.0, gamma)
-                        </code>
-                    </div>
-                    <dv class="mb-1"></dv>
-                    <div class="col col-12 d-flex justify-content-start">
-                        <code>cv2.imshow('Thresholded Image', thresholded_image)</code>
-                    </div>
-                    <dv class="mb-1"></dv>
-                    <div class="col col-12 d-flex justify-content-start">
-                        <code>cv2.waitKey(0)</code>
-                    </div>
-                    <dv class="mb-1"></dv>
-                    <div class="col col-12 d-flex justify-content-start">
-                        <code>cv2.destroyAllWindows()
-                        </code>
-                    </div>
-                    <div class="mb-2"></div>
+                    <div class="mb-3"></div>
+                    {% endfor %}
                 </div>
+                <div class="mb-1"></div>
             </div>
         </div>
     </div>

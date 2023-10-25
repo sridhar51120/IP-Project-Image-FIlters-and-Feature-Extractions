@@ -4,7 +4,7 @@
 <div class="container-fluid pt-4 px-4">
     <div class="card bg-secondary">
         <div class="card-body">
-            <h4 class="text-primary">Spatial filter Technique</h4>
+            <h4 class="text-primary">{{ data.title }}</h4>
         </div>
     </div>
 </div>
@@ -19,11 +19,7 @@
         <div class="bg-secondary ">
             <div class="card card-body bg-dark text-secondary">
                 <p class="lead text-muted text-left">
-                    Spatial filtering is a fundamental image processing technique used to enhance or suppress specific
-                    features in an image by applying a filter, also known as a kernel or mask, to each pixel in the
-                    image. The filter is a small matrix or window that slides over the image, and for each position, it
-                    computes a weighted sum of the pixel values within the window. This weighted sum is assigned to the
-                    corresponding pixel in the output image.
+                    {{ data.def }}
                 </p>
             </div>
         </div>
@@ -35,65 +31,22 @@
 
             <div class="card card-body bg-dark text-secondary">
                 <div class="d-flex align-items-center justify-content-between">
-                    <h6 class="mb-0 text-primary">Brief overview of how spatial filter works</h6>
+                    <h6 class="mb-0 text-primary"> {{ workflowtitle }}</h6>
                 </div>
             </div>
             <div class="mb-3"></div>
+            {% for workflow in workflows %}
             <div class="card card-body bg-dark text-secondary">
-                <h6 class="mb-0 d-flex justify-content-start">1. Image Representation</h6>
+                <h6 class="mb-0 d-flex justify-content-start">{{ workflow['title'] }}</h6>
             </div>
             <div class="mb-1"></div>
             <div class="card card-body bg-dark text-secondary">
                 <p class="lead text-muted text-left">
-                    The input image is usually represented as a 2D matrix, where each element represents the intensity
-                    or color value of a pixel.
+                    {{ workflow['description'] }}
                 </p>
             </div>
             <br>
-            <div class="card card-body bg-dark text-secondary">
-                <h6 class="mb-0 d-flex justify-content-start">2. Define the Filter Kernel:</h6>
-            </div>
-            <div class="mb-1"></div>
-            <div class="card card-body bg-dark text-secondary">
-                <p class="lead text-muted text-left">
-                    You need to define a filter kernel, which is a smaller 2D matrix. The size and values of this kernel
-                    depend on the specific image processing task you want to perform. For example, to perform blurring,
-                    you might use a kernel that averages the pixel values in its neighborhood. </p>
-            </div>
-            <br>
-            <div class="card card-body bg-dark text-secondary">
-                <h6 class="mb-0 d-flex justify-content-start">3. Convolution Operation</h6>
-            </div>
-            <div class="mb-1"></div>
-            <div class="card card-body bg-dark text-secondary">
-                <p class="lead text-muted text-left">
-                    The convolution operation involves sliding the filter kernel over the entire input image. At each
-                    position, the filter is centered on a pixel, and a weighted sum of the pixel values within the
-                    kernel's neighborhood is computed. The result of this computation is assigned to the corresponding
-                    pixel in the output image.</p>
-            </div>
-            <br>
-            <div class="card card-body bg-dark text-secondary">
-                <h6 class="mb-0 d-flex justify-content-start">4. Border Handling</h6>
-            </div>
-            <div class="mb-1"></div>
-            <div class="card card-body bg-dark text-secondary">
-                <p class="lead text-muted text-left">
-                    During convolution, the filter kernel may extend beyond the borders of the input image. Various
-                    techniques, such as zero-padding or mirroring, can be used to handle these border pixels.</p>
-            </div>
-            <br>
-            <div class="card card-body bg-dark text-secondary">
-                <h6 class="mb-0 d-flex justify-content-start">5.Output Image </h6>
-            </div>
-            <div class="mb-1"></div>
-            <div class="card card-body bg-dark text-secondary">
-                <p class="lead text-muted text-left">
-                    After applying the filter to every pixel in the input image, you get a new image called the filtered
-                    image or spatially filtered image. This image may highlight certain features or characteristics
-                    based on the chosen filter kernel.</p>
-            </div>
-            <br>
+            {% endfor %}
         </div>
     </div>
 </div>
@@ -112,58 +65,15 @@
             <div class="card bg-dark">
                 <div class="container">
                     <div class="mb-1"></div>
-                    <div class="col col-12 d-flex justify-content-start"><span># Import Cv2 Library</span></div>
-                    <div class="mb-1"></div>
-                    <div class="col col-12 d-flex justify-content-start"><code>import cv2</code></div>
-                    <div class="col col-12 d-flex justify-content-start"><code>import numpy as np</code></div>
-                    <br>
-                    <div class="col col-12 d-flex justify-content-start"><span># Load the image</span></div>
-                    <div class="mb-1"></div>
+                    {% for i in code %}
+                    <div class="col col-12 d-flex justify-content-start"><span></span>{{ i['comment'] }}</div>
                     <div class="col col-12 d-flex justify-content-start">
-                        <code>image = cv2.imread('input_image.jpg')</code>
-                    </div>
-                    <br>
-                    <div class="col col-12 d-flex justify-content-start"><span># Define a 3x3 averaging filter
-                            kernel</span>
-                    </div>
-                    <div class="mb-1"></div>
-                    <div class="col col-12 d-flex justify-content-start">
-                        <code>kernel = np.array([[1, 1, 1],
-                            [1, 1, 1],
-                            [1, 1, 1]]) / 9</code>
-                    </div>
-                    <br>
-                    <div class="col col-12 d-flex justify-content-start"><span># Perform convolution</span></div>
-                    <div class="mb-1"></div>
-                    <div class="col col-12 d-flex justify-content-start">
-                        <code>output_image = cv2.filter2D(input_image, -1, kernel)
-                        </code>
-                    </div>
-                    <br>
-                    <div class="col col-12 d-flex justify-content-start"><span># Save or display the output image
-                        </span>
-                    </div>
-                    <div class="mb-1"></div>
-                    <div class="col col-12 d-flex justify-content-start">
-                        <code>cv2.imwrite('output.jpg', output_image)</code>
-                    </div>
-                    <div class="mb-1"></div>
-                    <div class="col col-12 d-flex justify-content-start">
-                        <code>cv2.imshow('Filtered Image', output_image)
-                        </code>
-                    </div>
-                    <div class="mb-1"></div>
-                    <div class="col col-12 d-flex justify-content-start">
-                        <code>cv2.waitKey(0)
-                        </code>
-                    </div>
-                    <div class="mb-1"></div>
-                    <div class="col col-12 d-flex justify-content-start">
-                        <code>cv2.destroyAllWindows()
-                        </code>
+                        <code>{{ i['code'] }}</code>
                     </div>
                     <div class="mb-3"></div>
+                    {% endfor %}
                 </div>
+                <div class="mb-1"></div>
             </div>
         </div>
     </div>
