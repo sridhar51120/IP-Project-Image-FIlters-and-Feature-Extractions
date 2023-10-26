@@ -50,7 +50,7 @@ def Histogram_Equalization_output():
                 'histo_img': hist_img
             }
             return {
-                'template': render_template('InputCollapse/enhancement/histogram.html', data=data),
+                'template': render_template('OutputCollapse/enhancement/histogram.html', data=data),
                 'img_url': img_path.replace("assets", ""),
                 'histo_img': hist_img.replace("assets", "")
             }
@@ -107,7 +107,7 @@ def Gamma_correction_output():
             }
 
             return {
-                'template': render_template('InputCollapse/enhancement/gamma_correction.html', data=data),
+                'template': render_template('OutputCollapse/enhancement/gamma_correction.html', data=data),
                 'img_url': img_path.replace("assets", ""),
                 'gamm_img': gamm_img.replace("assets", "")
             }
@@ -163,7 +163,7 @@ def Contrast_Stretching_output():
             }
 
             return {
-                'template': render_template('InputCollapse/enhancement/contrast_strching.html', data=data),
+                'template': render_template('OutputCollapse/enhancement/contrast_strching.html', data=data),
                 'img_url': img_path.replace("assets", ""),
                 'contrast_img': contrast_img.replace("assets", "")
             }
@@ -218,7 +218,7 @@ def Spatial_filtering_output():
             }
 
             return {
-                'template': render_template('InputCollapse/enhancement/spatial_filtering.html', data=data),
+                'template': render_template('OutputCollapse/enhancement/spatial_filtering.html', data=data),
                 'img_url': img_path.replace("assets", ""),
                 'spatial_filter': spatial_filter.replace("assets", "")
             }

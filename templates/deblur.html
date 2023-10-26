@@ -52,30 +52,30 @@
 </div>
 <div class="container-fluid pt-4 px-4">
   <div class="bg-secondary text-center rounded p-4">
-    <div class="card card-body bg-dark text-secondary">
-      <div class="d-flex align-items-center justify-content-between">
-        <h6 class="mb-0 text-primary">Code</h6>
-      </div>
-    </div>
-    <br>
-    <div class="card bg-primary">
-      <div class="card-header bg-secondary d-flex justify-content-start">
-        Python Code
-      </div>
-      <div class="card bg-dark">
-        <div class="container">
-          <div class="mb-1"></div>
-          {% for i in code %}
-          <div class="col col-12 d-flex justify-content-start"><span></span>{{ i['comment'] }}</div>
-          <div class="col col-12 d-flex justify-content-start">
-            <code>{{ i['code'] }}</code>
+      <div class="card card-body bg-dark text-secondary">
+          <div class="d-flex align-items-center justify-content-between">
+              <h6 class="mb-0 text-primary">Code</h6>
           </div>
-          <div class="mb-3"></div>
-          {% endfor %}
-        </div>
-        <div class="mb-1"></div>
       </div>
-    </div>
+      <br>
+      <div class="card bg-primary">
+          <div class="card-header bg-secondary d-flex justify-content-start">
+              Python Code
+          </div>
+          <div class="card bg-dark">
+              <div class="container">
+                  <div class="mb-1"></div>
+                  {% for i in code %}
+                  <div class="col col-12 d-flex justify-content-start"><span></span>{{ i['comment'] }}</div>
+                  <div class="col col-12 d-flex justify-content-start">
+                      <code>{{ i['code'] }}</code>
+                  </div>
+                  <div class="mb-3"></div>
+                  {% endfor %}
+              </div>
+              <div class="mb-1"></div>
+          </div>
+      </div>
   </div>
 </div>
 <div class="container-fluid pt-4 px-4">

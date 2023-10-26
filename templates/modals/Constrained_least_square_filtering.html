@@ -1,0 +1,37 @@
+<div class="modal fade" id="constraine-least-image-modal" tabindex="-1" role="dialog" data-bs-backdrop="static" 
+ aria-labelledby="constraine-least-image-modalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="container">
+                    <div class="float-right">
+                        <h5 class="text-success">Upload Your Image</h5>
+                    </div>
+                    <div class="float-left">
+                        <div class="alert-container "></div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-body">
+                        <h5 class="card-title text-danger d-flex justify-content-start">
+                            File
+                            <span class="text-danger"><strong> *</strong></span>
+                        </h5>
+                        <form id="uploadForm" enctype="multipart/form-data">
+                            <input class="form-control d-flex justify-content-start" type="file"
+                                name="constraine-least-input-image-file" id="constraine-least-input-image" autocomplete="Image">
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" id="btn-constraine-least-modal-close">Close</button>
+                <button class="btn btn-success d-flex justify-content-start"
+                    id="btn-constraine-least-input-image-submit">Upload</button>
+            </div>
+        </div>
+    </div>
+</div>

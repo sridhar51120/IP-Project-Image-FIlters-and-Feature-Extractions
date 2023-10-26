@@ -47,3 +47,7 @@ def contrast_strching_temp():
 @bp.route("/spatial",methods=['GET'])
 def spatial_temp():
    return render_template("modals/spatial_contrast.html")
+
+@bp.route("/constraint_least_square",methods=['GET'])
+def constraint_least_square_temp():
+   return render_template("modals/Constrained_least_square_filtering.html")

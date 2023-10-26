@@ -1,0 +1,112 @@
+{% extends '__master.html' %}
+
+{% block content %}
+<div class="container-fluid pt-4 px-4">
+    <div class="card bg-secondary">
+        <div class="card-body">
+            <h4 class="text-primary">{{ data.title }}</h4>
+        </div>
+    </div>
+</div>
+<div class="container-fluid pt-4 px-4">
+    <div class="bg-secondary text-center rounded p-4">
+        <div class="card card-body bg-dark text-secondary">
+            <div class="d-flex align-items-center justify-content-between">
+                <h6 class="mb-0 text-primary">Definition</h6>
+            </div>
+        </div>
+        <div class="mb-3"></div>
+        <div class="bg-secondary ">
+            <div class="card card-body bg-dark text-secondary">
+                <p class="lead text-muted text-left">
+                    {{ data.def }}
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid pt-4 px-4">
+    <div class="bg-secondary text-center rounded p-4">
+        <div class="bg-secondary">
+
+            <div class="card card-body bg-dark text-secondary">
+                <div class="d-flex align-items-center justify-content-between">
+                    <h6 class="mb-0 text-primary"> {{ workflowtitle  }}</h6>
+                </div>
+            </div>
+            <div class="mb-3"></div>
+            {% for workflow in workflows %}
+            <div class="card card-body bg-dark text-secondary">
+                <h6 class="mb-0 d-flex justify-content-start">{{ workflow['title'] }}</h6>
+            </div>
+            <div class="mb-1"></div>
+            <div class="card card-body bg-dark text-secondary">
+                <p class="lead text-muted text-left">
+                    {{ workflow['description'] }}
+                </p>
+            </div>
+            <br>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+<div class="container-fluid pt-4 px-4">
+    <div class="bg-secondary text-center rounded p-4">
+        <div class="card card-body bg-dark text-secondary">
+            <div class="d-flex align-items-center justify-content-between">
+                <h6 class="mb-0 text-primary">Code</h6>
+            </div>
+        </div>
+        <br>
+        <div class="card bg-primary">
+            <div class="card-header bg-secondary d-flex justify-content-start">
+                Python Code
+            </div>
+            <div class="card bg-dark">
+                <div class="container">
+                    <div class="mb-1"></div>
+                    {% for i in code %}
+                    <div class="col col-12 d-flex justify-content-start"><span></span>{{ i['comment'] }}</div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>{{ i['code'] }}</code>
+                    </div>
+                    <div class="mb-3"></div>
+                    {% endfor %}
+                </div>
+                <div class="mb-1"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid pt-4 px-4">
+    <div class="bg-secondary text-center rounded p-4">
+        <div class="card card-body bg-dark text-secondary">
+            <div class="d-flex align-items-center justify-content-between">
+                <h6 class="mb-0 text-primary">Live Demo</h6>
+            </div>
+        </div>
+        <div class="mb-2"></div>
+        <div class="bg-secondary ">
+            <div class="card card-body bg-dark text-secondary">
+                <p class="lead text-muted text-left">
+                    The following code will take a live image feed from your machine and apply Constrained least square filtering to
+                    it, then display both original frame as well as its
+                </p>
+            </div>
+        </div>
+        <div class="bg-secondary ">
+            <div class="card card-body bg-dark text-secondary">
+                <div class="d-flex justify-content-center">
+                    <button class="btn btn-success btn-sm btn-load-img-constrained-least-square-filtering">Lets Start Live Demo</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-content"></div>
+<div class="constrained-least-toast-container-alert"></div>
+<div class="constrained-least_image_collapse"></div>
+<br>
+
+
+{% endblock content %}
