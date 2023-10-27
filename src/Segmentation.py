@@ -57,4 +57,26 @@ class Segmentation:
         #          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
         # ValueError: cannot reshape array of size 1 into shape (3,3)
         return path
+    
+    def OrederStatics(self,path):
+        input_image = cv2.imread(self.name, cv2.IMREAD_GRAYSCALE)
+        kernel_size = 5
+        filtered_image = cv2.medianBlur(input_image, kernel_size)
+        img_path = path + "/Order_statics_img.jpg"
+        cv2.imwrite(img_path, filtered_image)
+        return img_path
+    
+    def harmonics_filter(self,path):
+        input_image = cv2.imread(self.name, cv2.IMREAD_GRAYSCALE)
+        harmonic_image = cv2.divide(1.0, cv2.divide(1.0, input_image + 1e-6))
+        img_path = path + "harmonic_output_img.jpg"
+        cv2.imwrite(img_path, harmonic_image)
+        return img_path
+    
+    def geometric_filter(self,path):
+        input_image = cv2.imread(self.name, cv2.IMREAD_GRAYSCALE)
+        harmonic_image = cv2.divide(1.0, cv2.divide(1.0, input_image + 1e-6))
+        img_path = path + "harmonic_output_img.jpg"
+        cv2.imwrite(img_path, harmonic_image)
+        return img_path
 

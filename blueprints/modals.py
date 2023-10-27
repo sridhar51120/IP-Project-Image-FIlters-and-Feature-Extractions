@@ -51,3 +51,15 @@ def spatial_temp():
 @bp.route("/constraint_least_square",methods=['GET'])
 def constraint_least_square_temp():
    return render_template("modals/Constrained_least_square_filtering.html")
+
+@bp.route("/order_statics",methods=['GET'])
+def order_statics_temp():
+   return render_template("modals/order_statics.html")
+
+@bp.route("/harmonic",methods=['GET'])
+def harmonic_temp():
+   return render_template("modals/harmonic_filter.html")
+
+@bp.route("/geometric",methods=['GET'])
+def geometric_temp():
+   return render_template("modals/geometric_mean.html")
