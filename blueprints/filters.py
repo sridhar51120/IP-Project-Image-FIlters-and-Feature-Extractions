@@ -199,16 +199,32 @@ def geometric_mean_temp():
         ]
 
     code = [
-        {'comment' : '', 'code' : ''}
+        {'comment' : '# Import Required Library', 'code' : 'import cv2'},
+        {'comment' : '', 'code' : 'import numpy as np'},
+        {'comment' : '# load the Image', 'code' : 'image = cv2.imread(image_path)'},
+        {'comment' : '# Convert the RGB Image to Gray Image', 'code' : 'gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)'},
+        {'comment' : '# Perform Canny edge detection', 'code' : 'edges = cv2.Canny(gray, 50, 150, apertureSize=3)'},
+        {'comment' : '# Find contours', 'code' : 'contours, _ = cv2.findContours(edges, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)'},
+        {'comment' : '# Create a white canvas', 'code' : 'geometric_img = np.ones_like(image) * 255'},
+        {'comment' : '# Draw approximated polygons around contours', 'code' : 'for contour in contours:'},
+        {'comment' : '', 'code' : 'epsilon = 0.01 * cv2.arcLength(contour, True)'},
+        {'comment' : '', 'code' : 'approx = cv2.approxPolyDP(contour, epsilon, True)'},
+        {'comment' : '', 'code' : 'cv2.drawContours(geometric_img, [approx], -1, (0, 0, 0), 2)'},
+        {'comment' : ' # Display the geometric image', 'code' : 'cv2.imshow("Geometric Image", geometric_img)'},
+        {'comment' : '', 'code' : 'cv2.waitKey(0)'},
+        {'comment' : '', 'code' : 'cv2.destroyAllWindows()'},
+        {'comment' : '# Save the resulting image', 'code' : 'geometric_img_path = "geometric_image.png"'},
+        {'comment' : '', 'code' : 'cv2.imwrite(geometric_img_path, geometric_img)'},
+        {'comment' : '', 'code' : 'print(f"Geometric image saved as {geometric_img_path}")'}
     ]
     return render_template("geometric_mean.html",data=data,workflowtitle="Brief overview of how Gamma_correction Works",workflows=workflows,code=code)
 
 @bp.route("/geometric_mean_output", methods=['POST'])
 def geometric_mean_output():
     if request.method == 'POST':
-        if 'harmonic-filter-input-image-file' in request.files:
-            file = request.files['harmonic-filter-input-image-file']
-            img_dir = 'assets/uploads/filters/harmonics/'
+        if 'geometric-filter-input-image-file' in request.files:
+            file = request.files['geometric-filter-input-image-file']
+            img_dir = 'assets/uploads/filters/geometric_mean/'
             os.makedirs(img_dir, exist_ok=True)
             img_path = os.path.join(img_dir, file.filename)
             file.save(img_path)
@@ -310,3 +326,33 @@ def Gaussian_Noise_temp():
         {'comment' : '', 'code' : 'cv2.destroyAllWindows()'}
     ]
     return render_template("Gaussian_Noise.html",data=data,workflowtitle="Brief overview of how Gamma_correction Works",workflows=workflows,code=code)
+
+@bp.route("/Gaussian_noise_output", methods=['POST'])
+# TODO:
+# oise_output
+#     output_img = const.Gaussian_noise(img_dir)
+#                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+#   File "D:\GITHUB\IP-Project-Image-FIlters-and-Feature-Extractions\src\Segmentation.py", line 92, in Gaussian_noise
+#     height, width, channels = image.shape
+# ValueError: not enough values to unpack (expected 3, got 2)
+def Gaussian_noise_output():
+    if request.method == 'POST':
+        if 'gaussian-noise-input-image-file' in request.files:
+            file = request.files['gaussian-noise-input-image-file']
+            img_dir = 'assets/uploads/filters/gaussian_filter/'
+            os.makedirs(img_dir, exist_ok=True)
+            img_path = os.path.join(img_dir, file.filename)
+            file.save(img_path)
+            const = Segmentation(img_path)
+            output_img = const.Gaussian_noise(img_dir)
+            data = {
+                'img_url': img_path,
+                'Gaussian_noise': output_img
+            }
+            return {
+                'template': render_template('OutputCollapse/filters/Gaussian_Noise.html', data=data),
+                'img_url': img_path.replace("assets", ""),
+                'Gaussian_noise': output_img.replace("assets", "")
+            }
+        else:
+            return 'No file part in the request'

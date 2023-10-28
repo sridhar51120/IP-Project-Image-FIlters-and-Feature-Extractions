@@ -63,3 +63,8 @@ def harmonic_temp():
 @bp.route("/geometric",methods=['GET'])
 def geometric_temp():
    return render_template("modals/geometric_mean.html")
+
+
+@bp.route("/Gaussian_Noise",methods=['GET'])
+def Gaussian_Noise_temp():
+   return render_template("modals/Gaussian_Noise.html")

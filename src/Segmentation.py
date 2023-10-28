@@ -74,9 +74,26 @@ class Segmentation:
         return img_path
     
     def geometric_filter(self,path):
-        input_image = cv2.imread(self.name, cv2.IMREAD_GRAYSCALE)
-        harmonic_image = cv2.divide(1.0, cv2.divide(1.0, input_image + 1e-6))
-        img_path = path + "harmonic_output_img.jpg"
-        cv2.imwrite(img_path, harmonic_image)
+        image = cv2.imread(self.name, cv2.IMREAD_GRAYSCALE)
+        edges = cv2.Canny(image, 50, 150, apertureSize=3)
+        contours, _ = cv2.findContours(edges, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+        geometric_img = np.ones_like(image) * 255
+        for contour in contours:
+            epsilon = 0.01 * cv2.arcLength(contour, True)
+            approx = cv2.approxPolyDP(contour, epsilon, True)
+            cv2.drawContours(geometric_img, [approx], -1, (0, 0, 0), 2)
+            
+        img_path = path + 'geometric_image.png'
+        cv2.imwrite(img_path, geometric_img)
         return img_path
-
+    
+    def Gaussian_noise(self,path):
+        image = cv2.imread(self.name, cv2.IMREAD_GRAYSCALE)
+        height, width, channels = image.shape
+        mean = 0
+        stddev = 25
+        gaussian_noise = np.random.normal(mean, stddev, (height, width, channels)).astype(np.uint8)
+        noisy_image = cv2.add(image, gaussian_noise)
+        img_path = path + 'gaussian_noise_output_image.png'
+        cv2.imwrite(img_path, noisy_image)
+        return img_path       
