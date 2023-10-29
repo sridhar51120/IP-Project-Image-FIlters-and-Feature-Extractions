@@ -38,13 +38,13 @@ $(document).ready(function () {
                                 $(document.body).append(image_template);
 
                                 $('.btn-constraint-least-output-original-image-show').click(function () {
-                                    var viewer = new Viewer(document.getElementById(`${data['img_url']}`), {
+                                    new Viewer(document.getElementById(`${data['img_url']}`), {
                                         loop: true,
                                         interval: 500
                                     }).show();
                                 });
                                 $('.btn-constraint-least-output-image-show').click(function () {
-                                    var viewer = new Viewer(document.getElementById(`${data['constaint_img']}`), {
+                                    new Viewer(document.getElementById(`${data['constaint_img']}`), {
                                         loop: true,
                                         interval: 500
                                     }).show();

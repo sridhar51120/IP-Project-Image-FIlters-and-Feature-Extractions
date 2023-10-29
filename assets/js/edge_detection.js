@@ -35,13 +35,13 @@ $(document).ready(function () {
                                 $(document.body).append(image_template);
 
                                 $('.btn-edge-detection-output-original-image-show').click(function () {
-                                    var viewer = new Viewer(document.getElementById(`${data['img_url']}`), {
+                                    new Viewer(document.getElementById(`${data['img_url']}`), {
                                         loop: true,
                                         interval: 500
                                     }).show();
                                 });
                                 $('.btn-edge-detection-output-image-show').click(function () {
-                                    var viewer = new Viewer(document.getElementById(`${data['edge_detection']}`), {
+                                    new Viewer(document.getElementById(`${data['edge_detection']}`), {
                                         loop: true,
                                         interval: 500
                                     }).show();

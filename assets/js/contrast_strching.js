@@ -38,13 +38,13 @@ $(document).ready(function () {
                                 $(document.body).append(image_template);
 
                                 $('.btn-contrast-strching-output-original-image-show').click(function () {
-                                    var viewer = new Viewer(document.getElementById(`${data['img_url']}`), {
+                                    new Viewer(document.getElementById(`${data['img_url']}`), {
                                         loop: true,
                                         interval: 500
                                     }).show();
                                 });
                                 $('.btn-contrast-strching-output-image-show').click(function () {
-                                    var viewer = new Viewer(document.getElementById(`${data['contrast_img']}`), {
+                                    new Viewer(document.getElementById(`${data['contrast_img']}`), {
                                         loop: true,
                                         interval: 500
                                     }).show();

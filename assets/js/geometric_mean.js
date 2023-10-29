@@ -18,7 +18,7 @@ $(document).ready(function () {
                     if (/\.(jpg|png)$/i.test(fileName)) {
                         $('#geometric-filter-image-modal').modal('hide');
                         $.ajax({
-                            url: '/filters/geometric_mean_output',
+                            url: '/filter1/geometric_mean_output',
                             type: 'POST',
                             data: new FormData(document.getElementById('uploadForm')),
                             processData: false,
@@ -39,13 +39,14 @@ $(document).ready(function () {
                                 $(document.body).append(image_template);
 
                                 $('.btn-geometric-filter-output-original-image-show').click(function () {
-                                    var viewer = new Viewer(document.getElementById(`${data['img_url']}`), {
+                                    new Viewer(document.getElementById(`${data['img_url']}`), {
                                         loop: true,
                                         interval: 500
                                     }).show();
                                 });
+                                // TODO: 404 Error Occured -> Image Not Found
                                 $('.btn-geometric-filter-output-image-show').click(function () {
-                                    var viewer = new Viewer(document.getElementById(`${data['geometric_img']}`), {
+                                    new Viewer(document.getElementById(`${data['geometric_img']}`), {
                                         loop: true,
                                         interval: 500
                                     }).show();
@@ -53,7 +54,7 @@ $(document).ready(function () {
                                 $('.btn-download-img-geometric-filter').click(function () {
                                     const a = document.createElement("a");
                                     a.href = `${data['geometric_img']}`;
-                                    a.download = "Order_statistics_img.jpg";
+                                    a.download = "Geometric_output_img.jpg";
                                     document.body.appendChild(a);
                                     a.click();
                                     document.body.removeChild(a);

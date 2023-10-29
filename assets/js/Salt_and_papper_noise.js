@@ -1,25 +1,25 @@
 $(document).ready(function () {
-    $('.btn-load-img-gaussian-noise').click(function () {
+    $('.btn-load-img-salt-and-papper-noise').click(function () {
         // alert("Button clicked");
-        $.get("/modals/Gaussian_Noise", function (data) {
+        $.get("/modals/salt_and_papper_noise", function (data) {
             console.log("Data received:", data);
             $('.modal-content').append(data);
-            $('#gaussian-noise-image-modal').modal('show');
+            $('#salt-and-papper-noise-image-modal').modal('show');
 
-            $('#btn-gaussian-noise-modal-close').click(function () {
-                $('#gaussian-noise-image-modal').modal('hide');
+            $('#btn-salt-and-papper-noise-modal-close').click(function () {
+                $('#salt-and-papper-noise-image-modal').modal('hide');
             });
 
-            const submit_image = document.getElementById('btn-gaussian-noise-input-image-submit');
+            const submit_image = document.getElementById('btn-salt-and-papper-noise-input-image-submit');
             $(submit_image).click(function () {
-                const input_image = document.getElementById('gaussian-noise-input-image');
+                const input_image = document.getElementById('salt-and-papper-noise-input-image');
                 if (input_image.files.length > 0) {
                     const fileName = input_image.files[0].name;
                     // alert(fileName);
                     if (/\.(jpg|png)$/i.test(fileName)) {
-                        $('#gaussian-noise-image-modal').modal('hide');
+                        $('#salt-and-papper-noise-image-modal').modal('hide');
                         $.ajax({
-                            url: '/filter1/Gaussian_noise_output',
+                            url: '/filter1/salt_and_papper_noise_output',
                             type: 'POST',
                             data: new FormData(document.getElementById('uploadForm')),
                             processData: false,
@@ -28,33 +28,33 @@ $(document).ready(function () {
                                 console.log('Server response:', response);
                                 console.log('Data : ', data);
 
-                                $('.gaussian_input_image_collapse').append(data['template']);
-                                $('.output-gaussian-noise-toggle-groups').collapse({
+                                $('.salt-and-papper-noise_image_collapse').append(data['template']);
+                                $('.output-salt-and-papper-noise-toggle-groups').collapse({
                                     toggle: false
                                 }).show();
 
                                 var image_template = `
                             <img src="${data['img_url']}" id="${data['img_url']}" alt="original Image" style="display:none;">
-                            <img src="${data['Gaussian_noise']}" id="${data['Gaussian_noise']}" alt="Gaussian Noise Image" style="display:none;">
+                            <img src="${data['salt_and_papper_noise']}" id="${data['salt_and_papper_noise']}" alt="Salt and Papper Noise Image" style="display:none;">
                             `;
                                 $(document.body).append(image_template);
 
-                                $('.btn-gaussian-noise-output-original-image-show').click(function () {
+                                $('.btn-salt-and-papper-noise-output-original-image-show').click(function () {
                                     new Viewer(document.getElementById(`${data['img_url']}`), {
                                         loop: true,
                                         interval: 500
                                     }).show();
                                 });
-                                $('.btn-gaussian-noise-output-image-show').click(function () {
-                                    new Viewer(document.getElementById(`${data['Gaussian_noise']}`), {
+                                $('.btn-salt-and-papper-noise-output-image-show').click(function () {
+                                    new Viewer(document.getElementById(`${data['salt_and_papper_noise']}`), {
                                         loop: true,
                                         interval: 500
                                     }).show();
                                 });
-                                $('.btn-download-img-gaussian-noise').click(function () {
+                                $('.btn-download-img-salt-and-papper-noise').click(function () {
                                     const a = document.createElement("a");
-                                    a.href = `${data['Gaussian_noise']}`;
-                                    a.download = "Gaussian_Noise_img.jpg";
+                                    a.href = `${data['salt_and_papper_noise']}`;
+                                    a.download = "Salt_and_papper_Noise_img.jpg";
                                     document.body.appendChild(a);
                                     a.click();
                                     document.body.removeChild(a);

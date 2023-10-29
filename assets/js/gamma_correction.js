@@ -35,13 +35,13 @@ $(document).ready(function () {
                                 $(document.body).append(image_template);
 
                                 $('.btn-gamma-correction-output-original-image-show').click(function () {
-                                    var viewer = new Viewer(document.getElementById(`${data['img_url']}`), {
+                                    new Viewer(document.getElementById(`${data['img_url']}`), {
                                         loop: true,
                                         interval: 500
                                     }).show();
                                 });
                                 $('.btn-gamma-correction-output-image-show').click(function () {
-                                    var viewer = new Viewer(document.getElementById(`${data['gamm_img']}`), {
+                                    new Viewer(document.getElementById(`${data['gamm_img']}`), {
                                         loop: true,
                                         interval: 500
                                     }).show();

@@ -61,7 +61,7 @@ def Histogram_Equalization_output():
 @bp.route("/Gamma_correction", methods=['GET'])
 def Gamma_correction_temp():
     data = {
-        'title': 'Edge detection Technique',
+        'title': 'Gamma Correction Technique',
         'def': 'Edge detection is a fundamental technique in image processing that is used to identify the boundaries of objects within an image. It works by highlighting abrupt changes in pixel intensity, which often correspond to edges in the image. There are several algorithms for edge detection, with the Canny edge detector being one of the most widely used.'
     }
 
@@ -79,15 +79,18 @@ def Gamma_correction_temp():
     ]
 
     code = [
-        {'comment': '# Import Cv2 Library', 'code': 'import cv2'},
-        {'comment': '# Import Numpy Library', 'code': 'import numpy as np'},
-        {'comment': '# Load the image',
-            'code': 'image = cv2.imread("input_image.jpg")'},
-        {'comment': '# Apply Canny edge detection',
-            'code': 'edges = cv2.Canny(image, threshold1, threshold2)'},
-        {'comment': '# Save the image',
-            'code': 'cv2.imwrite("edge_detected_image.jpg", edges)'},
-
+        {'comment': "# Import Required Library",'code': "import cv2"},
+        {'comment': "",'code': "import numpy as np"},
+        {'comment': "# Load the image",'code': "image = cv2.imread(image_path)"},
+        {'comment': "# Apply gamma correction",'code': "gamma_corrected = np.power(image / 255.0, gamma) * 255.0"},
+        {'comment': "",'code': "gamma_corrected = np.array(gamma_corrected, dtype=np.uint8)"},
+        {'comment': "# Display the original and gamma corrected images",'code': "cv2.imshow('Original Image', image)"},
+        {'comment': "",'code': "cv2.imshow(f'Gamma Corrected Image (Gamma = {gamma})', gamma_corrected)"},
+        {'comment': "",'code': "cv2.waitKey(0)"},
+        {'comment': "",'code': "cv2.destroyAllWindows()"},
+        {'comment': "# Save the resulting image",'code': "gamma_corrected_path = 'gamma_corrected_image.png'"},
+        {'comment': "",'code': "cv2.imwrite(gamma_corrected_path, gamma_corrected)"},
+        {'comment': "",'code': 'print(f"Gamma corrected image saved as {gamma_corrected_path}")'}
     ]
     return render_template("Gamma_correction.html", data=data, workflowtitle="Brief overview of how Gamma_correction Works", workflows=workflows, code=code)
 

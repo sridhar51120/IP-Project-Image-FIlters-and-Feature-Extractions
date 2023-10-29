@@ -18,7 +18,7 @@ $(document).ready(function () {
                     if (/\.(jpg|png)$/i.test(fileName)) {
                         $('#harmonic-filter-image-modal').modal('hide');
                         $.ajax({
-                            url: '/filters/Hormonic_Filter_output',
+                            url: '/filter1/Hormonic_Filter_output',
                             type: 'POST',
                             data: new FormData(document.getElementById('uploadForm')),
                             processData: false,
@@ -39,13 +39,13 @@ $(document).ready(function () {
                                 $(document.body).append(image_template);
 
                                 $('.btn-harmonic-filter-output-original-image-show').click(function () {
-                                    var viewer = new Viewer(document.getElementById(`${data['img_url']}`), {
+                                    new Viewer(document.getElementById(`${data['img_url']}`), {
                                         loop: true,
                                         interval: 500
                                     }).show();
                                 });
                                 $('.btn-harmonic-filter-output-image-show').click(function () {
-                                    var viewer = new Viewer(document.getElementById(`${data['harmonic_filter']}`), {
+                                    new Viewer(document.getElementById(`${data['harmonic_filter']}`), {
                                         loop: true,
                                         interval: 500
                                     }).show();

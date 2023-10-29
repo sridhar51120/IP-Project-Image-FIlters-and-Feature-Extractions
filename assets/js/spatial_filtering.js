@@ -35,13 +35,13 @@ $(document).ready(function () {
                                 $(document.body).append(image_template);
 
                                 $('.btn-spatial-filter-output-original-image-show').click(function () {
-                                    var viewer = new Viewer(document.getElementById(`${data['img_url']}`), {
+                                    new Viewer(document.getElementById(`${data['img_url']}`), {
                                         loop: true,
                                         interval: 500
                                     }).show();
                                 });
                                 $('.btn-spatial-filter-output-image-show').click(function () {
-                                    var viewer = new Viewer(document.getElementById(`${data['spatial_filter']}`), {
+                                    new Viewer(document.getElementById(`${data['spatial_filter']}`), {
                                         loop: true,
                                         interval: 500
                                     }).show();

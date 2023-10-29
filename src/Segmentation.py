@@ -2,6 +2,11 @@ import cv2
 import numpy as np
 import cv2
 from scipy.optimize import minimize
+import matplotlib.pyplot as plt
+from skimage import io, color
+from skimage.morphology import medial_axis, skeletonize
+from skimage.util import invert
+
 class Segmentation:
     def __init__(self, name):
         self.name = name
@@ -89,11 +94,53 @@ class Segmentation:
     
     def Gaussian_noise(self,path):
         image = cv2.imread(self.name, cv2.IMREAD_GRAYSCALE)
-        height, width, channels = image.shape
+        if len(image.shape) < 3: 
+            height, width = image.shape
+            channels = 1
+        else:
+            height, width, channels = image.shape
         mean = 0
         stddev = 25
         gaussian_noise = np.random.normal(mean, stddev, (height, width, channels)).astype(np.uint8)
         noisy_image = cv2.add(image, gaussian_noise)
         img_path = path + 'gaussian_noise_output_image.png'
         cv2.imwrite(img_path, noisy_image)
-        return img_path       
+        return img_path  
+    
+    def median_filter(self,path):
+        input_image = cv2.imread(self.name, cv2.IMREAD_GRAYSCALE)
+        _, binary_image = cv2.threshold(input_image, 128, 255, cv2.THRESH_BINARY)
+        dist_transform = cv2.distanceTransform(binary_image, distanceType=cv2.DIST_L2, maskSize=5)
+        cv2.normalize(dist_transform, dist_transform, 0, 1.0, cv2.NORM_MINMAX)
+        medial_like_image = cv2.threshold(dist_transform, 0.4, 1, cv2.THRESH_BINARY)[1]
+        img_path = path + "meidan-filter_output_img.jpg"
+        cv2.imwrite(img_path, medial_like_image * 255)
+        return img_path 
+    
+    def salt_and_papper_noise(self,path):
+        amount=0.05
+        image = cv2.imread(self.name)
+
+        if len(image.shape) == 3:
+            image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+            
+        row, col = image.shape
+        
+        if len(image.shape) == 2:  
+            row, col = image.shape
+            
+        num_salt = np.ceil(amount * image.size * 0.5)
+        num_pepper = np.ceil(amount * image.size * 0.5)
+
+        salt_coords = [np.random.randint(0, i - 1, int(num_salt)) for i in image.shape]
+        image[salt_coords[0], salt_coords[1]] = 255
+
+        pepper_coords = [np.random.randint(0, i - 1, int(num_pepper)) for i in image.shape]
+        image[pepper_coords[0], pepper_coords[1]] = 0
+        
+        img_path = path + "salt_and_papper_noise_output_img.jpg"
+        cv2.imwrite(img_path, image)
+        
+        return img_path 
+   
+

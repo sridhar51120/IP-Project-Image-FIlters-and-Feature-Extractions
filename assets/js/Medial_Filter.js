@@ -1,25 +1,25 @@
 $(document).ready(function () {
-    $('.btn-load-img-gaussian-noise').click(function () {
+    $('.btn-load-img-meadian-filter').click(function () {
         // alert("Button clicked");
-        $.get("/modals/Gaussian_Noise", function (data) {
+        $.get("/modals/median_filter", function (data) {
             console.log("Data received:", data);
             $('.modal-content').append(data);
-            $('#gaussian-noise-image-modal').modal('show');
+            $('#median-filter-image-modal').modal('show');
 
-            $('#btn-gaussian-noise-modal-close').click(function () {
-                $('#gaussian-noise-image-modal').modal('hide');
+            $('#btn-median-filter-modal-close').click(function () {
+                $('#median-filter-image-modal').modal('hide');
             });
 
-            const submit_image = document.getElementById('btn-gaussian-noise-input-image-submit');
+            const submit_image = document.getElementById('btn-median-filter-input-image-submit');
             $(submit_image).click(function () {
-                const input_image = document.getElementById('gaussian-noise-input-image');
+                const input_image = document.getElementById('median-filter-input-image');
                 if (input_image.files.length > 0) {
                     const fileName = input_image.files[0].name;
                     // alert(fileName);
                     if (/\.(jpg|png)$/i.test(fileName)) {
-                        $('#gaussian-noise-image-modal').modal('hide');
+                        $('#median-filter-image-modal').modal('hide');
                         $.ajax({
-                            url: '/filter1/Gaussian_noise_output',
+                            url: '/filter1/median_filter_output',
                             type: 'POST',
                             data: new FormData(document.getElementById('uploadForm')),
                             processData: false,
@@ -28,33 +28,33 @@ $(document).ready(function () {
                                 console.log('Server response:', response);
                                 console.log('Data : ', data);
 
-                                $('.gaussian_input_image_collapse').append(data['template']);
-                                $('.output-gaussian-noise-toggle-groups').collapse({
+                                $('.meadian-filter_image_collapse').append(data['template']);
+                                $('.output-median-filter-toggle-groups').collapse({
                                     toggle: false
                                 }).show();
 
                                 var image_template = `
                             <img src="${data['img_url']}" id="${data['img_url']}" alt="original Image" style="display:none;">
-                            <img src="${data['Gaussian_noise']}" id="${data['Gaussian_noise']}" alt="Gaussian Noise Image" style="display:none;">
+                            <img src="${data['median_img']}" id="${data['median_img']}" alt="Median Filter Image" style="display:none;">
                             `;
                                 $(document.body).append(image_template);
 
-                                $('.btn-gaussian-noise-output-original-image-show').click(function () {
+                                $('.btn-medial-filter-output-original-image-show').click(function () {
                                     new Viewer(document.getElementById(`${data['img_url']}`), {
                                         loop: true,
                                         interval: 500
                                     }).show();
                                 });
-                                $('.btn-gaussian-noise-output-image-show').click(function () {
-                                    new Viewer(document.getElementById(`${data['Gaussian_noise']}`), {
+                                $('.btn-medial-filter-output-image-show').click(function () {
+                                    new Viewer(document.getElementById(`${data['median_img']}`), {
                                         loop: true,
                                         interval: 500
                                     }).show();
                                 });
-                                $('.btn-download-img-gaussian-noise').click(function () {
+                                $('.btn-download-img-medial-filter').click(function () {
                                     const a = document.createElement("a");
-                                    a.href = `${data['Gaussian_noise']}`;
-                                    a.download = "Gaussian_Noise_img.jpg";
+                                    a.href = `${data['median_img']}`;
+                                    a.download = "Median_Filter_img.jpg";
                                     document.body.appendChild(a);
                                     a.click();
                                     document.body.removeChild(a);

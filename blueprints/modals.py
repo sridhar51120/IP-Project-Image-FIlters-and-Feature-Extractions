@@ -68,3 +68,12 @@ def geometric_temp():
 @bp.route("/Gaussian_Noise",methods=['GET'])
 def Gaussian_Noise_temp():
    return render_template("modals/Gaussian_Noise.html")
+
+
+@bp.route("/median_filter",methods=['GET'])
+def median_filter_temp():
+   return render_template("modals/Median_Filter.html")
+
+@bp.route("/salt_and_papper_noise",methods=['GET'])
+def salt_and_papper_noise_temp():
+   return render_template("modals/Salt_and_papper_noise.html")

@@ -18,7 +18,7 @@ $(document).ready(function () {
                     if (/\.(jpg|png)$/i.test(fileName)) {
                         $('#order-statics-image-modal').modal('hide');
                         $.ajax({
-                            url: '/filters/Order_statistics_filters_output',
+                            url: '/filter1/Order_statistics_filters_output',
                             type: 'POST',
                             data: new FormData(document.getElementById('uploadForm')),
                             processData: false,
@@ -39,13 +39,13 @@ $(document).ready(function () {
                                 $(document.body).append(image_template);
 
                                 $('.btn-oreder-statics-output-original-image-show').click(function () {
-                                    var viewer = new Viewer(document.getElementById(`${data['img_url']}`), {
+                                    new Viewer(document.getElementById(`${data['img_url']}`), {
                                         loop: true,
                                         interval: 500
                                     }).show();
                                 });
                                 $('.btn-oreder-statics-output-image-show').click(function () {
-                                    var viewer = new Viewer(document.getElementById(`${data['Order_statistics']}`), {
+                                    new Viewer(document.getElementById(`${data['Order_statistics']}`), {
                                         loop: true,
                                         interval: 500
                                     }).show();

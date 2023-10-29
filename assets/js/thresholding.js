@@ -34,13 +34,13 @@ $(document).ready(function () {
                             `;
                                 $(document.body).append(image_template);
                                 $('.btn-thresholding-output-original-image-show').click(function () {
-                                    var viewer = new Viewer(document.getElementById(`${data['img_url']}`), {
+                                    new Viewer(document.getElementById(`${data['img_url']}`), {
                                         loop: true,
                                         interval: 500
                                     }).show();
                                 });
                                 $('.btn-thresholding-output-image-show').click(function () {
-                                    var viewer = new Viewer(document.getElementById(`${data['thresholding']}`), {
+                                    new Viewer(document.getElementById(`${data['thresholding']}`), {
                                         loop: true,
                                         interval: 500
                                     }).show();
