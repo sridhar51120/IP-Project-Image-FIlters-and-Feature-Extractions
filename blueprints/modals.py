@@ -77,3 +77,16 @@ def median_filter_temp():
 @bp.route("/salt_and_papper_noise",methods=['GET'])
 def salt_and_papper_noise_temp():
    return render_template("modals/Salt_and_papper_noise.html")
+
+
+@bp.route("/adaptive_filter",methods=['GET'])
+def adaptive_filter_temp():
+   return render_template("modals/adaptive_filter.html")
+
+@bp.route("/average_filter",methods=['GET'])
+def average_filter_temp():
+   return render_template("modals/Average_filter.html")
+
+@bp.route("/butterworth_filter",methods=['GET'])
+def butterworth_filter_temp():
+   return render_template("modals/butterworth_filter.html")

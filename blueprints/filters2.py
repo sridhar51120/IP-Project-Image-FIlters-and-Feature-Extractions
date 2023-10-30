@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, redirect, url_for, request, session
-from src.Segmentation import Segmentation
+from src.Filters import Filters
 import os
 import cv2
 
@@ -36,7 +36,29 @@ def weiner_temp():
     ]
     return render_template("Weiner.html", data=data, workflowtitle="Brief overview of how Weiner Filter Works", workflows=workflows, code=code)
 
-
+@bp.route("/weiner_filter_output", methods=['POST'])
+def weiner_filter_output():
+    if request.method == 'POST':
+        if 'order-statics-input-image-file' in request.files:
+            file = request.files['order-statics-input-image-file']
+            img_dir = 'assets/uploads/filters/order_statistics_filters/'
+            os.makedirs(img_dir, exist_ok=True)
+            img_path = os.path.join(img_dir, file.filename)
+            file.save(img_path)
+            const = Segmentation(img_path)
+            output_img = const.OrederStatics(img_dir)
+            data = {
+                'img_url': img_path,
+                'Order_statistics': output_img
+            }
+            return {
+                'template': render_template('OutputCollapse/filters/order_statics.html', data=data),
+                'img_url': img_path.replace("assets", ""),
+                'Order_statistics': output_img.replace("assets", "")
+            }
+        else:
+            return 'No file part in the request'
+        
 @bp.route("/butterworth_filter", methods=['GET'])
 def butterworth_filter_temp():
     data = {
@@ -73,7 +95,30 @@ def butterworth_filter_temp():
     ]
     return render_template("butterworth_filter.html", data=data, workflowtitle="Brief overview of how Butter worth filter Works", workflows=workflows, code=code)
 
-
+@bp.route("/butterworth_filter_output", methods=['POST'])
+def butterworth_filter_output():
+    if request.method == 'POST':
+        if 'butterworth-input-image-file' in request.files:
+            file = request.files['butterworth-input-image-file']
+            img_dir = 'assets/uploads/filters/butterworth_filters/'
+            os.makedirs(img_dir, exist_ok=True)
+            img_path = os.path.join(img_dir, file.filename)
+            file.save(img_path)
+            const = Filters(img_path)
+            output_img = const.butterworth_filter(img_dir)
+            data = {
+                'img_url': img_path,
+                'butterworth_high_pass_filter' : output_img
+            }
+            return {
+                'template': render_template('OutputCollapse/filters/butterworth_filter.html', data=data),
+                'img_url': img_path.replace("assets", ""),
+                'butterworth_high_pass_filter' : output_img.replace("assets", "")
+            }
+        else:
+            return 'No file part in the request'
+        
+        
 @bp.route("/homomorphic_filters", methods=['GET'])
 def homomorphic_filters_temp():
     data = {
@@ -161,7 +206,29 @@ def adaptive_filter_temp():
     ]
     return render_template("adaptive_filter.html", data=data, workflowtitle="Brief overview of how Adaptive filter Works", workflows=workflows, code=code)
 
-
+@bp.route("/adpative_filter_output", methods=['POST'])
+def adpative_filter_output():
+    if request.method == 'POST':
+        if 'adaptive-input-image-file' in request.files:
+            file = request.files['adaptive-input-image-file']
+            img_dir = 'assets/uploads/filters/adaptivefilter/'
+            os.makedirs(img_dir, exist_ok=True)
+            img_path = os.path.join(img_dir, file.filename)
+            file.save(img_path)
+            const = Filters(img_path)
+            output_img = const.adaptive_filter(img_dir)
+            data = {
+                'img_url': img_path,
+                'Adaptive_filter': output_img
+            }
+            return {
+                'template': render_template('OutputCollapse/filters/adaptive_filter.html', data=data),
+                'img_url': img_path.replace("assets", ""),
+                'Adaptive_filter': output_img.replace("assets", "")
+            }
+        else:
+            return 'No file part in the request'
+        
 @bp.route("/non_local_means_filter", methods=['GET'])
 def non_local_means_filter_temp():
     data = {
@@ -346,3 +413,26 @@ def average_filter_temp():
         {'comment': '', 'code': ''}
     ]
     return render_template("Average_filter.html", data=data, workflowtitle="Brief overview of how Average Filter Works", workflows=workflows, code=code)
+
+@bp.route("/average_filter_output", methods=['POST'])
+def average_filter_output():
+    if request.method == 'POST':
+        if 'average-input-image-file' in request.files:
+            file = request.files['average-input-image-file']
+            img_dir = 'assets/uploads/filters/average_filters/'
+            os.makedirs(img_dir, exist_ok=True)
+            img_path = os.path.join(img_dir, file.filename)
+            file.save(img_path)
+            const = Filters(img_path)
+            output_img = const.average_filter(img_dir)
+            data = {
+                'img_url': img_path,
+                'Average_filter' : output_img
+            }
+            return {
+                'template': render_template('OutputCollapse/filters/Average_filter.html', data=data),
+                'img_url': img_path.replace("assets", ""),
+                'Average_filter' : output_img.replace("assets", "")
+            }
+        else:
+            return 'No file part in the request'

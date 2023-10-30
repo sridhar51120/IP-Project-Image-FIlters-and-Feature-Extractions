@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -27,4 +27,51 @@
     });
   </script>
 </body>
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Code Block - Python: Print Hello, World! (with Copy to Clipboard)</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-header">
+                Python Code
+                <button class="btn btn-primary btn-sm float-right" id="copyButton">Copy</button>
+            </div>
+            <div class="card-body">
+                <div id="pythonCode">
+                    <pre><code class="python" >print("Hello, World!")</code></pre>
+                    <pre><code class="python" >  print("Hello, World!")</code></pre>
+                    <pre><code class="python" >  print("Hello, World!")</code></pre>
+                    <pre><code class="python" >  print("Hello, World!")</code></pre>
+                    <pre><code class="python" >  print("Hello, World!")</code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#copyButton').on('click', function () {
+                var codeBlock = document.getElementById('pythonCode');
+                var range = document.createRange();
+                range.selectNode(codeBlock);
+                window.getSelection().removeAllRanges();
+                window.getSelection().addRange(range);
+                document.execCommand('copy');
+                window.getSelection().removeAllRanges();
+                alert('Code copied to clipboard');
+            });
+        });
+    </script>
+</body>
+
 </html>

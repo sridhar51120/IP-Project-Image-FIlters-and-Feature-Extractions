@@ -1,0 +1,98 @@
+{% extends '__master.html' %}
+
+{% block content %}
+<div class="container-fluid pt-4 px-4">
+    <div class="card bg-secondary">
+        <div class="card-body">
+            <h4 class="text-primary">{{ data.title }}</h4>
+        </div>
+    </div>
+</div>
+<div class="container-fluid pt-4 px-4">
+    <div class="bg-secondary text-center rounded p-4">
+        <div class="card card-body bg-dark text-secondary">
+            <div class="d-flex align-items-center justify-content-between">
+                <h6 class="mb-0 text-primary">Definition</h6>
+            </div>
+        </div>
+        <div class="mb-3"></div>
+        <div class="bg-secondary ">
+            <div class="card card-body bg-dark text-secondary">
+                <p class="text-muted text-left">
+                    {{ data.def }}
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid pt-4 px-4">
+    <div class="bg-secondary text-center rounded p-4">
+        <div class="bg-secondary">
+
+            <div class="card card-body bg-dark text-secondary">
+                <div class="d-flex align-items-center justify-content-between">
+                    <h6 class="mb-0 text-primary"> {{ workflowtitle }}</h6>
+                </div>
+            </div>
+            <div class="mb-3"></div>
+            {% for workflow in workflows %}
+            <div class="card card-body bg-dark text-secondary">
+                <h6 class="mb-0 d-flex justify-content-start">{{ workflow['title'] }}</h6>
+            </div>
+            <div class="mb-1"></div>
+            <div class="card card-body bg-dark text-secondary">
+                <p class="text-muted text-left">
+                    {{ workflow['description'] }}
+                </p>
+            </div>
+            <br>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+<div class="container-fluid pt-4 px-4">
+    <div class="bg-secondary rounded p-4">
+        <div class="card card-body bg-dark text-secondary">
+            <div class="d-flex align-items-center justify-content-between">
+                <h6 class="mb-0 text-primary">Code</h6>
+            </div>
+        </div>
+        <br>
+        <div class="card bg-primary">
+            <!--TODO: implement copy clipboard and change background -->
+            <div class="card-header bg-secondary">
+                <div class="d-flex justify-content-between">
+                    <div class="float-left">Python Code</div>
+                    <div class="float-right">
+                        <button class="btn btn-sm btn-change-background-theme btn-primary" title="Copy Code"><i
+                                class="bi bi-brightness-high"></i></button>
+                        <button class="btn btn-sm btn-primary btn-copy-content-python-code" title="Change Background"><i
+                                class="bi bi-clipboard"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="card bg-dark" id="code-block">
+                <div class="container">
+                    <div class="mb-1"></div>
+                    {% for i in code %}
+                    <div class="row">
+                        <div class="col-12 d-flex justify-content-start">
+                            <span>{{ i['comment'] }}</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 d-flex justify-content-start">
+                            <code>{{ i['code'] }}</code>
+                        </div>
+                    </div>
+                    <div class="mb-3"></div>
+                    {% endfor %}
+                </div>
+                <div class="mb-1"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}

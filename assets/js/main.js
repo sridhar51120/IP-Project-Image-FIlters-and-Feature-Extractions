@@ -31,7 +31,22 @@
         $('.sidebar, .content').toggleClass("open");
         return false;
     });
+    
+    // For Changing Background Theme
+    $('.btn-change-background-theme').on('click', function () {
+        if ($('#code-block').hasClass('bg-dark')) {
+            $('#code-block').removeClass('bg-dark');
+            $('#code-block').addClass('bg-white');
+        } else {
+            $('#code-block').removeClass('bg-white');
+            $('#code-block').addClass('bg-dark');
+        }
+    });
 
+    // For Copy to Clipboard
+    $('.btn-copy-content-python-code').on('click',function(){
+        alert("Copy To Clipboard function clicked");
+    })
 
 })(jQuery);
 

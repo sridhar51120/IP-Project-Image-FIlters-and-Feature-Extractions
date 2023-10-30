@@ -4,7 +4,7 @@
 <div class="container-fluid pt-4 px-4">
     <div class="card bg-secondary">
         <div class="card-body">
-            <h4 class="text-primary">{{ data.title }}</h4>
+            <h4 class="text-primary">{{ data.title }}( High Pass Filter )</h4>
         </div>
     </div>
 </div>
@@ -78,6 +78,37 @@
         </div>
     </div>
 </div>
+<div class="container-fluid pt-4 px-4">
+    <div class="bg-secondary text-center rounded p-4">
+        <div class="card card-body bg-dark text-secondary">
+            <div class="d-flex align-items-center justify-content-between">
+                <h6 class="mb-0 text-primary">Live Demo</h6>
+            </div>
+        </div>
+        <div class="mb-2"></div>
+        <div class="bg-secondary ">
+            <div class="card card-body bg-dark text-secondary">
+                <p class="lead text-muted text-left">
+                    The following code will take a live image feed from your machine and apply histogram equalization to
+                    it, then display both original frame as well as its
+                </p>
+            </div>
+        </div>
+        <div class="bg-secondary ">
+            <div class="card card-body bg-dark text-secondary">
+                <div class="d-flex justify-content-center">
+                    <button class="btn btn-success btn-sm btn-load-img-butter-worth-filter">Lets Start Live Demo</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal-content"></div>
+<div class="butterworth-filter-toast-container-alert"></div>
+<div class="butterworth-filter-input-image-collapse"></div>
+<div class="butterworth-filter_image_collapse"></div>
+<br>
 
 
 {% endblock content %}

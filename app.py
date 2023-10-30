@@ -19,7 +19,8 @@ app.register_blueprint(filters2.bp)
 
 @app.route("/",methods=['GET'])
 def dashboard():
-   return render_template("dashboard.html")
+   return render_template('home.html')
+   # return render_template("dashboard.html")
 
 @app.route("/home",methods=['GET'])
 def home():

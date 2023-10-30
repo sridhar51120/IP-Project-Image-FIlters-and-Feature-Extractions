@@ -3,9 +3,9 @@ $(document).ready(function () {
         $.get("/modals/cluster", function (data) {
             // console.log("Data received:", data);
             $('.modal-content').append(data);
-            $('#histogram-image-modal').modal('show');
-            $('#btn-histogram-modal-close').click(function () {
-                $('#histogram-image-modal').modal('hide');
+            $('#cluster-image-modal').modal('show');
+            $('#cluster-image-modal-close').click(function () {
+                $('#cluster-image-modal').modal('hide');
             });
             const btn_cluster_submit_image = document.getElementById('btn-cluster-input-image-submit');
             $(btn_cluster_submit_image).click(function () {
@@ -14,7 +14,7 @@ $(document).ready(function () {
                     const fileName = cluster_input_image.files[0].name;
                     // alert(fileName);
                     if (/\.(jpg|png)$/i.test(fileName)) {
-                        $('#histogram-image-modal').modal('hide');
+                        $('#cluster-image-modal').modal('hide');
                         $.ajax({
                             url: '/segmentation/Clustering_output',
                             type: 'POST',
