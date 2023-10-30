@@ -10,9 +10,11 @@
 </div>
 <div class="container-fluid pt-4 px-4">
     <div class="bg-secondary text-center rounded p-4">
-        <div class="card card-body bg-dark text-secondary">
-            <div class="d-flex align-items-center justify-content-between">
-                <h6 class="mb-0 text-primary">Definition</h6>
+        <div class="card">
+            <div class="card-body bg-dark text-secondary">
+                <div class="d-flex align-items-center justify-content-between">
+                    <h6 class="mb-0 text-primary">Definition</h6>
+                </div>
             </div>
         </div>
         <div class="mb-3"></div>
@@ -41,7 +43,7 @@
             </div>
             <div class="mb-1"></div>
             <div class="card card-body bg-dark text-secondary">
-                <p class="text-muted text-left text-monospace">
+                <p class="text-muted text-left">
                     {{ workflow['description'] }}
                 </p>
             </div>
@@ -66,7 +68,7 @@
                     <div class="float-right">
                         <button class="btn btn-sm btn-change-background-theme btn-primary" title="Change Background"><i
                                 class="bi bi-brightness-high"></i></button>
-                        <button class="btn btn-sm btn-primary btn-copy-content-python-code" title="Copy to Clipboard" ><i
+                        <button class="btn btn-sm btn-primary btn-copy-content-python-code" title="Copy to Clipboard"><i
                                 class="bi bi-clipboard"></i></button>
                     </div>
                 </div>
