@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Copy Text to Clipboard</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <div class="container mt-5">
+    <div class="input-group">
+      <input type="text" class="form-control" id="copyText" value="Text to copy">
+      <div class="input-group-append">
+        <button class="btn btn-primary" id="copyButton">Copy</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $('#copyButton').on('click', function() {
+        var copyText = $('#copyText');
+        copyText.select();
+        document.execCommand('copy');
+        alert('Copied the text: ' + copyText.val());
+      });
+    });
+  </script>
+</body>
+</html>
