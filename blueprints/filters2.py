@@ -39,22 +39,22 @@ def weiner_temp():
 @bp.route("/weiner_filter_output", methods=['POST'])
 def weiner_filter_output():
     if request.method == 'POST':
-        if 'order-statics-input-image-file' in request.files:
-            file = request.files['order-statics-input-image-file']
-            img_dir = 'assets/uploads/filters/order_statistics_filters/'
+        if 'weiner-input-image-file' in request.files:
+            file = request.files['weiner-input-image-file']
+            img_dir = 'assets/uploads/filters/weiner_filter/'
             os.makedirs(img_dir, exist_ok=True)
             img_path = os.path.join(img_dir, file.filename)
             file.save(img_path)
-            const = Segmentation(img_path)
-            output_img = const.OrederStatics(img_dir)
+            const = Filters(img_path)
+            output_img = const.weiner_filters(img_dir)
             data = {
                 'img_url': img_path,
-                'Order_statistics': output_img
+                'weiner_filter' : output_img
             }
             return {
-                'template': render_template('OutputCollapse/filters/order_statics.html', data=data),
+                'template': render_template('OutputCollapse/filters/Weiner.html', data=data),
                 'img_url': img_path.replace("assets", ""),
-                'Order_statistics': output_img.replace("assets", "")
+                'weiner_filter' : output_img.replace("assets", "")
             }
         else:
             return 'No file part in the request'
@@ -147,8 +147,31 @@ def homomorphic_filters_temp():
     code = [
         {'comment': '', 'code': ''}
     ]
-    return render_template("homomarphic_filter.html", data=data, workflowtitle="Brief overview of how Homomarphic Filter Works", workflows=workflows, code=code)
+    return render_template("Hormonic_Filter.html", data=data, workflowtitle="Brief overview of how Homomarphic Filter Works", workflows=workflows, code=code)
 
+# TODO: PermissionError: [Errno 13] Permission denied: 'assets/uploads/filters/homomarphic/'
+@bp.route("/homomarphic_filter_output", methods=['POST'])
+def homomarphic_filter_output():
+    if request.method == 'POST':
+        if 'harmonic-filter-input-image-file' in request.files:
+            file = request.files['harmonic-filter-input-image-file']
+            img_dir = 'assets/uploads/filters/homomarphic/'
+            os.makedirs(img_dir, exist_ok=True)
+            img_path = os.path.join(img_dir, file.filename)
+            file.save(img_path)
+            const = Filters(img_path)
+            output_img = const.homomarphic_filter(img_dir)
+            data = {
+                'img_url': img_path,
+                'homomorphic_filter' : output_img
+            }
+            return {
+                'template': render_template('OutputCollapse/filters/Homomorphic.html', data=data),
+                'img_url': img_path.replace("assets", ""),
+                'homomorphic_filter' : output_img.replace("assets", "")
+            }
+        else:
+            return 'No file part in the request'
 
 @bp.route("/notch_filter", methods=['GET'])
 def notch_filter_temp():
@@ -177,7 +200,30 @@ def notch_filter_temp():
     ]
     return render_template("notch_filter.html", data=data, workflowtitle="Brief overview of how Gamma_correction Works", workflows=workflows, code=code)
 
-
+@bp.route("/notch_filter_output", methods=['POST'])
+def notch_filter_output():
+    if request.method == 'POST':
+        if 'notch-input-image-file' in request.files:
+            file = request.files['notch-input-image-file']
+            img_dir = 'assets/uploads/filters/notch_filter/'
+            os.makedirs(img_dir, exist_ok=True)
+            img_path = os.path.join(img_dir, file.filename)
+            file.save(img_path)
+            const = Filters(img_path)
+            output_img = const.notch_filter(img_dir)
+            data = {
+                'img_url': img_path,
+                'notch_filter' : output_img
+            }
+            return {
+                'template': render_template('OutputCollapse/filters/notch_filter.html', data=data),
+                'img_url': img_path.replace("assets", ""),
+                'notch_filter' : output_img.replace("assets", "")
+            }
+        else:
+            return 'No file part in the request'
+        
+        
 @bp.route("/adaptive_filter", methods=['GET'])
 def adaptive_filter_temp():
     data = {
@@ -255,6 +301,28 @@ def non_local_means_filter_temp():
     ]
     return render_template("non_local_means_filter.html", data=data, workflowtitle="Brief overview of how Non Local Means Filter Works", workflows=workflows, code=code)
 
+@bp.route("/non_local_mean_filter_output", methods=['POST'])
+def non_local_mean_filter_output():
+    if request.method == 'POST':
+        if 'non-local-means-input-image-file' in request.files:
+            file = request.files['non-local-means-input-image-file']
+            img_dir = 'assets/uploads/filters/non_local_means_filters/'
+            os.makedirs(img_dir, exist_ok=True)
+            img_path = os.path.join(img_dir, file.filename)
+            file.save(img_path)
+            const = Filters(img_path)
+            output_img = const.non_local_mean_filter(img_dir)
+            data = {
+                'img_url': img_path,
+                'non_local_mean' : output_img
+            }
+            return {
+                'template': render_template('OutputCollapse/filters/non_local_means_filter.html', data=data),
+                'img_url': img_path.replace("assets", ""),
+                'non_local_mean' : output_img.replace("assets", "")
+            }
+        else:
+            return 'No file part in the request'
 
 @bp.route("/unsharp_mask_filters", methods=['GET'])
 def unsharp_mask_filters_temp():
@@ -281,7 +349,29 @@ def unsharp_mask_filters_temp():
     ]
     return render_template("unsharp_masking.html", data=data, workflowtitle="Brief overview of how Unsharp Masking Works", workflows=workflows, code=code)
 
-
+@bp.route("/unsharp_masking_output", methods=['POST'])
+def unsharp_masking_output():
+    if request.method == 'POST':
+        if 'unsharp-masking-input-image-file' in request.files:
+            file = request.files['unsharp-masking-input-image-file']
+            img_dir = 'assets/uploads/filters/low_pass_filters/'
+            os.makedirs(img_dir, exist_ok=True)
+            img_path = os.path.join(img_dir, file.filename)
+            file.save(img_path)
+            const = Filters(img_path)
+            output_img = const.unsharp_masking(img_dir)
+            data = {
+                'img_url': img_path,
+                'unsharp_masking' : output_img
+            }
+            return {
+                'template': render_template('OutputCollapse/filters/unsharp_masking.html', data=data),
+                'img_url': img_path.replace("assets", ""),
+                'unsharp_masking' : output_img.replace("assets", "")
+            }
+        else:
+            return 'No file part in the request'
+        
 @bp.route("/low_pass_filter", methods=['GET'])
 def low_pass_filter_temp():
     data = {
@@ -306,7 +396,29 @@ def low_pass_filter_temp():
     ]
     return render_template("low_pass_filters.html", data=data, workflowtitle="Brief overview of how Low pass Filter Works", workflows=workflows, code=code)
 
-
+@bp.route("/low_pass_filter_output", methods=['POST'])
+def low_pass_filter_output():
+    if request.method == 'POST':
+        if 'low-pass-input-image-file' in request.files:
+            file = request.files['low-pass-input-image-file']
+            img_dir = 'assets/uploads/filters/low_pass_filters/'
+            os.makedirs(img_dir, exist_ok=True)
+            img_path = os.path.join(img_dir, file.filename)
+            file.save(img_path)
+            const = Filters(img_path)
+            output_img = const.low_pass_filter(img_dir)
+            data = {
+                'img_url': img_path,
+                'low_pass_filter' : output_img
+            }
+            return {
+                'template': render_template('OutputCollapse/filters/low_pass_filters.html', data=data),
+                'img_url': img_path.replace("assets", ""),
+                'low_pass_filter' : output_img.replace("assets", "")
+            }
+        else:
+            return 'No file part in the request'
+        
 @bp.route("/high_pass_filter", methods=['GET'])
 def high_pass_filter_temp():
     data = {
@@ -334,6 +446,28 @@ def high_pass_filter_temp():
     ]
     return render_template("high_pass_filter.html", data=data, workflowtitle="Brief overview of how High Pass Filter Works", workflows=workflows, code=code)
 
+@bp.route("/high_pass_filter_output", methods=['POST'])
+def high_pass_filter_output():
+    if request.method == 'POST':
+        if 'high-pass-input-image-file' in request.files:
+            file = request.files['high-pass-input-image-file']
+            img_dir = 'assets/uploads/filters/highpassFilter/'
+            os.makedirs(img_dir, exist_ok=True)
+            img_path = os.path.join(img_dir, file.filename)
+            file.save(img_path)
+            const = Filters(img_path)
+            output_img = const.high_pass_filter(img_dir)
+            data = {
+                'img_url': img_path,
+                'high_pass_filter' : output_img
+            }
+            return {
+                'template': render_template('OutputCollapse/filters/high_pass_filter.html', data=data),
+                'img_url': img_path.replace("assets", ""),
+                'high_pass_filter' : output_img.replace("assets", "")
+            }
+        else:
+            return 'No file part in the request'
 
 @bp.route("/laplacian_filter", methods=['GET'])
 def laplacian_filter_temp():
@@ -362,7 +496,29 @@ def laplacian_filter_temp():
     ]
     return render_template("laplacian_filter.html", data=data, workflowtitle="Brief overview of how Laplacian Filter Works", workflows=workflows, code=code)
 
-
+@bp.route("/laplacian_filter_output", methods=['POST'])
+def laplacian_filter_output():
+    if request.method == 'POST':
+        if 'laplacian-input-image-file' in request.files:
+            file = request.files['laplacian-input-image-file']
+            img_dir = 'assets/uploads/filters/laplacian_filter/'
+            os.makedirs(img_dir, exist_ok=True)
+            img_path = os.path.join(img_dir, file.filename)
+            file.save(img_path)
+            const = Filters(img_path)
+            output_img = const.laplacian_filter(img_dir)
+            data = {
+                'img_url': img_path,
+                'laplacian_filter' : output_img
+            }
+            return {
+                'template': render_template('OutputCollapse/filters/laplacian_filter.html', data=data),
+                'img_url': img_path.replace("assets", ""),
+                'laplacian_filter' : output_img.replace("assets", "")
+            }
+        else:
+            return 'No file part in the request'
+        
 # @bp.route("/median_filter", methods=['GET'])
 # def median_filter_temp():
 #     data = {

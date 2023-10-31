@@ -90,3 +90,36 @@ def average_filter_temp():
 @bp.route("/butterworth_filter",methods=['GET'])
 def butterworth_filter_temp():
    return render_template("modals/butterworth_filter.html")
+
+
+@bp.route("/high_pass_filter_filter",methods=['GET'])
+def high_pass_filter_filter_temp():
+   return render_template("modals/high_pass_filter.html")
+
+@bp.route("/homomarphic_filter",methods=['GET'])
+def homomarphic_filter_temp():
+   return render_template("modals/Homomorphic.html")
+
+@bp.route("/laplacian_filter",methods=['GET'])
+def laplacian_filter_temp():
+   return render_template("modals/laplacian_filter.html")
+
+@bp.route("/low_pass_filter",methods=['GET'])
+def low_pass_filter_temp():
+   return render_template("modals/low_pass_filters.html")
+
+@bp.route("/non_local_mean_filter",methods=['GET'])
+def non_local_mean_filter_temp():
+   return render_template("modals/non_local_means_filter.html")
+
+@bp.route("/notch_filter",methods=['GET'])
+def notch_filter_temp():
+   return render_template("modals/notch_filter.html")
+
+@bp.route("/unsharp_masking",methods=['GET'])
+def unsharp_masking_temp():
+   return render_template("modals/unsharp_masking.html")
+
+@bp.route("/weiner_filter",methods=['GET'])
+def weiner_filter_temp():
+   return render_template("modals/Weiner.html")

@@ -1,4 +1,4 @@
-<!-- {% extends '__master.html' %}
+{% extends '__master.html' %}
 
 {% block content %}
 <div class="container-fluid pt-4 px-4">
@@ -89,7 +89,7 @@
         <div class="bg-secondary ">
             <div class="card card-body bg-dark text-secondary">
                 <p class="lead text-muted text-left">
-                    The following code will take a live image feed from your machine and apply histogram equalization to
+                    The following code will take a live image feed from your machine and apply Laplacian Filter to
                     it, then display both original frame as well as its
                 </p>
             </div>
@@ -97,7 +97,7 @@
         <div class="bg-secondary ">
             <div class="card card-body bg-dark text-secondary">
                 <div class="d-flex justify-content-center">
-                    <button class="btn btn-success btn-sm btn-load-img-histogram-equal">Lets Start Live Demo</button>
+                    <button class="btn btn-success btn-sm btn-load-img-laplacian-filter">Lets Start Live Demo</button>
                 </div>
             </div>
         </div>
@@ -105,10 +105,10 @@
 </div>
 
 <div class="modal-content"></div>
-<div class="histo-toast-container-alert"></div>
-<div class="histo-input-image-collapse"></div>
-<div class="histo_image_collapse"></div>
+<div class="laplacian-filter-toast-container-alert"></div>
+<div class="laplacian-filter-input-image-collapse"></div>
+<div class="laplacian-filter_image_collapse"></div>
 <br>
 
 
-{% endblock content %} -->
+{% endblock content %}
