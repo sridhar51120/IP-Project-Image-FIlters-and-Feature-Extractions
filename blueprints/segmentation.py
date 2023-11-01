@@ -149,25 +149,7 @@ def Thresholding_temp():
         {'title': 'Visualization and Further Analysis','description':' 1) Visualize the Results: Present the binary segmented image or overlay it on the original image for better visualization. 2) Use in Subsequent Processing: Utilize the segmented binary image for further image processing steps or analysis, depending on the application (e.g., feature extraction or object detection).'},
         {'title': 'Fine-tuning and Iteration','description':' 1) Adjustment: If necessary, revisit the threshold selection or parameter settings and reapply the process. 2) Iterate and Refine: Fine-tune the thresholding technique or post-processing steps based on evaluation.'}
     ]
-
-    code = [
-        {'comment': '# Import Required Library', 'code': 'import cv2'},
-        {'comment': '', 'code': 'import numpy as np'},
-        {'comment': '# Load the image',
-            'code': 'image = cv2.imread("input_image.jpg", cv2.IMREAD_GRAYSCALE)'},
-        {'comment': '# Set a threshold value (you can experiment with different values)',
-         'code': 'threshold_value = 128'},
-        {'comment': '# Apply binary thresholding',
-            'code': 'ret, thresholded_image = cv2.threshold(image, threshold_value, 255, cv2.THRESH_BINARY)'},
-        {'comment': '# Display the thresholded image',
-            'code': 'gamma_corrected = np.power(image/255.0, gamma)'},
-        {'comment': '# Display the image',
-            'code': 'cv2.imshow("Thresholded Image", thresholded_image)'},
-        {'comment': '', 'code': 'cv2.waitKey(0)'},
-        {'comment': '', 'code': 'cv2.destroyAllWindows()'}
-    ]
-
-    return render_template("Thresholding.html", data=data, workflowtitle="Brief overview of how Thresolding Works", workflows=workflows, code=code)
+    return render_template("Thresholding.html", data=data, workflowtitle="Brief overview of how Thresolding Works", workflows=workflows)
 
 
 @bp.route("/Thresolding_output", methods=['POST'])

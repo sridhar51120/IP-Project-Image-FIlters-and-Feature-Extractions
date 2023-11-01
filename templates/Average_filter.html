@@ -65,14 +65,104 @@
             <div class="card bg-dark">
                 <div class="container">
                     <div class="mb-1"></div>
-                    {% for i in code %}
-                    <div class="col col-12 d-flex justify-content-start"><span></span>{{ i['comment'] }}</div>
+                    <div class="col col-12 d-flex justify-content-start"><span>% Read the image</span>
+                    </div>
                     <div class="col col-12 d-flex justify-content-start">
-                        <code>{{ i['code'] }}</code>
+                        <code>original_image = imread('path_to_your_image.jpg');</code>
                     </div>
                     <div class="mb-3"></div>
-                    {% endfor %}
+                    <div class="col col-12 d-flex justify-content-start"><span>% Convert the image to grayscale if
+                            needed</span></div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>gray_image = rgb2gray(original_image);
+                            </code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span>% Define the size of the filter (adjust
+                            as needed)</span></div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>filter_size = 5; % For a 5x5 filter
+                            </code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span>
+                            % Create the averaging filter
+                        </span>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>filter = fspecial('average', [filter_size filter_size]);</code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span>
+                            % Apply the filter to the image
+                        </span>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>filtered_image = imfilter(gray_image, filter, 'replicate'); % 'replicate' pads the image boundaries</code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span>
+                            % Display the original and filtered images
+                        </span>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>figure;</code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>subplot(1, 2, 1), imshow(gray_image), title('Original Image');</code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>subplot(1, 2, 2), imshow(filtered_image), title('Average Filtered Image');</code>
+                    </div>
                 </div>
+                <!-- <div class="container">
+                    <div class="mb-1"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span># Import Required Library</span>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>import cv2</code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span># Read the image </span></div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>image = cv2.imread('path_to_your_image.jpg')</code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span># Define the kernel size for the average
+                            filter (adjust as needed)</span>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>kernel_size = (5, 5)
+                            </code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span># Apply the average filter</span>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>filtered_image = cv2.blur(image, kernel_size)
+                            </code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span># Display the original and filtered
+                            images</span>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>cv2.imshow('Original Image', image)
+                            </code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>cv2.imshow('Average Filtered Image', filtered_image)
+                            </code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>cv2.waitKey(0)
+                            </code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>cv2.destroyAllWindows()
+                            </code>
+                    </div>
+                </div> -->
                 <div class="mb-1"></div>
             </div>
         </div>

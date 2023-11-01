@@ -63,15 +63,123 @@
                 Python Code
             </div>
             <div class="card bg-dark">
-                <div class="container">
+                <!-- <div class="container">
                     <div class="mb-1"></div>
-                    {% for i in code %}
-                    <div class="col col-12 d-flex justify-content-start"><span></span>{{ i['comment'] }}</div>
+                    <div class="col col-12 d-flex justify-content-start"><span>% Read the original image</span>
+                    </div>
                     <div class="col col-12 d-flex justify-content-start">
-                        <code>{{ i['code'] }}</code>
+                        <code>original_image = imread('path_to_your_image.jpg');</code>
                     </div>
                     <div class="mb-3"></div>
-                    {% endfor %}
+                    <div class="col col-12 d-flex justify-content-start"><span>% Convert the image to grayscale (if
+                            it's
+                            a color image)</span></div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>gray_image = rgb2gray(original_image);
+                            </code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span>% Define the minimum and maximum
+                            intensity values after stretching</span></div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>min_intensity = 50; % Adjust as needed
+                            </code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>max_intensity = 200; % Adjust as needed
+                            </code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span>
+                            % Apply contrast stretching using imadjust
+                        </span>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>stretched_image = imadjust(gray_image, [min_intensity/255, max_intensity/255], []);</code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span>
+                            % Display the images
+                        </span>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>figure;</code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>subplot(1, 2, 1), imshow(gray_image), title('Original Image');</code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>subplot(1, 2, 2), imshow(stretched_image), title('Contrast-Stretched Image');</code>
+                    </div>
+                </div> -->
+                <div class="container">
+                    <div class="mb-1"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span># Import Required Library</span>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>import cv2</code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>import numpy as np</code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>import matplotlib.pyplot as plt</code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span># Read the image </span></div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>image = cv2.imread('path_to_your_image.jpg', 0)                       </code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span># Define the minimum and maximum
+                            intensity values after stretching</span>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>min_intensity = 50  # Adjust as needed
+                            </code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>max_intensity = 200  # Adjust as needed
+                            </code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span>
+                            # Apply contrast stretching
+                        </span>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>stretched_image = np.copy(image)</code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>stretched_image[image < min_intensity] = min_intensity</code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>stretched_image[image > max_intensity] = max_intensity
+                            </code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>stretched_image = cv2.normalize(stretched_image, None, 0, 255, cv2.NORM_MINMAX)
+                            </code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span>
+                            # Display the original and contrast-stretched images
+                        </span>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>plt.figure(figsize=(10, 5))</code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>plt.subplot(1, 2, 1), plt.imshow(image, cmap='gray'), plt.title('Original Image')</code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>plt.subplot(1, 2, 2), plt.imshow(stretched_image, cmap='gray'), plt.title('Contrast-Stretched Image')
+                            </code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>plt.show()
+                            </code>
+                    </div>
                 </div>
                 <div class="mb-1"></div>
             </div>
@@ -97,7 +205,8 @@
         <div class="bg-secondary ">
             <div class="card card-body bg-dark text-secondary">
                 <div class="d-flex justify-content-center">
-                    <button class="btn btn-success btn-sm  btn-load-img-contrast-strching">Lets Start Live Demo</button>
+                    <button class="btn btn-success btn-sm  btn-load-img-contrast-strching">Lets Start Live
+                        Demo</button>
                 </div>
             </div>
         </div>

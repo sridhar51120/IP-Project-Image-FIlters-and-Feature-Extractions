@@ -63,15 +63,200 @@
                 Python Code
             </div>
             <div class="card bg-dark">
-                <div class="container">
+                <!-- <div class="container">
                     <div class="mb-1"></div>
-                    {% for i in code %}
-                    <div class="col col-12 d-flex justify-content-start"><span></span>{{ i['comment'] }}</div>
+                    <div class="col col-12 d-flex justify-content-start"><span>% Read the original image</span>
+                    </div>
                     <div class="col col-12 d-flex justify-content-start">
-                        <code>{{ i['code'] }}</code>
+                        <code>original_image = imread('path_to_your_image.jpg');</code>
                     </div>
                     <div class="mb-3"></div>
-                    {% endfor %}
+                    <div class="col col-12 d-flex justify-content-start"><span>% Convert the image to grayscale (if it's
+                            a color image)</span></div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>gray_image = rgb2gray(original_image);
+                        </code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span>
+                            % Display the original image
+                        </span>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>figure;</code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>subplot(1, 2, 1), imshow(gray_image), title('Original Image');</code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span>
+                            % Perform FFT on the image
+                        </span>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>fft_image = fft2(double(gray_image));
+                            </code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>fft_image_shifted = fftshift(fft_image);
+                            </code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span>% Define the center and the radius for
+                            the notch filter</span>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>center_x = size(fft_image_shifted, 2) / 2;
+                        </code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>center_y = size(fft_image_shifted, 1) / 2;
+                        </code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>notch_radius = 20;
+                        </code>
+                    </div>
+
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span>% Define the center and the radius for
+                            the notch filter</span>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>center_x = size(fft_image_shifted, 2) / 2;
+                        </code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>center_y = size(fft_image_shifted, 1) / 2;
+                        </code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>notch_radius = 20;
+                        </code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span>% Create a notch filter</span>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>notch_filter = ones(size(fft_image_shifted));
+                        </code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>notch_filter(center_y-notch_radius:center_y+notch_radius, center_x-notch_radius:center_x+notch_radius) = 0;
+                        </code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span>% Apply the notch filter in the frequency
+                            domain</span>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>filtered_fft_image = fft_image_shifted .* notch_filter;
+                        </code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span>% Perform Inverse FFT to get the image in
+                            the spatial domain</span>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>filtered_image = ifft2(ifftshift(filtered_fft_image));
+                        </code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>filtered_image = uint8(abs(filtered_image));
+                        </code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span>% Display the notch-filtered image</span>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>subplot(1, 2, 2), imshow(filtered_image), title('Notch Filtered Image');
+                        </code>
+                    </div>
+                </div> -->
+                <div class="container">
+                    <div class="mb-1"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span># Import Required Library</span>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>import cv2</code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>import numpy as np</code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>from matplotlib import pyplot as plt</code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span># Load the Input Image</span></div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>image = cv2.imread('path_to_your_image.jpg', 0) </code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span># Apply Fast Fourier Transform
+                            (FFT)</span>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>f = np.fft.fft2(image)</code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>fshift = np.fft.fftshift(f)
+                        </code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span>
+                            # Find the center of the image
+                        </span>
+
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>rows, cols = image.shape</code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>crow, ccol = rows // 2, cols // 2</code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span># Create a mask with notches at specific
+                            frequencies (for example, removing a certain frequency at (100, 100))</span>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>notch_radius = 30</code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>fshift[crow - notch_radius:crow + notch_radius, ccol - notch_radius:ccol + notch_radius] = 0</code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span>
+                            # Apply inverse FFT to get the image in spatial domain
+                        </span>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>f_ishift = np.fft.ifftshift(fshift)</code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>filtered_image = np.fft.ifft2(f_ishift)
+                        </code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>filtered_image = np.abs(filtered_image)
+                        </code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span>
+                            # Display the original and filtered images
+                        </span>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>plt.figure(figsize=(10, 5))</code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>plt.subplot(1, 2, 1), plt.imshow(image, cmap='gray'), plt.title('Original Image')</code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>plt.subplot(1, 2, 2), plt.imshow(filtered_image, cmap='gray'), plt.title('Notch Filtered Image')</code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>plt.show()</code>
+                    </div>
                 </div>
                 <div class="mb-1"></div>
             </div>

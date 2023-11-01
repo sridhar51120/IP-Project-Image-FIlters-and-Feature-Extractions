@@ -51,27 +51,77 @@
     </div>
 </div>
 <div class="container-fluid pt-4 px-4">
-    <div class="bg-secondary text-center rounded p-4">
-        <div class="card card-body bg-dark text-secondary">
-            <div class="d-flex align-items-center justify-content-between">
-                <h6 class="mb-0 text-primary">Code</h6>
+    <div class="bg-secondary rounded p-4">
+        <div class="card bg-dark text-secondary">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-6 text-primary font-weight-bold">Python Code</div>
+                    <div class="col-6 d-flex justify-content-end">
+                        <button class="btn btn-sm btn-change-background-theme btn-primary me-2"
+                            title="Change Background"><i class="bi bi-brightness-high"></i></button>
+                        <button class="btn btn-sm btn-primary btn-copy-content-code me-2" title="Copy to Clipboard"><i
+                                class="bi bi-clipboard"></i></button>
+                        <div class="dropdown me-2">
+                            <button class="btn btn-primary dropdown-toggle btn-primary" type="button"
+                                id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                Select Language
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <li><a class="dropdown-item btn btn-primary"
+                                        id="dropdown-unsharp-masking-python-code">Python</a></li>
+                                <li><a class="dropdown-item btn btn-primary"
+                                        id="dropdown-unsharp-masking-matlab-code">MatLab Code</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <button class="btn btn-sm btn-primary btn-user-guide-modal me-2" title="User Guide"><i
+                                class="bi bi-laptop"></i></button>
+                    </div>
+                </div>
             </div>
         </div>
         <br>
         <div class="card bg-primary">
-            <div class="card-header bg-secondary d-flex justify-content-start">
-                Python Code
-            </div>
-            <div class="card bg-dark">
-                <div class="container">
+            <div class="card bg-dark" id="code-block">
+                <div class="container" id="unsharp-masking-python-code-snippet">
                     <div class="mb-1"></div>
-                    {% for i in code %}
-                    <div class="col col-12 d-flex justify-content-start"><span></span>{{ i['comment'] }}</div>
+                    <div class="col col-12 d-flex justify-content-start"><span># Import Required Libraries</span></div>
                     <div class="col col-12 d-flex justify-content-start">
-                        <code>{{ i['code'] }}</code>
+                        <code>import cv2</code>
                     </div>
                     <div class="mb-3"></div>
-                    {% endfor %}
+                    <div class="col col-12 d-flex justify-content-start"><span># Load the Image file</span></div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>image = cv2.imread(image_path, cv2.IMREAD_GRAYSCALE)</code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span># Apply Gaussian blur</span></div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>blurred_image = cv2.GaussianBlur(image, (0, 0), 2)</code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span># Create the unsharp mask</span></div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>unsharp_mask = cv2.addWeighted(image, 1.5, blurred_image, -0.5, 0)</code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span># Display Gaussian blur output
+                            image file</span></div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code></code>cv2.imshow('unsharp_mask_output',unsharp_mask)
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>cv2.waitkKey(0)</code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>cv2.destroyAllwindow()</code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span># Save the result to a file</span></div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>cv2.imwrite('unsharp_mask_output.jpg', unsharp_mask)</code>
+                    </div>
+                    <div class="mb-3"></div>
                 </div>
                 <div class="mb-1"></div>
             </div>
@@ -110,5 +160,82 @@
 <div class="unsharp-masking_image_collapse"></div>
 <br>
 
-
+<script>
+    $(document).ready(function () {
+        $('#dropdown-unsharp-masking-matlab-code').click(function () {
+            $('#unsharp-masking-python-code-snippet').remove();
+            let content = `<div class="container" id="unsharp-masking-matlab-code-snippet">
+                    <div class="mb-1"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span>% Read the image</span></div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>image = cv2.imread('path_to_your_image.jpg', 0)</code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span>% Apply unsharp mask filter</span>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>unsharp_mask_image = imsharpen(original_image);</code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span>% Display the original and unsharp mask images</span></div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>figure;</code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>subplot(1, 2, 1), imshow(original_image), title('Original Image');</code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>subplot(1, 2, 2), imshow(unsharp_mask_image), title('Unsharp Mask Image');</code>
+                    </div>
+                </div>`;
+            $('#code-block').append(content);
+            $('#code-block').html(content);
+        });
+        $('#dropdown-unsharp-masking-python-code').click(function () {
+            $().remove('#unsharp-masking-matlab-code-snippet');
+            let content = `<div class="container" id="unsharp-masking-python-code-snippet">
+                    <div class="mb-1"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span># Import Required Libraries</span></div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>import cv2</code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span># Load the Image file</span></div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>image = cv2.imread(image_path, cv2.IMREAD_GRAYSCALE)</code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span># Apply Gaussian blur</span></div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>blurred_image = cv2.GaussianBlur(image, (0, 0), 2)</code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span># Create the unsharp mask</span></div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>unsharp_mask = cv2.addWeighted(image, 1.5, blurred_image, -0.5, 0)</code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span># Display Gaussian blur output
+                            image file</span></div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code></code>cv2.imshow('unsharp_mask_output',unsharp_mask)
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>cv2.waitkKey(0)</code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>cv2.destroyAllwindow()</code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span># Save the result to a file</span></div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>cv2.imwrite('unsharp_mask_output.jpg', unsharp_mask)</code>
+                    </div>
+                    <div class="mb-3"></div>
+                </div>`;
+            $('#code-block').append(content);
+            $('#code-block').html(content);
+        });
+    })
+</script>
 {% endblock content %}

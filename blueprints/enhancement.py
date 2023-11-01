@@ -22,11 +22,11 @@ def Histogram_Equalization_temp():
     code = [
         {'comment': '# Import Cv2 Library', 'code': 'import cv2'},
         {'comment': '# Load the image',
-            'code': "original_image = cv2.imread('your_image.jpg', cv2.IMREAD_GRAYSCALE)"},
-        {'comment': "# Apply histogram equalization",
-            'code': "equalized_image = cv2.equalizeHist(original_image)"},
-        {'comment': '# Save the equalized image',
-            'code': "cv2.imwrite('equalized_image.jpg', equalized_image)"}
+            'code': ""},
+        {'comment': "",
+            'code': ""},
+        {'comment': '',
+            'code': "cv2.imwrite('equalized_image.jpg', )"}
     ]
     return render_template("Histogram_Equalization.html", data=data, workflowtitle="Brief overview of how Histogram Equalization Works", workflows=workflows, code=code)
 
@@ -190,18 +190,7 @@ def Spatial_filtering_temp():
         {'title': '5.Output Image', 'description': 'After applying the filter to every pixel in the input image, you get a new image called the filtered image or spatially filtered image. This image may highlight certain features or characteristics based on the chosen filter kernel.'}
     ]
 
-    code = [
-        {'comment': '# Import Cv2 Library', 'code': 'import cv2'},
-        {'comment': '# Import Numpy Library', 'code': 'import numpy as np'},
-        {'comment': '# Load the image', 'code': 'image = cv2.imread("input_image.jpg")'},
-        {'comment': '# Define a 3x3 averaging filter kernel', 'code': 'kernel = np.array([[1, 1, 1],[1, 1, 1],[1, 1, 1]]) / 9'},
-        {'comment': '# Perform convolution', 'code': 'output_image = cv2.filter2D(input_image, -1, kernel)'},
-        {'comment': '# Save the output image', 'code': 'cv2.imwrite("output.jpg", output_image)'},
-        {'comment': '# Display the output image', 'code': 'cv2.imshow("Filtered Image", output_image)'},
-        {'comment': '', 'code': 'cv2.waitKey(0)'},
-        {'comment': '', 'code': 'cv2.destroyAllWindows()'}
-
-    ]
+    code = []
 
     return render_template("Spatial_filtering.html", data=data, workflowtitle="Brief overview of how Spatial_filtering Works", workflows=workflows, code=code)
 
