@@ -85,3 +85,128 @@ $(document).ready(function () {
         });
     });
 });
+
+
+$(document).ready(function () {
+    $('#dropdown-geometric-filter-matlab-script-code').click(function () {
+        $('#geometric-python-code').remove();
+        let content = `                <div class="container" id="geometric-matlab-code">
+                    <div class="mb-1"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span>% Read the original image</span>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>original_image = imread('path_to_your_image.jpg');</code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span>% Convert the image to grayscale (if it's
+                            a color image)</span></div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>gray_image = rgb2gray(original_image);
+                        </code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span>
+                            % Display the original image
+                        </span>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>figure;</code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>subplot(1, 2, 1), imshow(gray_image), title('Original Image');</code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span>
+                            % Define the size of the filter
+                        </span>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>filter_size = 3;
+                            </code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span>% Apply the geometric mean filter using
+                            nlfilter</span>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>filtered_image = nlfilter(gray_image, [filter_size filter_size], @(x) geomean(x(:)));
+                        </code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span>% Display the filtered image</span>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>subplot(1, 2, 2), imshow(filtered_image, []), title('Geometric Mean Filtered Image');
+                        </code>
+                    </div>
+                </div>`;
+        $('#code-block').append(content);
+        $('#code-block').html(content);
+    })
+    $('#dropdown-geometric-filter-python-code').click(function () {
+        $('#geometric-matlab-code').remove();
+        let content = `
+            <div class="container" id="geometric-python-code">
+                    <div class="mb-1"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span># Import Required Library</span>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>import cv2</code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>import numpy as np</code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>from scipy.ndimage import generic_filter
+                        </code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span># Read the image </span></div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>image = cv2.imread('path_to_your_image.jpg', 0)</code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span># Define the geometric mean filter
+                            function</span>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>def geometric_mean(data):
+                        </code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>&nbsp;&nbsp;&nbsp;return np.prod(data) ** (1.0 / len(data))
+                        </code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span>
+                            # Apply the geometric mean filter using a 3x3 window
+                        </span>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>filtered_image = generic_filter(image, geometric_mean, size=3)</code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span>
+                            # Display the original and filtered images
+                        </span>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>cv2.imshow('Original Image', image)</code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>cv2.imshow('Geometric Mean Filtered Image', filtered_image)</code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>cv2.waitKey(0)
+                        </code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>cv2.destroyAllWindows()
+                        </code>
+                    </div>
+                </div>`;
+        $('#code-block').append(content);
+        $('#code-block').html(content);
+    })
+})
+

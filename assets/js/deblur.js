@@ -83,3 +83,144 @@ $(document).ready(function () {
         });
     });
 });
+
+
+$(document).ready(function () {
+    $('#dropdown-deblur-python-code').click(function () {
+        $('#deblur-matlab-code').remove();
+        let content = `                <div class="container" id="deblur-python-code">
+                    <div class="mb-1"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span># Import Required Library</span>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>import cv2</code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>import numpy as np</code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>from skimage import color, data, restoration</code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>import matplotlib.pyplot as plt</code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span># Read the image </span></div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>image = cv2.imread('path_to_your_image.jpg')</code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span># Convert the image to float for
+                            deconvolution</span>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>image = color.rgb2gray(image)
+                        </code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span>
+                            # Generate a blurry version of the image (simulating motion blur)
+                        </span>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>psf = np.ones((5, 5)) / 25</code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>image_blurred = cv2.filter2D(image, -1, psf)</code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span>
+                            # Perform Richardson-Lucy deconvolution
+                        </span>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>deconvolved_image, _ = restoration.richardson_lucy(image_blurred, psf, iterations=30)</code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span>
+                            # Display the images
+                        </span>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>plt.figure(figsize=(10, 5))</code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>plt.subplot(1, 2, 1)</code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>plt.title('Blurred Image')</code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>plt.imshow(image_blurred, cmap='gray')</code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>plt.subplot(1, 2, 2)</code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>plt.title('Deblurred Image')</code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>plt.imshow(deconvolved_image, cmap='gray')</code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>plt.show()</code>
+                    </div>
+                </div>`;
+        $('#code-block').append(content);
+        $('#code-block').html(content);
+    })
+    $('#dropdown-deblur-matlab-script-code').click(function () {
+        $('deblur-python-code').remove();
+        let content = `                <div class="container" id="deblur-matlab-code">
+                    <div class="mb-1"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span>% Read the original image</span>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>original_image = imread('path_to_your_image.jpg');</code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span>% Convert the image to grayscale (if it's
+                            a color image)</span></div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>gray_image = rgb2gray(original_image);
+                        </code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span>% Generate a blurry version of the image
+                            (simulating motion blur)</span></div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>psf = fspecial('motion', 25, 45); % Creating a motion blur PSF
+                        </code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>blurred_image = imfilter(gray_image, psf, 'conv', 'circular');
+                        </code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span>
+                            % Perform Richardson-Lucy deconvolution
+                        </span>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>deblurred_image = deconvlucy(blurred_image, psf, 10); % Adjust iterations as needed                        </code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span>
+                            % Display the images
+                        </span>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>figure;</code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>subplot(1, 2, 1), imshow(blurred_image), title('Blurred Image');</code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>subplot(1, 2, 2), imshow(deblurred_image), title('Deblurred Image');</code>
+                    </div>
+                </div>`;
+        $('#code-block').append(content);
+        $('#code-block').html(content);
+    })
+})
+

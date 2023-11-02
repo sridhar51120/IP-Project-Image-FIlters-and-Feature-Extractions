@@ -51,78 +51,40 @@
     </div>
 </div>
 <div class="container-fluid pt-4 px-4">
-    <div class="bg-secondary text-center rounded p-4">
-        <div class="card card-body bg-dark text-secondary">
-            <div class="d-flex align-items-center justify-content-between">
-                <h6 class="mb-0 text-primary">Code</h6>
+    <div class="bg-secondary rounded p-4">
+        <div class="card bg-dark text-secondary">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-6 text-primary font-weight-bold">Python Code</div>
+                    <div class="col-6 d-flex justify-content-end">
+                        <button class="btn btn-sm btn-change-background-theme btn-primary me-2"
+                            title="Change Background"><i class="bi bi-brightness-high"></i></button>
+                        <button class="btn btn-sm btn-primary btn-copy-content-code me-2" title="Copy to Clipboard"><i
+                                class="bi bi-clipboard"></i></button>
+                        <div class="dropdown me-2">
+                            <button class="btn btn-primary dropdown-toggle btn-primary" type="button"
+                                id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                Select Language
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <li><a class="dropdown-item btn btn-primary"
+                                        id="dropdown-clustering-python-code">Python</a>
+                                </li>
+                                <li><a class="dropdown-item btn btn-primary"
+                                        id="dropdown-clustering-matlab-script-code">MatLab</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <button class="btn btn-sm btn-primary btn-user-guide-modal me-2" title="User Guide"><i
+                                class="bi bi-laptop"></i></button>
+                    </div>
+                </div>
             </div>
         </div>
         <br>
         <div class="card bg-primary">
-            <div class="card-header bg-secondary d-flex justify-content-start">
-                Python Code
-            </div>
-            <div class="card bg-dark">
-                <!-- <div class="container">
-                    <div class="mb-1"></div>
-                    <div class="col col-12 d-flex justify-content-start"><span>% Read the original image</span>
-                    </div>
-                    <div class="col col-12 d-flex justify-content-start">
-                        <code>original_image = imread('path_to_your_image.jpg');</code>
-                    </div>
-                    <div class="col col-12 d-flex justify-content-start">
-                        <code>image = double(original_image);
-                        </code>
-                    </div>
-                    <div class="mb-3"></div>
-                    <div class="col col-12 d-flex justify-content-start"><span>% Flatten the image array</span></div>
-                    <div class="col col-12 d-flex justify-content-start">
-                        <code>[rows, cols, channels] = size(image);
-                            </code>
-                    </div>
-                    <div class="col col-12 d-flex justify-content-start">
-                        <code>pixels = reshape(image, rows * cols, channels);
-                            </code>
-                    </div>
-                    <div class="mb-3"></div>
-                    <div class="col col-12 d-flex justify-content-start"><span>% Specify the number of clusters (adjust
-                            as needed)</span></div>
-                    <div class="col col-12 d-flex justify-content-start">
-                        <code>num_clusters = 5;
-                            </code>
-                    </div>
-                    <div class="mb-3"></div>
-                    <div class="col col-12 d-flex justify-content-start"><span>
-                            % Perform K-means clustering
-                        </span>
-                    </div>
-                    <div class="col col-12 d-flex justify-content-start">
-                        <code>[idx, centers] = kmeans(pixels, num_clusters);</code>
-                    </div>
-                    <div class="mb-3"></div>
-                    <div class="col col-12 d-flex justify-content-start"><span>
-                            % Reshape the pixel indices to form the clustered image
-                        </span>
-                    </div>
-                    <div class="col col-12 d-flex justify-content-start">
-                        <code>segmented_image = reshape(idx, rows, cols);</code>
-                    </div>
-                    <div class="mb-3"></div>
-                    <div class="col col-12 d-flex justify-content-start"><span>
-                            % Display the original and clustered images
-                        </span>
-                    </div>
-                    <div class="col col-12 d-flex justify-content-start">
-                        <code>figure;</code>
-                    </div>
-                    <div class="col col-12 d-flex justify-content-start">
-                        <code>subplot(1, 2, 1), imshow(original_image), title('Original Image');</code>
-                    </div>
-                    <div class="col col-12 d-flex justify-content-start">
-                        <code>subplot(1, 2, 2), imagesc(segmented_image), colormap(gca, jet), colorbar, title('Clustered Image');</code>
-                    </div>
-                </div> -->
-                <div class="container">
+            <div class="card bg-dark" id="code-block">
+                <div class="container" id="clustering-python-code">
                     <div class="mb-1"></div>
                     <div class="col col-12 d-flex justify-content-start"><span># Import Required Library</span>
                     </div>
@@ -251,8 +213,6 @@
     </div>
 </div>
 <div class="modal-content"></div>
-<div class="cluster-container-alert"></div>
-<div class="cluster-input-image-collapse"></div>
 <div class="cluster-image-collapse"></div>
 <br>
 

@@ -19,16 +19,8 @@ def Histogram_Equalization_temp():
         {'title': '5. Output Image', 'description': 'The result is an output image where the pixel intensities are adjusted to have a more uniform distribution. Dark and light areas are enhanced, and details become more visible.'},
         {'title': '6. Enhanced Contrast', 'description': 'The output image has improved contrast and is visually more appealing. It brings out subtle details and makes it easier to distinguish objects in the image.'}
     ]
-    code = [
-        {'comment': '# Import Cv2 Library', 'code': 'import cv2'},
-        {'comment': '# Load the image',
-            'code': ""},
-        {'comment': "",
-            'code': ""},
-        {'comment': '',
-            'code': "cv2.imwrite('equalized_image.jpg', )"}
-    ]
-    return render_template("Histogram_Equalization.html", data=data, workflowtitle="Brief overview of how Histogram Equalization Works", workflows=workflows, code=code)
+
+    return render_template("Histogram_Equalization.html", data=data, workflowtitle="Brief overview of how Histogram Equalization Works", workflows=workflows)
 
 
 @bp.route("/Histogram_Equalization_modal", methods=['GET'])
@@ -78,21 +70,7 @@ def Gamma_correction_temp():
          'description': 'Identifies zero crossings in the second derivative of the image to find edges.'}
     ]
 
-    code = [
-        {'comment': "# Import Required Library",'code': "import cv2"},
-        {'comment': "",'code': "import numpy as np"},
-        {'comment': "# Load the image",'code': "image = cv2.imread(image_path)"},
-        {'comment': "# Apply gamma correction",'code': "gamma_corrected = np.power(image / 255.0, gamma) * 255.0"},
-        {'comment': "",'code': "gamma_corrected = np.array(gamma_corrected, dtype=np.uint8)"},
-        {'comment': "# Display the original and gamma corrected images",'code': "cv2.imshow('Original Image', image)"},
-        {'comment': "",'code': "cv2.imshow(f'Gamma Corrected Image (Gamma = {gamma})', gamma_corrected)"},
-        {'comment': "",'code': "cv2.waitKey(0)"},
-        {'comment': "",'code': "cv2.destroyAllWindows()"},
-        {'comment': "# Save the resulting image",'code': "gamma_corrected_path = 'gamma_corrected_image.png'"},
-        {'comment': "",'code': "cv2.imwrite(gamma_corrected_path, gamma_corrected)"},
-        {'comment': "",'code': 'print(f"Gamma corrected image saved as {gamma_corrected_path}")'}
-    ]
-    return render_template("Gamma_correction.html", data=data, workflowtitle="Brief overview of how Gamma_correction Works", workflows=workflows, code=code)
+    return render_template("Gamma_correction.html", data=data, workflowtitle="Brief overview of how Gamma_correction Works", workflows=workflows)
 
 
 @bp.route("/Gamma_correction_output", methods=['POST'])
@@ -136,19 +114,8 @@ def Contrast_Stretching_temp():
         {'title': '4. Normalize', 'description': 'Optionally, you can normalize the pixel values to ensure the corrected image maintains the same dynamic range as the original.'}
     ]
 
-    code = [
-        {'comment': '# Import Cv2 Library', 'code': 'import cv2'},
-        {'comment': '# Load the image', 'code': 'image = cv2.imread("input_image.jpg", cv2.IMREAD_GRAYSCALE)'},
-        {'comment': '# Find the minimum and maximum pixel values in the input image', 'code': 'min_in = np.min(image)'},
-        {'comment': '', 'code': 'max_in = np.max(image)'},
-        {'comment': '# Define the desired minimum and maximum  values for the output image', 'code': 'min_out = 0'},
-        {'comment': '', 'code': 'max_out = 255'},
-        {'comment': '# Apply contrast stretching', 'code': 'contrast_stretched = ((image - min_in) / (max_in - min_in)) * (max_out - min_out) + min_out'},
-        {'comment': '# Convert the image to 8-bit unsigned integer (optional normalization)', 'code': 'contrast_stretched = contrast_stretched.astype(np.uint8)'},
-        {'comment': '# Save the contrast-stretched image', 'code': 'cv2.imwrite("contrast_stretched_image.jpg", contrast_stretched)'}
-    ]
 
-    return render_template("Contrast_Stretching.html", data=data, workflowtitle="Brief overview of how Contrast_Stretching Works", workflows=workflows, code=code)
+    return render_template("Contrast_Stretching.html", data=data, workflowtitle="Brief overview of how Contrast_Stretching Works", workflows=workflows)
 
 
 @bp.route("/Contrast_Stretching_output", methods=['POST'])
@@ -190,9 +157,7 @@ def Spatial_filtering_temp():
         {'title': '5.Output Image', 'description': 'After applying the filter to every pixel in the input image, you get a new image called the filtered image or spatially filtered image. This image may highlight certain features or characteristics based on the chosen filter kernel.'}
     ]
 
-    code = []
-
-    return render_template("Spatial_filtering.html", data=data, workflowtitle="Brief overview of how Spatial_filtering Works", workflows=workflows, code=code)
+    return render_template("Spatial_filtering.html", data=data, workflowtitle="Brief overview of how Spatial_filtering Works", workflows=workflows)
 
 
 @bp.route("/Spatial_filtering_output", methods=['POST'])

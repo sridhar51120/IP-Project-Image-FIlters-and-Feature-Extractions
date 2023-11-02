@@ -28,48 +28,7 @@ def Constrained_least_square_filtering_temp():
         {'title': '9) Evaluation', 'description': 'Assess the effectiveness of the constrained least square filtering by using appropriate quality metrics and visual inspection. Ensure that the output meets your image processing goals and the constraints are satisfied'}
     ]
 
-    code = [
-        {'comment': '# import required libraries', 'code': 'import numpy as np'},
-        {'comment': '', 'code': 'import cv2'},
-        {'comment': '', 'code': 'from scipy.optimize import minimize'},
-        {'comment': '# Load the input image',
-            'code': 'input_image = cv2.imread("test.jpg", cv2.IMREAD_GRAYSCALE)'},
-        {'comment': '# Define the constrained least squares filter function',
-            'code': 'def constrained_least_squares_filter(kernel, input_image, constraints):'},
-        {'comment': '    # Reshape the kernel to the desired shape (e.g., 3x3)',
-         'code': '    kernel = kernel.reshape(3, 3)'},
-        {'comment': '    # Apply the filter using convolution',
-            'code': '    filtered_image = cv2.filter2D(input_image, -1, kernel)'},
-        {'comment': '    # Calculate the squared difference between filtered and input images',
-            'code': '    diff = np.sum(np.square(filtered_image - input_image))'},
-        {'comment': '    # Apply constraints as penalty terms',
-            'code': '    penalty = 0'},
-        {'comment': '', 'code': '    for constraint in constraints:'},
-        {'comment': '', 'code': '        penalty += constraint(kernel)'},
-        {'comment': '    # Return the objective function value (minimize squared difference + penalties)',
-         'code': '    return diff + penalty'},
-        {'comment': '# Define constraints (modify as needed)',
-         'code': 'def constraint_1(kernel):'},
-        {'comment': '    # Example constraint: ensure the sum of the kernel elements is 1',
-            'code': '    return np.square(np.sum(kernel) - 1)'},
-        {'comment': '# Initial guess for the filter kernel (as a 1D array)',
-         'code': 'initial_kernel = np.random.rand(9)'},
-        {'comment': '# Define constraints as a list',
-            'code': 'constraints = [constraint_1]'},
-        {'comment': '# Minimize the objective function',
-            'code': 'result = minimize(constrained_least_squares_filter, initial_kernel, args=(input_image, constraints))'},
-        {'comment': '# Get the optimized filter kernel (reshape to 3x3)',
-         'code': 'optimized_kernel = result.x.reshape(3, 3)'},
-        {'comment': '# Apply the optimized filter to the input image',
-            'code': 'filtered_image = cv2.filter2D(input_image, -1, optimized_kernel)'},
-        {'comment': '# Save or display the filtered image',
-            'code': 'cv2.imwrite("output.jpg", filtered_image)'},
-        {'comment': '',
-            'code': 'cv2.imshow("Filtered Image", filtered_image)'},
-        {'comment': '', 'code': 'cv2.waitKey(0)'},
-        {'comment': '', 'code': 'cv2.destroyAllWindows()'}
-    ]
-    return render_template("Constrained_least_square_filtering.html", data=data, workflowtitle="Brief overview of how Constrained Least Square Filtering Works", workflows=workflows, code=code)
+    return render_template("Constrained_least_square_filtering.html", data=data, workflowtitle="Brief overview of how Constrained Least Square Filtering Works", workflows=workflows)
 
 
 @bp.route("/Constrained_least_square_filtering_output", methods=['POST'])
@@ -118,9 +77,8 @@ def Order_statistics_filters_temp():
             'description': 'Assess the effectiveness of the order statistics filter by using relevant quality metrics, such as PSNR (Peak Signal-to-Noise Ratio), SSIM (Structural Similarity Index), or visual inspection. Ensure that the output meets your image processing goals.'}
     ]
 
-    code = [
-    ]
-    return render_template("Order_statistics_filters.html", data=data, workflowtitle="Brief overview of how Order Statistics Filters Works", workflows=workflows, code=code)
+
+    return render_template("Order_statistics_filters.html", data=data, workflowtitle="Brief overview of how Order Statistics Filters Works", workflows=workflows)
 
 
 @bp.route("/Order_statistics_filters_output", methods=['POST'])
@@ -165,42 +123,7 @@ def Hormonic_Filter_temp():
         {'title': '7) Iterative Refinement (Optional)', 'description': 'If the initial harmonic mean results are unsatisfactory, consider iterating through the process with different neighborhood sizes and configurations to optimize the results'}
     ]
 
-    code = [
-        {'comment': '# Import Required library', 'code': 'import numpy as np'},
-        {'comment': '', 'code': 'import cv2'},
-        {'comment': '# Load the image',
-            'code': 'image = cv2.imread(image_path, cv2.IMREAD_GRAYSCALE)'},
-        {'comment': '# Perform Discrete Fourier Transform (DFT)',
-         'code': 'dft = cv2.dft(np.float32(image), flags=cv2.DFT_COMPLEX_OUTPUT)'},
-        {'comment': '', 'code': 'dft_shift = np.fft.fftshift(dft)'},
-        {'comment': '# High-pass filter: increase high-frequency components',
-            'code': 'rows, cols = image.shape'},
-        {'comment': '', 'code': 'crow, ccol = rows // 2, cols // 2'},
-        {'comment': '', 'code': 'mask = np.ones((rows, cols, 2), np.uint8)'},
-        {'comment': '',
-            'code': 'mask[crow - strength:crow + strength, ccol - strength:ccol + strength] = 0'},
-        {'comment': '# Apply the high-pass filter',
-            'code': 'dft_shift = dft_shift * mask'},
-        {'comment': '# Inverse DFT',
-            'code': 'f_ishift = np.fft.ifftshift(dft_shift)'},
-        {'comment': '', 'code': 'img_back = cv2.idft(f_ishift)'},
-        {'comment': '',
-            'code': 'img_back = cv2.magnitude(img_back[:, :, 0], img_back[:, :, 1])'},
-        {'comment': '# Normalize the output image to display it properly',
-            'code': 'img_back = cv2.normalize(img_back, None, alpha=0, beta=255, norm_type=cv2.NORM_MINMAX, dtype=cv2.CV_8U)'},
-        {'comment': '# Display the original and harmonic images',
-            'code': 'cv2.imshow("Original Image", image)'},
-        {'comment': '',
-            'code': 'cv2.imshow(f"Harmonic Image (Strength = {strength})", img_back)'},
-        {'comment': '', 'code': 'cv2.waitKey(0)'},
-        {'comment': '', 'code': 'cv2.destroyAllWindows()'},
-        {'comment': '# Save the resulting image',
-            'code': 'harmonic_img_path = "harmonic_image.png"'},
-        {'comment': '', 'code': 'cv2.imwrite(harmonic_img_path, img_back)'},
-        {'comment': '',
-            'code': 'print(f"Harmonic image saved as {harmonic_img_path}")'}
-    ]
-    return render_template("Hormonic_Filter.html", data=data, workflowtitle="Brief overview of how Hormonic Filter Works", workflows=workflows, code=code)
+    return render_template("Hormonic_Filter.html", data=data, workflowtitle="Brief overview of how Hormonic Filter Works", workflows=workflows)
 
 
 @bp.route("/Hormonic_Filter_output", methods=['POST'])
@@ -249,39 +172,7 @@ def geometric_mean_temp():
         {'title': '10) Post-Processing (Optional)', 'description': 'Depending on the results and your specific goals, you may apply post-processing techniques such as contrast enhancement, edge detection, or further filtering to improve the image.'}
     ]
 
-    code = [
-        {'comment': '# Import Required Library', 'code': 'import cv2'},
-        {'comment': '', 'code': 'import numpy as np'},
-        {'comment': '# load the Image',
-            'code': 'image = cv2.imread(image_path)'},
-        {'comment': '# Convert the RGB Image to Gray Image',
-            'code': 'gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)'},
-        {'comment': '# Perform Canny edge detection',
-            'code': 'edges = cv2.Canny(gray, 50, 150, apertureSize=3)'},
-        {'comment': '# Find contours',
-            'code': 'contours, _ = cv2.findContours(edges, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)'},
-        {'comment': '# Create a white canvas',
-            'code': 'geometric_img = np.ones_like(image) * 255'},
-        {'comment': '# Draw approximated polygons around contours',
-            'code': 'for contour in contours:'},
-        {'comment': '',
-            'code': 'epsilon = 0.01 * cv2.arcLength(contour, True)'},
-        {'comment': '',
-            'code': 'approx = cv2.approxPolyDP(contour, epsilon, True)'},
-        {'comment': '',
-            'code': 'cv2.drawContours(geometric_img, [approx], -1, (0, 0, 0), 2)'},
-        {'comment': ' # Display the geometric image',
-            'code': 'cv2.imshow("Geometric Image", geometric_img)'},
-        {'comment': '', 'code': 'cv2.waitKey(0)'},
-        {'comment': '', 'code': 'cv2.destroyAllWindows()'},
-        {'comment': '# Save the resulting image',
-            'code': 'geometric_img_path = "geometric_image.png"'},
-        {'comment': '',
-            'code': 'cv2.imwrite(geometric_img_path, geometric_img)'},
-        {'comment': '',
-            'code': 'print(f"Geometric image saved as {geometric_img_path}")'}
-    ]
-    return render_template("geometric_mean.html", data=data, workflowtitle="Brief overview of how Gamma_correction Works", workflows=workflows, code=code)
+    return render_template("geometric_mean.html", data=data, workflowtitle="Brief overview of how Gamma_correction Works", workflows=workflows)
 
 
 @bp.route("/geometric_mean_output", methods=['POST'])
@@ -328,8 +219,7 @@ def median_Filter_temp():
         {'title': '9) Post-Processing (Optional)', 'description': 'Depending on the results and your specific application, you can apply additional image processing steps such as contrast stretching, sharpening, or color correction to further enhance the visual quality of the denoised image.'}
     ]
 
-    code = []
-    return render_template("Median_Filter.html", data=data, workflowtitle="Brief overview of how Median Filter Works", workflows=workflows, code=code)
+    return render_template("Median_Filter.html", data=data, workflowtitle="Brief overview of how Median Filter Works", workflows=workflows)
 
 
 @bp.route("/median_filter_output", methods=['POST'])
@@ -380,9 +270,7 @@ def Salt_and_papper_noise_temp():
         {'title': '10) Iterative Refinement (Optional)', 'description': 'If the initial denoising results are unsatisfactory, consider repeating the denoising process with different parameter settings or alternative filtering methods to achieve the desired outcome.'}
     ]
 
-    code = [
-    ]
-    return render_template("Salt_and_papper_noise.html", data=data, workflowtitle="Brief overview of how Gamma_correction Works", workflows=workflows, code=code)
+    return render_template("Salt_and_papper_noise.html", data=data, workflowtitle="Brief overview of how Gamma_correction Works", workflows=workflows)
 
 
 @bp.route("/salt_and_papper_noise_output", methods=['POST'])
@@ -430,29 +318,7 @@ def Gaussian_Noise_temp():
             'description': 'Assess the effectiveness of the noise reduction by using appropriate quality metrics, such as Peak Signal-to-Noise Ratio (PSNR), Mean Squared Error (MSE), or Structural Similarity Index (SSIM). Visual inspection is also valuable to ensure the output meets your image processing goals.'},
         {'title': '8) Iterative Refinement (Optional)', 'description': 'If the initial results are unsatisfactory, consider iterating through the process by revisiting parameter settings and trying different algorithms to optimize the results.'}
     ]
-
-    code = [
-        {'comment': '# Import Required Library', 'code': 'import cv2'},
-        {'comment': '', 'code': 'import numpy as np'},
-        {'comment': '# Load the image',
-            'code': 'image = cv2.imread("test.jpg")'},
-        {'comment': '# Get the dimensions of the image',
-            'code': 'height, width, channels = image.shape'},
-        {'comment': '# Define the mean and standard deviation for the Gaussian noise',
-            'code': 'mean = 0'},
-        {'comment': '# You can adjust this value to control the noise level',
-            'code': 'stddev = 25 '},
-        {'comment': '# Generate Gaussian noise with the same dimensions as the image',
-            'code': 'gaussian_noise = np.random.normal(mean, stddev, (height, width, channels)).astype(np.uint8)'},
-        {'comment': '# Add the Gaussian noise to the image',
-            'code': 'noisy_image = cv2.add(image, gaussian_noise)'},
-        {'comment': '# Save or display the noisy image',
-            'code': 'cv2.imwrite("noisy_image.jpg", noisy_image)'},
-        {'comment': '', 'code': 'cv2.imshow("Noisy Image", noisy_image)'},
-        {'comment': '', 'code': 'cv2.waitKey(0)'},
-        {'comment': '', 'code': 'cv2.destroyAllWindows()'}
-    ]
-    return render_template("Gaussian_Noise.html", data=data, workflowtitle="Brief overview of how Gamma_correction Works", workflows=workflows, code=code)
+    return render_template("Gaussian_Noise.html", data=data, workflowtitle="Brief overview of how Gamma_correction Works", workflows=workflows)
 
 
 @bp.route("/Gaussian_noise_output", methods=['POST'])

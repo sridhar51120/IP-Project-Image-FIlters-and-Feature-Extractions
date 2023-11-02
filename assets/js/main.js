@@ -42,12 +42,6 @@
             $('#code-block').addClass('bg-dark');
         }
     });
-
-    // For Copy to Clipboard
-    $('.btn-copy-content-python-code').on('click',function(){
-        alert("Copy To Clipboard function clicked");
-    })
-
 })(jQuery);
 
 

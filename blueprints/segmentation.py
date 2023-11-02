@@ -26,32 +26,7 @@ def Clustering_temp():
         {'title': '7. Save or Display Results',
          'description': 'Save the clustered image or display it to visualize the final output.'}
     ]
-
-    code = [
-        {'comment': '# Import Required Library', 'code': 'import cv2'},
-        {'comment': '', 'code': 'import numpy as np'},
-        {'comment': '', 'code': 'from sklearn.cluster import KMeans'},
-        {'comment': '# Load the image',
-            'code': 'image = cv2.imread("input_image.jpg")'},
-        {'comment': '', 'code': 'height, width, _ = image.shape'},
-        {'comment': '# Reshape the image into a flat array of pixels',
-            'code': 'image_data = image.reshape(-1, 3)'},
-        {'comment': '# Choose the number of clusters (K)', 'code': 'K = 5'},
-        {'comment': '# Create and fit the K-means model',
-            'code': 'kmeans = KMeans(n_clusters=K)'},
-        {'comment': '', 'code': 'kmeans.fit(image_data)'},
-        {'comment': '# Get cluster labels for each pixel', 'code': ''},
-        {'comment': '', 'code': 'labels = kmeans.predict(image_data)'},
-        {'comment': '# Replace pixel values with cluster centroid values',
-            'code': 'segmented_image = kmeans.cluster_centers_[labels].reshape(height, width, 3).astype(np.uint8)'},
-        {'comment': '# Display the segmented image',
-            'code': 'cv2.imshow("Segmented_Image.png", segmented_image)'},
-        {'comment': '# save the segmented image',
-            'code': 'cv2.imshow("Segmented Image", segmented_image)'},
-        {'comment': '', 'code': 'cv2.waitKey(0)'},
-        {'comment': '', 'code': 'cv2.destroyAllWindows()'}
-    ]
-    return render_template("Clustering.html", data=data, workflowtitle="Brief overview of how Clustering Works", workflows=workflows, code=code)
+    return render_template("Clustering.html", data=data, workflowtitle="Brief overview of how Clustering Works", workflows=workflows)
 
 
 @bp.route("/Clustering_output", methods=['POST'])
@@ -93,19 +68,7 @@ def Edge_detection_temp():
         {'title': '6) Postprocessing', 'description': 'After detecting edges, you may perform further postprocessing, such as: 1) Edge Thinning: Further thinning the edges if necessary. 2) Edge Localization: Refine edge positions for sub-pixel accuracy. 3) Edge Enhancement: Apply techniques to enhance the visual representation of edges.'},
         {'title': '7) Visualization', 'description': 'The final step often involves overlaying the detected edges onto the original image to visualize the results.'}
     ]
-
-    code = [
-        {'comment': '# Import Required Library', 'code': 'import numpy as np'},
-        {'comment': '', 'code': 'import cv2'},
-        {'comment': '# Load the image',
-            'code': 'image = cv2.imread("input_image.jpg")'},
-        {'comment': '# Apply Canny edge detection',
-            'code': 'edges = cv2.Canny(image, threshold1, threshold2)'},
-        {'comment': '# Save the image',
-            'code': 'cv2.imwrite("edge_detected_image.jpg", edges)'}
-    ]
-
-    return render_template("Edge_detection.html", data=data, workflowtitle="Brief overview of how Edge Detection Works", workflows=workflows, code=code)
+    return render_template("Edge_detection.html", data=data, workflowtitle="Brief overview of how Edge Detection Works", workflows=workflows)
 
 
 @bp.route("/Edge_detection_output", methods=['POST'])

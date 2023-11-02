@@ -84,3 +84,97 @@ $(document).ready(function () {
     });
 });
 
+
+$(document).ready(function () {
+    $('#dropdown-non-local-mean-filter-python-code').click(function () {
+        $('#non-local-mean-filter-matlab-code').remove();
+        let content = `</div>
+                <div class="container" id="non-local-mean-filter-python-code">
+                    <div class="mb-1"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span># Import Required Library</span>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>import cv2</code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span># Load the Input Image</span></div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>image = cv2.imread('path_to_your_image.jpg', 0)</code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span># Apply Non-Local Means Denoising</span>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>filtered_image = cv2.fastNlMeansDenoising(image, None, h=3, hForColor=3, templateWindowSize=7, searchWindowSize=21)
+                        </code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span>
+                            # Display the original and denoised images
+                        </span>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>cv2.imshow('Original Image', image)</code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>cv2.imshow('NLM Filtered Image', filtered_image)</code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>cv2.waitKey(0)</code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>cv2.destroyAllWindows()</code>
+                    </div>
+                </div>`;
+        $('#code-block').append(content);
+        $('#code-block').html(content);
+    })
+    $('#dropdown-non-local-mean-filter-matlab-script-code').click(function () {
+        $('#non-local-mean-filter-python-code').remove();
+        let content = `<div class="container" id="non-local-mean-filter-matlab-code">
+                    <div class="mb-1"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span>% Read the original image</span>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>original_image = imread('path_to_your_image.jpg');</code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span>% Convert the image to grayscale (if it's
+                            a color image)</span></div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>gray_image = rgb2gray(original_image);
+                        </code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span>
+                            % Display the original image
+                        </span>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>figure;</code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>subplot(1, 2, 1), imshow(gray_image), title('Original Image');</code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span>
+                            % Apply Non-Local Means Filtering
+                        </span>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>filtered_image = nlfilter(gray_image, [3 3], @(x) mean2((x - mean2(x)).^2));
+                            </code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span>% Display the NLM-filtered image</span>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>subplot(1, 2, 2), imshow(uint8(filtered_image)), title('NLM Filtered Image');
+                        </code>
+                    </div>
+                </div>`;
+        $('#code-block').append(content);
+        $('#code-block').html(content);
+    })
+})
+

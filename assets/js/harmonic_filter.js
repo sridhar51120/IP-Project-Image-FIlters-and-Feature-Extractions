@@ -27,7 +27,7 @@ $(document).ready(function () {
                                 console.log('Server response:', response);
                                 console.log('Data : ', data);
 
-                                $('.harmonic-filter_image_collapse').append(data['template']);
+                                $('.hormonic-filter_image_collapse').append(data['template']);
                                 $('.output-harmonic-filter-toggle-groups').collapse({
                                     toggle: false
                                 }).show();
@@ -84,3 +84,119 @@ $(document).ready(function () {
         });
     });
 });
+
+
+$(document).ready(function () {
+    $('#dropdown-hormonic-filter-python-code').click(function () {
+        $('#hormonic-matlab-code').remove();
+        let content = `<div class="container" id="hormonic-python-code">
+                    <div class="mb-1"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span># Import Required Library</span>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>import cv2</code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>import numpy as np</code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>from skimage.filters import rank
+                        </code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span># Read the image </span></div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>image = cv2.imread('path_to_your_image.jpg', 0)</code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span># Apply harmonic mean filtering</span>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>filtered_image = rank.harmonic(image, np.ones((3, 3)))
+                        </code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span>
+                            # Display the original and filtered images
+                        </span>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>cv2.imshow('Original Image', image)</code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>cv2.imshow('Harmonic Filtered Image', filtered_image)
+                        </code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>cv2.waitKey(0)</code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>cv2.destroyAllWindows()
+                        </code>
+                    </div>
+                </div>`;
+        $('#code-block').append(content);
+        $('#code-block').html(content);
+    })
+    $('#dropdown-hormonic-filter-matlab-script-code').click(function () {
+        $('#hormonic-python-code').remove();
+        let content = `<div class="container" id="hormonic-matlab-code">
+                    <div class="mb-1"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span>% Read the original image</span>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>original_image = imread('path_to_your_image.jpg');</code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span>% Convert the image to grayscale (if it's
+                            a color image)</span></div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>gray_image = rgb2gray(original_image);
+                        </code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span>
+                            % Display the original image
+                        </span>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>figure;</code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>subplot(1, 2, 1), imshow(gray_image), title('Original Image');</code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span>
+                            % Define the size of the filter
+                        </span>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>filter_size = 3;
+                            </code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span>% Create the harmonic mean filter</span>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>harm_filter = ones(filter_size, filter_size) / numel(harm_filter);
+                        </code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span>% Apply harmonic mean filtering</span>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>filtered_image = imfilter(double(gray_image), harm_filter, 'replicate');
+                        </code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span>% Display the filtered image</span>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>subplot(1, 2, 2), imshow(uint8(filtered_image)), title('Harmonic Filtered Image');
+                        </code>
+                    </div>
+                </div>`;
+        $('#code-block').append(content);
+        $('#code-block').html(content);
+    })
+})

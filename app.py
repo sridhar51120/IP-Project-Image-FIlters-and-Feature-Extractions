@@ -35,5 +35,11 @@ def copy():
 def test():
    return render_template('test.html')
 
+# TODO:
+'''
+   Homomarphic filter -> Python Code
+   Hormonic Filter -> js and Html Code
+
+'''
 if __name__ == '__main__':
    app.run(host='127.0.0.1', port=5000, debug=True)

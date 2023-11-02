@@ -84,3 +84,113 @@ $(document).ready(function () {
         });
     });
 });
+
+$(document).ready(function () {
+    $('#dropdown-order-statics-filter-python-code').click(function () {
+        $('#order-statistic-matlab-code').remove();
+        let content = `<div class="container" id="order-statistic-python-code">
+                    <div class="mb-1"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span># Import Required Library</span>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>import cv2</code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span># Load the Input Image</span></div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>input_image = cv2.imread("input_img.jpg", cv2.IMREAD_GRAYSCALE)</code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span># Define Kernal size of the
+                            image</span>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>kernel_size = 5</code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span>
+                            # Apply Median Blur Operation
+                        </span>
+
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>filtered_image = cv2.medianBlur(input_image, kernel_size)
+                            </code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span># Save the file</span>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>cv2.imwrite(img_path, filtered_image)</code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span># Display the file using
+                            opencv Lib</span>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>cv2.imshow("filtered_image","Output Image")</code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>cv2.waitKey(0)</code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>cv2.destroyAllwindows()</code>
+                    </div>
+                </div>`;
+        $('#code-block').append(content);
+        $('#code-block').html(content);
+    })
+    $('#dropdown-order-statics-filter-matlab-script-code').click(function () {
+        $('#order-statistic-python-code').remove();
+        let content = `                <div class="container" id="order-statistic-matlab-code">
+                    <div class="mb-1"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span>% Read the original image</span>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>original_image = imread('path_to_your_image.jpg');</code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span>% Convert the image to grayscale (if
+                            it's a color image)</span></div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>gray_image = rgb2gray(original_image);</code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span>
+                            % Display the original image
+                        </span>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>figure;</code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>subplot(1, 2, 1), imshow(gray_image), title('Original Image');</code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span>
+                            % Apply median filtering
+                        </span>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>filter_size = 3;  % Set the size of the filter window (3x3 in this case)
+                            </code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>filtered_image = medfilt2(gray_image, [filter_size, filter_size]);
+                            </code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span>% Display the median-filtered
+                            image</span>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>subplot(1, 2, 2), imshow(filtered_image), title('Median Filtered Image');
+                            </code>
+                    </div>
+                </div>
+            `;
+        $('#code-block').append(content);
+        $('#code-block').html(content);
+    })
+})
+

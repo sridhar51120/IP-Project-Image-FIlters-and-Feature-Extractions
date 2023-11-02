@@ -31,10 +31,8 @@ def weiner_temp():
         {'title': '10) Iterative Refinement (Optional)', 'description': 'If the initial results are unsatisfactory, consider reiterating the process by refining your PSD estimation, changing filter design parameters, or adopting more advanced techniques.'}
     ]
 
-    code = [
-        {'comment': '', 'code': ''}
-    ]
-    return render_template("Weiner.html", data=data, workflowtitle="Brief overview of how Weiner Filter Works", workflows=workflows, code=code)
+
+    return render_template("Weiner.html", data=data, workflowtitle="Brief overview of how Weiner Filter Works", workflows=workflows)
 
 @bp.route("/weiner_filter_output", methods=['POST'])
 def weiner_filter_output():
@@ -90,10 +88,8 @@ def butterworth_filter_temp():
          'description': 'If the filter results are unsatisfactory, you may need to revisit the design parameters, such as the cutoff frequency or order, and make adjustments for better results.'}
     ]
 
-    code = [
-        {'comment': '', 'code': ''}
-    ]
-    return render_template("butterworth_filter.html", data=data, workflowtitle="Brief overview of how Butter worth filter Works", workflows=workflows, code=code)
+
+    return render_template("butterworth_filter.html", data=data, workflowtitle="Brief overview of how Butter worth filter Works", workflows=workflows)
 
 @bp.route("/butterworth_filter_output", methods=['POST'])
 def butterworth_filter_output():
@@ -144,17 +140,14 @@ def homomorphic_filters_temp():
         {'title': '11) Iterative Refinement', 'description': 'If the initial results are unsatisfactory, consider iterating the process by revisiting steps 5 to 10, possibly with different filter designs or parameters.'}
     ]
 
-    code = [
-        {'comment': '', 'code': ''}
-    ]
-    return render_template("Hormonic_Filter.html", data=data, workflowtitle="Brief overview of how Homomarphic Filter Works", workflows=workflows, code=code)
 
-# TODO: PermissionError: [Errno 13] Permission denied: 'assets/uploads/filters/homomarphic/'
+    return render_template("Homomorphic.html", data=data, workflowtitle="Brief overview of how Homomarphic Filter Works", workflows=workflows)
+
 @bp.route("/homomarphic_filter_output", methods=['POST'])
 def homomarphic_filter_output():
     if request.method == 'POST':
-        if 'harmonic-filter-input-image-file' in request.files:
-            file = request.files['harmonic-filter-input-image-file']
+        if 'homomarphic-filter-input-image-file' in request.files:
+            file = request.files['homomarphic-filter-input-image-file']
             img_dir = 'assets/uploads/filters/homomarphic/'
             os.makedirs(img_dir, exist_ok=True)
             img_path = os.path.join(img_dir, file.filename)
@@ -195,10 +188,8 @@ def notch_filter_temp():
         {'title': '8) Iterative Refinement (Optional)', 'description': 'If the initial filtering results are unsatisfactory or if there are multiple unwanted frequencies to eliminate, you may need to iterate the process, revisiting steps 3 to 7 with different filter parameters or additional filters.'}
     ]
 
-    code = [
-        {'comment': '', 'code': ''}
-    ]
-    return render_template("notch_filter.html", data=data, workflowtitle="Brief overview of how Gamma_correction Works", workflows=workflows, code=code)
+
+    return render_template("notch_filter.html", data=data, workflowtitle="Brief overview of how Gamma_correction Works", workflows=workflows)
 
 @bp.route("/notch_filter_output", methods=['POST'])
 def notch_filter_output():
@@ -247,10 +238,8 @@ def adaptive_filter_temp():
         {'title': '9) Post-Processing (Optional)', 'description': 'Depending on the application, you may perform additional post-processing steps, such as contrast stretching, sharpening, or color correction to further enhance the image.'}
     ]
 
-    code = [
-        {'comment': '', 'code': ''}
-    ]
-    return render_template("adaptive_filter.html", data=data, workflowtitle="Brief overview of how Adaptive filter Works", workflows=workflows, code=code)
+
+    return render_template("adaptive_filter.html", data=data, workflowtitle="Brief overview of how Adaptive filter Works", workflows=workflows)
 
 @bp.route("/adpative_filter_output", methods=['POST'])
 def adpative_filter_output():
@@ -296,10 +285,8 @@ def non_local_means_filter_temp():
             'description': 'Evaluate the effectiveness of the NLM denoising algorithm by using appropriate quality metrics, such as Peak Signal-to-Noise Ratio (PSNR), Structural Similarity Index (SSIM), or visual inspection. This step is essential to ensure that noise reduction does not cause the loss of essential image details or introduce artifacts.'}
     ]
 
-    code = [
-        {'comment': '', 'code': ''}
-    ]
-    return render_template("non_local_means_filter.html", data=data, workflowtitle="Brief overview of how Non Local Means Filter Works", workflows=workflows, code=code)
+
+    return render_template("non_local_means_filter.html", data=data, workflowtitle="Brief overview of how Non Local Means Filter Works", workflows=workflows)
 
 @bp.route("/non_local_mean_filter_output", methods=['POST'])
 def non_local_mean_filter_output():
@@ -344,10 +331,8 @@ def unsharp_mask_filters_temp():
             'description': 'Evaluate the quality of the sharpened image. Use quality metrics like the Structural Similarity Index (SSIM) or Peak Signal-to-Noise Ratio (PSNR) to measure the effectiveness of the unsharp masking. Visual inspection is also crucial.'}
     ]
 
-    code = [
-        {'comment': '', 'code': ''}
-    ]
-    return render_template("unsharp_masking.html", data=data, workflowtitle="Brief overview of how Unsharp Masking Works", workflows=workflows, code=code)
+
+    return render_template("unsharp_masking.html", data=data, workflowtitle="Brief overview of how Unsharp Masking Works", workflows=workflows)
 
 @bp.route("/unsharp_masking_output", methods=['POST'])
 def unsharp_masking_output():
@@ -391,10 +376,8 @@ def low_pass_filter_temp():
             'description': 'Assess the effectiveness of the low-pass filtering process. Use appropriate quality metrics to evaluate the results. Peak Signal-to-Noise Ratio (PSNR), Structural Similarity Index (SSIM), and visual inspection can be useful for assessing image quality.'}
     ]
 
-    code = [
-        {'comment': '', 'code': ''}
-    ]
-    return render_template("low_pass_filters.html", data=data, workflowtitle="Brief overview of how Low pass Filter Works", workflows=workflows, code=code)
+
+    return render_template("low_pass_filters.html", data=data, workflowtitle="Brief overview of how Low pass Filter Works", workflows=workflows)
 
 @bp.route("/low_pass_filter_output", methods=['POST'])
 def low_pass_filter_output():
@@ -441,10 +424,8 @@ def high_pass_filter_temp():
         {'title': 'Iterative Refinement (Optional)', 'description': 'If the initial results are unsatisfactory, consider experimenting with different kernel designs, sizes, and post-processing steps to fine-tune the enhancement.'}
     ]
 
-    code = [
-        {'comment': '', 'code': ''}
-    ]
-    return render_template("high_pass_filter.html", data=data, workflowtitle="Brief overview of how High Pass Filter Works", workflows=workflows, code=code)
+
+    return render_template("high_pass_filter.html", data=data, workflowtitle="Brief overview of how High Pass Filter Works", workflows=workflows)
 
 @bp.route("/high_pass_filter_output", methods=['POST'])
 def high_pass_filter_output():
@@ -491,10 +472,8 @@ def laplacian_filter_temp():
         {'title': 'Quality Assessment', 'description': 'Evaluate the performance of the Laplacian filtering by using appropriate quality metrics. For edge detection tasks, metrics like precision and recall can be useful for assessing the accuracy of edge detection.'}
     ]
 
-    code = [
-        {'comment': '', 'code': ''}
-    ]
-    return render_template("laplacian_filter.html", data=data, workflowtitle="Brief overview of how Laplacian Filter Works", workflows=workflows, code=code)
+
+    return render_template("laplacian_filter.html", data=data, workflowtitle="Brief overview of how Laplacian Filter Works", workflows=workflows)
 
 @bp.route("/laplacian_filter_output", methods=['POST'])
 def laplacian_filter_output():
@@ -519,31 +498,6 @@ def laplacian_filter_output():
         else:
             return 'No file part in the request'
         
-# @bp.route("/median_filter", methods=['GET'])
-# def median_filter_temp():
-#     data = {
-#         'title': 'Median Filtering',
-#         'def': 'Median filtering replaces each pixel with the median value of its neighborhood, making it effective for removing salt-and-pepper noise while preserving edges.'
-#     }
-
-#     workflows = [
-#         {'title': 'Image Acquisition and Preprocessing',
-#             'description': 'Begin with the acquisition of the noisy image. Ensure it is in a suitable format for processing. You may want to convert the image to grayscale if it is in color.'},
-#         {'title': 'Noise Characterization', 'description': 'Analyze the noise in the image to determine the extent and characteristics of salt-and-pepper noise. Understanding the nature of the noise helps in selecting the right filter size.'},
-#         {'title': 'Filter Selection',
-#             'description': 'Choose an appropriate filter size (usually a square or rectangular neighborhood) for the median filter. The filter size should be large enough to cover noise spikes but not too large to blur image details.'},
-#         {'title': 'Image Partitioning (Optional)', 'description': 'Divide the image into non-overlapping blocks or apply median filtering locally if there are variations in noise characteristics across the image.'},
-#         {'title': 'Noise Reduction', 'description': 'Apply the median filter to each block or the entire image. For each pixel, the filter computes the median value of the pixel intensities in its neighborhood. The median value replaces the central pixel value.'},
-#         {'title': 'Post-processing (Optional)', 'description': 'Depending on the results and the specific requirements of your application, you may perform additional post-processing steps, such as contrast enhancement or further noise reduction.'},
-#         {'title': 'Quality Assessment', 'description': 'Evaluate the effectiveness of the median filtering by using appropriate quality metrics or visual inspection. Compare the filtered image with the noisy original to ensure that noise has been effectively reduced while preserving image details.'},
-#         {'title': 'Iterative Refinement (Optional)', 'description': 'If the initial median filtering results are unsatisfactory, you can experiment with different filter sizes and configurations or consider alternative noise reduction methods.'}
-#     ]
-
-#     code = [
-#         {'comment': '', 'code': ''}
-#     ]
-#     return render_template("median_filter.html", data=data, workflowtitle="Brief overview of how Median Filter Works", workflows=workflows, code=code)
-
 
 @bp.route("/average_filter", methods=['GET'])
 def average_filter_temp():
@@ -565,10 +519,8 @@ def average_filter_temp():
         {'title': 'Output Image Display', 'description': 'Display or save the resulting smoothed image to visualize the effects of the average filtering. Consider using visualization tools or libraries compatible with your image processing environment.'}
     ]
 
-    code = [
-        {'comment': '', 'code': ''}
-    ]
-    return render_template("Average_filter.html", data=data, workflowtitle="Brief overview of how Average Filter Works", workflows=workflows, code=code)
+
+    return render_template("Average_filter.html", data=data, workflowtitle="Brief overview of how Average Filter Works", workflows=workflows)
 
 @bp.route("/average_filter_output", methods=['POST'])
 def average_filter_output():

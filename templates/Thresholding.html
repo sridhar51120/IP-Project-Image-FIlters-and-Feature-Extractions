@@ -51,19 +51,40 @@
     </div>
 </div>
 <div class="container-fluid pt-4 px-4">
-    <div class="bg-secondary text-center rounded p-4">
-        <div class="card card-body bg-dark text-secondary">
-            <div class="d-flex align-items-center justify-content-between">
-                <h6 class="mb-0 text-primary">Code</h6>
+    <div class="bg-secondary rounded p-4">
+        <div class="card bg-dark text-secondary">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-6 text-primary font-weight-bold">Python Code</div>
+                    <div class="col-6 d-flex justify-content-end">
+                        <button class="btn btn-sm btn-change-background-theme btn-primary me-2"
+                            title="Change Background"><i class="bi bi-brightness-high"></i></button>
+                        <button class="btn btn-sm btn-primary btn-copy-content-code me-2" title="Copy to Clipboard"><i
+                                class="bi bi-clipboard"></i></button>
+                        <div class="dropdown me-2">
+                            <button class="btn btn-primary dropdown-toggle btn-primary" type="button"
+                                id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                Select Language
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <li><a class="dropdown-item btn btn-primary"
+                                        id="dropdown-threshold-python-code">Python</a>
+                                </li>
+                                <li><a class="dropdown-item btn btn-primary"
+                                        id="dropdown-threshold-matlab-script-code">MatLab</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <button class="btn btn-sm btn-primary btn-user-guide-modal me-2" title="User Guide"><i
+                                class="bi bi-laptop"></i></button>
+                    </div>
+                </div>
             </div>
         </div>
         <br>
         <div class="card bg-primary">
-            <div class="card-header bg-secondary d-flex justify-content-start">
-                Code
-            </div>
-            <div class="card bg-dark">
-                <!-- <div class="container">
+            <div class="card bg-dark" id="code-block">
+                <div class="container" id="thresholding-python">
                     <div class="mb-1"></div>
                     <div class="col col-12 d-flex justify-content-start"><span># Import Required Library</span></div>
                     <div class="col col-12 d-flex justify-content-start">
@@ -79,7 +100,7 @@
                     </div>
                     <div class="mb-3"></div>
                     <div class="col col-12 d-flex justify-content-start"><span># Set a threshold value (you can
-                        experiment with different values)</span></div>
+                            experiment with different values)</span></div>
                     <div class="col col-12 d-flex justify-content-start">
                         <code>threshold_value = 128</code>
                     </div>
@@ -105,44 +126,6 @@
                     <div class="col col-12 d-flex justify-content-start">
                         <code>cv2.destroyAllWindows()</code>
                     </div>
-                </div> -->
-                <div class="container">
-                    <div class="mb-1"></div>
-                    <div class="col col-12 d-flex justify-content-start"><span>% Read the
-                            image</span></div>
-                    <div class="col col-12 d-flex justify-content-start">
-                        <code>image = imread('path_to_your_image.jpg');</code>
-                    </div>
-                    <div class="mb-3"></div>
-                    <div class="col col-12 d-flex justify-content-start"><span>% Convert the image
-                            to grayscale
-                            (if it's a color image)</span></div>
-                    <div class="col col-12 d-flex justify-content-start">
-                        <code>gray_image = rgb2gray(image);</code>
-                    </div>
-                    <div class="mb-3"></div>
-                    <div class="col col-12 d-flex justify-content-start"><span>% Perform simple
-                            global thresholding</span></div>
-                    <div class="col col-12 d-flex justify-content-start">
-                        <code>threshold_value = 128;  % Adjust the threshold value as needed</code>
-                    </div>
-                    <div class="col col-12 d-flex justify-content-start">
-                        <code>thresholded_image = gray_image > threshold_value;</code>
-                    </div>
-                    <div class="mb-3"></div>
-                    <div class="col col-12 d-flex justify-content-start"><span>% Display the
-                            original and thresholded images</span>
-                    </div>
-                    <div class="col col-12 d-flex justify-content-start">
-                        <code>figure;</code>
-                    </div>
-                    <div class="col col-12 d-flex justify-content-start">
-                        <code>subplot(1, 2, 1), imshow(gray_image), title('Original Image');</code>
-                    </div>
-                    <div class="col col-12 d-flex justify-content-start">
-                        <code>subplot(1, 2, 2), imshow(thresholded_image), title('Thresholded Image');</code>
-                    </div>
-
                 </div>
                 <div class="mb-1"></div>
             </div>
@@ -177,13 +160,9 @@
     </div>
 </div>
 <div class="modal-content"></div>
-<div class="thresolding-container-alert"></div>
-<div class="thresolding-image-collapse"></div>
 <div class="thresolding-input-image-collapse"></div>
 
 <br>
-<script>
-    
-</script>
+
 
 {% endblock content %}

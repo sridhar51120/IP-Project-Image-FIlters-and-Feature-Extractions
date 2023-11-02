@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    $('.btn-load-img-harmonic-filter').click(function () {
+    $('.btn-load-img-homomarphic-filter').click(function () {
         $.get("/modals/homomarphic_filter", function (data) {
             // console.log("Data received:", data);
             $('.modal-content').append(data);
@@ -25,7 +25,7 @@ $(document).ready(function () {
                                 console.log('Server response:', response);
                                 console.log('Data : ', data);
 
-                                $('.homomarphic-filter_image_collapse').append(data['template']);
+                                $('.homomarphic-filter-input-image-collapse').append(data['template']);
                                 data['template']
                                 $('.output-homomarphic-filter-toggle-groups').collapse({
                                     toggle: false

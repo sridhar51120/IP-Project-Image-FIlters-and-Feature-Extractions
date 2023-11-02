@@ -24,7 +24,7 @@ $(document).ready(function () {
                                 // console.log('Server response:', response);
                                 // console.log('Data : ', data);
 
-                                $('.histo_image_collapse').append(data['template']);
+                                $('.histo_image_input_collapse').append(data['template']);
                                 $(".output-histogram-toggle-groups").collapse("toggle");
                                 var toggleState = $(".output-histogram-toggle-groups").hasClass("show");
                                 if (toggleState) {
@@ -85,3 +85,98 @@ $(document).ready(function () {
     });
 
 });
+
+$(document).ready(function () {
+    $('#dropdown-histogram-python-code').click(function () {
+        $('#histogram-matlab-code').remove();
+        let content = `                <div class="container" id="histogram-python-code">
+                    <div class="mb-1"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span># Import Required Library</span>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>import cv2</code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span># Read the image </span></div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>original_image = cv2.imread('your_image.jpg', cv2.IMREAD_GRAYSCALE)</code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span># Apply histogram equalization</span>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>equalized_image = cv2.equalizeHist(original_image)
+                        </code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span>
+                            # Display the original and filtered images
+                        </span>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>cv2.imshow('Original Image', original_image)</code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>cv2.imshow('Histogram Image', equalized_image)
+                        </code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>cv2.waitKey(0)</code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>cv2.destroyAllWindows()
+                        </code>
+                    </div>
+                </div>`;
+        $('#code-block').append(content);
+        $('#code-block').html(content);
+    })
+    $('#dropdown-histogram-matlab-script-code').click(function () {
+        $('#histogram-python-code').remove();
+        let content = `                <div class="container" id="histogram-matlab-code">
+                    <div class="mb-1"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span>% Read the original image</span>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>original_image = imread('path_to_your_image.jpg');</code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span>% Convert the image to grayscale (if it's
+                            a color image)</span></div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>gray_image = rgb2gray(original_image);
+                        </code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span>
+                            % Display the original image
+                        </span>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>figure;</code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>subplot(1, 2, 1), imshow(gray_image), title('Original Image');</code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span>
+                            % Perform histogram equalization
+                        </span>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>equalized_image = histeq(gray_image);
+                            </code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span>% Display the histogram equalized
+                            image</span>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>subplot(1, 2, 2), imshow(equalized_image), title('Histogram Equalized Image');
+                        </code>
+                    </div>
+                </div>`;
+        $('#code-block').append(content);
+        $('#code-block').html(content);
+    })
+})

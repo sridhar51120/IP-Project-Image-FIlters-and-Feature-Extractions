@@ -28,25 +28,7 @@ def deblur_temp():
         {'title': '10) Output and Application',
          'description': 'Use the deblurred image for its intended application, whether it"s for scientific analysis, medical diagnosis, or any other purpose.'}
     ]
-
-    code = [
-        {'comment': '# Import Cv2 Library', 'code': 'import cv2'},
-        {'comment': '# Load the image',
-            'code': 'image = cv2.imread("input_image.jpg", cv2.IMREAD_GRAYSCALE)'},
-        {'comment': '# Convert Image to Grayscale',
-            'code': 'blurred_gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)'},
-        {'comment': '# Specify the kernel size for blurring (you may need to adjust this)',
-         'code': 'kernel_size = 5'},
-        {'comment': '# Apply Gaussian blur to the grayscale image',
-            'code': 'blurred_gray = cv2.GaussianBlur(blurred_gray, (kernel_size, kernel_size), 0)'},
-        {'comment': '# Specify the Wiener filter parameters (you may need to adjust these)',
-         'code': 'deblur_image = cv2.deconvolve(blurred_gray, kernel_size, 0.01)'},
-        {'comment': '# Display the Deblurred Image',
-            'code': 'cv2.imshow("Deblurred Image", deblur_image)'},
-        {'comment': '', 'code': 'cv2.waitKey(0)'},
-        {'comment': '', 'code': 'cv2.destroyAllWindows()'}
-    ]
-    return render_template("deblur.html", data=data, workflowtitle="Brief overview of how Deblur Works", workflows=workflows, code=code)
+    return render_template("deblur.html", data=data, workflowtitle="Brief overview of how Deblur Works", workflows=workflows)
 
 
 @bp.route("/deblur_output", methods=['POST'])
@@ -96,10 +78,7 @@ def in_paint_temp():
         {'title': '10. Visualization and Output',
          'description': 'Generate the final inpainted image and save or display it as needed.'}
     ]
-
-    code = [
-    ]
-    return render_template("in_paint.html", data=data, workflowtitle="Brief overview of how In Paint Works", workflows=workflows, code=code)
+    return render_template("in_paint.html", data=data, workflowtitle="Brief overview of how In Paint Works", workflows=workflows)
 
 
 @bp.route("/in_paint_output", methods=['POST'])
@@ -147,9 +126,7 @@ def noise_reduction_temp():
         {'title': '10) Performance Optimization', 'description': 'For large images or real-time applications, consider optimizing the Gaussian filtering process for speed. This can involve using separable filters or GPU acceleration to improve processing time.'}
     ]
 
-    code = [
-    ]
-    return render_template("noise_reduction.html", data=data, workflowtitle="Brief overview of how Noise reduction Works", workflows=workflows, code=code)
+    return render_template("noise_reduction.html", data=data, workflowtitle="Brief overview of how Noise reduction Works", workflows=workflows)
 
 
 @bp.route("/noise_reduction_output", methods=['POST'])

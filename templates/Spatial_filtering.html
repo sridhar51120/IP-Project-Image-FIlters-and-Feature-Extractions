@@ -67,8 +67,10 @@
                                 Select Language
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <li><a class="dropdown-item btn btn-primary" id="python-code">Python</a></li>
-                                <li><a class="dropdown-item btn btn-primary" id="java-script-code">Javascript</a>
+                                <li><a class="dropdown-item btn btn-primary"
+                                        id="dropdown-code-spatial-filter-snippets-python-code">Python</a></li>
+                                <li><a class="dropdown-item btn btn-primary"
+                                        id="dropdown-code-spatial-filter-snippets-matlab-code">MatLab</a>
                                 </li>
                             </ul>
                         </div>
@@ -80,8 +82,8 @@
         </div>
         <br>
         <div class="card bg-primary">
-            <div class="card bg-dark">
-                <div class="container">
+            <div class="card bg-dark" id="code-block">
+                <div class="container" id="spatial-filter-python">
                     <div class="mb-1"></div>
                     <div class="col col-12 d-flex justify-content-start"><span># Import Required Libraies</span></div>
                     <div class="col col-12 d-flex justify-content-start">
@@ -136,54 +138,6 @@
                     </div>
 
                 </div>
-               <div class="container">
-                    <div class="mb-1"></div>
-                    <div class="col col-12 d-flex justify-content-start"><span>% Read the image</span></div>
-                    <div class="col col-12 d-flex justify-content-start">
-                        <code>image = imread('path_to_your_image.jpg');</code>
-                    </div>
-                    <div class="mb-3"></div>
-                    <div class="col col-12 d-flex justify-content-start"><span>% Convert the image to grayscale
-                        (if it's a color image)</span></div>
-                    <div class="col col-12 d-flex justify-content-start">
-                        <code>gray_image = rgb2gray(image);</code>
-                    </div>
-                    <div class="mb-3"></div>
-                    <div class="col col-12 d-flex justify-content-start"><span>% Define Gaussian filter
-                        parameters</span></div>
-                    <div class="col col-12 d-flex justify-content-start">
-                        <code>filter_size = 5; % Filter size (5x5 in this case)</code>
-                    </div>
-                    <div class="col col-12 d-flex justify-content-start">
-                        <code>sigma = 1; % Standard deviation for Gaussian</code>
-                    </div>
-                    <div class="mb-3"></div>
-                    <div class="col col-12 d-flex justify-content-start"><span>% Create Gaussian filter kernel</span>
-                    </div>
-                    <div class="col col-12 d-flex justify-content-start">
-                        <code>gaussian_filter = fspecial('gaussian', [filter_size, filter_size], sigma);
-                        </code>
-                    </div>
-                    <div class="mb-3"></div>
-                    <div class="col col-12 d-flex justify-content-start"><span>% Apply the filter using imfilter</span>
-                    </div>
-                    <div class="col col-12 d-flex justify-content-start">
-                        <code>filtered_image = imfilter(gray_image, gaussian_filter, 'conv');</code>
-                    </div>
-                    <div class="mb-3"></div>
-                    <div class="col col-12 d-flex justify-content-start"><span>% Display the original and
-                        filtered images</span></div>
-                    <div class="col col-12 d-flex justify-content-start">
-                        <code>figure;</code>
-                    </div>
-                    <div class="col col-12 d-flex justify-content-start">
-                        <code>subplot(1, 2, 1), imshow(gray_image), title('Original Image');</code>
-                    </div>
-                    <div class="col col-12 d-flex justify-content-start">
-                        <code>subplot(1, 2, 2), imshow(filtered_image), title('Gaussian Filtered Image');</code>
-                    </div>
-
-                </div>  -->
                 <div class="mb-1"></div>
             </div>
         </div>
@@ -216,8 +170,7 @@
 </div>
 
 <div class="modal-content"></div>
-<div class="spatial-toast-container-alert"></div>
 <div class="spatial-filter-input-image-collapse"></div>
-<div class="spatial-filter-image-collapse"></div>
 <br>
+
 {% endblock content %}

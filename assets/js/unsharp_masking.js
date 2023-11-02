@@ -84,3 +84,81 @@ $(document).ready(function () {
     });
 });
 
+
+$(document).ready(function () {
+    $('#dropdown-unsharp-masking-matlab-code').click(function () {
+        $('#unsharp-masking-python-code-snippet').remove();
+        let content = `<div class="container" id="unsharp-masking-matlab-code-snippet">
+                    <div class="mb-1"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span>% Read the image</span></div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>image = cv2.imread('path_to_your_image.jpg', 0)</code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span>% Apply unsharp mask filter</span>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>unsharp_mask_image = imsharpen(original_image);</code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span>% Display the original and unsharp mask images</span></div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>figure;</code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>subplot(1, 2, 1), imshow(original_image), title('Original Image');</code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>subplot(1, 2, 2), imshow(unsharp_mask_image), title('Unsharp Mask Image');</code>
+                    </div>
+                </div>`;
+        $('#code-block').append(content);
+        $('#code-block').html(content);
+    });
+    $('#dropdown-unsharp-masking-python-code').click(function () {
+        $().remove('#unsharp-masking-matlab-code-snippet');
+        let content = `<div class="container" id="unsharp-masking-python-code-snippet">
+                    <div class="mb-1"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span># Import Required Libraries</span></div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>import cv2</code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span># Load the Image file</span></div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>image = cv2.imread(image_path, cv2.IMREAD_GRAYSCALE)</code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span># Apply Gaussian blur</span></div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>blurred_image = cv2.GaussianBlur(image, (0, 0), 2)</code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span># Create the unsharp mask</span></div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>unsharp_mask = cv2.addWeighted(image, 1.5, blurred_image, -0.5, 0)</code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span># Display Gaussian blur output
+                            image file</span></div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code></code>cv2.imshow('unsharp_mask_output',unsharp_mask)
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>cv2.waitkKey(0)</code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>cv2.destroyAllwindow()</code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span># Save the result to a file</span></div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>cv2.imwrite('unsharp_mask_output.jpg', unsharp_mask)</code>
+                    </div>
+                    <div class="mb-3"></div>
+                </div>`;
+        $('#code-block').append(content);
+        $('#code-block').html(content);
+    });
+})
+

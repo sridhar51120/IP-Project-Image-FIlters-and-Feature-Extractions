@@ -84,3 +84,213 @@ $(document).ready(function () {
     });
 });
 
+
+$(document).ready(function () {
+    $('#dropdown-high-passfilter-python-code').click(function () {
+        $('#high-pass-filter-matlab-code').remove();
+        let content = `
+            <div class="container" id="high-pass-filter-python-code">
+                    <div class="mb-1"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span># Import Required Library</span>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>import cv2</code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>import numpy as np</code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>from matplotlib import pyplot as plt
+                        </code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span># Read the image </span></div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>image = cv2.imread('path_to_your_image.jpg', 0)</code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span># Perform Fourier Transform</span>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>f_transform = np.fft.fft2(image)
+                        </code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>f_shift = np.fft.fftshift(f_transform)
+                        </code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span>
+                            # Get image dimensions
+                        </span>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>rows, cols = image.shape</code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>crow, ccol = rows // 2, cols // 2
+                        </code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span>
+                            # Create a high-pass filter mask
+                        </span>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>d = 30  # Adjust the cutoff distance for high-pass filter</code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>mask = np.ones((rows, cols), np.uint8)</code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>mask[crow - d:crow + d, ccol - d:ccol + d] = 0
+                        </code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span>
+                            # Apply high-pass filter by multiplying the Fourier Transform with the mask
+                        </span>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>f_shift_filtered = f_shift * mask</code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span>
+                            # Perform Inverse Fourier Transform
+                        </span>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>f_ishift = np.fft.ifftshift(f_shift_filtered)</code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>filtered_image = np.fft.ifft2(f_ishift)</code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>filtered_image = np.abs(filtered_image)
+                        </code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span>
+                            # Display the original and high-pass filtered images
+                        </span>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>plt.figure(figsize=(10, 5))</code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>plt.subplot(1, 2, 1), plt.imshow(image, cmap='gray'), plt.title('Original Image')</code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>plt.subplot(1, 2, 2), plt.imshow(filtered_image, cmap='gray'), plt.title('High-Pass Filtered Image')
+                        </code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>plt.show()
+                        </code>
+                    </div>
+                </div>`;
+        $('#code-block').append(content);
+        $('#code-block').html(content);
+    })
+    $('#dropdown-high-passfilter-matlab-script-code').click(function () {
+        $('#high-pass-filter-python-code').remove();
+        let content = `                <div class="container" id="high-pass-filter-matlab-code">
+                    <div class="mb-1"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span>% Read the original image</span>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>original_image = imread('path_to_your_image.jpg');</code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span>% Convert the image to grayscale (if it's
+                            a color image)</span></div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>gray_image = rgb2gray(original_image);
+                        </code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span>
+                            % Display the original image
+                        </span>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>figure;</code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>subplot(1, 3, 1), imshow(gray_image), title('Original Image');</code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span>
+                            % Perform Fast Fourier Transform (FFT) to work in the frequency domain
+                        </span>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>fft_image = fft2(double(gray_image));
+                            </code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span>% Find the size of the image</span>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>[M, N] = size(fft_image);
+                        </code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>center_x = fix(M / 2);
+                        </code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>center_y = fix(N / 2);
+                        </code>
+                    </div>
+
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span>% Create a high-pass filter (for example,
+                            a notch filter with 1s in the corners)</span>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>cutoff = 30; % Adjust the cutoff frequency
+                        </code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>high_pass = ones(M, N);
+                        </code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>high_pass(center_x - cutoff:center_x + cutoff, center_y - cutoff:center_y + cutoff) = 0;
+                        </code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span>% Apply the high-pass filter in the
+                            frequency domain</span>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>fft_filtered = fft_image .* high_pass;
+                        </code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span>% Perform the Inverse Fourier Transform
+                            to obtain the image in the spatial domain</span>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>filtered_image = ifft2(fft_filtered);
+                        </code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>filtered_image = abs(filtered_image);
+                        </code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span>% Display the filtered image</span>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>subplot(1, 3, 3), imshow(filtered_image, []), title('High-Pass Filtered Image');
+                        </code>
+                    </div>
+                </div>`;
+        $('#code-block').append(content);
+        $('#code-block').html(content);
+    })
+})
+
+

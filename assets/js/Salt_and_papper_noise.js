@@ -85,3 +85,132 @@ $(document).ready(function () {
         });
     });
 });
+
+
+$(document).ready(function () {
+    $('#dropdown-salt_and_papper_noise-python-code').click(function () {
+        $('#salt_and_papper_noise_matlab_code').remove();
+        let content = `            <div class="container" id="salt_and_papper_noise_python_code">
+                <div class="mb-1"></div>
+                <div class="col col-12 d-flex justify-content-start"><span># Import Required Libraies</span></div>
+                <div class="col col-12 d-flex justify-content-start">
+                    <code>import cv2</code>
+                </div>
+                <div class="col col-12 d-flex justify-content-start">
+                    <code>import numpy as np</code>
+                </div>
+                <div class="mb-3"></div>
+                <div class="col col-12 d-flex justify-content-start"><span># Check for color image</span></div>
+                <div class="col col-12 d-flex justify-content-start">
+                    <code>if len(image.shape) == 3:</code>
+                </div>
+                <div class="col col-12 d-flex justify-content-start">
+                    <code>image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)</code>
+                </div>
+                <div class="mb-3"></div>
+                <div class="col col-12 d-flex justify-content-start"><span># Extract image dimensions</span></div>
+                <div class="col col-12 d-flex justify-content-start">
+                    <code>if len(image.shape) == 2</code>
+                </div>
+                <div class="col col-12 d-flex justify-content-start">
+                    <code>row, col = image.shape</code>
+                </div>
+                <div class="col col-12 d-flex justify-content-start">
+                    <code>else:</code>
+                </div>
+                <div class="col col-12 d-flex justify-content-start">
+                    <code>raise ValueError("Invalid image format. Expected grayscale image.")</code>
+                </div>
+
+                <div class="mb-3"></div>
+                <div class="col col-12 d-flex justify-content-start"><span># Add salt and pepper noise</span></div>
+                <div class="col col-12 d-flex justify-content-start">
+                    <code>num_salt = np.ceil(amount * image.size * 0.5)</code>
+                </div>
+                <div class="col col-12 d-flex justify-content-start">
+                    <code>num_pepper = np.ceil(amount * image.size * 0.5)</code>
+                </div>
+                <div class="mb-3"></div>
+                <div class="col col-12 d-flex justify-content-start"><span># Add salt noise</span></div>
+                <div class="col col-12 d-flex justify-content-start">
+                    <code>salt_coords = [np.random.randint(0, i - 1, int(num_salt)) for i in image.shape]</code>
+                </div>
+                <div class="col col-12 d-flex justify-content-start">
+                    <code>image[salt_coords[0], salt_coords[1]] = 255</code>
+                </div>
+                <div class="mb-3"></div>
+                <div class="col col-12 d-flex justify-content-start"><span># Add pepper noise</span></div>
+                <div class="col col-12 d-flex justify-content-start">
+                    <code>pepper_coords = [np.random.randint(0, i - 1, int(num_pepper)) for i in image.shape]</code>
+                </div>
+                <div class="col col-12 d-flex justify-content-start">
+                    <code>image[pepper_coords[0], pepper_coords[1]] = 0</code>
+                </div>
+                <div class="mb-3"></div>
+                <div class="col col-12 d-flex justify-content-start"><span># Display the noisy image</span></div>
+                <div class="col col-12 d-flex justify-content-start">
+                    <code>cv2.imshow('Noisy Image', image)</code>
+                </div>
+                <div class="col col-12 d-flex justify-content-start">
+                    <code>cv2.waitKey(0)</code>
+                </div>
+                <div class="col col-12 d-flex justify-content-start">
+                    <code>cv2.destroyAllWindows()</code>
+                </div>
+                <div class="mb-3"></div>
+                <div class="col col-12 d-flex justify-content-start"><span># Save the resulting image</span></div>
+                <div class="col col-12 d-flex justify-content-start">
+                    <code>cv2.imwrite("noisy_image.png", image)</code>
+                </div>
+            </div>`;
+        $('#code-block').append(content);
+        $('#code-block').html(content);
+
+    })
+    $('#dropdown-salt_and_papper_noise-matlab-script-code').click(function () {
+        $('#salt_and_papper_noise_python_code').remove();
+        let content = `            <div class="container" id="salt_and_papper_noise_matlab_code">
+                <div class="mb-1"></div>
+                <div class="col col-12 d-flex justify-content-start"><span>% Read the original image</span> </div>
+                <div class="col col-12 d-flex justify-content-start">
+                    <code>original_image = imread('path_to_your_image.jpg');</code>
+                </div>
+                <div class="mb-3"></div>
+                <div class="col col-12 d-flex justify-content-start"><span>% Convert the image to grayscale (if it's
+                        a color image)</span></div>
+                <div class="col col-12 d-flex justify-content-start">
+                    <code>gray_image = rgb2gray(original_image);</code>
+                </div>
+                <div class="mb-3"></div>
+                <div class="col col-12 d-flex justify-content-start"><span>% Display the original image</span></div>
+                <div class="col col-12 d-flex justify-content-start">
+                    <code>figure;</code>
+                </div>
+                <div class="col col-12 d-flex justify-content-start">
+                    <code>subplot(1, 2, 1), imshow(gray_image), title('Original Image');
+                    </code>
+                </div>
+                <div class="mb-3"></div>
+                <div class="col col-12 d-flex justify-content-start"><span>% Introduce salt-and-pepper noise</span>
+                </div>
+                <div class="col col-12 d-flex justify-content-start">
+                    <code>noise_density = 0.05;  % Adjust the noise density (percentage of pixels to be affected)
+                    </code>
+                </div>
+                <div class="col col-12 d-flex justify-content-start">
+                    <code>noisy_image = imnoise(gray_image, 'salt & pepper', noise_density);
+                    </code>
+                </div>
+                <div class="mb-3"></div>
+                <div class="col col-12 d-flex justify-content-start"><span>% Display the noisy image</span>
+                </div>
+                <div class="col col-12 d-flex justify-content-start">
+                    <code>subplot(1, 2, 2), imshow(noisy_image), title('Salt-and-Pepper Noisy Image');</code>
+                </div>
+            </div>`;
+        $('#code-block').append(content);
+        $('#code-block').html(content);
+
+    })
+})
+
