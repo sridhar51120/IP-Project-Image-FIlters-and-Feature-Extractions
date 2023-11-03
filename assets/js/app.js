@@ -117,6 +117,58 @@ $(document).ready(function () {
         }, 5000);
     })
 })
+// For Side Bar Collapse
+$(document).ready(function () {
+    $(".sidebar-title-digital-image-fundamentals").click(function () {
+        $(".sidebar-collapse-content-digital-image-fundamentals").collapse("toggle");
+        var toggleState = $(".sidebar-collapse-content-digital-image-fundamentals").hasClass("show");
+        if (toggleState) {
+            $(".sidebar-collapse-content-digital-image-fundamentals").attr("data-toggle", "");
+        } else {
+            $(".sidebar-collapse-content-digital-image-fundamentals").attr("data-toggle", "collapse");
+        }
+    });
+
+    $(".sidebar-title-image-enhancement-restoration").click(function () {
+        $(".sidebar-collapse-content-image-enhancement-restoration").collapse("toggle");
+        var toggleState = $(".sidebar-collapse-content-image-enhancement-restoration").hasClass("show");
+        if (toggleState) {
+            $(".sidebar-collapse-content-image-enhancement-restoration").attr("data-toggle", "");
+        } else {
+            $(".sidebar-collapse-content-image-enhancement-restoration").attr("data-toggle", "collapse");
+        }
+    });
+
+    $(".sidebar-title-image-segmentation-description").click(function () {
+        $(".sidebar-collapse-content-image-segmentation-description").collapse("toggle");
+        var toggleState = $(".sidebar-collapse-content-image-segmentation-description").hasClass("show");
+        if (toggleState) {
+            $(".sidebar-collapse-content-image-segmentation-description").attr("data-toggle", "");
+        } else {
+            $(".sidebar-collapse-content-image-segmentation-description").attr("data-toggle", "collapse");
+        }
+    });
+
+    $(".sidebar-title-image-compression").click(function () {
+        $(".sidebar-collapse-content-image-compression").collapse("toggle");
+        var toggleState = $(".sidebar-collapse-content-image-compression").hasClass("show");
+        if (toggleState) {
+            $(".sidebar-collapse-content-image-compression").attr("data-toggle", "");
+        } else {
+            $(".sidebar-collapse-content-image-compression").attr("data-toggle", "collapse");
+        }
+    });
+
+    $(".sidebar-title-image-restoration").click(function () {
+        $(".sidebar-collapse-content-image-restoration").collapse("toggle");
+        var toggleState = $(".sidebar-collapse-content-image-restoration").hasClass("show");
+        if (toggleState) {
+            $(".sidebar-collapse-content-image-restoration").attr("data-toggle", "");
+        } else {
+            $(".sidebar-collapse-content-image-restoration").attr("data-toggle", "collapse");
+        }
+    });
+});
 
 
 
