@@ -23,8 +23,10 @@ $(document).ready(function () {
                                 <div id="Required-content">
                                     <div class="row">
                                         <div class="d-flex justify-content-end">
-                                            <button class="btn btn-primary btn-copy-content-code-requirement btn-sm"><i
-                                                    class="bi bi-clipboard"></i></button>
+                                            <button class="btn btn-primary btn-copy-content-code-requirement btn-sm">
+                                            <div class="change-icon-clipboard-icon-requirments-file">
+                                            <i class="bi bi-clipboard b-icon-clipboard-fill-requirements-file"></i>
+                                        </div></button>
                                         </div>
                                         <code>Flask</code>
                                         <code>numpy</code>
@@ -88,7 +90,13 @@ $(document).ready(function () {
             window.getSelection().addRange(range);
             document.execCommand('copy');
             window.getSelection().removeAllRanges();
-            alert('Code copied to clipboard');
+            let data = `<i class="bi bi-0-square-fill b-icon-square-fill-requirements-file"></i>`;
+            $('.b-icon-clipboard-fill-requirements-file').remove();
+            $('.change-icon-clipboard-icon-requirments-file').append('<i class="bi bi-check2-circle"></i>');
+            setTimeout(function () {
+                $('.b-icon-square-fill-requirements-file').remove();
+                $('.change-icon-clipboard-icon-requirments-file').append('<i class="bi bi-clipboard b-icon-clipboard-fill-requirements-file"></i>');
+            }, 5000);
         })
     })
 
@@ -100,7 +108,15 @@ $(document).ready(function () {
         window.getSelection().addRange(range);
         document.execCommand('copy');
         window.getSelection().removeAllRanges();
-        alert('Code copied to clipboard');
+        let data = `<i class="bi bi-0-square-fill"></i>`;
+        $('.bi-clipboard').remove();
+        $('.change-icon-clipboard-icon').append('<i class="bi bi-check2-circle"></i>');
+        setTimeout(function () {
+            $('.bi-check2-circle').remove();
+            $('.change-icon-clipboard-icon').append('<i class="bi bi-clipboard"></i>');
+        }, 5000);
     })
 })
+
+
 

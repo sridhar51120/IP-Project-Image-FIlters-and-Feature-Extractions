@@ -1,37 +1,38 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Wiener Filter Example</title>
-</head>
-<body>
-    <input type="file" id="fileInput">
-    <canvas id="originalCanvas" width="400" height="300" style="border:1px solid black;"></canvas>
-    <canvas id="wienerCanvas" width="400" height="300" style="border:1px solid black;"></canvas>
+{% extends '__master.html' %}
 
-    <script>
-        document.getElementById('fileInput').addEventListener('change', function(e) {
-            var file = e.target.files[0];
-            var img = new Image();
+{% block content %}
 
-            img.onload = function() {
-                var originalCanvas = document.getElementById('originalCanvas');
-                var wienerCanvas = document.getElementById('wienerCanvas');
-                var originalCtx = originalCanvas.getContext('2d');
-                var wienerCtx = wienerCanvas.getContext('2d');
 
-                // Draw the original image on the original canvas
-                originalCtx.drawImage(img, 0, 0, originalCanvas.width, originalCanvas.height);
+<!-- Button to trigger the alert -->
+<button id="showAlertBtn" class="btn btn-primary">Show Alert</button>
 
-                // Here you would apply the Wiener filter algorithm or other image processing techniques
-                // However, implementing the Wiener filter in pure JavaScript here is complex and not practical
+<!-- JavaScript using jQuery to show Bootstrap alert -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#showAlertBtn").on("click", function () {
+            // Create a new alert element
+            var alertDiv = $("<div></div>")
+                .addClass("alert alert-success")
+                .attr("role", "alert")
+                .text("This is a Bootstrap alert!");
 
-                // Display the modified image (in this case, it will just copy the original)
-                var imgData = originalCtx.getImageData(0, 0, originalCanvas.width, originalCanvas.height);
-                wienerCtx.putImageData(imgData, 0, 0);
-            };
+            // Add the alert to the page
+            $("body").append(alertDiv);
 
-            img.src = URL.createObjectURL(file);
+            // Use setTimeout to append additional data after 3 seconds
+            setTimeout(function () {
+                var additionalData = $("<p></p>").text("Additional data after time finished.");
+                alertDiv.append(additionalData);
+            }, 3000);
         });
-    </script>
-</body>
-</html>
+    });
+</script>
+
+<!-- Bootstrap JS (jQuery is required for some components) -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+
+{% endblock content %}
