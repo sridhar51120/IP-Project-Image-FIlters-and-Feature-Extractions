@@ -1,7 +1,17 @@
 $(document).ready(function () {
     $('.btn-load-img-gamma-correction').click(function () {
+        var Data = {
+            folderName: 'assets/uploads/enhancement/gamma_correction'
+        };
+        $.get('/files/isAvailablle_folder', { data: JSON.stringify(Data) })
+            .done(function (response) {
+                // console.log('Server response:', response);
+            })
+            .fail(function (xhr, textStatus, errorThrown) {
+                // console.error('Request failed:', errorThrown);
+            });
         $.get("/modals/gamma_correction", function (data) {
-            console.log("Data received:", data);
+            //  console.log("Data received:", data);
             $('.modal-content').append(data);
             $('#gamma-correction-image-modal').modal('show');
             $('#btn-gamma-correction-modal-close').click(function () {
@@ -21,8 +31,8 @@ $(document).ready(function () {
                             processData: false,
                             contentType: false,
                             success: function (data, response) {
-                                // console.log('Server response:', response);
-                                // console.log('Data : ', data);
+                                // // console.log('Server response:', response);
+                                // // console.log('Data : ', data);
                                 $('.gammma-correction-image-collapse').append(data['template']);
                                 $('#output-gamma-correction-toggle-groups').collapse({
                                     toggle: false
@@ -56,11 +66,11 @@ $(document).ready(function () {
                                 });
                             },
                             error: function (xhr, status, error) {
-                                console.log('XHR status:', status);
-                                console.log('XHR error:', error);
+                                // console.log('XHR status:', status);
+                                // console.log('XHR error:', error);
                             },
                             complete: function (xhr, status) {
-                                console.log('Request complete. XHR status:', status);
+                                // console.log('Request complete. XHR status:', status);
                             }
                         });
                     } else {

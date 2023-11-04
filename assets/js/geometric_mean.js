@@ -1,8 +1,17 @@
 $(document).ready(function () {
     $('.btn-load-img-geometric-mean').click(function () {
-        // alert("Button clicked");
+        var Data = {
+            folderName: 'assets/uploads/filters/geometric_mean'
+        };
+        $.get('/files/isAvailablle_folder', { data: JSON.stringify(Data) })
+            .done(function (response) {
+                // console.log('Server response:', response);
+            })
+            .fail(function (xhr, textStatus, errorThrown) {
+                // console.error('Request failed:', errorThrown);
+            });
         $.get("/modals/geometric", function (data) {
-            console.log("Data received:", data);
+            //  console.log("Data received:", data);
             $('.modal-content').append(data);
             $('#geometric-filter-image-modal').modal('show');
 
@@ -24,8 +33,8 @@ $(document).ready(function () {
                             processData: false,
                             contentType: false,
                             success: function (data, response) {
-                                console.log('Server response:', response);
-                                console.log('Data : ', data);
+                                // console.log('Server response:', response);
+                                // console.log('Data : ', data);
 
                                 $('.geometric-mean_image_collapse').append(data['template']);
                                 $('.output-geometric-filter-toggle-groups').collapse({
@@ -61,11 +70,11 @@ $(document).ready(function () {
                                 });
                             },
                             error: function (xhr, status, error) {
-                                console.log('XHR status:', status);
-                                console.log('XHR error:', error);
+                                // console.log('XHR status:', status);
+                                // console.log('XHR error:', error);
                             },
                             complete: function (xhr, status) {
-                                console.log('Request complete. XHR status:', status);
+                                // console.log('Request complete. XHR status:', status);
                             }
                         });
                     } else {

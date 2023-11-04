@@ -1,5 +1,15 @@
 $(document).ready(function () {
     $('.btn-load-img-histogram-equal').click(function () {
+        var Data = {
+            folderName: 'assets/uploads/enhancement/histogram'
+        };
+        $.get('/files/isAvailablle_folder', { data: JSON.stringify(Data) })
+            .done(function (response) {
+                // console.log('Server response:', response);
+            })
+            .fail(function (xhr, textStatus, errorThrown) {
+                // console.error('Request failed:', errorThrown);
+            });
         $.get("/modals/histogram", function (data) {
             $('.modal-content').append(data);
             const temp = data;
@@ -21,8 +31,8 @@ $(document).ready(function () {
                             processData: false,
                             contentType: false,
                             success: function (data, response) {
-                                // console.log('Server response:', response);
-                                // console.log('Data : ', data);
+                                // // console.log('Server response:', response);
+                                // // console.log('Data : ', data);
 
                                 $('.histo_image_input_collapse').append(data['template']);
                                 $(".output-histogram-toggle-groups").collapse("toggle");

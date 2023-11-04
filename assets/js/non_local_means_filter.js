@@ -1,7 +1,17 @@
 $(document).ready(function () {
     $('.btn-load-img-non-local-filter').click(function () {
+        var Data = {
+            folderName: 'assets/uploads/filters/non_local_means_filters'
+        };
+        $.get('/files/isAvailablle_folder', { data: JSON.stringify(Data) })
+            .done(function (response) {
+                // console.log('Server response:', response);
+            })
+            .fail(function (xhr, textStatus, errorThrown) {
+                // console.error('Request failed:', errorThrown);
+            });
         $.get("/modals/non_local_mean_filter", function (data) {
-            // console.log("Data received:", data);
+            // //  console.log("Data received:", data);
             $('.modal-content').append(data);
             $('#non-local-means-filter-image-modal').modal('show');
             $('#btn-non-local-means-filter-modal-close').click(function () {
@@ -22,8 +32,8 @@ $(document).ready(function () {
                             processData: false,
                             contentType: false,
                             success: function (data, response) {
-                                console.log('Server response:', response);
-                                console.log('Data : ', data);
+                                // console.log('Server response:', response);
+                                // console.log('Data : ', data);
 
                                 $('.non-local-mean-input-image-collapse').append(data['template']);
                                 data['template']

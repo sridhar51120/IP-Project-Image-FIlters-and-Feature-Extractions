@@ -1,7 +1,17 @@
 $(document).ready(function () {
     $('.btn-load-img-noise-detect').click(function () {
+        var Data = {
+            folderName: 'assets/uploads/restoration/noise_reduction'
+        };
+        $.get('/files/isAvailablle_folder', { data: JSON.stringify(Data) })
+            .done(function (response) {
+                // console.log('Server response:', response);
+            })
+            .fail(function (xhr, textStatus, errorThrown) {
+                // console.error('Request failed:', errorThrown);
+            });
         $.get("/modals/noise_reduction", function (data) {
-            // console.log("Data received:", data);
+            // //  console.log("Data received:", data);
             $('.modal-content').append(data);
             $('#noise-reduction-image-modal').modal('show');
             $('#btn-noise-reduction-modal-close').click(function () {
@@ -22,8 +32,8 @@ $(document).ready(function () {
                             processData: false,
                             contentType: false,
                             success: function (data, response) {
-                                // console.log('Server response:', response);
-                                // console.log('Data : ', data);
+                                // // console.log('Server response:', response);
+                                // // console.log('Data : ', data);
 
                                 $('.noise-input-image-collaps').append(data['template']);
                                 $('#output-noise-reduction-toggle-groups').collapse({

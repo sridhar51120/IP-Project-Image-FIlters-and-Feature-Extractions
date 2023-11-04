@@ -1,7 +1,17 @@
 $(document).ready(function () {
     $('.btn-load-img-thresholding').click(function () {
+        var Data = {
+            folderName: 'assets/uploads/segmantation/thresholding'
+        };
+        $.get('/files/isAvailablle_folder', { data: JSON.stringify(Data) })
+            .done(function (response) {
+                // console.log('Server response:', response);
+            })
+            .fail(function (xhr, textStatus, errorThrown) {
+                // console.error('Request failed:', errorThrown);
+            });
         $.get("/modals/thresolding", function (data) {
-            // console.log("Data received:", data);
+            // //  console.log("Data received:", data);
             $('.modal-content').append(data);
             $('#thresolding-image-modal').modal('show');
             $('#btn-thresolding-modal-close').click(function () {
@@ -21,8 +31,8 @@ $(document).ready(function () {
                             processData: false,
                             contentType: false,
                             success: function (data, response) {
-                                // console.log('Server response:', response);
-                                // console.log('Data : ', data);
+                                // // console.log('Server response:', response);
+                                // // console.log('Data : ', data);
                                 $('.thresolding-input-image-collapse').append(data['template']);
                                 $('#output-thresholding-toggle-groups').collapse({
                                     toggle: false

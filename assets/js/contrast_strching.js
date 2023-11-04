@@ -1,7 +1,17 @@
 $(document).ready(function () {
     $('.btn-load-img-contrast-strching').click(function () {
+        var Data = {
+            folderName: 'assets/uploads/enhancement/contrast_strching'
+        };
+        $.get('/files/isAvailablle_folder', { data: JSON.stringify(Data) })
+            .done(function (response) {
+                // console.log('Server response:', response);
+            })
+            .fail(function (xhr, textStatus, errorThrown) {
+                // console.error('Request failed:', errorThrown);
+            });
         $.get("/modals/contrast_strching", function (data) {
-            // console.log("Data received:", data);
+            // //  console.log("Data received:", data);
             $('.modal-content').append(data);
             $('#contrast-image-modal').modal('show');
 
@@ -23,8 +33,8 @@ $(document).ready(function () {
                             contentType: false,
                             success: function (data, response) {
 
-                                // console.log('Server response:', response);
-                                // console.log('Data : ', data);
+                                // // console.log('Server response:', response);
+                                // // console.log('Data : ', data);
 
                                 $('.contrast-strching-image-collapse').append(data['template']);
                                 $('#output-contrast-strching-toggle-groups').collapse({

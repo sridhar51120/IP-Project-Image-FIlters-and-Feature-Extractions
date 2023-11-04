@@ -1,7 +1,17 @@
 $(document).ready(function () {
     $('.btn-load-img-edge-detection').click(function () {
+        var Data = {
+            folderName: 'assets/uploads/segmantation/edge_detection'
+        };
+        $.get('/files/isAvailablle_folder', { data: JSON.stringify(Data) })
+            .done(function (response) {
+                // console.log('Server response:', response);
+            })
+            .fail(function (xhr, textStatus, errorThrown) {
+                // console.error('Request failed:', errorThrown);
+            });
         $.get("/modals/edge_detection", function (data) {
-            // console.log("Data received:", data);
+            // //  console.log("Data received:", data);
             $('.modal-content').append(data);
             $('#edge-detection-image-modal').modal('show');
             $('#btn-edge-detection-modal-close').click(function () {
@@ -21,8 +31,8 @@ $(document).ready(function () {
                             contentType: false,
                             success: function (data, response) {
                                 $('#edge-detection-image-modal').modal('hide');
-                                // console.log('Server response:', response);
-                                // console.log('Data : ', data);
+                                // // console.log('Server response:', response);
+                                // // console.log('Data : ', data);
                                 $('.edge-detect-image-collapse').append(data['template']);
                                 $('.output-edge-detection-toggle-groups').collapse({
                                     toggle: false

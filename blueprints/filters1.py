@@ -36,7 +36,7 @@ def Constrained_least_square_filtering_output():
     if request.method == 'POST':
         if 'constraine-least-input-image-file' in request.files:
             file = request.files['constraine-least-input-image-file']
-            img_path = f'assets/uploads/segmantation/{file.filename}'
+            img_path = f'assets/uploads/segmantation/constraint_least_square/{file.filename}'
             file.save(os.path.join(img_path))
             const = Segmentation(img_path)
             constaint_img = const.ConstraintLeastSquare()

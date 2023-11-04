@@ -1,7 +1,17 @@
 $(document).ready(function () {
     $('.btn-load-img-inpaint-img').click(function () {
+        var Data = {
+            folderName: 'assets/uploads/restoration/inpaint'
+        };
+        $.get('/files/isAvailablle_folder', { data: JSON.stringify(Data) })
+            .done(function (response) {
+                // console.log('Server response:', response);
+            })
+            .fail(function (xhr, textStatus, errorThrown) {
+                // console.error('Request failed:', errorThrown);
+            });
         $.get("/modals/inpaint", function (data) {
-            // console.log("Data received:", data);
+            // //  console.log("Data received:", data);
             $('.modal-content').append(data);
             $('#inpaint-image-modal').modal('show');
             $('#btn-inpaint-modal-close').click(function () {
@@ -22,8 +32,8 @@ $(document).ready(function () {
                             processData: false,
                             contentType: false,
                             success: function (data, response) {
-                                // console.log('Server response:', response);
-                                // console.log('Data : ', data);
+                                // // console.log('Server response:', response);
+                                // // console.log('Data : ', data);
 
                                 $('.inpaint-input-image-collapse').append(data['template']);
                                 $('#output-inpainting-toggle-groups').collapse({

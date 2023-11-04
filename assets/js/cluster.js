@@ -1,7 +1,17 @@
 $(document).ready(function () {
     $('.btn-load-img-clustering-img').click(function () {
+        var Data = {
+            folderName: 'assets/uploads/segmantation/cluster'
+        };
+        $.get('/files/isAvailablle_folder', { data: JSON.stringify(Data) })
+            .done(function (response) {
+                // console.log('Server response:', response);
+            })
+            .fail(function (xhr, textStatus, errorThrown) {
+                // console.error('Request failed:', errorThrown);
+            });
         $.get("/modals/cluster", function (data) {
-            // console.log("Data received:", data);
+            // //  console.log("Data received:", data);
             $('.modal-content').append(data);
             $('#cluster-image-modal').modal('show');
             $('#cluster-image-modal-close').click(function () {
@@ -23,8 +33,8 @@ $(document).ready(function () {
                             contentType: false,
                             success: function (data, response) {
 
-                                // console.log('Server response:', response);
-                                // console.log('Data : ', data);
+                                // // console.log('Server response:', response);
+                                // // console.log('Data : ', data);
 
                                 $('.cluster-image-collapse').append(data['template']);
                                 $('#output-clustering-toggle-groups').collapse({

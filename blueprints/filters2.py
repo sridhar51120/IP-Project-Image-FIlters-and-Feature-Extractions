@@ -339,7 +339,7 @@ def unsharp_masking_output():
     if request.method == 'POST':
         if 'unsharp-masking-input-image-file' in request.files:
             file = request.files['unsharp-masking-input-image-file']
-            img_dir = 'assets/uploads/filters/low_pass_filters/'
+            img_dir = 'assets/uploads/filters/unsharp_masking/'
             os.makedirs(img_dir, exist_ok=True)
             img_path = os.path.join(img_dir, file.filename)
             file.save(img_path)

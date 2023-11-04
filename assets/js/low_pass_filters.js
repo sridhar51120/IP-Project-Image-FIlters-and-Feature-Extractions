@@ -1,7 +1,17 @@
 $(document).ready(function () {
     $('.btn-load-img-low-pass-filter').click(function () {
+        var Data = {
+            folderName: 'assets/uploads/filters/low_pass_filters'
+        };
+        $.get('/files/isAvailablle_folder', { data: JSON.stringify(Data) })
+            .done(function (response) {
+                // console.log('Server response:', response);
+            })
+            .fail(function (xhr, textStatus, errorThrown) {
+                // console.error('Request failed:', errorThrown);
+            });
         $.get("/modals/low_pass_filter", function (data) {
-            // console.log("Data received:", data);
+            // //  console.log("Data received:", data);
             $('.modal-content').append(data);
             $('#low-pass-filter-image-modal').modal('show');
             $('#btn-low-pass-filter-modal-close').click(function () {
@@ -22,8 +32,8 @@ $(document).ready(function () {
                             processData: false,
                             contentType: false,
                             success: function (data, response) {
-                                console.log('Server response:', response);
-                                console.log('Data : ', data);
+                                // console.log('Server response:', response);
+                                // console.log('Data : ', data);
 
                                 $('.low_pass-input-image-collapse').append(data['template']);
                                 data['template']

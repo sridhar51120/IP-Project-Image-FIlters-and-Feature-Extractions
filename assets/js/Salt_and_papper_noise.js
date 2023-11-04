@@ -1,8 +1,17 @@
 $(document).ready(function () {
     $('.btn-load-img-salt-and-papper-noise').click(function () {
-        // alert("Button clicked");
+        var Data = {
+            folderName: 'assets/uploads/filters/salt_and_papper_noise'
+        };
+        $.get('/files/isAvailablle_folder', { data: JSON.stringify(Data) })
+            .done(function (response) {
+                // console.log('Server response:', response);
+            })
+            .fail(function (xhr, textStatus, errorThrown) {
+                // console.error('Request failed:', errorThrown);
+            });
         $.get("/modals/salt_and_papper_noise", function (data) {
-            console.log("Data received:", data);
+            //  console.log("Data received:", data);
             $('.modal-content').append(data);
             $('#salt-and-papper-noise-image-modal').modal('show');
 
@@ -25,8 +34,8 @@ $(document).ready(function () {
                             processData: false,
                             contentType: false,
                             success: function (data, response) {
-                                console.log('Server response:', response);
-                                console.log('Data : ', data);
+                                // console.log('Server response:', response);
+                                // console.log('Data : ', data);
 
                                 $('.salt-and-papper-noise_image_collapse').append(data['template']);
                                 $('.output-salt-and-papper-noise-toggle-groups').collapse({
@@ -61,11 +70,11 @@ $(document).ready(function () {
                                 });
                             },
                             error: function (xhr, status, error) {
-                                console.log('XHR status:', status);
-                                console.log('XHR error:', error);
+                                // console.log('XHR status:', status);
+                                // console.log('XHR error:', error);
                             },
                             complete: function (xhr, status) {
-                                console.log('Request complete. XHR status:', status);
+                                // console.log('Request complete. XHR status:', status);
                             }
                         });
                     } else {
