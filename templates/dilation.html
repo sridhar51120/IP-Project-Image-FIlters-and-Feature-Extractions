@@ -50,7 +50,7 @@
         </div>
     </div>
 </div>
-<!-- <div class="container-fluid pt-4 px-4">
+<div class="container-fluid pt-4 px-4">
     <div class="bg-secondary text-center rounded p-4">
         <div class="card card-body bg-dark text-secondary">
             <div class="d-flex align-items-center justify-content-between">
@@ -90,10 +90,10 @@
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 <li><a class="dropdown-item btn btn-primary"
-                                        id="dropdown-edge-detected-python-code">Python</a>
+                                        id="dropdown-dilation-python-code">Python</a>
                                 </li>
                                 <li><a class="dropdown-item btn btn-primary"
-                                        id="dropdown-edge-detected-matlab-script-code">MatLab</a>
+                                        id="dropdown-dilation-matlab-script-code">MatLab</a>
                                 </li>
                             </ul>
                         </div>
@@ -106,7 +106,7 @@
         <br>
         <div class="card bg-primary">
             <div class="card bg-dark" id="code-block">
-                <div class="container" id="edge-detected-python-code">
+                <div class="container" id="dilation-python-code">
                     <div class="mb-1"></div>
                     <div class="col col-12 d-flex justify-content-start"><span># Import Required Library</span>
                     </div>
@@ -116,35 +116,75 @@
                     <div class="col col-12 d-flex justify-content-start">
                         <code>import numpy as np</code>
                     </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>from matplotlib import pyplot as plt</code>
+                    </div>
                     <div class="mb-3"></div>
                     <div class="col col-12 d-flex justify-content-start"><span># Read the image </span></div>
                     <div class="col col-12 d-flex justify-content-start">
                         <code>image = cv2.imread('path_to_your_image.jpg', 0)                       </code>
                     </div>
                     <div class="mb-3"></div>
-                    <div class="col col-12 d-flex justify-content-start"><span># Apply Canny edge detection</span>
+                    <div class="col col-12 d-flex justify-content-start"><span># Define the structuring element for
+                            dilation (kernel)</span>
                     </div>
                     <div class="col col-12 d-flex justify-content-start">
-                        <code>edges = cv2.Canny(image, 100, 200)
+                        <code>kernel = np.ones((5, 5), np.uint8)  # You can modify the kernel size as needed
                         </code>
                     </div>
                     <div class="mb-3"></div>
                     <div class="col col-12 d-flex justify-content-start"><span>
-                            # Display the original and edge-detected images
+                            # Apply dilation
                         </span>
                     </div>
                     <div class="col col-12 d-flex justify-content-start">
-                        <code>cv2.imshow('Original Image', image)</code>
+                        <code>dilated_image = cv2.dilate(image, kernel, iterations=1)
+                        </code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span>
+                            # Display the original and dilated images
+                        </span>
                     </div>
                     <div class="col col-12 d-flex justify-content-start">
-                        <code>cv2.imshow('Edge Detected Image', edges)</code>
-                    </div>
-                    <div class="col col-12 d-flex justify-content-start">
-                        <code>cv2.waitKey(0)
+                        <code>plt.figure(figsize=(8, 4))
                         </code>
                     </div>
                     <div class="col col-12 d-flex justify-content-start">
-                        <code>cv2.destroyAllWindows()
+                        <code>plt.subplot(1, 2, 1)</code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>plt.imshow(image, cmap='gray')
+                        </code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>plt.title('Original Image')
+                        </code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>plt.axis('off')</code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>plt.subplot(1, 2, 2)
+                        </code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>plt.imshow(dilated_image, cmap='gray')
+                        </code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>plt.title('Dilated Image')</code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>plt.axis('off')
+                        </code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>plt.tight_layout()
+                        </code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>plt.show()
                         </code>
                     </div>
                 </div>
@@ -164,7 +204,7 @@
         <div class="bg-secondary ">
             <div class="card card-body bg-dark text-secondary">
                 <p class="lead text-muted text-left">
-                    The following code will take a live image feed from your machine and apply Edge Detection to
+                    The following code will take a live image feed from your machine and apply Dilation to
                     it, then display both original frame as well as its
                 </p>
             </div>
@@ -172,15 +212,13 @@
         <div class="bg-secondary ">
             <div class="card card-body bg-dark text-secondary">
                 <div class="d-flex justify-content-center">
-                    <button class="btn btn-success btn-sm  btn-load-img-edge-detection">Lets Start Live Demo</button>
+                    <button class="btn btn-success btn-sm  btn-load-img-dilation">Lets Start Live Demo</button>
                 </div>
             </div>
         </div>
     </div>
 </div>
 <div class="modal-content"></div>
-<div class="edge-detect-image-collapse"></div>
-<br> -->
-
-
+<div class="dilation-input-image-collapse"></div>
+<br>
 {% endblock content %}

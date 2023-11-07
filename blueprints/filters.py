@@ -1,8 +1,9 @@
 from flask import Blueprint, render_template, redirect, url_for, request, session
 import os
+from src.Filters import Filters
 import cv2
 
-bp = Blueprint("/filters3", __name__, url_prefix="/filters3")
+bp = Blueprint("/filters", __name__, url_prefix="/filters3")
 
 
 @bp.route("/descrete_forier_trasnform", methods=['GET'])
@@ -26,6 +27,30 @@ def descrete_forier_trasnform_temp():
         {'title': 'Display or Save', 'description': 'Finally, display the processed image or save it to a file. You can visualize the changes made to the image in the spatial domain.'},
     ]
     return render_template("dft.html", data=data, workflowtitle="Brief overview of how Discrete Fourier Transform (DFT) Works", workflows=workflows)
+
+
+@bp.route("/descrete_forier_trasnform_output", methods=['POST'])
+def descrete_forier_trasnform_output():
+    if request.method == 'POST':
+        if 'dft-input-image-file' in request.files:
+            file = request.files['dft-input-image-file']
+            img_dir = 'assets/uploads/filters/dft/'
+            os.makedirs(img_dir, exist_ok=True)
+            img_path = os.path.join(img_dir, file.filename)
+            file.save(img_path)
+            const = Filters(img_path)
+            output_img = const.dft(img_dir)
+            data = {
+                'img_url': img_path,
+                'dft_output_img': output_img
+            }
+            return {
+                'template': render_template('OutputCollapse/filters/dft.html', data=data),
+                'img_url': img_path.replace("assets", ""),
+                'dft_output_img': output_img.replace("assets", "")
+            }
+        else:
+            return 'No file part in the request'
 
 
 @bp.route("/dilation", methods=['GET'])
@@ -55,6 +80,30 @@ def dilation_temp():
     return render_template("dilation.html", data=data, workflowtitle="Brief overview of how Dilation Works", workflows=workflows)
 
 
+@bp.route("/dilation_output", methods=['POST'])
+def dilation_output():
+    if request.method == 'POST':
+        if 'dilation-input-image-file' in request.files:
+            file = request.files['dilation-input-image-file']
+            img_dir = 'assets/uploads/filters/dilation/'
+            os.makedirs(img_dir, exist_ok=True)
+            img_path = os.path.join(img_dir, file.filename)
+            file.save(img_path)
+            const = Filters(img_path)
+            output_img = const.dilation(img_dir)
+            data = {
+                'img_url': img_path,
+                'dilation_output_img': output_img
+            }
+            return {
+                'template': render_template('OutputCollapse/filters/dilation.html', data=data),
+                'img_url': img_path.replace("assets", ""),
+                'dilation_output_img': output_img.replace("assets", "")
+            }
+        else:
+            return 'No file part in the request'
+
+
 @bp.route("/erosion", methods=['GET'])
 def erosion_temp():
     data = {
@@ -74,6 +123,30 @@ def erosion_temp():
         {'title': 'Result', 'description': 'The final result after applying erosion is a binary image with shrunken foreground objects. The degree of shrinkage depends on the size and shape of the structuring element and the number of iterations.'}
     ]
     return render_template("erosion.html", data=data, workflowtitle="Brief overview of how Erosion Works", workflows=workflows)
+
+
+@bp.route("/erosion_output", methods=['POST'])
+def erosion_output():
+    if request.method == 'POST':
+        if 'errosion-input-image-file' in request.files:
+            file = request.files['errosion-input-image-file']
+            img_dir = 'assets/uploads/filters/errosion/'
+            os.makedirs(img_dir, exist_ok=True)
+            img_path = os.path.join(img_dir, file.filename)
+            file.save(img_path)
+            const = Filters(img_path)
+            output_img = const.errosion(img_dir)
+            data = {
+                'img_url': img_path,
+                'erroded_img': output_img
+            }
+            return {
+                'template': render_template('OutputCollapse/filters/erosion.html', data=data),
+                'img_url': img_path.replace("assets", ""),
+                'erroded_img': output_img.replace("assets", "")
+            }
+        else:
+            return 'No file part in the request'
 
 
 @bp.route("/hierarichal_image", methods=['GET'])
@@ -97,6 +170,30 @@ def hierarichal_image_temp():
     return render_template("Hierarchical_Image.html", data=data, workflowtitle="Brief overview of how Hierarchical image processing Works", workflows=workflows)
 
 
+@bp.route("/hierarichal_image_output", methods=['POST'])
+def hierarichal_image_output():
+    if request.method == 'POST':
+        if 'hierarchical-image-input-image-file' in request.files:
+            file = request.files['hierarchical-image-input-image-file']
+            img_dir = 'assets/uploads/filters/hierarchical/'
+            os.makedirs(img_dir, exist_ok=True)
+            img_path = os.path.join(img_dir, file.filename)
+            file.save(img_path)
+            const = Filters(img_path)
+            output_img = const.hierarchical(img_dir)
+            data = {
+                'img_url': img_path,
+                'hierarchical': output_img
+            }
+            return {
+                'template': render_template('OutputCollapse/filters/Hierarchical_Image.html', data=data),
+                'img_url': img_path.replace("assets", ""),
+                'hierarchical': output_img.replace("assets", "")
+            }
+        else:
+            return 'No file part in the request'
+
+
 @bp.route("/hough_trasform", methods=['GET'])
 def hough_trasform_temp():
     data = {
@@ -118,24 +215,28 @@ def hough_trasform_temp():
     return render_template("hough_transform.html", data=data, workflowtitle="Brief overview of how Hough Trasform Works", workflows=workflows)
 
 
-@bp.route("/huffmencoding", methods=['GET'])
-def huffmencoding_temp():
-    data = {
-        'title': 'Huffman coding',
-        'def': "Huffman coding is a widely used method for lossless data compression. In image processing, it's used to reduce the size of images without losing image quality. "
-    }
-
-    workflows = [
-        {'title': 'Image Preprocessing', 'description': 'Convert the image into a raw data format suitable for compression. This may involve converting the image into a matrix of pixel values or representing it in a way that facilitates encoding.'},
-        {'title': 'Collecting Statistics', 'description': 'Calculate the frequency of occurrence of each symbol in the image data. In image processing, these symbols can be pixel intensities or sequences of pixels, depending on the approach used.'},
-        {'title': 'Building the Huffman Tree', 'description': 'Construct a Huffman tree based on the symbol frequencies. This tree is a binary tree where leaf nodes represent symbols and their frequencies, and the paths from the root to the leaves represent the Huffman codes.'},
-        {'title': 'Assigning Huffman Codes', 'description': 'Traverse the Huffman tree to assign unique binary codes to each symbol. Symbols with higher frequencies will have shorter codes, optimizing the overall compression.'},
-        {'title': 'Generating Encoded Data', 'description': 'Encode the image data using the generated Huffman codes. Replace each symbol in the image data with its corresponding Huffman code. This step significantly reduces the total number of bits required to represent the image.'},
-        {'title': 'Creating a Coded Image', 'description': 'Assemble the encoded data into a structured format. This could involve writing headers, metadata, or any necessary information to allow the decoding process to reconstruct the original image.'},
-        {'title': 'Decoding the Image', 'description': 'To reconstruct the original image, reverse the Huffman coding process. Use the Huffman tree and the encoded data to decode the image. This involves traversing the tree based on the encoded bits to retrieve the original pixel values.'},
-        {'title': 'Image Post-processing', 'description': 'Reconstruct the image from the decoded data and perform any necessary operations to restore the original image format and quality. This could involve inverse operations to any preprocessing steps or additional filtering.'}
-    ]
-    return render_template("huffmencoding.html", data=data, workflowtitle="Brief overview of how Huff Men Coding Works", workflows=workflows)
+@bp.route("/hough_trasform_output", methods=['POST'])
+def hough_trasform_output():
+    if request.method == 'POST':
+        if 'hough-tansform-input-image-file' in request.files:
+            file = request.files['hough-tansform-input-image-file']
+            img_dir = 'assets/uploads/filters/hough_transform/'
+            os.makedirs(img_dir, exist_ok=True)
+            img_path = os.path.join(img_dir, file.filename)
+            file.save(img_path)
+            const = Filters(img_path)
+            output_img = const.hough_transform(img_dir)
+            data = {
+                'img_url': img_path,
+                'hough_transform': output_img
+            }
+            return {
+                'template': render_template('OutputCollapse/filters/hough_transform.html', data=data),
+                'img_url': img_path.replace("assets", ""),
+                'hough_transform': output_img.replace("assets", "")
+            }
+        else:
+            return 'No file part in the request'
 
 
 @bp.route("/region_growing", methods=['GET'])
@@ -160,6 +261,30 @@ def region_growing_temp():
     return render_template("region_growing.html", data=data, workflowtitle="Brief overview of how Region Growing Works", workflows=workflows)
 
 
+@bp.route("/region_growing_output", methods=['POST'])
+def region_growing_output():
+    if request.method == 'POST':
+        if 'region-growing-input-image-file' in request.files:
+            file = request.files['region-growing-input-image-file']
+            img_dir = 'assets/uploads/filters/region_growing/'
+            os.makedirs(img_dir, exist_ok=True)
+            img_path = os.path.join(img_dir, file.filename)
+            file.save(img_path)
+            const = Filters(img_path)
+            output_img = const.region_growing(img_dir)
+            data = {
+                'img_url': img_path,
+                'region_growing': output_img
+            }
+            return {
+                'template': render_template('OutputCollapse/filters/region_growing.html', data=data),
+                'img_url': img_path.replace("assets", ""),
+                'region_growing': output_img.replace("assets", "")
+            }
+        else:
+            return 'No file part in the request'
+
+
 @bp.route("/region_merging", methods=['GET'])
 def region_merging_temp():
     data = {
@@ -179,6 +304,30 @@ def region_merging_temp():
     return render_template("region_merging.html", data=data, workflowtitle="Brief overview of how Region Merging Works", workflows=workflows)
 
 
+@bp.route("/region_merging_output", methods=['POST'])
+def region_merging_output():
+    if request.method == 'POST':
+        if 'region-merging-input-image-file' in request.files:
+            file = request.files['region-merging-input-image-file']
+            img_dir = 'assets/uploads/filters/region_merging/'
+            os.makedirs(img_dir, exist_ok=True)
+            img_path = os.path.join(img_dir, file.filename)
+            file.save(img_path)
+            const = Filters(img_path)
+            output_img = const.region_merging(img_dir)
+            data = {
+                'img_url': img_path,
+                'region_merging': output_img
+            }
+            return {
+                'template': render_template('OutputCollapse/filters/region_merging.html', data=data),
+                'img_url': img_path.replace("assets", ""),
+                'region_merging': output_img.replace("assets", "")
+            }
+        else:
+            return 'No file part in the request'
+
+
 @bp.route("/runLengthCoding", methods=['GET'])
 def runLengthCoding_temp():
     data = {
@@ -196,6 +345,31 @@ def runLengthCoding_temp():
         {'title': 'Post-Processing', 'description': 'After decoding, further image processing or analysis can be performed on the reconstructed image as required.'}
     ]
     return render_template("runLengthEncode.html", data=data, workflowtitle="Brief overview of how Run Length Coding Works", workflows=workflows)
+
+
+@bp.route("/runLengthCoding_output", methods=['POST'])
+def runLengthCoding_output():
+    if request.method == 'POST':
+        if 'run-length-coding-input-image-file' in request.files:
+            file = request.files['run-length-coding-input-image-file']
+            img_dir = 'assets/uploads/filters/runLengthEncode/'
+            os.makedirs(img_dir, exist_ok=True)
+            img_path = os.path.join(img_dir, file.filename)
+            file.save(img_path)
+            const = Filters(img_path)
+            output_img = const.runLengthEncode(img_dir)
+            data = {
+                'img_url': img_path,
+                'runLengthEncode': output_img
+
+            }
+            return {
+                'template': render_template('OutputCollapse/filters/runLengthEncode.html', data=data),
+                'img_url': img_path.replace("assets", ""),
+                'runLengthEncode': output_img.replace("assets", "")
+            }
+        else:
+            return 'No file part in the request'
 
 
 @bp.route("/vectorQuantization", methods=['GET'])
@@ -221,3 +395,27 @@ def vectorQuantization_temp():
             'description': 'To view or process the compressed image, reverse the process by using the indices to retrieve vectors from the codebook and replace them back into the image.'}
     ]
     return render_template("VectorQuantization.html", data=data, workflowtitle="Brief overview of how Vector Quantization Works", workflows=workflows)
+
+@bp.route("/vectorQuantization_output", methods=['POST'])
+def vectorQuantization_output():
+    if request.method == 'POST':
+        if 'vector-quantization-input-image-file' in request.files:
+            file = request.files['vector-quantization-input-image-file']
+            img_dir = 'assets/uploads/filters/vector_quantization/'
+            os.makedirs(img_dir, exist_ok=True)
+            img_path = os.path.join(img_dir, file.filename)
+            file.save(img_path)
+            const = Filters(img_path)
+            output_img = const.vector_quantization(img_dir)
+            data = {
+                'img_url': img_path,
+                'vector_quantization': output_img
+
+            }
+            return {
+                'template': render_template('OutputCollapse/filters/vector_quantization.html', data=data),
+                'img_url': img_path.replace("assets", ""),
+                'vector_quantization': output_img.replace("assets", "")
+            }
+        else:
+            return 'No file part in the request'

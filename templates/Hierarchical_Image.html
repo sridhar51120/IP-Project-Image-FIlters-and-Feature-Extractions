@@ -50,7 +50,7 @@
         </div>
     </div>
 </div>
-<!-- <div class="container-fluid pt-4 px-4">
+<div class="container-fluid pt-4 px-4">
     <div class="bg-secondary text-center rounded p-4">
         <div class="card card-body bg-dark text-secondary">
             <div class="d-flex align-items-center justify-content-between">
@@ -90,10 +90,10 @@
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 <li><a class="dropdown-item btn btn-primary"
-                                        id="dropdown-edge-detected-python-code">Python</a>
+                                        id="dropdown-hierarchical-image-python-code">Python</a>
                                 </li>
                                 <li><a class="dropdown-item btn btn-primary"
-                                        id="dropdown-edge-detected-matlab-script-code">MatLab</a>
+                                        id="dropdown-hierarchical-image-matlab-script-code">MatLab</a>
                                 </li>
                             </ul>
                         </div>
@@ -106,7 +106,7 @@
         <br>
         <div class="card bg-primary">
             <div class="card bg-dark" id="code-block">
-                <div class="container" id="edge-detected-python-code">
+                <div class="container" id="hierarchical-image-python-code">
                     <div class="mb-1"></div>
                     <div class="col col-12 d-flex justify-content-start"><span># Import Required Library</span>
                     </div>
@@ -114,38 +114,97 @@
                         <code>import cv2</code>
                     </div>
                     <div class="col col-12 d-flex justify-content-start">
-                        <code>import numpy as np</code>
+                        <code>from skimage import io, color</code>
                     </div>
                     <div class="mb-3"></div>
                     <div class="col col-12 d-flex justify-content-start"><span># Read the image </span></div>
                     <div class="col col-12 d-flex justify-content-start">
-                        <code>image = cv2.imread('path_to_your_image.jpg', 0)                       </code>
+                        <code>image = io.imread('path_to_your_image.jpg')</code>
                     </div>
                     <div class="mb-3"></div>
-                    <div class="col col-12 d-flex justify-content-start"><span># Apply Canny edge detection</span>
+                    <div class="col col-12 d-flex justify-content-start"><span># Convert the image to grayscale</span>
                     </div>
                     <div class="col col-12 d-flex justify-content-start">
-                        <code>edges = cv2.Canny(image, 100, 200)
+                        <code>gray_image = color.rgb2gray(image)
                         </code>
                     </div>
                     <div class="mb-3"></div>
                     <div class="col col-12 d-flex justify-content-start"><span>
-                            # Display the original and edge-detected images
+                            # Function for quadtree decomposition
                         </span>
                     </div>
                     <div class="col col-12 d-flex justify-content-start">
-                        <code>cv2.imshow('Original Image', image)</code>
+                        <code>def quadtree_decomposition(img, level):</code>
                     </div>
                     <div class="col col-12 d-flex justify-content-start">
-                        <code>cv2.imshow('Edge Detected Image', edges)</code>
+                        <code>if level == 0:                        </code>
                     </div>
                     <div class="col col-12 d-flex justify-content-start">
-                        <code>cv2.waitKey(0)
+                        <code>return img.mean()
                         </code>
                     </div>
                     <div class="col col-12 d-flex justify-content-start">
-                        <code>cv2.destroyAllWindows()
+                        <code>else:
                         </code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>rows, cols = img.shape
+                        </code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>half_rows, half_cols = rows // 2, cols // 2
+                        </code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>quads = [img[:half_rows, :half_cols], img[:half_rows, half_cols:],
+                        </code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>img[half_rows:, :half_cols], img[half_rows:, half_cols:]]
+                        </code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>quad_img = cellfun(@(x) quadtree_decomposition(x, level-1), quads, 'UniformOutput', false);
+                        </code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>hierarchical_img = [quad_img{1}, quad_img{2}; quad_img{3}, quad_img{4}];
+                        </code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>end
+                        </code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>end
+                        </code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span>
+                            % Set the level of decomposition
+                        </span>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>decomposition_level = 4;</code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span>
+                            % Perform quadtree decomposition
+                        </span>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>hierarchical_img = quadtree_decomposition(gray_image, decomposition_level);</code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span>
+                            % Display the hierarchical image
+                        </span>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>imshow(hierarchical_img);</code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>title('Hierarchical Image Representation');</code>
                     </div>
                 </div>
                 <div class="mb-1"></div>
@@ -164,7 +223,7 @@
         <div class="bg-secondary ">
             <div class="card card-body bg-dark text-secondary">
                 <p class="lead text-muted text-left">
-                    The following code will take a live image feed from your machine and apply Edge Detection to
+                    The following code will take a live image feed from your machine and apply Hierarichal Image to
                     it, then display both original frame as well as its
                 </p>
             </div>
@@ -172,15 +231,15 @@
         <div class="bg-secondary ">
             <div class="card card-body bg-dark text-secondary">
                 <div class="d-flex justify-content-center">
-                    <button class="btn btn-success btn-sm  btn-load-img-edge-detection">Lets Start Live Demo</button>
+                    <button class="btn btn-success btn-sm  btn-load-img-hierarchical-image">Lets Start Live
+                        Demo</button>
                 </div>
             </div>
         </div>
     </div>
 </div>
 <div class="modal-content"></div>
-<div class="edge-detect-image-collapse"></div>
-<br> -->
-
+<div class="hierarchical-input-image-collapse"></div>
+<br>
 
 {% endblock content %}

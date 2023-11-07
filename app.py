@@ -4,7 +4,7 @@ import cv2
 import numpy as np
 import os
 from src.Enhancement import Enhancement
-from blueprints import enhancement, segmentation, restoring, modals, filters1, filters2, files, filters3
+from blueprints import enhancement, segmentation, restoring, modals, filters1, filters2, files, filters
 
 app = Flask(__name__,static_folder='assets',static_url_path='/')
 
@@ -17,7 +17,7 @@ app.register_blueprint(modals.bp)
 app.register_blueprint(filters1.bp)
 app.register_blueprint(filters2.bp)
 app.register_blueprint(files.bp)
-app.register_blueprint(filters3.bp)
+app.register_blueprint(filters.bp)
 
 @app.route("/",methods=['GET'])
 def dashboard():
@@ -37,11 +37,5 @@ def copy():
 def test():
    return render_template('test.html')
 
-# TODO:
-'''
-   Homomarphic filter -> Python Code
-   Hormonic Filter -> js and Html Code
-
-'''
 if __name__ == '__main__':
    app.run(host='127.0.0.1', port=5000, debug=True)

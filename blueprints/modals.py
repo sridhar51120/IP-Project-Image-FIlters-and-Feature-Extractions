@@ -123,3 +123,41 @@ def unsharp_masking_temp():
 @bp.route("/weiner_filter",methods=['GET'])
 def weiner_filter_temp():
    return render_template("modals/Weiner.html")
+
+@bp.route("/dft",methods=['GET'])
+def dft_temp():
+   return render_template("modals/dft.html")
+
+@bp.route("/dilation",methods=['GET'])
+def dilation_temp():
+   return render_template("modals/dilation.html")
+
+@bp.route("/errosion",methods=['GET'])
+def errosion_temp():
+   return render_template("modals/erosion.html")
+
+@bp.route("/hierarchical-image",methods=['GET'])
+def hierarchical_image_temp():
+   return render_template("modals/Hierarchical_Image.html")
+
+@bp.route("/hough_transform",methods=['GET'])
+def hough_transform_image_temp():
+   return render_template("modals/hough_transform.html")
+
+
+@bp.route("/region_growing",methods=['GET'])
+def region_growing_image_temp():
+   return render_template("modals/region_growing.html")
+
+@bp.route("/region_merging",methods=['GET'])
+def region_merging_image_temp():
+   return render_template("modals/region_merging.html")
+
+@bp.route("/runLengthCoding",methods=['GET'])
+def runLengthCoding_image_temp():
+   return render_template("modals/runLengthEncode.html")
+
+
+@bp.route("/vectorQuantization",methods=['GET'])
+def vectorQuantization_image_temp():
+   return render_template("modals/VectorQuantization.html")
