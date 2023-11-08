@@ -42,6 +42,8 @@ $(document).ready(function () {
                                     toggle: false
                                 }).show();
 
+                                $('.order-statcies-user-image').remove();
+
                                 var image_template = `
                             <img src="${data['img_url']}" id="${data['img_url']}" alt="original Image" style="display:none;">
                             <img src="${data['Order_statistics']}" id="${data['Order_statistics']}" alt="Ordered Statics Filter Image" style="display:none;">
@@ -67,6 +69,12 @@ $(document).ready(function () {
                                     document.body.appendChild(a);
                                     a.click();
                                     document.body.removeChild(a);
+                                });
+                                $('.btn-window-localtion-reload').click(function () {
+                                    location.reload();
+                                    $('html, body').animate({
+                                        scrollTop: $('.order-statcies-user-image').offset().top
+                                    }, 1000);
                                 });
                             },
                             error: function (xhr, status, error) {
@@ -95,6 +103,19 @@ $(document).ready(function () {
     });
 });
 
+$(document).ready(function () {
+    $('.btn-load-video-tutorial-order-statices').click(function () {
+        $.get("/user_tutorial_video/order_statics", function (data) {
+            $('.user-tutorial-video-content').append(data);
+            $('#order-statistic-user-video-tutorial-modal').modal('show');
+            $('.order-statistic-user-video-tutorial-modal-close').click(function () {
+                $('#order-statistic-user-video-tutorial-modal').modal('hide');
+                $('#order-statistic-user-video-tutorial-modal').remove();
+                location.reload();
+            });
+        });
+    })
+})
 $(document).ready(function () {
     $('#dropdown-order-statics-filter-python-code').click(function () {
         $('#order-statistic-matlab-code').remove();

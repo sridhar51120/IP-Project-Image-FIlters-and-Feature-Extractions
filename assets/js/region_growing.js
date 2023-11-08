@@ -41,6 +41,8 @@ $(document).ready(function () {
                                     toggle: false
                                 }).show();
 
+                                $('.region-growing-user-image').remove();
+
                                 var image_template = `
                             <img src="${data['img_url']}" id="${data['img_url']}" alt="original Image" style="display:none;">
                             <img src="${data['region_growing']}" id="${data['region_growing']}" alt="Region Growing Image" style="display:none;">
@@ -66,6 +68,12 @@ $(document).ready(function () {
                                     document.body.appendChild(a);
                                     a.click();
                                     document.body.removeChild(a);
+                                });
+                                $('.btn-window-localtion-reload').click(function () {
+                                    location.reload();
+                                    $('html, body').animate({
+                                        scrollTop: $('.region-growing-user-image').offset().top
+                                    }, 1000);
                                 });
                             },
                             error: function (xhr, status, error) {
@@ -93,6 +101,20 @@ $(document).ready(function () {
         });
     });
 });
+
+$(document).ready(function () {
+    $('.btn-load-video-tutorial-region-growing').click(function () {
+        $.get("/user_tutorial_video/region_growing", function (data) {
+            $('.user-tutorial-video-content').append(data);
+            $('#region-growing-user-video-tutorial-modal').modal('show');
+            $('.region-growing-user-video-tutorial-modal-close').click(function () {
+                $('#region-growing-user-video-tutorial-modal').modal('hide');
+                $('#region-growing-user-video-tutorial-modal').remove();
+                location.reload();
+            });
+        });
+    })
+})
 
 $(document).ready(function () {
     $('#dropdown-region-growing-matlab-script-code').click(function () {

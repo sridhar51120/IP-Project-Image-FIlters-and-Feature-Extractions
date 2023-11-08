@@ -50,20 +50,29 @@
         </div>
     </div>
 </div>
-<div class="container-fluid pt-4 px-4">
-    <div class="bg-secondary text-center rounded p-4">
-        <div class="card card-body bg-dark text-secondary">
-            <div class="d-flex align-items-center justify-content-between">
-                <h6 class="mb-0 text-primary">Tutorial Video(youtube)</h6>
-            </div>
-        </div>
-        <div class="mb-3"></div>
-        <div class="bg-secondary ">
+<div class="constrained-least-square-user-video">
+    <div class="container-fluid pt-4 px-4">
+        <div class="bg-secondary text-center rounded p-4">
             <div class="card card-body bg-dark text-secondary">
-                <iframe width="100%" height="315" src="https://www.youtube.com/embed/WWr9086eWtY?si=KzK0fOLGvd3ZXaWu"
-                    title="YouTube video player" frameborder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    allowfullscreen></iframe>
+                <div class="d-flex align-items-center justify-content-between">
+                    <h6 class="mb-0 text-primary">Tutorial Video(youtube)</h6>
+                </div>
+            </div>
+            <div class="mb-2"></div>
+            <div class="bg-secondary ">
+                <div class="card card-body bg-dark text-secondary">
+                    <p class="lead text-muted text-left">
+                        <!-- Explain Video Content -->
+                        The following page will take a live video tutorial.
+                    </p>
+                </div>
+            </div>
+            <div class="bg-secondary ">
+                <div class="card card-body bg-dark text-secondary">
+                    <div class="d-flex justify-content-center">
+                        <button class="btn btn-success btn-sm btn-load-video-tutorial-constrained-least-square">Lets Start the Video Tutorials</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -204,28 +213,30 @@
         </div>
     </div>
 </div>
-<div class="container-fluid pt-4 px-4">
-    <div class="bg-secondary text-center rounded p-4">
-        <div class="card card-body bg-dark text-secondary">
-            <div class="d-flex align-items-center justify-content-between">
-                <h6 class="mb-0 text-primary">Live Demo</h6>
-            </div>
-        </div>
-        <div class="mb-2"></div>
-        <div class="bg-secondary ">
+<div class="constrained-least-square-user-image">
+    <div class="container-fluid pt-4 px-4">
+        <div class="bg-secondary text-center rounded p-4">
             <div class="card card-body bg-dark text-secondary">
-                <p class="lead text-muted text-left">
-                    The following code will take a live image feed from your machine and apply Constrained least square
-                    filtering to
-                    it, then display both original frame as well as its
-                </p>
+                <div class="d-flex align-items-center justify-content-between">
+                    <h6 class="mb-0 text-primary">Live Demo</h6>
+                </div>
             </div>
-        </div>
-        <div class="bg-secondary ">
-            <div class="card card-body bg-dark text-secondary">
-                <div class="d-flex justify-content-center">
-                    <button class="btn btn-success btn-sm btn-load-img-constrained-least-square-filtering">Lets Start
-                        Live Demo</button>
+            <div class="mb-2"></div>
+            <div class="bg-secondary ">
+                <div class="card card-body bg-dark text-secondary">
+                    <p class="lead text-muted text-left">
+                        The following code will take a live image feed from your machine and apply Constrained least square
+                        filtering to
+                        it, then display both original frame as well as its
+                    </p>
+                </div>
+            </div>
+            <div class="bg-secondary ">
+                <div class="card card-body bg-dark text-secondary">
+                    <div class="d-flex justify-content-center">
+                        <button class="btn btn-success btn-sm btn-load-img-constrained-least-square-filtering">Lets Start
+                            Live Demo</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -234,5 +245,5 @@
 <div class="modal-content"></div>
 <div class="constrained-least_image_collapse"></div>
 <br>
-
+<div class="user-tutorial-video-content"></div>
 {% endblock content %}

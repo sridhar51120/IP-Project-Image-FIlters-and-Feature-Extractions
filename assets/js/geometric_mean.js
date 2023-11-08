@@ -41,6 +41,8 @@ $(document).ready(function () {
                                     toggle: false
                                 }).show();
 
+                                $('.geometric-mean-filter-user-image').remove();
+
                                 var image_template = `
                             <img src="${data['img_url']}" id="${data['img_url']}" alt="original Image" style="display:none;">
                             <img src="${data['geometric_img']}" id="${data['geometric_img']}" alt="Geometric Mean Filter Image" style="display:none;">
@@ -53,7 +55,6 @@ $(document).ready(function () {
                                         interval: 500
                                     }).show();
                                 });
-                                // TODO: 404 Error Occured -> Image Not Found
                                 $('.btn-geometric-filter-output-image-show').click(function () {
                                     new Viewer(document.getElementById(`${data['geometric_img']}`), {
                                         loop: true,
@@ -67,6 +68,12 @@ $(document).ready(function () {
                                     document.body.appendChild(a);
                                     a.click();
                                     document.body.removeChild(a);
+                                });
+                                $('.btn-window-localtion-reload').click(function () {
+                                    location.reload();
+                                    $('html, body').animate({
+                                        scrollTop: $('.geometric-mean-filter-user-image').offset().top
+                                    }, 1000);
                                 });
                             },
                             error: function (xhr, status, error) {
@@ -95,6 +102,19 @@ $(document).ready(function () {
     });
 });
 
+$(document).ready(function () {
+    $('.btn-load-video-tutorial-geometic-mean').click(function () {
+        $.get("/user_tutorial_video/geometric", function (data) {
+            $('.user-tutorial-video-content').append(data);
+            $('#geometric-mean-user-video-tutorial-modal').modal('show');
+            $('.geometric-mean-user-video-tutorial-modal-close').click(function () {
+                $('#geometric-mean-user-video-tutorial-modal').modal('hide');
+                $('#geometric-mean-user-video-tutorial-modal').remove();
+                location.reload();
+            });
+        });
+    })
+})
 
 $(document).ready(function () {
     $('#dropdown-geometric-filter-matlab-script-code').click(function () {

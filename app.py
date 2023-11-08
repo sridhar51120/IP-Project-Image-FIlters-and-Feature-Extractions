@@ -4,7 +4,7 @@ import cv2
 import numpy as np
 import os
 from src.Enhancement import Enhancement
-from blueprints import enhancement, segmentation, restoring, modals, filters1, filters2, files, filters
+from blueprints import enhancement, segmentation, restoring, modals, filters1, filters2, files, filters, videoModals
 
 app = Flask(__name__,static_folder='assets',static_url_path='/')
 
@@ -18,6 +18,7 @@ app.register_blueprint(filters1.bp)
 app.register_blueprint(filters2.bp)
 app.register_blueprint(files.bp)
 app.register_blueprint(filters.bp)
+app.register_blueprint(videoModals.bp)
 
 @app.route("/",methods=['GET'])
 def dashboard():

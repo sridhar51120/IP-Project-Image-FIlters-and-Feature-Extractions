@@ -18,18 +18,13 @@ def getContentFolder(folder_path):
 
 
 def remove_folder_contents(folder_path):
-    if os.path.exists(folder_path) and os.path.isdir(folder_path):
-        for filename in os.listdir(folder_path):
-            folder_path = os.path.join(folder_path, filename)
-            try:
-                if os.path.isfile(folder_path):
-                    os.unlink(folder_path)
-                elif os.path.isdir(folder_path):
-                    shutil.rmtree(folder_path)
-            except Exception as e:
-                pass
-                # print(f"Failed to delete {folder_path}. Reason: {e}")
-        return True
+    for filename in os.listdir(folder_path):
+        file_path = os.path.join(folder_path, filename)
+        try:
+            if os.path.isfile(file_path):
+                os.unlink(file_path)
+        except Exception as e:
+            print(e)
 
 
 def createFolder(folder_path):
@@ -44,11 +39,8 @@ def isAvailbeFolder():
     folderName = data['folderName']
 
     if os.path.exists(folderName):
-        # Folder exists, try to delete its contents
-        if remove_folder_contents(folderName):
-            return jsonify({'message': 'Success', 'data': 'deleted'})
-        else:
-            return jsonify({'message': 'Error', 'reason': 'Failed to delete folder contents'})
+        remove_folder_contents(folderName)
+        return jsonify({'message': 'Success', 'data': 'deleted'})
     else:
         if createFolder(folderName):
             return jsonify({'message': 'Success', 'folder': 'created'})

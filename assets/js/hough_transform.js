@@ -41,6 +41,8 @@ $(document).ready(function () {
                                     toggle: false
                                 }).show();
 
+                                $('.hough-transform-user-image').remove();
+
                                 var image_template = `
                             <img src="${data['img_url']}" id="${data['img_url']}" alt="original Image" style="display:none;">
                             <img src="${data['hough_transform']}" id="${data['hough_transform']}" alt="Hough Transform Image" style="display:none;">
@@ -66,6 +68,12 @@ $(document).ready(function () {
                                     document.body.appendChild(a);
                                     a.click();
                                     document.body.removeChild(a);
+                                });
+                                $('.btn-window-localtion-reload').click(function () {
+                                    location.reload();
+                                    $('html, body').animate({
+                                        scrollTop: $('.hough-transform-user-image').offset().top
+                                    }, 1000);
                                 });
                             },
                             error: function (xhr, status, error) {
@@ -93,6 +101,20 @@ $(document).ready(function () {
         });
     });
 });
+
+$(document).ready(function () {
+    $('.btn-load-video-tutorial-hough-transform').click(function () {
+        $.get("/user_tutorial_video/hough_transform", function (data) {
+            $('.user-tutorial-video-content').append(data);
+            $('#hough-transform-user-video-tutorial-modal').modal('show');
+            $('.hough-transform-user-video-tutorial-modal-close').click(function () {
+                $('#hough-transform-user-video-tutorial-modal').modal('hide');
+                $('#hough-transform-user-video-tutorial-modal').remove();
+                location.reload();
+            });
+        });
+    })
+})
 
 $(document).ready(function () {
     $('#dropdown-hough-transform-python-code').click(function () {

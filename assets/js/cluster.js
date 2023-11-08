@@ -40,6 +40,7 @@ $(document).ready(function () {
                                 $('#output-clustering-toggle-groups').collapse({
                                     toggle: false
                                 }).show();
+                                $('.cluster-user-image').remove();
 
                                 var image_template = `
                             <img src="${data['img_url']}" id="${data['img_url']}" alt="original Image" style="display:none;">
@@ -66,6 +67,12 @@ $(document).ready(function () {
                                     document.body.appendChild(a);
                                     a.click();
                                     document.body.removeChild(a);
+                                });
+                                $('.btn-window-localtion-reload').click(function () {
+                                    location.reload();
+                                    $('html, body').animate({
+                                        scrollTop: $('.cluster-user-image').offset().top
+                                    }, 1000);
                                 });
                             },
                             error: function (xhr, status, error) {
@@ -94,6 +101,19 @@ $(document).ready(function () {
     });
 });
 
+$(document).ready(function () {
+    $('.btn-load-video-tutorial-cluster').click(function () {
+        $.get("/user_tutorial_video/cluster", function (data) {
+            $('.user-tutorial-video-content').append(data);
+            $('#cluster-user-video-tutorial-modal').modal('show');
+            $('.cluster-user-video-tutorial-modal-close').click(function () {
+                $('#cluster-user-video-tutorial-modal').modal('hide');
+                $('#cluster-user-video-tutorial-modal').remove();
+                location.reload();
+            });
+        });
+    })
+})
 
 $(document).ready(function () {
     $('#dropdown-clustering-python-code').click(function () {

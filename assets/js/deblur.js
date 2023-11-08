@@ -41,6 +41,8 @@ $(document).ready(function () {
                                     toggle: false
                                 }).show();
 
+                                $('.deblur-user-image').remove();
+
                                 var image_template = `
                             <img src="${data['img_url']}" id="${data['img_url']}" alt="original Image" style="display:none;">
                             <img src="${data['deblur_img']}" id="${data['deblur_img']}" alt="Deblured Image" style="display:none;">
@@ -66,6 +68,12 @@ $(document).ready(function () {
                                     document.body.appendChild(a);
                                     a.click();
                                     document.body.removeChild(a);
+                                });
+                                $('.btn-window-localtion-reload').click(function () {
+                                    location.reload();
+                                    $('html, body').animate({
+                                        scrollTop: $('.deblur-user-image').offset().top
+                                    }, 1000);
                                 });
                             },
                             error: function (xhr, status, error) {
@@ -94,6 +102,19 @@ $(document).ready(function () {
     });
 });
 
+$(document).ready(function () {
+    $('.btn-load-video-tutorial-deblur').click(function () {
+        $.get("/user_tutorial_video/deblur", function (data) {
+            $('.user-tutorial-video-content').append(data);
+            $('#deblur-user-video-tutorial-modal').modal('show');
+            $('.deblur-user-video-tutorial-modal-close').click(function () {
+                $('#deblur-user-video-tutorial-modal').modal('hide');
+                $('#deblur-user-video-tutorial-modal').remove();
+                location.reload();
+            });
+        });
+    })
+})
 
 $(document).ready(function () {
     $('#dropdown-deblur-python-code').click(function () {

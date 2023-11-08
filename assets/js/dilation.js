@@ -41,6 +41,8 @@ $(document).ready(function () {
                                     toggle: false
                                 }).show();
 
+                                $('.dilation-user-image').remove();
+
                                 var image_template = `
                             <img src="${data['img_url']}" id="${data['img_url']}" alt="original Image" style="display:none;">
                             <img src="${data['dilation_output_img']}" id="${data['dilation_output_img']}" alt="Dilation Image" style="display:none;">
@@ -66,6 +68,12 @@ $(document).ready(function () {
                                     document.body.appendChild(a);
                                     a.click();
                                     document.body.removeChild(a);
+                                });
+                                $('.btn-window-localtion-reload').click(function () {
+                                    location.reload();
+                                    $('html, body').animate({
+                                        scrollTop: $('.dilation-user-image').offset().top
+                                    }, 1000);
                                 });
                             },
                             error: function (xhr, status, error) {
@@ -93,6 +101,20 @@ $(document).ready(function () {
         });
     });
 });
+
+$(document).ready(function () {
+    $('.btn-load-video-tutorial-dilation').click(function () {
+        $.get("/user_tutorial_video/dilation", function (data) {
+            $('.user-tutorial-video-content').append(data);
+            $('#dilation-user-video-tutorial-modal').modal('show');
+            $('.dilation-user-video-tutorial-modal-close').click(function () {
+                $('#dilation-user-video-tutorial-modal').modal('hide');
+                $('#dilation-user-video-tutorial-modal').remove();
+                location.reload();
+            });
+        });
+    })
+})
 
 $(document).ready(function () {
     $('#dropdown-dilation-python-code').click(function () {

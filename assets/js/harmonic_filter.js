@@ -41,6 +41,8 @@ $(document).ready(function () {
                                     toggle: false
                                 }).show();
 
+                                $('.hormonic-filter-user-image').remove();
+
                                 var image_template = `
                             <img src="${data['img_url']}" id="${data['img_url']}" alt="original Image" style="display:none;">
                             <img src="${data['harmonic_filter']}" id="${data['harmonic_filter']}" alt="Harmonic Filter Image" style="display:none;">
@@ -66,6 +68,12 @@ $(document).ready(function () {
                                     document.body.appendChild(a);
                                     a.click();
                                     document.body.removeChild(a);
+                                });
+                                $('.btn-window-localtion-reload').click(function () {
+                                    location.reload();
+                                    $('html, body').animate({
+                                        scrollTop: $('.hormonic-filter-user-image').offset().top
+                                    }, 1000);
                                 });
                             },
                             error: function (xhr, status, error) {
@@ -93,7 +101,19 @@ $(document).ready(function () {
         });
     });
 });
-
+$(document).ready(function () {
+    $('.btn-load-video-tutorial-hormonic-filter').click(function () {
+        $.get("/user_tutorial_video/harmonic", function (data) {
+            $('.user-tutorial-video-content').append(data);
+            $('#hormonic-user-video-tutorial-modal').modal('show');
+            $('.hormonic-user-video-tutorial-modal-close').click(function () {
+                $('#hormonic-user-video-tutorial-modal').modal('hide');
+                $('#hormonic-user-video-tutorial-modal').remove();
+                location.reload();
+            });
+        });
+    })
+})
 
 $(document).ready(function () {
     $('#dropdown-hormonic-filter-python-code').click(function () {

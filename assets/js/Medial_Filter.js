@@ -42,6 +42,8 @@ $(document).ready(function () {
                                     toggle: false
                                 }).show();
 
+                                $('.medial-filter-user-image').remove();
+
                                 var image_template = `
                             <img src="${data['img_url']}" id="${data['img_url']}" alt="original Image" style="display:none;">
                             <img src="${data['median_img']}" id="${data['median_img']}" alt="Median Filter Image" style="display:none;">
@@ -67,6 +69,12 @@ $(document).ready(function () {
                                     document.body.appendChild(a);
                                     a.click();
                                     document.body.removeChild(a);
+                                });
+                                $('.btn-window-localtion-reload').click(function () {
+                                    location.reload();
+                                    $('html, body').animate({
+                                        scrollTop: $('.medial-filter-user-image').offset().top
+                                    }, 1000);
                                 });
                             },
                             error: function (xhr, status, error) {
@@ -94,6 +102,20 @@ $(document).ready(function () {
         });
     });
 });
+
+$(document).ready(function () {
+    $('.btn-load-video-tutorial-median-filter').click(function () {
+        $.get("/user_tutorial_video/median_filter", function (data) {
+            $('.user-tutorial-video-content').append(data);
+            $('#median-filter-user-video-tutorial-modal').modal('show');
+            $('.median-filter-user-video-tutorial-modal-close').click(function () {
+                $('#median-filter-user-video-tutorial-modal').modal('hide');
+                $('#median-filter-user-video-tutorial-modal').remove();
+                location.reload();
+            });
+        });
+    })
+})
 
 $(document).ready(function () {
     $('#dropdown-median-filter-python-code').click(function () {

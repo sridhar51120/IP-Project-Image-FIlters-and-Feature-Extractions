@@ -36,10 +36,11 @@ $(document).ready(function () {
                                 // console.log('Data : ', data);
 
                                 $('.homomarphic-filter-input-image-collapse').append(data['template']);
-                                data['template']
                                 $('.output-homomarphic-filter-toggle-groups').collapse({
                                     toggle: false
                                 }).show();
+
+                                $('.homomorphic-filter-user-image').remove();
 
                                 var image_template = `
                             <img src="${data['img_url']}" id="${data['img_url']}" alt="original Image" style="display:none;">
@@ -67,6 +68,12 @@ $(document).ready(function () {
                                     a.click();
                                     document.body.removeChild(a);
                                 });
+                                $('.btn-window-localtion-reload').click(function () {
+                                    location.reload();
+                                    $('html, body').animate({
+                                        scrollTop: $('.homomorphic-filter-user-image').offset().top
+                                    }, 1000);
+                                });
                             },
                             error: function (xhr, status, error) {
                                 // console.log('XHR status:', status);
@@ -93,4 +100,18 @@ $(document).ready(function () {
         });
     });
 });
+
+$(document).ready(function () {
+    $('.btn-load-video-tutorial-homomarphic-filter').click(function () {
+        $.get("/user_tutorial_video/homomarphic_filter", function (data) {
+            $('.user-tutorial-video-content').append(data);
+            $('#homomorphic-user-video-tutorial-modal').modal('show');
+            $('.homomorphic-user-video-tutorial-modal-close').click(function () {
+                $('#homomorphic-user-video-tutorial-modal').modal('hide');
+                $('#homomorphic-user-video-tutorial-modal').remove();
+                location.reload();
+            });
+        });
+    })
+})
 

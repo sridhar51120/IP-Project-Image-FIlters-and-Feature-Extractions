@@ -41,6 +41,8 @@ $(document).ready(function () {
                                     toggle: false
                                 }).show();
 
+                                $('.region-merging-user-image').remove();
+
                                 var image_template = `
                             <img src="${data['img_url']}" id="${data['img_url']}" alt="original Image" style="display:none;">
                             <img src="${data['region_merging']}" id="${data['region_merging']}" alt="Region Merging Image" style="display:none;">
@@ -66,6 +68,12 @@ $(document).ready(function () {
                                     document.body.appendChild(a);
                                     a.click();
                                     document.body.removeChild(a);
+                                });
+                                $('.btn-window-localtion-reload').click(function () {
+                                    location.reload();
+                                    $('html, body').animate({
+                                        scrollTop: $('.region-merging-user-image').offset().top
+                                    }, 1000);
                                 });
                             },
                             error: function (xhr, status, error) {
@@ -93,6 +101,20 @@ $(document).ready(function () {
         });
     });
 });
+
+$(document).ready(function () {
+    $('.btn-load-video-tutorial-region-merging').click(function () {
+        $.get("/user_tutorial_video/region_merging", function (data) {
+            $('.user-tutorial-video-content').append(data);
+            $('#region-merging-user-video-tutorial-modal').modal('show');
+            $('.region-merging-user-video-tutorial-modal-close').click(function () {
+                $('#region-merging-user-video-tutorial-modal').modal('hide');
+                $('#region-merging-user-video-tutorial-modal').remove();
+                location.reload();
+            });
+        });
+    })
+})
 
 $(document).ready(function () {
     $('#dropdown-region-merging-matlab-script-code').click(function () {

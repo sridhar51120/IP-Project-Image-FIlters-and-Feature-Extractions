@@ -38,6 +38,8 @@ $(document).ready(function () {
                                     toggle: false
                                 }).show();
 
+                                $('.spatial-filter-user-imager').remove();
+
                                 var image_template = `
                             <img src="${data['img_url']}" id="${data['img_url']}" alt="original Image" style="display:none;">
                             <img src="${data['spatial_filter']}" id="${data['spatial_filter']}" alt="Spatial Filter Image" style="display:none;">
@@ -63,6 +65,12 @@ $(document).ready(function () {
                                     document.body.appendChild(a);
                                     a.click();
                                     document.body.removeChild(a);
+                                });
+                                $('.btn-window-localtion-reload').click(function () {
+                                    location.reload();
+                                    $('html, body').animate({
+                                        scrollTop: $('.spatial-filter-user-imager').offset().top
+                                    }, 1000);
                                 });
                             },
                             error: function (xhr, status, error) {
@@ -91,6 +99,19 @@ $(document).ready(function () {
     });
 });
 
+$(document).ready(function () {
+    $('.btn-load-video-tutorial-spatial-filter').click(function () {
+        $.get("/user_tutorial_video/spatial", function (data) {
+            $('.user-tutorial-video-content').append(data);
+            $('#spatial-filter-user-video-tutorial-modal').modal('show');
+            $('.spatial-filter-user-video-tutorial-modal-close').click(function () {
+                $('#spatial-filter-user-video-tutorial-modal').modal('hide');
+                $('#spatial-filter-user-video-tutorial-modal').remove();
+                location.reload();
+            });
+        });
+    })
+})
 
 $(document).ready(function () {
     $('#dropdown-code-spatial-filter-snippets-python-code').click(function () {

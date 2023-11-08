@@ -41,6 +41,8 @@ $(document).ready(function () {
                                     toggle: false
                                 }).show();
 
+                                $('.adaptive-filter-user-input-image').remove();
+
                                 var image_template = `
                             <img src="${data['img_url']}" id="${data['img_url']}" alt="original Image" style="display:none;">
                             <img src="${data['Adaptive_filter']}" id="${data['Adaptive_filter']}" alt="Adaptive Filter Image" style="display:none;">
@@ -66,6 +68,12 @@ $(document).ready(function () {
                                     document.body.appendChild(a);
                                     a.click();
                                     document.body.removeChild(a);
+                                });
+                                $('.btn-window-localtion-reload').click(function () {
+                                    location.reload();
+                                    $('html, body').animate({
+                                        scrollTop: $('.adaptive-filter-user-input-image').offset().top
+                                    }, 1000);
                                 });
                             },
                             error: function (xhr, status, error) {
@@ -94,6 +102,20 @@ $(document).ready(function () {
     });
 });
 
+
+$(document).ready(function () {
+    $('.btn-load-video-tutorial-adaptive-filter').click(function () {
+        $.get("/user_tutorial_video/adaptive_filter", function (data) {
+            $('.user-tutorial-video-content').append(data);
+            $('#adaptive-filter-user-video-tutorial-modal').modal('show');
+            $('.adaptive-filter-user-video-tutorial-modal-close').click(function () {
+                $('#adaptive-filter-user-video-tutorial-modal').modal('hide');
+                $('#adaptive-filter-user-video-tutorial-modal').remove();
+                location.reload();
+            });
+        });
+    })
+})
 
 $(document).ready(function () {
     $('#dropdown-adaptive-filter-python-code').click(function () {

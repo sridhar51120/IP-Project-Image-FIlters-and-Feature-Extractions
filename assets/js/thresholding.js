@@ -38,6 +38,7 @@ $(document).ready(function () {
                                     toggle: false
                                 }).show();
 
+                                $('.thresholding-user-image').remove();
                                 var image_template = `
                             <img src="${data['img_url']}" id="${data['img_url']}" alt="original Image" style="display:none;">
                             <img src="${data['thresholding']}" id="${data['thresholding']}" alt="Thresolded Image" style="display:none;">
@@ -62,6 +63,12 @@ $(document).ready(function () {
                                     document.body.appendChild(a);
                                     a.click();
                                     document.body.removeChild(a);
+                                });
+                                $('.btn-window-localtion-reload').click(function () {
+                                    location.reload();
+                                    $('html, body').animate({
+                                        scrollTop: $('.thresholding-user-image').offset().top
+                                    }, 1000);
                                 });
                             },
                             error: function (xhr, status, error) {
@@ -90,6 +97,19 @@ $(document).ready(function () {
     });
 });
 
+$(document).ready(function () {
+    $('.btn-load-video-tutorial-thresholding').click(function () {
+        $.get("/user_tutorial_video/thresolding", function (data) {
+            $('.user-tutorial-video-content').append(data);
+            $('#threshold-user-video-tutorial-modal').modal('show');
+            $('.threshold-user-video-tutorial-modal-close').click(function () {
+                $('#threshold-user-video-tutorial-modal').modal('hide');
+                $('#threshold-user-video-tutorial-modal').remove();
+                location.reload();
+            });
+        });
+    })
+})
 
 $(document).ready(function () {
     $('#dropdown-threshold-matlab-script-code').click(function () {

@@ -41,6 +41,8 @@ $(document).ready(function () {
                                     toggle: false
                                 }).show();
 
+                                $('.erosion-user-image').remove();
+
                                 var image_template = `
                             <img src="${data['img_url']}" id="${data['img_url']}" alt="original Image" style="display:none;">
                             <img src="${data['erroded_img']}" id="${data['erroded_img']}" alt="Errorded Image" style="display:none;">
@@ -66,6 +68,12 @@ $(document).ready(function () {
                                     document.body.appendChild(a);
                                     a.click();
                                     document.body.removeChild(a);
+                                });
+                                $('.btn-window-localtion-reload').click(function () {
+                                    location.reload();
+                                    $('html, body').animate({
+                                        scrollTop: $('.erosion-user-image').offset().top
+                                    }, 1000);
                                 });
                             },
                             error: function (xhr, status, error) {
@@ -93,6 +101,19 @@ $(document).ready(function () {
         });
     });
 });
+$(document).ready(function () {
+    $('.btn-load-video-tutorial-erosion').click(function () {
+        $.get("/user_tutorial_video/errosion", function (data) {
+            $('.user-tutorial-video-content').append(data);
+            $('#erosion-user-video-tutorial-modal').modal('show');
+            $('.erosion-user-video-tutorial-modal-close').click(function () {
+                $('#erosion-user-video-tutorial-modal').modal('hide');
+                $('#erosion-user-video-tutorial-modal').remove();
+                location.reload();
+            });
+        });
+    })
+})
 
 $(document).ready(function () {
     $('#dropdown-erosion-python-code').click(function () {

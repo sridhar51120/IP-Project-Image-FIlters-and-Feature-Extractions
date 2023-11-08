@@ -40,7 +40,8 @@ $(document).ready(function () {
                                 $('#output-constraint-least-toggle-groups').collapse({
                                     toggle: false
                                 }).show();
-                                // TODO:
+                                $('.constrained-least-square-user-image').remove();
+
                                 var image_template = `
                             <img src="${data['img_url']}" id="${data['img_url']}" alt="original Image" style="display:none;">
                             <img src="${data['constaint_img']}" id="${data['constaint_img']}" alt="Deblured Image" style="display:none;">
@@ -66,6 +67,12 @@ $(document).ready(function () {
                                     document.body.appendChild(a);
                                     a.click();
                                     document.body.removeChild(a);
+                                });
+                                $('.btn-window-localtion-reload').click(function () {
+                                    location.reload();
+                                    $('html, body').animate({
+                                        scrollTop: $('.constrained-least-square-user-image').offset().top
+                                    }, 1000);
                                 });
                             },
                             error: function (xhr, status, error) {
@@ -93,6 +100,19 @@ $(document).ready(function () {
         });
     });
 });
+$(document).ready(function () {
+    $('.btn-load-video-tutorial-constrained-least-square').click(function () {
+        $.get("/user_tutorial_video/constraint_least_square", function (data) {
+            $('.user-tutorial-video-content').append(data);
+            $('#constrained-least-user-video-tutorial-modal').modal('show');
+            $('.constrained-least-user-video-tutorial-modal-close').click(function () {
+                $('#constrained-least-user-video-tutorial-modal').modal('hide');
+                $('#constrained-least-user-video-tutorial-modal').remove();
+                location.reload();
+            });
+        });
+    })
+})
 
 $(document).ready(function () {
     $('#dropdown-constrained-least-python-code').click(function () {

@@ -35,13 +35,11 @@ $(document).ready(function () {
                                 // // console.log('Data : ', data);
 
                                 $('.histo_image_input_collapse').append(data['template']);
-                                $(".output-histogram-toggle-groups").collapse("toggle");
-                                var toggleState = $(".output-histogram-toggle-groups").hasClass("show");
-                                if (toggleState) {
-                                    $(".output-histogram-toggle-groups").attr("data-toggle", "");
-                                } else {
-                                    $(".output-histogram-toggle-groups").attr("data-toggle", "collapse");
-                                }
+                                $('.output-histogram-toggle-groups').collapse({
+                                    toggle: false
+                                }).show();
+
+                                $('.histogram-user-image').remove();
 
                                 var image_template = `
                             <img src="${data['img_url']}" id="${data['img_url']}" alt="original Image" style="display:none;">
@@ -69,6 +67,12 @@ $(document).ready(function () {
                                     a.click();
                                     document.body.removeChild(a);
                                 });
+                                $('.btn-window-localtion-reload').click(function () {
+                                    location.reload();
+                                    $('html, body').animate({
+                                        scrollTop: $('.histogram-user-image').offset().top
+                                    }, 1000);
+                                });
                             },
                             error: function (xhr, status, error) {
                                 // console.log('XHR status:', status);
@@ -95,6 +99,19 @@ $(document).ready(function () {
     });
 
 });
+$(document).ready(function () {
+    $('.btn-load-video-tutorial-histogram').click(function () {
+        $.get("/user_tutorial_video/histogram", function (data) {
+            $('.user-tutorial-video-content').append(data);
+            $('#histogram-user-video-tutorial-modal').modal('show');
+            $('.histogram-user-video-tutorial-modal-close').click(function () {
+                $('#histogram-user-video-tutorial-modal').modal('hide');
+                $('#histogram-user-video-tutorial-modal').remove();
+                location.reload();
+            });
+        });
+    })
+})
 
 $(document).ready(function () {
     $('#dropdown-histogram-python-code').click(function () {

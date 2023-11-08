@@ -41,6 +41,8 @@ $(document).ready(function () {
                                     toggle: false
                                 }).show();
 
+                                $('.non-local-mean-filter-user-image').remove();
+
                                 var image_template = `
                             <img src="${data['img_url']}" id="${data['img_url']}" alt="original Image" style="display:none;">
                             <img src="${data['non_local_mean']}" id="${data['non_local_mean']}" alt="Non local Mean Filter Image" style="display:none;">
@@ -66,6 +68,12 @@ $(document).ready(function () {
                                     document.body.appendChild(a);
                                     a.click();
                                     document.body.removeChild(a);
+                                });
+                                $('.btn-window-localtion-reload').click(function () {
+                                    location.reload();
+                                    $('html, body').animate({
+                                        scrollTop: $('.non-local-mean-filter-user-image').offset().top
+                                    }, 1000);
                                 });
                             },
                             error: function (xhr, status, error) {
@@ -93,6 +101,20 @@ $(document).ready(function () {
         });
     });
 });
+
+$(document).ready(function () {
+    $('.btn-load-video-tutorial-weiner').click(function () {
+        $.get("/user_tutorial_video/weiner_user_tutorial_video", function (data) {
+            $('.user-tutorial-video-content').append(data);
+            $('#weiner-user-video-tutorial-modal').modal('show');
+            $('.weiner-user-video-tutorial-modal-close').click(function () {
+                $('#weiner-user-video-tutorial-modal').modal('hide');
+                $('#weiner-user-video-tutorial-modal').remove();
+                location.reload();
+            });
+        });
+    })
+})
 
 
 $(document).ready(function () {

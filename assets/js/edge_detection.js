@@ -38,6 +38,8 @@ $(document).ready(function () {
                                     toggle: false
                                 }).show();
 
+                                $('.edge-detection-user-image').remove();
+
                                 var image_template = `
                             <img src="${data['img_url']}" id="${data['img_url']}" alt="original Image" style="display:none;">
                             <img src="${data['edge_detection']}" id="${data['edge_detection']}" alt="Edge Detection Image" style="display:none;">
@@ -63,6 +65,12 @@ $(document).ready(function () {
                                     document.body.appendChild(a);
                                     a.click();
                                     document.body.removeChild(a);
+                                });
+                                $('.btn-window-localtion-reload').click(function () {
+                                    location.reload();
+                                    $('html, body').animate({
+                                        scrollTop: $('.edge-detection-user-image').offset().top
+                                    }, 1000);
                                 });
                             },
                             error: function (xhr, status, error) {
@@ -91,6 +99,20 @@ $(document).ready(function () {
     });
 
 });
+
+$(document).ready(function () {
+    $('.btn-load-video-tutorial-edge-detection').click(function () {
+        $.get("/user_tutorial_video/errosion", function (data) {
+            $('.user-tutorial-video-content').append(data);
+            $('#edge-detection-user-video-tutorial-modal').modal('show');
+            $('.edge-detection-user-video-tutorial-modal-close').click(function () {
+                $('#edge-detection-user-video-tutorial-modal').modal('hide');
+                $('#edge-detection-user-video-tutorial-modal').remove();
+                location.reload();
+            });
+        });
+    })
+})
 
 
 $(document).ready(function () {

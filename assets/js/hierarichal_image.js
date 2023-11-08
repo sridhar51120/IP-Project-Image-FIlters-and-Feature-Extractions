@@ -41,6 +41,8 @@ $(document).ready(function () {
                                     toggle: false
                                 }).show();
 
+                                $('.hierarchical-image-user-image').remove();
+
                                 var image_template = `
                             <img src="${data['img_url']}" id="${data['img_url']}" alt="original Image" style="display:none;">
                             <img src="${data['hierarchical']}" id="${data['hierarchical']}" alt="Hierarchical Image" style="display:none;">
@@ -66,6 +68,12 @@ $(document).ready(function () {
                                     document.body.appendChild(a);
                                     a.click();
                                     document.body.removeChild(a);
+                                });
+                                $('.btn-window-localtion-reload').click(function () {
+                                    location.reload();
+                                    $('html, body').animate({
+                                        scrollTop: $('.hierarchical-image-user-image').offset().top
+                                    }, 1000);
                                 });
                             },
                             error: function (xhr, status, error) {
@@ -94,6 +102,19 @@ $(document).ready(function () {
     });
 });
 
+$(document).ready(function () {
+    $('.btn-load-video-tutorial-hierarchical').click(function () {
+        $.get("/user_tutorial_video/hierarchical-image", function (data) {
+            $('.user-tutorial-video-content').append(data);
+            $('#hierarchical-user-video-tutorial-modal').modal('show');
+            $('.hierarchical-user-video-tutorial-modal-close').click(function () {
+                $('#hierarchical-user-video-tutorial-modal').modal('hide');
+                $('#hierarchical-user-video-tutorial-modal').remove();
+                location.reload();
+            });
+        });
+    })
+})
 
 $(document).ready(function () {
     $('#dropdown-hierarchical-image-python-code').click(function () {

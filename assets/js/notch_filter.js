@@ -41,6 +41,7 @@ $(document).ready(function () {
                                     toggle: false
                                 }).show();
 
+                                $('.notch-filter-user-image').remove();
                                 var image_template = `
                             <img src="${data['img_url']}" id="${data['img_url']}" alt="original Image" style="display:none;">
                             <img src="${data['notch_filter']}" id="${data['notch_filter']}" alt="Notch Filter Image" style="display:none;">
@@ -66,6 +67,12 @@ $(document).ready(function () {
                                     document.body.appendChild(a);
                                     a.click();
                                     document.body.removeChild(a);
+                                });
+                                $('.btn-window-localtion-reload').click(function () {
+                                    location.reload();
+                                    $('html, body').animate({
+                                        scrollTop: $('.notch-filter-user-image').offset().top
+                                    }, 1000);
                                 });
                             },
                             error: function (xhr, status, error) {
@@ -93,6 +100,20 @@ $(document).ready(function () {
         });
     });
 });
+
+$(document).ready(function () {
+    $('.btn-load-video-tutorial-notch-filter').click(function () {
+        $.get("/user_tutorial_video/notch_filter", function (data) {
+            $('.user-tutorial-video-content').append(data);
+            $('#notch-filter-user-video-tutorial-modal').modal('show');
+            $('.notch-filter-user-video-tutorial-modal-close').click(function () {
+                $('#notch-filter-user-video-tutorial-modal').modal('hide');
+                $('#notch-filter-user-video-tutorial-modal').remove();
+                location.reload();
+            });
+        });
+    })
+})
 
 
 $(document).ready(function () {

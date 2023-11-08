@@ -40,6 +40,8 @@ $(document).ready(function () {
                                     toggle: false
                                 }).show();
 
+                                $('.inpaint-user-image').remove();
+
                                 var image_template = `
                             <img src="${data['img_url']}" id="${data['img_url']}" alt="original Image" style="display:none;">
                             <img src="${data['inpaint_img']}" id="${data['inpaint_img']}" alt="inpainted Image" style="display:none;">
@@ -65,6 +67,12 @@ $(document).ready(function () {
                                     document.body.appendChild(a);
                                     a.click();
                                     document.body.removeChild(a);
+                                });
+                                $('.btn-window-localtion-reload').click(function () {
+                                    location.reload();
+                                    $('html, body').animate({
+                                        scrollTop: $('.inpaint-user-image').offset().top
+                                    }, 1000);
                                 });
                             },
                             error: function (xhr, status, error) {
@@ -93,6 +101,19 @@ $(document).ready(function () {
     });
 
 });
+$(document).ready(function () {
+    $('.btn-load-video-tutorial-inpaint').click(function () {
+        $.get("/user_tutorial_video/inpaint", function (data) {
+            $('.user-tutorial-video-content').append(data);
+            $('#inpaint-user-video-tutorial-modal').modal('show');
+            $('.inpaint-user-video-tutorial-modal-close').click(function () {
+                $('#inpaint-user-video-tutorial-modal').modal('hide');
+                $('#inpaint-user-video-tutorial-modal').remove();
+                location.reload();
+            });
+        });
+    })
+})
 
 $(document).ready(function () {
     $('#dropdown-in-paint-matlab-script-code').click(function () {

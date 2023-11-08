@@ -38,6 +38,8 @@ $(document).ready(function () {
                                     toggle: false
                                 }).show();
 
+                                $('.gamma-correction-user-image').remove();
+
                                 var image_template = `
                             <img src="${data['img_url']}" id="${data['img_url']}" alt="original Image" style="display:none;">
                             <img src="${data['gamm_img']}" id="${data['gamm_img']}" alt="Gamma Correction Image" style="display:none;">
@@ -63,6 +65,12 @@ $(document).ready(function () {
                                     document.body.appendChild(a);
                                     a.click();
                                     document.body.removeChild(a);
+                                });
+                                $('.btn-window-localtion-reload').click(function () {
+                                    location.reload();
+                                    $('html, body').animate({
+                                        scrollTop: $('.gamma-correction-user-image').offset().top
+                                    }, 1000);
                                 });
                             },
                             error: function (xhr, status, error) {
@@ -92,6 +100,19 @@ $(document).ready(function () {
 
 });
 
+$(document).ready(function () {
+    $('.btn-load-video-tutorial-gamma-correction').click(function () {
+        $.get("/user_tutorial_video/gamma_correction", function (data) {
+            $('.user-tutorial-video-content').append(data);
+            $('#gamma-correction-user-video-tutorial-modal').modal('show');
+            $('.gamma-correction-user-video-tutorial-modal-close').click(function () {
+                $('#gamma-correction-user-video-tutorial-modal').modal('hide');
+                $('#gamma-correction-user-video-tutorial-modal').remove();
+                location.reload();
+            });
+        });
+    })
+})
 
 $(document).ready(function () {
     $('#dropdown-gamma-corrected-python-code').click(function () {

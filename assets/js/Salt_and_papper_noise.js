@@ -5,10 +5,10 @@ $(document).ready(function () {
         };
         $.get('/files/isAvailablle_folder', { data: JSON.stringify(Data) })
             .done(function (response) {
-                // console.log('Server response:', response);
+                console.log('Server response:', response);
             })
             .fail(function (xhr, textStatus, errorThrown) {
-                // console.error('Request failed:', errorThrown);
+                console.error('Request failed:', errorThrown);
             });
         $.get("/modals/salt_and_papper_noise", function (data) {
             //  console.log("Data received:", data);
@@ -42,6 +42,8 @@ $(document).ready(function () {
                                     toggle: false
                                 }).show();
 
+                                $('.salt-and-papper-user-image').remove();
+
                                 var image_template = `
                             <img src="${data['img_url']}" id="${data['img_url']}" alt="original Image" style="display:none;">
                             <img src="${data['salt_and_papper_noise']}" id="${data['salt_and_papper_noise']}" alt="Salt and Papper Noise Image" style="display:none;">
@@ -67,6 +69,12 @@ $(document).ready(function () {
                                     document.body.appendChild(a);
                                     a.click();
                                     document.body.removeChild(a);
+                                });
+                                $('.btn-window-localtion-reload').click(function () {
+                                    location.reload();
+                                    $('html, body').animate({
+                                        scrollTop: $('.salt-and-papper-user-image').offset().top
+                                    }, 1000);
                                 });
                             },
                             error: function (xhr, status, error) {
@@ -95,6 +103,19 @@ $(document).ready(function () {
     });
 });
 
+$(document).ready(function () {
+    $('.btn-load-video-tutorial-salt-and-pappser-noise').click(function () {
+        $.get("/user_tutorial_video/salt_and_papper_noise", function (data) {
+            $('.user-tutorial-video-content').append(data);
+            $('#salt-and-papper-noise-user-video-tutorial-modal').modal('show');
+            $('.salt-and-papper-noise-user-video-tutorial-modal-close').click(function () {
+                $('#salt-and-papper-noise-user-video-tutorial-modal').modal('hide');
+                $('#salt-and-papper-noise-user-video-tutorial-modal').remove();
+                location.reload();
+            });
+        });
+    })
+})
 
 $(document).ready(function () {
     $('#dropdown-salt_and_papper_noise-python-code').click(function () {

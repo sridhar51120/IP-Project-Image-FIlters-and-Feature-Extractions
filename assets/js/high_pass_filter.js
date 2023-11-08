@@ -10,7 +10,7 @@ $(document).ready(function () {
             .fail(function (xhr, textStatus, errorThrown) {
                 // console.error('Request failed:', errorThrown);
             });
-        $.get("/modals/high_pass_filter_filter", function (data) {
+        $.get("/modals/high_pass_filter", function (data) {
             // //  console.log("Data received:", data);
             $('.modal-content').append(data);
             $('#high-pass-filter-image-modal').modal('show');
@@ -41,6 +41,8 @@ $(document).ready(function () {
                                     toggle: false
                                 }).show();
 
+                                $('.high-pass-filter-user-image').remove();
+
                                 var image_template = `
                             <img src="${data['img_url']}" id="${data['img_url']}" alt="original Image" style="display:none;">
                             <img src="${data['high_pass_filter']}" id="${data['high_pass_filter']}" alt="High Pass Filter Image" style="display:none;">
@@ -66,6 +68,12 @@ $(document).ready(function () {
                                     document.body.appendChild(a);
                                     a.click();
                                     document.body.removeChild(a);
+                                });
+                                $('.btn-window-localtion-reload').click(function () {
+                                    location.reload();
+                                    $('html, body').animate({
+                                        scrollTop: $('.high-pass-filter-user-image').offset().top
+                                    }, 1000);
                                 });
                             },
                             error: function (xhr, status, error) {
@@ -93,7 +101,19 @@ $(document).ready(function () {
         });
     });
 });
-
+$(document).ready(function () {
+    $('.btn-load-video-tutorial-high-pass-fiilter').click(function () {
+        $.get("/user_tutorial_video/high_pass_filter", function (data) {
+            $('.user-tutorial-video-content').append(data);
+            $('#high-pass-user-video-tutorial-modal').modal('show');
+            $('.high-pass-user-video-tutorial-modal-close').click(function () {
+                $('#high-pass-user-video-tutorial-modal').modal('hide');
+                $('#high-pass-user-video-tutorial-modal').remove();
+                location.reload();
+            });
+        });
+    })
+})
 
 $(document).ready(function () {
     $('#dropdown-high-passfilter-python-code').click(function () {

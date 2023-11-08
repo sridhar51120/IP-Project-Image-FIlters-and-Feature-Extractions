@@ -92,7 +92,7 @@ def butterworth_filter_temp():
    return render_template("modals/butterworth_filter.html")
 
 
-@bp.route("/high_pass_filter_filter",methods=['GET'])
+@bp.route("/high_pass_filter",methods=['GET'])
 def high_pass_filter_filter_temp():
    return render_template("modals/high_pass_filter.html")
 

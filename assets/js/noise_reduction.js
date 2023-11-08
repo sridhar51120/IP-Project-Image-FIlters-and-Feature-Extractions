@@ -40,6 +40,8 @@ $(document).ready(function () {
                                     toggle: false
                                 }).show();
 
+                                $('.noise-reduction-user-image').remove();
+
                                 var image_template = `
                             <img src="${data['img_url']}" id="${data['img_url']}" alt="original Image" style="display:none;">
                             <img src="${data['noise_img']}" id="${data['noise_img']}" alt="Noised Image" style="display:none;">
@@ -65,6 +67,12 @@ $(document).ready(function () {
                                     document.body.appendChild(a);
                                     a.click();
                                     document.body.removeChild(a);
+                                });
+                                $('.btn-window-localtion-reload').click(function () {
+                                    location.reload();
+                                    $('html, body').animate({
+                                        scrollTop: $('.noise-reduction-user-image').offset().top
+                                    }, 1000);
                                 });
                             },
                             error: function (xhr, status, error) {
@@ -93,6 +101,19 @@ $(document).ready(function () {
     });
 });
 
+$(document).ready(function () {
+    $('.btn-load-video-tutorial-noise-reduction').click(function () {
+        $.get("/user_tutorial_video/noise_reduction", function (data) {
+            $('.user-tutorial-video-content').append(data);
+            $('#noise-reduction-user-video-tutorial-modal').modal('show');
+            $('.noise-reduction-user-video-tutorial-modal-close').click(function () {
+                $('#noise-reduction-user-video-tutorial-modal').modal('hide');
+                $('#noise-reduction-user-video-tutorial-modal').remove();
+                location.reload();
+            });
+        });
+    })
+})
 
 
 $(document).ready(function () {

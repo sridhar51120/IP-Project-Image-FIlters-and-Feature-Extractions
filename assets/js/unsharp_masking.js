@@ -41,6 +41,8 @@ $(document).ready(function () {
                                     toggle: false
                                 }).show();
 
+                                $('.unsharp-mask-user-image').remove();
+
                                 var image_template = `
                             <img src="${data['img_url']}" id="${data['img_url']}" alt="original Image" style="display:none;">
                             <img src="${data['unsharp_masking']}" id="${data['unsharp_masking']}" alt="UnSharp Masking Image" style="display:none;">
@@ -66,6 +68,12 @@ $(document).ready(function () {
                                     document.body.appendChild(a);
                                     a.click();
                                     document.body.removeChild(a);
+                                });
+                                $('.btn-window-localtion-reload').click(function () {
+                                    location.reload();
+                                    $('html, body').animate({
+                                        scrollTop: $('.unsharp-mask-user-image').offset().top
+                                    }, 1000);
                                 });
                             },
                             error: function (xhr, status, error) {
@@ -93,6 +101,20 @@ $(document).ready(function () {
         });
     });
 });
+
+$(document).ready(function () {
+    $('.btn-load-video-tutorial-unsharp-masking').click(function () {
+        $.get("/user_tutorial_video/unsharp_masking", function (data) {
+            $('.user-tutorial-video-content').append(data);
+            $('#unsharp-masking-user-video-tutorial-modal').modal('show');
+            $('.unsharp-masking-user-video-tutorial-modal-close').click(function () {
+                $('#unsharp-masking-user-video-tutorial-modal').modal('hide');
+                $('#unsharp-masking-user-video-tutorial-modal').remove();
+                location.reload();
+            });
+        });
+    })
+})
 
 
 $(document).ready(function () {

@@ -40,6 +40,7 @@ $(document).ready(function () {
                                 $('.output-average-filter-toggle-groups').collapse({
                                     toggle: false
                                 }).show();
+                                $('.average-filter-user-input-image').remove();
 
                                 var image_template = `
                             <img src="${data['img_url']}" id="${data['img_url']}" alt="original Image" style="display:none;">
@@ -66,6 +67,12 @@ $(document).ready(function () {
                                     document.body.appendChild(a);
                                     a.click();
                                     document.body.removeChild(a);
+                                });
+                                $('.btn-window-localtion-reload').click(function () {
+                                    location.reload();
+                                    $('html, body').animate({
+                                        scrollTop: $('.average-filter-user-input-image').offset().top
+                                    }, 1000);
                                 });
                             },
                             error: function (xhr, status, error) {
@@ -94,7 +101,19 @@ $(document).ready(function () {
     });
 });
 
-
+$(document).ready(function () {
+    $('.btn-load-video-tutorial-average-filter').click(function () {
+        $.get("/user_tutorial_video/average_filter", function (data) {
+            $('.user-tutorial-video-content').append(data);
+            $('#average-user-video-tutorial-modal').modal('show');
+            $('.average-user-video-tutorial-modal-close').click(function () {
+                $('#average-user-video-tutorial-modal').modal('hide');
+                $('#average-user-video-tutorial-modal').remove();
+                location.reload();
+            });
+        });
+    })
+})
 
 $(document).ready(function () {
     $('#dropdown-average-filter-python-code').click(function () {

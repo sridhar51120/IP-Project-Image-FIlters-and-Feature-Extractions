@@ -1,14 +1,15 @@
 $(document).ready(function () {
     $('.btn-load-img-weiner-filter').click(function () {
         var Data = {
-            folderName: 'assets/uploads/filters/Weiner'
+            folderName: 'assets/uploads/filters/weiner_filter'
+
         };
         $.get('/files/isAvailablle_folder', { data: JSON.stringify(Data) })
             .done(function (response) {
-                // console.log('Server response:', response);
+                console.log('Server response:', response);
             })
             .fail(function (xhr, textStatus, errorThrown) {
-                // console.error('Request failed:', errorThrown);
+                console.error('Request failed:', errorThrown);
             });
         $.get("/modals/weiner_filter", function (data) {
             // //  console.log("Data received:", data);
@@ -41,6 +42,8 @@ $(document).ready(function () {
                                     toggle: false
                                 }).show();
 
+                                $('.weiner-user-image').remove();
+
                                 var image_template = `
                             <img src="${data['img_url']}" id="${data['img_url']}" alt="original Image" style="display:none;">
                             <img src="${data['weiner_filter']}" id="${data['weiner_filter']}" alt="Weiner Filter Image" style="display:none;">
@@ -66,6 +69,12 @@ $(document).ready(function () {
                                     document.body.appendChild(a);
                                     a.click();
                                     document.body.removeChild(a);
+                                });
+                                $('.btn-window-localtion-reload').click(function () {
+                                    location.reload();
+                                    $('html, body').animate({
+                                        scrollTop: $('.weiner-user-image').offset().top
+                                    }, 1000);
                                 });
                             },
                             error: function (xhr, status, error) {
@@ -94,6 +103,19 @@ $(document).ready(function () {
     });
 });
 
+$(document).ready(function () {
+    $('.btn-load-video-tutorial-weiner').click(function () {
+        $.get("/user_tutorial_video/weiner_user_tutorial_video", function (data) {
+            $('.user-tutorial-video-content').append(data);
+            $('#weiner-user-video-tutorial-modal').modal('show');
+            $('.weiner-user-video-tutorial-modal-close').click(function () {
+                $('#weiner-user-video-tutorial-modal').modal('hide');
+                $('#weiner-user-video-tutorial-modal').remove();
+                location.reload();
+            });
+        });
+    })
+})
 
 $(document).ready(function () {
     $('#dropdown-weiner-java-script-code').click(function () {

@@ -43,6 +43,7 @@ $(document).ready(function () {
                                     toggle: false
                                 }).show();
 
+                                $('.gaussian-noise-user-image').remove();
                                 var image_template = `
                             <img src="${data['img_url']}" id="${data['img_url']}" alt="original Image" style="display:none;">
                             <img src="${data['Gaussian_noise']}" id="${data['Gaussian_noise']}" alt="Gaussian Noise Image" style="display:none;">
@@ -68,6 +69,12 @@ $(document).ready(function () {
                                     document.body.appendChild(a);
                                     a.click();
                                     document.body.removeChild(a);
+                                });
+                                $('.btn-window-localtion-reload').click(function () {
+                                    location.reload();
+                                    $('html, body').animate({
+                                        scrollTop: $('.gaussian-noise-user-image').offset().top
+                                    }, 1000);
                                 });
                             },
                             error: function (xhr, status, error) {
@@ -95,6 +102,20 @@ $(document).ready(function () {
         });
     });
 });
+
+$(document).ready(function () {
+    $('.btn-load-video-tutorial-gaussian').click(function () {
+        $.get("/user_tutorial_video/Gaussian_Noise", function (data) {
+            $('.user-tutorial-video-content').append(data);
+            $('#gaussian-noise-user-video-tutorial-modal').modal('show');
+            $('.gaussian-noise-user-video-tutorial-modal-close').click(function () {
+                $('#gaussian-noise-user-video-tutorial-modal').modal('hide');
+                $('#gaussian-noise-user-video-tutorial-modal').remove();
+                location.reload();
+            });
+        });
+    })
+})
 
 
 $(document).ready(function () {
