@@ -15,7 +15,7 @@ def weiner_video_modal():
 @bp.route("/cluster", methods=['GET'])
 def Clustering_temp():
     data = {
-        'title': 'Weiner Filter Video(Tutorial)'
+        'title': 'Cluster Video(Tutorial)'
     }
     return render_template("videoModal/cluster.html", data=data)
 
@@ -23,7 +23,7 @@ def Clustering_temp():
 @bp.route("/edge_detection", methods=['GET'])
 def edge_temp():
     data = {
-        'title': 'Weiner Filter Video(Tutorial)'
+        'title': 'Edge Detection Video(Tutorial)'
     }
     return render_template("videoModal/edge_detection.html", data=data)
 
@@ -31,7 +31,7 @@ def edge_temp():
 @bp.route("/region_detection", methods=['GET'])
 def region_growing_temp():
     data = {
-        'title': 'Weiner Filter Video(Tutorial)'
+        'title': 'Region Detection Video(Tutorial)'
     }
     return render_template("videoModal/region_growing.html", data=data)
 
@@ -39,15 +39,15 @@ def region_growing_temp():
 @bp.route("/thresolding", methods=['GET'])
 def thresolding_temp():
     data = {
-        'title': 'Weiner Filter Video(Tutorial)'
+        'title': 'Thresholding Video(Tutorial)'
     }
-    return render_template("videoModal/thresolding.html", data=data)
+    return render_template("videoModal/Thresholding.html", data=data)
 
 
 @bp.route("/deblur", methods=['GET'])
 def deblur_temp():
     data = {
-        'title': 'Weiner Filter Video(Tutorial)'
+        'title': 'Deblur Video(Tutorial)'
     }
     return render_template("videoModal/deblur.html", data=data)
 
@@ -55,7 +55,7 @@ def deblur_temp():
 @bp.route("/inpaint", methods=['GET'])
 def inpaint_temp():
     data = {
-        'title': 'Weiner Filter Video(Tutorial)'
+        'title': 'IN Paint Video(Tutorial)'
     }
     return render_template("videoModal/in_paint.html", data=data)
 
@@ -63,7 +63,7 @@ def inpaint_temp():
 @bp.route("/noise_reduction", methods=['GET'])
 def noise_reduction_temp():
     data = {
-        'title': 'Weiner Filter Video(Tutorial)'
+        'title': ' Noise Reduction Video(Tutorial)'
     }
     return render_template("videoModal/noise_reduction.html", data=data)
 
@@ -71,7 +71,7 @@ def noise_reduction_temp():
 @bp.route("/histogram", methods=['GET'])
 def histogram_temp():
     data = {
-        'title': 'Weiner Filter Video(Tutorial)'
+        'title': 'Histogram Equalisation Video(Tutorial)'
     }
     return render_template("videoModal/histo.html", data=data)
 
@@ -79,7 +79,7 @@ def histogram_temp():
 @bp.route("/gamma_correction", methods=['GET'])
 def gamma_correction_temp():
     data = {
-        'title': 'Weiner Filter Video(Tutorial)'
+        'title': 'Gamma Correction Video(Tutorial)'
     }
     return render_template("videoModal/gamma_correction.html", data=data)
 
@@ -87,7 +87,7 @@ def gamma_correction_temp():
 @bp.route("/contrast_strching", methods=['GET'])
 def contrast_strching_temp():
     data = {
-        'title': 'Weiner Filter Video(Tutorial)'
+        'title': 'Contrast Strching Video(Tutorial)'
     }
     return render_template("videoModal/contrast_strching.html", data=data)
 
@@ -95,15 +95,15 @@ def contrast_strching_temp():
 @bp.route("/spatial", methods=['GET'])
 def spatial_temp():
     data = {
-        'title': 'Weiner Filter Video(Tutorial)'
+        'title': 'Spatial FIltering Video(Tutorial)'
     }
-    return render_template("videoModal/spatial_contrast.html", data=data)
+    return render_template("videoModal/Spatial_filtering.html", data=data)
 
 
 @bp.route("/constraint_least_square", methods=['GET'])
 def constraint_least_square_temp():
     data = {
-        'title': 'Weiner Filter Video(Tutorial)'
+        'title': 'Constraint Least Square Filter Video(Tutorial)'
     }
     return render_template("videoModal/Constrained_least_square_filtering.html", data=data)
 
@@ -111,23 +111,23 @@ def constraint_least_square_temp():
 @bp.route("/order_statics", methods=['GET'])
 def order_statics_temp():
     data = {
-        'title': 'Weiner Filter Video(Tutorial)'
+        'title': 'Order Statics Video(Tutorial)'
     }
-    return render_template("videoModal/order_statics.html", data=data)
+    return render_template("videoModal/Order_statistics_filters.html", data=data)
 
 
 @bp.route("/harmonic", methods=['GET'])
 def harmonic_temp():
     data = {
-        'title': 'Weiner Filter Video(Tutorial)'
+        'title': 'Harmonic Filter Video(Tutorial)'
     }
-    return render_template("videoModal/harmonic_filter.html", data=data)
+    return render_template("videoModal/Hormonic_Filter.html", data=data)
 
 
 @bp.route("/geometric", methods=['GET'])
 def geometric_temp():
     data = {
-        'title': 'Weiner Filter Video(Tutorial)'
+        'title': 'Geometric Filter Video(Tutorial)'
     }
     return render_template("videoModal/geometric_mean.html", data=data)
 
@@ -135,7 +135,7 @@ def geometric_temp():
 @bp.route("/Gaussian_Noise", methods=['GET'])
 def Gaussian_Noise_temp():
     data = {
-        'title': 'Weiner Filter Video(Tutorial)'
+        'title': 'Gaussian Noise Video(Tutorial)'
     }
     return render_template("videoModal/Gaussian_Noise.html", data=data)
 
@@ -143,7 +143,7 @@ def Gaussian_Noise_temp():
 @bp.route("/median_filter", methods=['GET'])
 def median_filter_temp():
     data = {
-        'title': 'Weiner Filter Video(Tutorial)'
+        'title': 'Median Filter Video(Tutorial)'
     }
     return render_template("videoModal/Median_Filter.html", data=data)
 
@@ -151,7 +151,7 @@ def median_filter_temp():
 @bp.route("/salt_and_papper_noise", methods=['GET'])
 def salt_and_papper_noise_temp():
     data = {
-        'title': 'Weiner Filter Video(Tutorial)'
+        'title': 'Salt and Papper Noise Video(Tutorial)'
     }
     return render_template("videoModal/Salt_and_papper_noise.html", data=data)
 
@@ -159,7 +159,7 @@ def salt_and_papper_noise_temp():
 @bp.route("/adaptive_filter", methods=['GET'])
 def adaptive_filter_temp():
     data = {
-        'title': 'Weiner Filter Video(Tutorial)'
+        'title': 'Adaptive Filter Video(Tutorial)'
     }
     return render_template("videoModal/adaptive_filter.html", data=data)
 
@@ -167,7 +167,7 @@ def adaptive_filter_temp():
 @bp.route("/average_filter", methods=['GET'])
 def average_filter_temp():
     data = {
-        'title': 'Weiner Filter Video(Tutorial)'
+        'title': 'Average Filter Video(Tutorial)'
     }
     return render_template("videoModal/Average_filter.html", data=data)
 
@@ -175,7 +175,7 @@ def average_filter_temp():
 @bp.route("/butterworth_filter", methods=['GET'])
 def butterworth_filter_temp():
     data = {
-        'title': 'Weiner Filter Video(Tutorial)'
+        'title': 'ButterWorth Filter Video(Tutorial)'
     }
     return render_template("videoModal/butterworth_filter.html", data=data)
 
@@ -183,7 +183,7 @@ def butterworth_filter_temp():
 @bp.route("/high_pass_filter", methods=['GET'])
 def high_pass_filter_filter_temp():
     data = {
-        'title': 'Weiner Filter Video(Tutorial)'
+        'title': 'High Pass Filter Video(Tutorial)'
     }
     return render_template("videoModal/high_pass_filter.html", data=data)
 
@@ -191,7 +191,7 @@ def high_pass_filter_filter_temp():
 @bp.route("/homomarphic_filter", methods=['GET'])
 def homomarphic_filter_temp():
     data = {
-        'title': 'Weiner Filter Video(Tutorial)'
+        'title': 'Homomarphic Filter Video(Tutorial)'
     }
     return render_template("videoModal/Homomorphic.html", data=data)
 
@@ -199,7 +199,7 @@ def homomarphic_filter_temp():
 @bp.route("/laplacian_filter", methods=['GET'])
 def laplacian_filter_temp():
     data = {
-        'title': 'Weiner Filter Video(Tutorial)'
+        'title': 'Laplacian Filter Video(Tutorial)'
     }
     return render_template("videoModal/laplacian_filter.html", data=data)
 
@@ -207,7 +207,7 @@ def laplacian_filter_temp():
 @bp.route("/low_pass_filter", methods=['GET'])
 def low_pass_filter_temp():
     data = {
-        'title': 'Weiner Filter Video(Tutorial)'
+        'title': 'Low Pass Filter Video(Tutorial)'
     }
     return render_template("videoModal/low_pass_filters.html", data=data)
 
@@ -215,7 +215,7 @@ def low_pass_filter_temp():
 @bp.route("/non_local_mean_filter", methods=['GET'])
 def non_local_mean_filter_temp():
     data = {
-        'title': 'Weiner Filter Video(Tutorial)'
+        'title': 'Non Local Mean Filter Video(Tutorial)'
     }
     return render_template("videoModal/non_local_means_filter.html", data=data)
 
@@ -223,7 +223,7 @@ def non_local_mean_filter_temp():
 @bp.route("/notch_filter", methods=['GET'])
 def notch_filter_temp():
     data = {
-        'title': 'Weiner Filter Video(Tutorial)'
+        'title': 'Notch Filter  Video(Tutorial)'
     }
     return render_template("videoModal/notch_filter.html", data=data)
 
@@ -231,7 +231,7 @@ def notch_filter_temp():
 @bp.route("/unsharp_masking", methods=['GET'])
 def unsharp_masking_temp():
     data = {
-        'title': 'Weiner Filter Video(Tutorial)'
+        'title': 'Unsharp Masking Video(Tutorial)'
     }
     return render_template("videoModal/unsharp_masking.html", data=data)
 
@@ -247,7 +247,7 @@ def weiner_filter_temp():
 @bp.route("/dft", methods=['GET'])
 def dft_temp():
     data = {
-        'title': 'Weiner Filter Video(Tutorial)'
+        'title': 'DFT Video(Tutorial)'
     }
     return render_template("videoModal/dft.html", data=data)
 
@@ -255,7 +255,7 @@ def dft_temp():
 @bp.route("/dilation", methods=['GET'])
 def dilation_temp():
     data = {
-        'title': 'Weiner Filter Video(Tutorial)'
+        'title': 'Dilation Video(Tutorial)'
     }
     return render_template("videoModal/dilation.html", data=data)
 
@@ -263,7 +263,7 @@ def dilation_temp():
 @bp.route("/errosion", methods=['GET'])
 def errosion_temp():
     data = {
-        'title': 'Weiner Filter Video(Tutorial)'
+        'title': 'Erosion Video(Tutorial)'
     }
     return render_template("videoModal/erosion.html", data=data)
 
@@ -271,7 +271,7 @@ def errosion_temp():
 @bp.route("/hierarchical-image", methods=['GET'])
 def hierarchical_image_temp():
     data = {
-        'title': 'Weiner Filter Video(Tutorial)'
+        'title': 'Hierachal Image Video(Tutorial)'
     }
     return render_template("videoModal/Hierarchical_Image.html", data=data)
 
@@ -279,7 +279,7 @@ def hierarchical_image_temp():
 @bp.route("/hough_transform", methods=['GET'])
 def hough_transform_image_temp():
     data = {
-        'title': 'Weiner Filter Video(Tutorial)'
+        'title': 'Hough Transform Video(Tutorial)'
     }
     return render_template("videoModal/hough_transform.html", data=data)
 
@@ -287,7 +287,7 @@ def hough_transform_image_temp():
 @bp.route("/region_growing", methods=['GET'])
 def region_growing_image_temp():
     data = {
-        'title': 'Weiner Filter Video(Tutorial)'
+        'title': 'Region Growing Video(Tutorial)'
     }
     return render_template("videoModal/region_growing.html", data=data)
 
@@ -295,7 +295,7 @@ def region_growing_image_temp():
 @bp.route("/region_merging", methods=['GET'])
 def region_merging_image_temp():
     data = {
-        'title': 'Weiner Filter Video(Tutorial)'
+        'title': 'Region Merging Video(Tutorial)'
     }
     return render_template("videoModal/region_merging.html", data=data)
 
@@ -303,7 +303,7 @@ def region_merging_image_temp():
 @bp.route("/runLengthCoding", methods=['GET'])
 def runLengthCoding_image_temp():
     data = {
-        'title': 'Weiner Filter Video(Tutorial)'
+        'title': 'Run Length Encode Video(Tutorial)'
     }
     return render_template("videoModal/runLengthEncode.html", data=data)
 
@@ -311,6 +311,6 @@ def runLengthCoding_image_temp():
 @bp.route("/vectorQuantization", methods=['GET'])
 def vectorQuantization_image_temp():
     data = {
-        'title': 'Weiner Filter Video(Tutorial)'
+        'title': 'Vector Quantization Video(Tutorial)'
     }
     return render_template("videoModal/VectorQuantization.html", data=data)

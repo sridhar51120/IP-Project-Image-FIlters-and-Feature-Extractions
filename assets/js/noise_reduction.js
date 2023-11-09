@@ -109,7 +109,7 @@ $(document).ready(function () {
             $('.noise-reduction-user-video-tutorial-modal-close').click(function () {
                 $('#noise-reduction-user-video-tutorial-modal').modal('hide');
                 $('#noise-reduction-user-video-tutorial-modal').remove();
-                location.reload();
+                // location.reload();
             });
         });
     })

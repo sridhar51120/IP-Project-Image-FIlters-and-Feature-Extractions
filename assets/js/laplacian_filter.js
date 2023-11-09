@@ -110,7 +110,7 @@ $(document).ready(function () {
             $('.laplacian-user-video-tutorial-modal-close').click(function () {
                 $('#laplacian-user-video-tutorial-modal').modal('hide');
                 $('#laplacian-user-video-tutorial-modal').remove();
-                location.reload();
+                // location.reload();
             });
         });
     })

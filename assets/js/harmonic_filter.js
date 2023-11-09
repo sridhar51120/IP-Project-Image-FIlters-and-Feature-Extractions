@@ -109,7 +109,7 @@ $(document).ready(function () {
             $('.hormonic-user-video-tutorial-modal-close').click(function () {
                 $('#hormonic-user-video-tutorial-modal').modal('hide');
                 $('#hormonic-user-video-tutorial-modal').remove();
-                location.reload();
+                // location.reload();
             });
         });
     })

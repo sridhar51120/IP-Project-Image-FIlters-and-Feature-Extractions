@@ -110,7 +110,7 @@ $(document).ready(function () {
             $('.geometric-mean-user-video-tutorial-modal-close').click(function () {
                 $('#geometric-mean-user-video-tutorial-modal').modal('hide');
                 $('#geometric-mean-user-video-tutorial-modal').remove();
-                location.reload();
+                // location.reload();
             });
         });
     })

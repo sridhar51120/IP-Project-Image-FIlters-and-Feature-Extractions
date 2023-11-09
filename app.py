@@ -23,20 +23,20 @@ app.register_blueprint(videoModals.bp)
 @app.route("/",methods=['GET'])
 def dashboard():
    # return render_template('multiple_language_code_sniippets.html')
-   return render_template('home.html')
-   # return render_template("dashboard.html")
+   # return render_template('home.html')
+   return render_template("dashboard.html")
 
 @app.route("/home",methods=['GET'])
 def home():
    return render_template('home.html')
 
-@app.route("/copy",methods=['GET'])
-def copy():
-   return render_template('copy.html')
+# @app.route("/copy",methods=['GET'])
+# def copy():
+#    return render_template('copy.html')
 
-@app.route("/test",methods=['GET'])
-def test():
-   return render_template('test.html')
+# @app.route("/test",methods=['GET'])
+# def test():
+#    return render_template('test.html')
 
 if __name__ == '__main__':
    app.run(host='127.0.0.1', port=5000, debug=True)

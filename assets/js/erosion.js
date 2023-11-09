@@ -10,7 +10,7 @@ $(document).ready(function () {
             .fail(function (xhr, textStatus, errorThrown) {
                 // console.error('Request failed:', errorThrown);
             });
-        $.get("/modals/hierarchical-image", function (data) {
+        $.get("/modals/errosion", function (data) {
             // //  console.log("Data received:", data);
             $('.modal-content').append(data);
             $('#errosion-image-modal').modal('show');
@@ -109,7 +109,7 @@ $(document).ready(function () {
             $('.erosion-user-video-tutorial-modal-close').click(function () {
                 $('#erosion-user-video-tutorial-modal').modal('hide');
                 $('#erosion-user-video-tutorial-modal').remove();
-                location.reload();
+                // location.reload();
             });
         });
     })

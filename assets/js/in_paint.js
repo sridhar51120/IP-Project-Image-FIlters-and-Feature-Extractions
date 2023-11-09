@@ -109,7 +109,7 @@ $(document).ready(function () {
             $('.inpaint-user-video-tutorial-modal-close').click(function () {
                 $('#inpaint-user-video-tutorial-modal').modal('hide');
                 $('#inpaint-user-video-tutorial-modal').remove();
-                location.reload();
+                // location.reload();
             });
         });
     })

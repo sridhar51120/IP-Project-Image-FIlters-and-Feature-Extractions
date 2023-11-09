@@ -109,7 +109,7 @@ $(document).ready(function () {
             $('.high-pass-user-video-tutorial-modal-close').click(function () {
                 $('#high-pass-user-video-tutorial-modal').modal('hide');
                 $('#high-pass-user-video-tutorial-modal').remove();
-                location.reload();
+                // location.reload();
             });
         });
     })

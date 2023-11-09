@@ -111,7 +111,7 @@ $(document).ready(function () {
             $('.adaptive-filter-user-video-tutorial-modal-close').click(function () {
                 $('#adaptive-filter-user-video-tutorial-modal').modal('hide');
                 $('#adaptive-filter-user-video-tutorial-modal').remove();
-                location.reload();
+                // location.reload();
             });
         });
     })

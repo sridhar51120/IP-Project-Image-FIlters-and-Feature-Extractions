@@ -111,7 +111,7 @@ $(document).ready(function () {
             $('.median-filter-user-video-tutorial-modal-close').click(function () {
                 $('#median-filter-user-video-tutorial-modal').modal('hide');
                 $('#median-filter-user-video-tutorial-modal').remove();
-                location.reload();
+                // location.reload();
             });
         });
     })

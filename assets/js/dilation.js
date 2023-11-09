@@ -110,7 +110,7 @@ $(document).ready(function () {
             $('.dilation-user-video-tutorial-modal-close').click(function () {
                 $('#dilation-user-video-tutorial-modal').modal('hide');
                 $('#dilation-user-video-tutorial-modal').remove();
-                location.reload();
+                // location.reload();
             });
         });
     })

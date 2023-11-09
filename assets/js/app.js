@@ -1,6 +1,6 @@
 $(document).ready(function () {
     $('.btn-user-guide-modal').click(function () {
-        const data = `<div class="modal fade" id="UserGuideModal"  aria-labelledby="UserGuideModalLabel" tabindex="-1" role="dialog">
+        const data = `<div class="modal fade" id="UserGuideModal"  aria-labelledby="UserGuideModalLabel" tabindex="-1" role="dialog" data-bs-backdrop="static">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -71,6 +71,7 @@ $(document).ready(function () {
 
         $('.btn-system-requirements-modal-close').click(function () {
             $('#UserGuideModal').modal('hide');
+            location.reload();
         });
         $('.btn-download-requirements-file-system-requirements').click(function () {
             $("#for-python-code-snippets").collapse("toggle");
@@ -96,7 +97,7 @@ $(document).ready(function () {
             setTimeout(function () {
                 $('.b-icon-square-fill-requirements-file').remove();
                 $('.change-icon-clipboard-icon-requirments-file').append('<i class="bi bi-clipboard b-icon-clipboard-fill-requirements-file"></i>');
-            }, 5000);
+            }, 3000);
         })
     })
 
@@ -114,7 +115,7 @@ $(document).ready(function () {
         setTimeout(function () {
             $('.bi-check2-circle').remove();
             $('.change-icon-clipboard-icon').append('<i class="bi bi-clipboard"></i>');
-        }, 5000);
+        }, 3000);
     })
 })
 // For Side Bar Collapse

@@ -110,7 +110,7 @@ $(document).ready(function () {
             $('.low-pass-filter-user-video-tutorial-modal-close').click(function () {
                 $('#low-pass-filter-user-video-tutorial-modal').modal('hide');
                 $('#low-pass-filter-user-video-tutorial-modal').remove();
-                location.reload();
+                // location.reload();
             });
         });
     })

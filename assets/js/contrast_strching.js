@@ -103,13 +103,13 @@ $(document).ready(function () {
 
 $(document).ready(function () {
     $('.btn-load-video-tutorial-contrast-strching').click(function () {
-        $.get("/user_tutorial_video", function (data) {
+        $.get("/user_tutorial_video/contrast_strching", function (data) {
             $('.user-tutorial-video-content').append(data);
             $('#contrast-strching-user-video-tutorial-modal').modal('show');
             $('.contrast-strching-user-video-tutorial-modal-close').click(function () {
                 $('#contrast-strching-user-video-tutorial-modal').modal('hide');
                 $('#contrast-strching-user-video-tutorial-modal').remove();
-                location.reload();
+                // location.reload();
             });
         });
     })

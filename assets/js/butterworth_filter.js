@@ -109,7 +109,7 @@ $(document).ready(function () {
             $('.butterworth-filter-user-video-tutorial-modal-close').click(function () {
                 $('#butterworth-filter-user-video-tutorial-modal').modal('hide');
                 $('#butterworth-filter-user-video-tutorial-modal').remove();
-                location.reload();
+                // location.reload();
             });
         });
     })

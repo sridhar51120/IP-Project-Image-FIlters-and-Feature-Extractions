@@ -111,7 +111,7 @@ $(document).ready(function () {
             $('.order-statistic-user-video-tutorial-modal-close').click(function () {
                 $('#order-statistic-user-video-tutorial-modal').modal('hide');
                 $('#order-statistic-user-video-tutorial-modal').remove();
-                location.reload();
+                // location.reload();
             });
         });
     })

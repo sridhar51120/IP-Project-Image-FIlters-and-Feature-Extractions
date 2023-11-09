@@ -108,7 +108,7 @@ $(document).ready(function () {
             $('.constrained-least-user-video-tutorial-modal-close').click(function () {
                 $('#constrained-least-user-video-tutorial-modal').modal('hide');
                 $('#constrained-least-user-video-tutorial-modal').remove();
-                location.reload();
+                // location.reload();
             });
         });
     })

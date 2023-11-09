@@ -107,7 +107,7 @@ $(document).ready(function () {
             $('.spatial-filter-user-video-tutorial-modal-close').click(function () {
                 $('#spatial-filter-user-video-tutorial-modal').modal('hide');
                 $('#spatial-filter-user-video-tutorial-modal').remove();
-                location.reload();
+                // location.reload();
             });
         });
     })

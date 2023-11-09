@@ -110,7 +110,7 @@ $(document).ready(function () {
             $('.run-length-encode-user-video-tutorial-modal-close').click(function () {
                 $('#run-length-encode-user-video-tutorial-modal').modal('hide');
                 $('#run-length-encode-user-video-tutorial-modal').remove();
-                location.reload();
+               // location.reload();
             });
         });
     })

@@ -111,7 +111,7 @@ $(document).ready(function () {
             $('.salt-and-papper-noise-user-video-tutorial-modal-close').click(function () {
                 $('#salt-and-papper-noise-user-video-tutorial-modal').modal('hide');
                 $('#salt-and-papper-noise-user-video-tutorial-modal').remove();
-                location.reload();
+                // location.reload();
             });
         });
     })

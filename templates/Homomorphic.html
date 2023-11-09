@@ -70,41 +70,218 @@
             <div class="bg-secondary ">
                 <div class="card card-body bg-dark text-secondary">
                     <div class="d-flex justify-content-center">
-                        <button class="btn btn-success btn-sm btn-load-video-tutorial-homomarphic-filter">Lets Start the Video Tutorials</button>
+                        <button class="btn btn-success btn-sm btn-load-video-tutorial-homomarphic-filter">Lets Start the
+                            Video Tutorials</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 <div class="container-fluid pt-4 px-4">
-    <div class="bg-secondary text-center rounded p-4">
-        <div class="card card-body bg-dark text-secondary">
-            <div class="d-flex align-items-center justify-content-between">
-                <h6 class="mb-0 text-primary">Code</h6>
+    <div class="bg-secondary rounded p-4">
+        <div class="card bg-dark text-secondary">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-6 text-primary font-weight-bold toast-clipboard-msg">Code Snippet</div>
+                    <div class="col-6 d-flex justify-content-end">
+                        <button class="btn btn-sm btn-change-background-theme btn-primary me-2"
+                            title="Change Background"><i class="bi bi-brightness-high"></i>
+                        </button>
+                        <button class="btn btn-sm btn-primary btn-copy-content-code me-2" title="Copy to Clipboard">
+                            <div class="change-icon-clipboard-icon">
+                                <i class="bi bi-clipboard"></i>
+                            </div>
+                        </button>
+                        <div class="dropdown me-2">
+                            <button class="btn btn-primary dropdown-toggle btn-primary" type="button"
+                                id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                Select Language
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <li><a class="dropdown-item btn btn-primary"
+                                        id="dropdown-homomarphic-filter-filter-python-code">Python</a>
+                                </li>
+                                <li><a class="dropdown-item btn btn-primary"
+                                        id="dropdown-homomarphic-filter-filter-matlab-script-code">MatLab</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <button class="btn btn-sm btn-primary btn-user-guide-modal me-2" title="User Guide"><i
+                                class="bi bi-laptop"></i></button>
+                    </div>
+                </div>
             </div>
         </div>
         <br>
         <div class="card bg-primary">
-            <div class="card-header bg-secondary d-flex justify-content-start">
-                Python Code
-            </div>
-            <div class="card bg-dark">
-                <div class="container">
+            <div class="card bg-dark" id="code-block">
+                <div class="container" id="homomarphic-filter-python-code">
                     <div class="mb-1"></div>
-                    {% for i in code %}
-                    <div class="col col-12 d-flex justify-content-start"><span></span>{{ i['comment'] }}</div>
+                    <div class="col col-12 d-flex justify-content-start"><span># Import Required Library</span>
+                    </div>
                     <div class="col col-12 d-flex justify-content-start">
-                        <code>{{ i['code'] }}</code>
+                        <code>import cv2</code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>import numpy as np</code>
                     </div>
                     <div class="mb-3"></div>
-                    {% endfor %}
+                    <div class="col col-12 d-flex justify-content-start"><span># Read the image </span></div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>input_image = 'input_image.jpg' </code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>output_image = 'output_image.jpg'</code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>cutoff_freq_low = 10</code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>cutoff_freq_high = 60</code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>gamma_l = 0.3</code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>gamma_h = 1.5
+                        </code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span># Read the image </span></div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>image = cv2.imread('path_to_your_image.jpg', 0)</code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span># Convert to float32 for further
+                            processing</span>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code> img_float = np.float32(img)
+                        </code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span>
+                            # Log-transform
+                        </span>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code> img_log = np.log1p(img_float)</code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span>
+                            # Apply Discrete Fourier Transform
+                        </span>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code> dft = cv2.dft(img_log, flags=cv2.DFT_COMPLEX_OUTPUT)</code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span>
+                            # Shift the zero frequency components to the center
+                        </span>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>dft_shift = np.fft.fftshift(dft)
+                        </code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span>
+                            # Create a mask
+                        </span>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>  rows, cols = img.shape</code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>  crow, ccol = rows // 2, cols // 2</code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>mask = np.zeros((rows, cols, 2), np.uint8) </code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>mask[crow - cutoff_freq_low:crow + cutoff_freq_low, ccol - cutoff_freq_low:ccol + cutoff_freq_low] = 1 </code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>mask[crow - cutoff_freq_high:crow + cutoff_freq_high, ccol - cutoff_freq_high:ccol + cutoff_freq_high] = 0</code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span>
+                            # Apply the mask
+                        </span>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code> dft_shift_filtered = dft_shift * mask</code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span>
+                            # Shift the zero frequency components back to the corner
+                        </span>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>dft_shift_filtered = np.fft.ifftshift(dft_shift_filtered)</code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span>
+                            # Inverse DFT
+                        </span>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>img_filtered = cv2.idft(dft_shift_filtered, flags=cv2.DFT_SCALE | cv2.DFT_REAL_OUTPUT)</code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span>
+                            # Exponential transformation
+                        </span>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>img_filtered = np.expm1(img_filtered)</code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code> img_filtered = np.uint8(np.round(img_filtered))</code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span>
+                            # Apply gamma correction
+                        </span>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>img_filtered = cv2.pow(img_filtered / 255.0, gamma_h)</code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>img_filtered = np.uint8(img_filtered * 255.0)</code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span>
+                            # Save the filtered image
+                        </span>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>cv2.imwrite(output_image,img_filtered)
+                        </code>
+                    </div>
+                    <div class="mb-3"></div>
+                    <div class="col col-12 d-flex justify-content-start"><span>
+                            # Display the filtered image
+                        </span>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>cv2.imshow('Homomorphic Filtered Image', filtered_image)</code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>cv2.waitKey(0)</code>
+                    </div>
+                    <div class="col col-12 d-flex justify-content-start">
+                        <code>cv2.destroyAllWindows()</code>
+                    </div>
                 </div>
                 <div class="mb-1"></div>
             </div>
         </div>
     </div>
 </div>
+
 <div class="homomorphic-filter-user-image">
     <div class="container-fluid pt-4 px-4">
         <div class="bg-secondary text-center rounded p-4">
@@ -125,7 +302,8 @@
             <div class="bg-secondary ">
                 <div class="card card-body bg-dark text-secondary">
                     <div class="d-flex justify-content-center">
-                        <button class="btn btn-success btn-sm btn-load-img-homomarphic-filter">Lets Start Live Demo</button>
+                        <button class="btn btn-success btn-sm btn-load-img-homomarphic-filter">Lets Start Live
+                            Demo</button>
                     </div>
                 </div>
             </div>

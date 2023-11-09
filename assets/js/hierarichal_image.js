@@ -110,7 +110,7 @@ $(document).ready(function () {
             $('.hierarchical-user-video-tutorial-modal-close').click(function () {
                 $('#hierarchical-user-video-tutorial-modal').modal('hide');
                 $('#hierarchical-user-video-tutorial-modal').remove();
-                location.reload();
+                // location.reload();
             });
         });
     })

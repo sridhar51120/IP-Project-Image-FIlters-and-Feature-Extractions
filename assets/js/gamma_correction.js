@@ -108,7 +108,7 @@ $(document).ready(function () {
             $('.gamma-correction-user-video-tutorial-modal-close').click(function () {
                 $('#gamma-correction-user-video-tutorial-modal').modal('hide');
                 $('#gamma-correction-user-video-tutorial-modal').remove();
-                location.reload();
+                // location.reload();
             });
         });
     })

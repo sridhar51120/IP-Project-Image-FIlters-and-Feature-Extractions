@@ -110,7 +110,7 @@ $(document).ready(function () {
             $('.dft-user-video-tutorial-modal-close').click(function () {
                 $('#dft-user-video-tutorial-modal').modal('hide');
                 $('#dft-user-video-tutorial-modal').remove();
-                location.reload();
+                // location.reload();
             });
         });
     })

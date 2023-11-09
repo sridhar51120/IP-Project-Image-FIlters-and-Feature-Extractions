@@ -14,7 +14,7 @@ $(document).ready(function () {
             // //  console.log("Data received:", data);
             $('.modal-content').append(data);
             $('#cluster-image-modal').modal('show');
-            $('#cluster-image-modal-close').click(function () {
+            $('#btn-cluster-modal-close').click(function () {
                 $('#cluster-image-modal').modal('hide');
             });
             const btn_cluster_submit_image = document.getElementById('btn-cluster-input-image-submit');
@@ -109,7 +109,7 @@ $(document).ready(function () {
             $('.cluster-user-video-tutorial-modal-close').click(function () {
                 $('#cluster-user-video-tutorial-modal').modal('hide');
                 $('#cluster-user-video-tutorial-modal').remove();
-                location.reload();
+               // location.reload();
             });
         });
     })

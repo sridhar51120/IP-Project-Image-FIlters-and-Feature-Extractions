@@ -107,7 +107,7 @@ $(document).ready(function () {
             $('.histogram-user-video-tutorial-modal-close').click(function () {
                 $('#histogram-user-video-tutorial-modal').modal('hide');
                 $('#histogram-user-video-tutorial-modal').remove();
-                location.reload();
+                // location.reload();
             });
         });
     })

@@ -110,7 +110,7 @@ $(document).ready(function () {
             $('.vector-quantization-user-video-tutorial-modal-close').click(function () {
                 $('#vector-quantization-user-video-tutorial-modal').modal('hide');
                 $('#vector-quantization-user-video-tutorial-modal').remove();
-                location.reload();
+                // location.reload();
             });
         });
     })

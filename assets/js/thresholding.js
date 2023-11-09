@@ -105,7 +105,7 @@ $(document).ready(function () {
             $('.threshold-user-video-tutorial-modal-close').click(function () {
                 $('#threshold-user-video-tutorial-modal').modal('hide');
                 $('#threshold-user-video-tutorial-modal').remove();
-                location.reload();
+                // location.reload();
             });
         });
     })

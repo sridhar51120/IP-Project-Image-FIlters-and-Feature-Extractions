@@ -110,7 +110,7 @@ $(document).ready(function () {
             $('.weiner-user-video-tutorial-modal-close').click(function () {
                 $('#weiner-user-video-tutorial-modal').modal('hide');
                 $('#weiner-user-video-tutorial-modal').remove();
-                location.reload();
+                // location.reload();
             });
         });
     })

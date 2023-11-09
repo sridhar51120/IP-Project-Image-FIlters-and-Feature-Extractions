@@ -31,8 +31,8 @@ def weiner_temp():
         {'title': '10) Iterative Refinement (Optional)', 'description': 'If the initial results are unsatisfactory, consider reiterating the process by refining your PSD estimation, changing filter design parameters, or adopting more advanced techniques.'}
     ]
 
-
     return render_template("Weiner.html", data=data, workflowtitle="Brief overview of how Weiner Filter Works", workflows=workflows)
+
 
 @bp.route("/weiner_filter_output", methods=['POST'])
 def weiner_filter_output():
@@ -47,16 +47,17 @@ def weiner_filter_output():
             output_img = const.weiner_filters(img_dir)
             data = {
                 'img_url': img_path,
-                'weiner_filter' : output_img
+                'weiner_filter': output_img
             }
             return {
                 'template': render_template('OutputCollapse/filters/Weiner.html', data=data),
                 'img_url': img_path.replace("assets", ""),
-                'weiner_filter' : output_img.replace("assets", "")
+                'weiner_filter': output_img.replace("assets", "")
             }
         else:
             return 'No file part in the request'
-        
+
+
 @bp.route("/butterworth_filter", methods=['GET'])
 def butterworth_filter_temp():
     data = {
@@ -88,8 +89,8 @@ def butterworth_filter_temp():
          'description': 'If the filter results are unsatisfactory, you may need to revisit the design parameters, such as the cutoff frequency or order, and make adjustments for better results.'}
     ]
 
-
     return render_template("butterworth_filter.html", data=data, workflowtitle="Brief overview of how Butter worth filter Works", workflows=workflows)
+
 
 @bp.route("/butterworth_filter_output", methods=['POST'])
 def butterworth_filter_output():
@@ -104,17 +105,17 @@ def butterworth_filter_output():
             output_img = const.butterworth_filter(img_dir)
             data = {
                 'img_url': img_path,
-                'butterworth_high_pass_filter' : output_img
+                'butterworth_high_pass_filter': output_img
             }
             return {
                 'template': render_template('OutputCollapse/filters/butterworth_filter.html', data=data),
                 'img_url': img_path.replace("assets", ""),
-                'butterworth_high_pass_filter' : output_img.replace("assets", "")
+                'butterworth_high_pass_filter': output_img.replace("assets", "")
             }
         else:
             return 'No file part in the request'
-        
-        
+
+
 @bp.route("/homomorphic_filters", methods=['GET'])
 def homomorphic_filters_temp():
     data = {
@@ -140,8 +141,8 @@ def homomorphic_filters_temp():
         {'title': '11) Iterative Refinement', 'description': 'If the initial results are unsatisfactory, consider iterating the process by revisiting steps 5 to 10, possibly with different filter designs or parameters.'}
     ]
 
-
     return render_template("Homomorphic.html", data=data, workflowtitle="Brief overview of how Homomarphic Filter Works", workflows=workflows)
+
 
 @bp.route("/homomarphic_filter_output", methods=['POST'])
 def homomarphic_filter_output():
@@ -156,15 +157,16 @@ def homomarphic_filter_output():
             output_img = const.homomarphic_filter(img_dir)
             data = {
                 'img_url': img_path,
-                'homomorphic_filter' : output_img
+                'homomorphic_filter': output_img
             }
             return {
                 'template': render_template('OutputCollapse/filters/Homomorphic.html', data=data),
                 'img_url': img_path.replace("assets", ""),
-                'homomorphic_filter' : output_img.replace("assets", "")
+                'homomorphic_filter': output_img.replace("assets", "")
             }
         else:
             return 'No file part in the request'
+
 
 @bp.route("/notch_filter", methods=['GET'])
 def notch_filter_temp():
@@ -188,8 +190,8 @@ def notch_filter_temp():
         {'title': '8) Iterative Refinement (Optional)', 'description': 'If the initial filtering results are unsatisfactory or if there are multiple unwanted frequencies to eliminate, you may need to iterate the process, revisiting steps 3 to 7 with different filter parameters or additional filters.'}
     ]
 
-
     return render_template("notch_filter.html", data=data, workflowtitle="Brief overview of how Gamma_correction Works", workflows=workflows)
+
 
 @bp.route("/notch_filter_output", methods=['POST'])
 def notch_filter_output():
@@ -204,17 +206,17 @@ def notch_filter_output():
             output_img = const.notch_filter(img_dir)
             data = {
                 'img_url': img_path,
-                'notch_filter' : output_img
+                'notch_filter': output_img
             }
             return {
                 'template': render_template('OutputCollapse/filters/notch_filter.html', data=data),
                 'img_url': img_path.replace("assets", ""),
-                'notch_filter' : output_img.replace("assets", "")
+                'notch_filter': output_img.replace("assets", "")
             }
         else:
             return 'No file part in the request'
-        
-        
+
+
 @bp.route("/adaptive_filter", methods=['GET'])
 def adaptive_filter_temp():
     data = {
@@ -238,8 +240,8 @@ def adaptive_filter_temp():
         {'title': '9) Post-Processing (Optional)', 'description': 'Depending on the application, you may perform additional post-processing steps, such as contrast stretching, sharpening, or color correction to further enhance the image.'}
     ]
 
-
     return render_template("adaptive_filter.html", data=data, workflowtitle="Brief overview of how Adaptive filter Works", workflows=workflows)
+
 
 @bp.route("/adpative_filter_output", methods=['POST'])
 def adpative_filter_output():
@@ -263,7 +265,8 @@ def adpative_filter_output():
             }
         else:
             return 'No file part in the request'
-        
+
+
 @bp.route("/non_local_means_filter", methods=['GET'])
 def non_local_means_filter_temp():
     data = {
@@ -272,21 +275,22 @@ def non_local_means_filter_temp():
     }
 
     workflows = [
-        {'title': 'Image Preprocessing', 'description': 'Start with the acquisition and preparation of the noisy image. Ensure that the image is appropriately formatted and normalized, if necessary.'},
-        {'title': 'Parameter Selection',
+        {'title': '1)   Image Preprocessing',
+            'description': 'Start with the acquisition and preparation of the noisy image. Ensure that the image is appropriately formatted and normalized, if necessary.'},
+        {'title': '2)   Parameter Selection',
             'description': 'Determine key parameters for the NLM algorithm, such as the search window size, the patch size, and the level of filtering (e.g., intensity or color). Selecting these parameters is crucial for the effectiveness of the denoising process.'},
-        {'title': 'Patch Extraction', 'description': 'Divide the image into overlapping patches. These patches will serve as the local neighborhoods from which similarities will be calculated.'},
-        {'title': 'Similarity Calculation', 'description': 'For each patch in the image, compare it to all other patches within a search window. Calculate the similarity between patches using metrics like the squared Euclidean distance or other suitable similarity measures.'},
-        {'title': 'Weight Calculation', 'description': 'Use the calculated similarities to assign weights to the patches in the search window. Patches that are more similar to the target patch receive higher weights. These weights represent the importance of each patch in the filtering process.'},
-        {'title': 'Filtering', 'description': 'For each patch in the image, calculate a weighted average of all patches in the search window. This weighted average effectively replaces the noisy pixel value in the target patch. Repeat this process for all patches in the image.'},
-        {'title': 'Aggregation', 'description': 'Reconstruct the filtered image by aggregating the results from the previous step. You can use techniques like overlapping patches and weighted averaging for this purpose.'},
-        {'title': 'Post-Processing (Optional)', 'description': 'Depending on the results and the specific requirements of your application, you may perform additional post-processing steps, such as contrast stretching or sharpening.'},
-        {'title': 'Quality Assessment',
+        {'title': '3)   Patch Extraction', 'description': 'Divide the image into overlapping patches. These patches will serve as the local neighborhoods from which similarities will be calculated.'},
+        {'title': '4)   Similarity Calculation', 'description': 'For each patch in the image, compare it to all other patches within a search window. Calculate the similarity between patches using metrics like the squared Euclidean distance or other suitable similarity measures.'},
+        {'title': '5)   Weight Calculation', 'description': 'Use the calculated similarities to assign weights to the patches in the search window. Patches that are more similar to the target patch receive higher weights. These weights represent the importance of each patch in the filtering process.'},
+        {'title': '6)   Filtering', 'description': 'For each patch in the image, calculate a weighted average of all patches in the search window. This weighted average effectively replaces the noisy pixel value in the target patch. Repeat this process for all patches in the image.'},
+        {'title': '7)   Aggregation', 'description': 'Reconstruct the filtered image by aggregating the results from the previous step. You can use techniques like overlapping patches and weighted averaging for this purpose.'},
+        {'title': '8)   Post-Processing (Optional)', 'description': 'Depending on the results and the specific requirements of your application, you may perform additional post-processing steps, such as contrast stretching or sharpening.'},
+        {'title': '9)   Quality Assessment',
             'description': 'Evaluate the effectiveness of the NLM denoising algorithm by using appropriate quality metrics, such as Peak Signal-to-Noise Ratio (PSNR), Structural Similarity Index (SSIM), or visual inspection. This step is essential to ensure that noise reduction does not cause the loss of essential image details or introduce artifacts.'}
     ]
 
-
     return render_template("non_local_means_filter.html", data=data, workflowtitle="Brief overview of how Non Local Means Filter Works", workflows=workflows)
+
 
 @bp.route("/non_local_mean_filter_output", methods=['POST'])
 def non_local_mean_filter_output():
@@ -301,15 +305,16 @@ def non_local_mean_filter_output():
             output_img = const.non_local_mean_filter(img_dir)
             data = {
                 'img_url': img_path,
-                'non_local_mean' : output_img
+                'non_local_mean': output_img
             }
             return {
                 'template': render_template('OutputCollapse/filters/non_local_means_filter.html', data=data),
                 'img_url': img_path.replace("assets", ""),
-                'non_local_mean' : output_img.replace("assets", "")
+                'non_local_mean': output_img.replace("assets", "")
             }
         else:
             return 'No file part in the request'
+
 
 @bp.route("/unsharp_mask_filters", methods=['GET'])
 def unsharp_mask_filters_temp():
@@ -331,8 +336,8 @@ def unsharp_mask_filters_temp():
             'description': 'Evaluate the quality of the sharpened image. Use quality metrics like the Structural Similarity Index (SSIM) or Peak Signal-to-Noise Ratio (PSNR) to measure the effectiveness of the unsharp masking. Visual inspection is also crucial.'}
     ]
 
-
     return render_template("unsharp_masking.html", data=data, workflowtitle="Brief overview of how Unsharp Masking Works", workflows=workflows)
+
 
 @bp.route("/unsharp_masking_output", methods=['POST'])
 def unsharp_masking_output():
@@ -347,16 +352,17 @@ def unsharp_masking_output():
             output_img = const.unsharp_masking(img_dir)
             data = {
                 'img_url': img_path,
-                'unsharp_masking' : output_img
+                'unsharp_masking': output_img
             }
             return {
                 'template': render_template('OutputCollapse/filters/unsharp_masking.html', data=data),
                 'img_url': img_path.replace("assets", ""),
-                'unsharp_masking' : output_img.replace("assets", "")
+                'unsharp_masking': output_img.replace("assets", "")
             }
         else:
             return 'No file part in the request'
-        
+
+
 @bp.route("/low_pass_filter", methods=['GET'])
 def low_pass_filter_temp():
     data = {
@@ -365,19 +371,19 @@ def low_pass_filter_temp():
     }
 
     workflows = [
-        {'title': 'Image Preprocessing', 'description': 'Start with acquiring and preprocessing the input image. Ensure that the image is properly formatted and adjusted for any specific requirements of the filtering algorithm. This may include resizing, color space conversion, and noise removal.'},
-        {'title': 'Select the Low-Pass Filter', 'description': 'Choose an appropriate low-pass filter based on the specific characteristics of your image and the filtering objectives. Common choices include Gaussian filters, mean filters, and Butterworth filters. The choice depends on the trade-off between noise reduction and detail preservation.'},
-        {'title': 'Kernel Size and Parameters', 'description': 'Determine the size of the filter kernel and its parameters, such as the standard deviation for a Gaussian filter or the order and cut-off frequency for a Butterworth filter. These parameters affect the extent of filtering and must be carefully selected based on the specific image and noise characteristics.'},
-        {'title': 'Filter Design and Implementation',
+        {'title': '1)   Image Preprocessing', 'description': 'Start with acquiring and preprocessing the input image. Ensure that the image is properly formatted and adjusted for any specific requirements of the filtering algorithm. This may include resizing, color space conversion, and noise removal.'},
+        {'title': '2)   Select the Low-Pass Filter', 'description': 'Choose an appropriate low-pass filter based on the specific characteristics of your image and the filtering objectives. Common choices include Gaussian filters, mean filters, and Butterworth filters. The choice depends on the trade-off between noise reduction and detail preservation.'},
+        {'title': '3)   Kernel Size and Parameters', 'description': 'Determine the size of the filter kernel and its parameters, such as the standard deviation for a Gaussian filter or the order and cut-off frequency for a Butterworth filter. These parameters affect the extent of filtering and must be carefully selected based on the specific image and noise characteristics.'},
+        {'title': '4)   Filter Design and Implementation',
             'description': 'Design and implement the selected filter. Convolve the filter kernel with the image using convolution operations, considering boundary handling methods (e.g., zero-padding or border replication) to handle the edges of the image.'},
-        {'title': 'Normalization (Optional)', 'description': 'Some filters may require normalization to ensure that the resulting image has a consistent brightness level. This step ensures that the overall image intensity is preserved after filtering.'},
-        {'title': 'Post-Filtering Processing (Optional)', 'description': 'Depending on the application and the characteristics of the image, you may apply additional post-filtering processing, such as contrast stretching, intensity scaling, or gamma correction, to adjust the filtered image"s appearance.'},
-        {'title': 'Evaluation and Quality Assessment',
+        {'title': '5)   Normalization (Optional)', 'description': 'Some filters may require normalization to ensure that the resulting image has a consistent brightness level. This step ensures that the overall image intensity is preserved after filtering.'},
+        {'title': '6)   Post-Filtering Processing (Optional)', 'description': 'Depending on the application and the characteristics of the image, you may apply additional post-filtering processing, such as contrast stretching, intensity scaling, or gamma correction, to adjust the filtered image"s appearance.'},
+        {'title': '7)   Evaluation and Quality Assessment',
             'description': 'Assess the effectiveness of the low-pass filtering process. Use appropriate quality metrics to evaluate the results. Peak Signal-to-Noise Ratio (PSNR), Structural Similarity Index (SSIM), and visual inspection can be useful for assessing image quality.'}
     ]
 
-
     return render_template("low_pass_filters.html", data=data, workflowtitle="Brief overview of how Low pass Filter Works", workflows=workflows)
+
 
 @bp.route("/low_pass_filter_output", methods=['POST'])
 def low_pass_filter_output():
@@ -392,16 +398,17 @@ def low_pass_filter_output():
             output_img = const.low_pass_filter(img_dir)
             data = {
                 'img_url': img_path,
-                'low_pass_filter' : output_img
+                'low_pass_filter': output_img
             }
             return {
                 'template': render_template('OutputCollapse/filters/low_pass_filters.html', data=data),
                 'img_url': img_path.replace("assets", ""),
-                'low_pass_filter' : output_img.replace("assets", "")
+                'low_pass_filter': output_img.replace("assets", "")
             }
         else:
             return 'No file part in the request'
-        
+
+
 @bp.route("/high_pass_filter", methods=['GET'])
 def high_pass_filter_temp():
     data = {
@@ -410,22 +417,23 @@ def high_pass_filter_temp():
     }
 
     workflows = [
-        {'title': 'Image Acquisition and Preprocessing',
+        {'title': '1)   Image Acquisition and Preprocessing',
             'description': 'Start with the acquisition of the image you want to process. Ensure that the image is properly formatted and preprocessed if necessary (e.g., resizing, noise reduction, or color space conversion).'},
-        {'title': 'Kernel Design',
+        {'title': '2)   Kernel Design',
             'description': 'Select or design a high-pass filter kernel. Common kernels include the Laplacian of Gaussian (LoG) filter, the Sobel or Prewitt edge detection filters, and custom-designed kernels.'},
-        {'title': 'Kernel Size Selection', 'description': 'Choose an appropriate kernel size, which determines the spatial extent of the filtering operation. The size of the kernel should be proportional to the size of the features you want to emphasize.'},
-        {'title': 'Convolution Operation', 'description': 'Apply the selected high-pass filter kernel to the image using convolution. Convolution involves sliding the kernel over the entire image and calculating the weighted sum of pixel values in the kernel"s neighborhood.'},
-        {'title': 'Normalization (Optional)', 'description': 'Depending on the specific filter used, you may need to normalize the output image to ensure that the pixel values fall within a specific range (e.g., 0 to 255).'},
-        {'title': 'Edge Localization (Optional)', 'description': 'To precisely locate edges in the image, you can apply zero-crossing detection to the filtered image. This technique identifies pixels where the intensity changes sign, indicating the presence of edges.'},
-        {'title': 'Enhancement and Post-processing (Optional)', 'description': 'You may adjust the contrast and brightness of the high-pass filtered image to enhance the visibility of edges and fine details. Additionally, you can combine the high-pass filtered image with the original image to create an enhanced version of the original.'},
-        {'title': 'Quality Assessment',
+        {'title': '3)   Kernel Size Selection', 'description': 'Choose an appropriate kernel size, which determines the spatial extent of the filtering operation. The size of the kernel should be proportional to the size of the features you want to emphasize.'},
+        {'title': '4)   Convolution Operation', 'description': 'Apply the selected high-pass filter kernel to the image using convolution. Convolution involves sliding the kernel over the entire image and calculating the weighted sum of pixel values in the kernel"s neighborhood.'},
+        {'title': '5)   Normalization (Optional)', 'description': 'Depending on the specific filter used, you may need to normalize the output image to ensure that the pixel values fall within a specific range (e.g., 0 to 255).'},
+        {'title': '6)   Edge Localization (Optional)', 'description': 'To precisely locate edges in the image, you can apply zero-crossing detection to the filtered image. This technique identifies pixels where the intensity changes sign, indicating the presence of edges.'},
+        {'title': '7)   Enhancement and Post-processing (Optional)', 'description': 'You may adjust the contrast and brightness of the high-pass filtered image to enhance the visibility of edges and fine details. Additionally, you can combine the high-pass filtered image with the original image to create an enhanced version of the original.'},
+        {'title': '8)   Quality Assessment',
             'description': 'Evaluate the results using appropriate quality metrics such as edge sharpness, signal-to-noise ratio (SNR), or visual inspection to ensure that the high-pass filtering has achieved the desired outcome.'},
-        {'title': 'Iterative Refinement (Optional)', 'description': 'If the initial results are unsatisfactory, consider experimenting with different kernel designs, sizes, and post-processing steps to fine-tune the enhancement.'}
+        {'title': '9)   Iterative Refinement (Optional)',
+         'description': 'If the initial results are unsatisfactory, consider experimenting with different kernel designs, sizes, and post-processing steps to fine-tune the enhancement.'}
     ]
 
-
     return render_template("high_pass_filter.html", data=data, workflowtitle="Brief overview of how High Pass Filter Works", workflows=workflows)
+
 
 @bp.route("/high_pass_filter_output", methods=['POST'])
 def high_pass_filter_output():
@@ -440,15 +448,16 @@ def high_pass_filter_output():
             output_img = const.high_pass_filter(img_dir)
             data = {
                 'img_url': img_path,
-                'high_pass_filter' : output_img
+                'high_pass_filter': output_img
             }
             return {
                 'template': render_template('OutputCollapse/filters/high_pass_filter.html', data=data),
                 'img_url': img_path.replace("assets", ""),
-                'high_pass_filter' : output_img.replace("assets", "")
+                'high_pass_filter': output_img.replace("assets", "")
             }
         else:
             return 'No file part in the request'
+
 
 @bp.route("/laplacian_filter", methods=['GET'])
 def laplacian_filter_temp():
@@ -458,22 +467,22 @@ def laplacian_filter_temp():
     }
 
     workflows = [
-        {'title': 'Image Acquisition and Preprocessing', 'description': 'Start by acquiring the image you want to process. Ensure that the image is in a suitable format and resolution for your task. You may need to perform some preprocessing steps, such as resizing or color space conversion, before applying Laplacian filtering.'},
-        {'title': 'Kernel Selection',
+        {'title': '1)   Image Acquisition and Preprocessing', 'description': 'Start by acquiring the image you want to process. Ensure that the image is in a suitable format and resolution for your task. You may need to perform some preprocessing steps, such as resizing or color space conversion, before applying Laplacian filtering.'},
+        {'title': '2)   Kernel Selection',
             'description': 'Choose an appropriate Laplacian kernel for your filtering task. Common options include the standard 3x3 Laplacian kernel, the 5x5 Laplacian of Gaussian (LoG) kernel, or more complex variants. The choice of kernel affects the filtering results, with larger kernels providing a wider edge detection response.'},
-        {'title': 'Image Conversion',
+        {'title': '3)   Image Conversion',
             'description': 'Convert the image to grayscale if it"s in color. Laplacian filtering is often applied to single-channel (grayscale) images.'},
-        {'title': 'Convolution', 'description': 'Perform convolution between the chosen Laplacian kernel and the grayscale image. You can use standard convolution techniques, such as the "full" or "valid" convolution, depending on your requirements. This step calculates the Laplacian response of the image.'},
-        {'title': 'Laplacian Response Visualization', 'description': 'Visualize the Laplacian response to see the edges and details detected in the image. You can create an output image or overlay the Laplacian response on the original image to better understand the detected features.'},
-        {'title': 'Thresholding', 'description': 'Apply thresholding to the Laplacian response to extract edges or features. Pixels with responses above a certain threshold are considered part of an edge. Experiment with different threshold values to control the level of detail extraction.'},
-        {'title': 'Post-processing (Optional)', 'description': 'Depending on the application, you might perform post-processing steps, such as morphological operations (dilation or erosion), to refine the detected edges or enhance the final result.'},
-        {'title': 'Feature Extraction or Image Enhancement',
+        {'title': '4)   Convolution', 'description': 'Perform convolution between the chosen Laplacian kernel and the grayscale image. You can use standard convolution techniques, such as the "full" or "valid" convolution, depending on your requirements. This step calculates the Laplacian response of the image.'},
+        {'title': '5)   Laplacian Response Visualization', 'description': 'Visualize the Laplacian response to see the edges and details detected in the image. You can create an output image or overlay the Laplacian response on the original image to better understand the detected features.'},
+        {'title': '6)   Thresholding', 'description': 'Apply thresholding to the Laplacian response to extract edges or features. Pixels with responses above a certain threshold are considered part of an edge. Experiment with different threshold values to control the level of detail extraction.'},
+        {'title': '7)   Post-processing (Optional)', 'description': 'Depending on the application, you might perform post-processing steps, such as morphological operations (dilation or erosion), to refine the detected edges or enhance the final result.'},
+        {'title': '8)   Feature Extraction or Image Enhancement',
             'description': 'The Laplacian response can be used for various purposes, such as feature extraction, image enhancement, or object detection. Consider how the filtered image will be used in your specific application.'},
-        {'title': 'Quality Assessment', 'description': 'Evaluate the performance of the Laplacian filtering by using appropriate quality metrics. For edge detection tasks, metrics like precision and recall can be useful for assessing the accuracy of edge detection.'}
+        {'title': '9)   Quality Assessment', 'description': 'Evaluate the performance of the Laplacian filtering by using appropriate quality metrics. For edge detection tasks, metrics like precision and recall can be useful for assessing the accuracy of edge detection.'}
     ]
 
-
     return render_template("laplacian_filter.html", data=data, workflowtitle="Brief overview of how Laplacian Filter Works", workflows=workflows)
+
 
 @bp.route("/laplacian_filter_output", methods=['POST'])
 def laplacian_filter_output():
@@ -488,16 +497,16 @@ def laplacian_filter_output():
             output_img = const.laplacian_filter(img_dir)
             data = {
                 'img_url': img_path,
-                'laplacian_filter' : output_img
+                'laplacian_filter': output_img
             }
             return {
                 'template': render_template('OutputCollapse/filters/laplacian_filter.html', data=data),
                 'img_url': img_path.replace("assets", ""),
-                'laplacian_filter' : output_img.replace("assets", "")
+                'laplacian_filter': output_img.replace("assets", "")
             }
         else:
             return 'No file part in the request'
-        
+
 
 @bp.route("/average_filter", methods=['GET'])
 def average_filter_temp():
@@ -507,20 +516,20 @@ def average_filter_temp():
     }
 
     workflows = [
-        {'title': 'Image Import and Preprocessing', 'description': 'Begin by importing the image you want to process. Ensure that the image is in a format suitable for your image processing environment or library. If necessary, perform any preliminary preprocessing tasks like resizing, grayscale conversion, or color space conversion.'},
-        {'title': 'Kernel Design', 'description': 'Decide on the size of the kernel or the neighborhood that you want to use for averaging. Common sizes are 3x3, 5x5, or 7x7 kernels. Larger kernels provide stronger smoothing but may blur fine details.'},
-        {'title': 'Image Padding', 'description': 'To apply the kernel to edge pixels, you"ll need to pad the image. There are various methods for padding, such as zero-padding or mirror padding. Padding ensures that the kernel can be centered on all image pixels.'},
-        {'title': 'Filter Implementation', 'description': 'Implement the average filter by iterating over each pixel in the image and computing the average of pixel values within the defined kernel window. The average is calculated by summing the pixel values and dividing by the total number of pixels in the kernel.'},
-        {'title': 'Output Image Generation',
+        {'title': '1)   Image Import and Preprocessing', 'description': 'Begin by importing the image you want to process. Ensure that the image is in a format suitable for your image processing environment or library. If necessary, perform any preliminary preprocessing tasks like resizing, grayscale conversion, or color space conversion.'},
+        {'title': '2)   Kernel Design', 'description': 'Decide on the size of the kernel or the neighborhood that you want to use for averaging. Common sizes are 3x3, 5x5, or 7x7 kernels. Larger kernels provide stronger smoothing but may blur fine details.'},
+        {'title': '3)   Image Padding', 'description': 'To apply the kernel to edge pixels, you"ll need to pad the image. There are various methods for padding, such as zero-padding or mirror padding. Padding ensures that the kernel can be centered on all image pixels.'},
+        {'title': '4)   Filter Implementation', 'description': 'Implement the average filter by iterating over each pixel in the image and computing the average of pixel values within the defined kernel window. The average is calculated by summing the pixel values and dividing by the total number of pixels in the kernel.'},
+        {'title': '5)   Output Image Generation',
             'description': 'Create a new image (output image) that will store the results of the average filtering. The output image should have the same dimensions as the input image.'},
-        {'title': 'Filter Application', 'description': 'Apply the average filter to each pixel in the input image by using the computed average values from the previous step. Replace the pixel value in the output image with the calculated average.'},
-        {'title': 'Handling Image Borders', 'description': 'For pixels near the image borders, the kernel may extend beyond the image boundaries. You can handle this by using different border-pixel strategies, such as omitting the edge pixels, extending the image by reflection, or wrapping around.'},
-        {'title': 'Normalization (Optional)', 'description': 'You may choose to normalize the output image if the kernel sum is not equal to one. Normalization ensures that the output image has the same overall brightness as the input image.'},
-        {'title': 'Output Image Display', 'description': 'Display or save the resulting smoothed image to visualize the effects of the average filtering. Consider using visualization tools or libraries compatible with your image processing environment.'}
+        {'title': '6)   Filter Application', 'description': 'Apply the average filter to each pixel in the input image by using the computed average values from the previous step. Replace the pixel value in the output image with the calculated average.'},
+        {'title': '7)   Handling Image Borders', 'description': 'For pixels near the image borders, the kernel may extend beyond the image boundaries. You can handle this by using different border-pixel strategies, such as omitting the edge pixels, extending the image by reflection, or wrapping around.'},
+        {'title': '8)   Normalization (Optional)', 'description': 'You may choose to normalize the output image if the kernel sum is not equal to one. Normalization ensures that the output image has the same overall brightness as the input image.'},
+        {'title': '9)   Output Image Display', 'description': 'Display or save the resulting smoothed image to visualize the effects of the average filtering. Consider using visualization tools or libraries compatible with your image processing environment.'}
     ]
 
-
     return render_template("Average_filter.html", data=data, workflowtitle="Brief overview of how Average Filter Works", workflows=workflows)
+
 
 @bp.route("/average_filter_output", methods=['POST'])
 def average_filter_output():
@@ -535,12 +544,12 @@ def average_filter_output():
             output_img = const.average_filter(img_dir)
             data = {
                 'img_url': img_path,
-                'Average_filter' : output_img
+                'Average_filter': output_img
             }
             return {
                 'template': render_template('OutputCollapse/filters/Average_filter.html', data=data),
                 'img_url': img_path.replace("assets", ""),
-                'Average_filter' : output_img.replace("assets", "")
+                'Average_filter': output_img.replace("assets", "")
             }
         else:
             return 'No file part in the request'

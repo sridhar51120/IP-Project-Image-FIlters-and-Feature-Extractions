@@ -111,7 +111,7 @@ $(document).ready(function () {
             $('.gaussian-noise-user-video-tutorial-modal-close').click(function () {
                 $('#gaussian-noise-user-video-tutorial-modal').modal('hide');
                 $('#gaussian-noise-user-video-tutorial-modal').remove();
-                location.reload();
+                // location.reload();
             });
         });
     })

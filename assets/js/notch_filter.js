@@ -109,7 +109,7 @@ $(document).ready(function () {
             $('.notch-filter-user-video-tutorial-modal-close').click(function () {
                 $('#notch-filter-user-video-tutorial-modal').modal('hide');
                 $('#notch-filter-user-video-tutorial-modal').remove();
-                location.reload();
+                // location.reload();
             });
         });
     })

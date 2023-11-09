@@ -102,13 +102,14 @@ $(document).ready(function () {
 
 $(document).ready(function () {
     $('.btn-load-video-tutorial-edge-detection').click(function () {
-        $.get("/user_tutorial_video/errosion", function (data) {
+        // alert("Clicked");
+        $.get("/user_tutorial_video/edge_detection", function (data) {
             $('.user-tutorial-video-content').append(data);
             $('#edge-detection-user-video-tutorial-modal').modal('show');
             $('.edge-detection-user-video-tutorial-modal-close').click(function () {
                 $('#edge-detection-user-video-tutorial-modal').modal('hide');
                 $('#edge-detection-user-video-tutorial-modal').remove();
-                location.reload();
+                // location.reload();
             });
         });
     })

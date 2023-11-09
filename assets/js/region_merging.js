@@ -110,7 +110,7 @@ $(document).ready(function () {
             $('.region-merging-user-video-tutorial-modal-close').click(function () {
                 $('#region-merging-user-video-tutorial-modal').modal('hide');
                 $('#region-merging-user-video-tutorial-modal').remove();
-                location.reload();
+                // location.reload();
             });
         });
     })
