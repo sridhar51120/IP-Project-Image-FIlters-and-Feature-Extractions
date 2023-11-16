@@ -86,12 +86,15 @@ $(document).ready(function () {
                         });
                     } else {
                         const alert_msg = `
-                        <div class="card bg-primary">
+                        <div class="card bg-primary alert-container-body">
                             <div class="card-body text-center text-dark">
                                 Invalid File Extension
                             </div>
                         </div>`
                         $('.alert-container').append(alert_msg);
+                        setTimeout(function () {
+                            $('.alert-container-body').remove();
+                        }, 3000);
                     }
                 } else {
                     alert("File Not Selected!");

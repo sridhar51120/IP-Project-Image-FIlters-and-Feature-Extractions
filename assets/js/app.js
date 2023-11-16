@@ -1,6 +1,6 @@
 $(document).ready(function () {
     $('.btn-user-guide-modal').click(function () {
-        const data = `<div class="modal fade" id="UserGuideModal"  aria-labelledby="UserGuideModalLabel" tabindex="-1" role="dialog" data-bs-backdrop="static">
+        const data = `<div class="modal fade" id="UserGuideModal"  aria-labelledby="UserGuideModalLabel" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">

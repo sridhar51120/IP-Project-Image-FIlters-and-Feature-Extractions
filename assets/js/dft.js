@@ -85,13 +85,20 @@ $(document).ready(function () {
                             }
                         });
                     } else {
-                        const alert_msg = `
-                        <div class="card bg-primary">
-                            <div class="card-body text-center text-dark">
-                                Invalid File Extension
-                            </div>
-                        </div>`
-                        $('.alert-container').append(alert_msg);
+                        // TODO: Alert Toast Implementations
+                        
+                        // const alert_msg = `
+                        // <div class="toast bg-primary element" role="alert" aria-live="assertive" aria-atomic="true">
+                        //     <div class="toast-body">
+                        //     Invalid File Extension
+                        //     </div>
+                        // </div>`
+                        // $('.alert-container').append(alert_msg);
+
+                        // $('.element').toast('show')
+                        // // setTimeout(function () {
+                        // //     $('.alert-container-body').remove();
+                        // // }, 3000);
 
                     }
                 } else {
