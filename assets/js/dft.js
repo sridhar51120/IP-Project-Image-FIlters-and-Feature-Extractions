@@ -16,6 +16,7 @@ $(document).ready(function () {
             $('#dft-image-modal').modal('show');
             $('#btn-dft-modal-close').click(function () {
                 $('#dft-image-modal').modal('hide');
+                $('#dft-image-modal').remove();
             });
             const submit_image = document.getElementById('btn-dft-input-image-submit');
             $(submit_image).click(function () {
@@ -36,7 +37,6 @@ $(document).ready(function () {
                                 // console.log('Data : ', data);
 
                                 $('.discrete-fourier-transform-image-collapse').append(data['template']);
-                                data['template']
                                 $('.output-dft-filter-toggle-groups').collapse({
                                     toggle: false
                                 }).show();
@@ -85,24 +85,38 @@ $(document).ready(function () {
                             }
                         });
                     } else {
-                        // TODO: Alert Toast Implementations
-                        
-                        // const alert_msg = `
-                        // <div class="toast bg-primary element" role="alert" aria-live="assertive" aria-atomic="true">
-                        //     <div class="toast-body">
-                        //     Invalid File Extension
-                        //     </div>
-                        // </div>`
-                        // $('.alert-container').append(alert_msg);
-
-                        // $('.element').toast('show')
-                        // // setTimeout(function () {
-                        // //     $('.alert-container-body').remove();
-                        // // }, 3000);
-
+                        const alert_msg = `
+                        <div class="toast bg-primary alert-container-body" role="alert" aria-live="assertive" aria-atomic="true">
+                            <div class="toast-body">
+                            <div class="container">
+                            <div class="text-center text-dark ">
+                            <strong class="mr-auto">Invalid File Extension.<br>Only <.jpg or .png > allowed</strong> 
+                            </div>
+                        </div>
+                            </div>
+                        </div>`;
+                        $('.alert-container').append(alert_msg);
+                        $('.alert-container-body').toast('show');
+                        $('.alert-container-body').on('hidden.bs.toast', function () {
+                            $('.alert-container-body').remove();
+                        });
                     }
                 } else {
-                    alert("File Not Selected!");
+                    const alert_msg = `
+                        <div class="toast bg-primary alert-container-body" role="alert" aria-live="assertive" aria-atomic="true">
+                            <div class="toast-body">
+                            <div class="container">
+                            <div class="text-center text-dark ">
+                            <strong class="mr-auto">File Not Selected</strong> 
+                            </div>
+                        </div>
+                            </div>
+                        </div>`;
+                    $('.alert-container').append(alert_msg);
+                    $('.alert-container-body').toast('show');
+                    $('.alert-container-body').on('hidden.bs.toast', function () {
+                        $('.alert-container-body').remove();
+                    });
                 }
             })
         });

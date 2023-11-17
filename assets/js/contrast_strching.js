@@ -17,6 +17,7 @@ $(document).ready(function () {
 
             $('#btn-contrast-modal-close').click(function () {
                 $('#contrast-image-modal').modal('hide');
+                $('#contrast-image-modal').remove();
             });
             const btn_contrast_strching_submit_image = document.getElementById('btn-contrast-strching-input-image-submit');
             $(btn_contrast_strching_submit_image).click(function () {
@@ -86,18 +87,36 @@ $(document).ready(function () {
                         });
                     } else {
                         const alert_msg = `
-                        <div class="card bg-primary alert-container-body">
-                            <div class="card-body text-center text-dark">
-                                Invalid File Extension
+                        <div class="toast bg-primary alert-container-body" role="alert" aria-live="assertive" aria-atomic="true">
+                            <div class="toast-body">
+                            <div class="container">
+                            <div class="text-center text-dark ">
+                            <strong class="mr-auto">Invalid File Extension.<br>Only <.jpg or .png > allowed</strong> 
                             </div>
-                        </div>`
+                        </div>
+                            </div>
+                        </div>`;
                         $('.alert-container').append(alert_msg);
-                        setTimeout(function () {
+                        $('.alert-container-body').toast('show');
+                        $('.alert-container-body').on('hidden.bs.toast', function () {
                             $('.alert-container-body').remove();
-                        }, 3000);
-                    }
+                        });                    }
                 } else {
-                    alert("File Not Selected!");
+                    const alert_msg = `
+                        <div class="toast bg-primary alert-container-body" role="alert" aria-live="assertive" aria-atomic="true">
+                            <div class="toast-body">
+                            <div class="container">
+                            <div class="text-center text-dark ">
+                            <strong class="mr-auto">File Not Selected</strong> 
+                            </div>
+                        </div>
+                            </div>
+                        </div>`;
+                    $('.alert-container').append(alert_msg);
+                    $('.alert-container-body').toast('show');
+                    $('.alert-container-body').on('hidden.bs.toast', function () {
+                        $('.alert-container-body').remove();
+                    });
                 }
             })
         });

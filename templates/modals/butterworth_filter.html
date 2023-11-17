@@ -2,34 +2,30 @@
     aria-labelledby="butterworth-filter-image-modalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
-            <div class="modal-header">
-                <div class="container">
-                    <div class="float-right">
-                        <h5 class="text-success">Upload Your Image</h5>
-                    </div>
-                    <div class="float-left">
-                        <div class="alert-container "></div>
-                    </div>
-                </div>
-            </div>
             <div class="card">
                 <div class="card-body">
-                    <div class="card-body">
-                        <h5 class="card-title text-danger d-flex justify-content-start">
-                            File
-                            <span class="text-danger"><strong> *</strong></span>
-                        </h5>
-                        <form id="uploadForm" enctype="multipart/form-data">
-                            <input class="form-control d-flex justify-content-start border border-success" type="file"
-                                name="butterworth-input-image-file" id="butterworth-input-image" autocomplete="Image">
-                        </form>
+                    <div class="">
+                        <div class="d-flex justify-content-center h5 text-success">Upload File</div>
+                        <div class="mb-2"></div>
+                        <div class="d-flex justify-content-center">
+                            <div class="alert-container">
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <form id="uploadForm" enctype="multipart/form-data">
+                        <input class="form-control d-flex justify-content-start border border-success" type="file"
+                            name="butterworth-input-image-file" id="butterworth-input-image" autocomplete="Image">
+                    </form>
+                    <br>
+                    <div class="d-flex justify-content-end">
+                        <button type="button" class="btn btn-danger"
+                            id="btn-butterworth-filter-modal-close">Close</button>
+                        &nbsp;
+                        <button class="btn btn-success d-flex justify-content-start"
+                            id="btn-butterworth-input-image-submit">Upload</button>
                     </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger" id="btn-butterworth-filter-modal-close">Close</button>
-                <button class="btn btn-success d-flex justify-content-start"
-                    id="btn-butterworth-input-image-submit">Upload</button>
             </div>
         </div>
     </div>

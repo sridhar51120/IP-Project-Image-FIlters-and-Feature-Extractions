@@ -1,74 +1,104 @@
 $(document).ready(function () {
     $('.btn-user-guide-modal').click(function () {
-        const data = `<div class="modal fade" id="UserGuideModal"  aria-labelledby="UserGuideModalLabel" tabindex="-1" role="dialog">
+        const data = `<div class="modal fade" id="UserGuideModal" aria-labelledby="UserGuideModalLabel" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title text-primary">System Requirements</h5>
                 </div>
                 <div class="modal-body">
-                <div class="container">
-                    <p class="font-weight-bold">To utilize our Web App, you typically require several libraries and modules to be
-                        installed in your system.</p>
-                    <div class="python">
-                        <h5 class="text-dark">For Python</h5>
-                        <p>Download the requirements file and execute the subsequent commands to install the necessary packages on
-                            your system.</p>
-                        <button class="btn btn-primary btn-sm btn-download-requirements-file-system-requirements">
-                            Show Requirements
-                        </button>
-                        <div class="collapse" id="for-python-code-snippets">
-                            <br>
-                            <div class="card card-body">
-                                <div id="Required-content">
-                                    <div class="row">
-                                        <div class="d-flex justify-content-end">
-                                            <button class="btn btn-primary btn-copy-content-code-requirement btn-sm">
-                                            <div class="change-icon-clipboard-icon-requirments-file">
-                                            <i class="bi bi-clipboard b-icon-clipboard-fill-requirements-file"></i>
-                                        </div></button>
+                    <div class="container">
+                        <p class="font-weight-bold">To utilize our Web App, you typically require several libraries and
+                            modules to be
+                            installed in your system.</p>
+                        <div class="python">
+                            <h5 class="text-dark">For Python</h5>
+                            <p>Download the requirements file and execute the subsequent commands to install the necessary
+                                packages on
+                                your system.</p>
+                            <button class="btn btn-primary btn-sm btn-download-requirements-file-system-requirements">
+                                Show Requirements
+                            </button>
+                            <div class="collapse" id="for-python-code-snippets">
+                                <br>
+                                <div class="card card-body">
+                                    <div id="Required-content">
+                                        <div class="row">
+                                            <div class="d-flex justify-content-end">
+                                                <button class="btn btn-primary btn-copy-content-code-requirement btn-sm">
+                                                    <div class="change-icon-clipboard-icon-requirments-file">
+                                                        <i
+                                                            class="bi bi-clipboard b-icon-clipboard-fill-requirements-file"></i>
+                                                    </div>
+                                                </button>
+                                            </div>
+                                            <code>Flask</code>
+                                            <code>numpy</code>
+                                            <code>opencv-python</code>
+                                            <code>scipy</code>
+                                            <code>matplotlib</code>
+                                            <code>skimage</code>
+                                            <code>pandas</code>
                                         </div>
-                                        <code>Flask</code>
-                                        <code>numpy</code>
-                                        <code>opencv-python</code>
-                                        <code>scipy</code>
-                                        <code>matplotlib</code>
-                                        <code>skimage</code>
-                                        <code>pandas</code>
                                     </div>
                                 </div>
-                            </div>
-                            <br>
-                            <div class="card card-body">
-                                Copy the ablove Content and create <b>requirement.txt</b> and Paste it to that file and run the below command in our
-                                system
-                            </div>
-                            <br>
-                            <div class="card card-body">
-                                pip install -r requirement.txt
+                                <br>
+                                <div class="card card-body">
+                                    Copy the ablove Content and create <b>requirement.txt</b> and Paste it to that file and
+                                    run the below command in our
+                                    system
+                                </div>
+                                <br>
+                                <div class="card card-body">
+                                    pip install -r requirement.txt
+                                </div>
+                                <br>
+                                <div class="d-flex justify-content-center">
+                                    <strong>( <b>or</b> )</strong>
+                                </div>
+                                <br>
+                                <div class="card card-body">
+                                    <button class="btn btn-primary btn-download-requirment-text-file">Download requirement.txt File</button> 
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="mb-3"></div>
-                    <div class="python">
-                        <h5 class="text-dark">For MatLab Tool</h5>
-                        <p>copy the respective code and go to the matlab tool and paste the code into matlab code pallate and run
-                            the matlab code</p>
-                        <a href="https://youtu.be/uHpeViKdWW8?feature=shared" class="btn btn-primary btn-sm" target="_blank">How Can i Run the
-                            Matlab Tool</a>
+                        <div class="mb-3"></div>
+                        <div class="python">
+                            <h5 class="text-dark">For MatLab Tool</h5>
+                            <p>copy the respective code and go to the matlab tool and paste the code into matlab code
+                                pallate and run
+                                the matlab code</p>
+                            <a href="https://youtu.be/uHpeViKdWW8?feature=shared" class="btn btn-primary btn-sm"
+                                target="_blank">How Can i Run the
+                                Matlab Tool</a>
+                        </div>
                     </div>
                 </div>
-            </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary btn-system-requirements-modal-close" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary btn-system-requirements-modal-close"
+                        data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
-        </div>
+    </div>
         `;
         $('#code-block').append(data);
         $('#UserGuideModal').modal('show');
-
+        $('.btn-download-requirment-text-file').click(function () {
+            var lines = [
+                "Hello, this is line 1.",
+                "This is line 2.",
+                "And here is line 3."
+            ];
+            var textData = lines.join("\n");
+            var blob = new Blob([textData], { type: "text/plain" });
+            var a = document.createElement("a");
+            a.href = window.URL.createObjectURL(blob);
+            a.download = "sample.txt";
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        });
         $('.btn-system-requirements-modal-close').click(function () {
             $('#UserGuideModal').modal('hide');
             location.reload();
