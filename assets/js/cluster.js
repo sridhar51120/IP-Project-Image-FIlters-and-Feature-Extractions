@@ -22,10 +22,21 @@ $(document).ready(function () {
             $(btn_cluster_submit_image).click(function () {
                 const cluster_input_image = document.getElementById('cluster-input-image');
                 if (cluster_input_image.files.length > 0) {
+                    const alert_msg = `
+                <div class="toast bg-success alert-container-body" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="false">
+                    <div class="toast-body">
+                        <div class="container">
+                            <div class="text-center text-dark ">
+                                <strong class="mr-auto">Processing<br>Please Wait a Few Seconds...</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>`;
+                    $('.alert-container').append(alert_msg);
+                    $('.alert-container-body').toast('show');
                     const fileName = cluster_input_image.files[0].name;
                     // alert(fileName);
                     if (/\.(jpg|png)$/i.test(fileName)) {
-                        $('#cluster-image-modal').modal('hide');
                         $.ajax({
                             url: '/segmentation/Clustering_output',
                             type: 'POST',
@@ -36,7 +47,8 @@ $(document).ready(function () {
 
                                 // // console.log('Server response:', response);
                                 // // console.log('Data : ', data);
-
+                                $('#cluster-image-modal').modal('hide');
+                                $('#cluster-image-modal').remove();
                                 $('.cluster-image-collapse').append(data['template']);
                                 $('#output-clustering-toggle-groups').collapse({
                                     toggle: false
@@ -77,14 +89,33 @@ $(document).ready(function () {
                                 });
                             },
                             error: function (xhr, status, error) {
-                                // console.log('XHR status:', status);
-                                // console.log('XHR error:', error);
+                                $('.alert-container-body').remove();
+                                const alert_msg = `
+                                    <div class="toast bg-primary alert-container-body" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-body">
+        <div class="container">
+            <div class="text-center text-dark ">
+                <strong class="mr-auto">
+                    An error occurred during the processing of your image.
+                    <br>Please provide another image to receive the output.
+                    <br>Your Image Doesn't support our Machine so provide another image to get the to receive the
+                    output</strong>
+            </div>
+        </div>
+    </div>
+</div>`;
+                                $('.alert-container').append(alert_msg);
+                                $('.alert-container-body').toast('show');
+                                $('.alert-container-body').on('hidden.bs.toast', function () {
+                                    $('.alert-container-body').remove();
+                                });
                             },
                             complete: function (xhr, status) {
                                 // console.log('Request complete. XHR status:', status);
                             }
                         });
                     } else {
+                        $('.alert-container-body').remove();
                         const alert_msg = `
                         <div class="toast bg-primary alert-container-body" role="alert" aria-live="assertive" aria-atomic="true">
                             <div class="toast-body">
@@ -131,7 +162,7 @@ $(document).ready(function () {
             $('.cluster-user-video-tutorial-modal-close').click(function () {
                 $('#cluster-user-video-tutorial-modal').modal('hide');
                 $('#cluster-user-video-tutorial-modal').remove();
-               // location.reload();
+                // location.reload();
             });
         });
     })
@@ -142,7 +173,7 @@ $(document).ready(function () {
         $('#clustering-matlab-code').remove();
         let content = `                <div class="container" id="clustering-python-code">
                     <div class="mb-1"></div>
-                    <div class="col col-12 d-flex justify-content-start"><span># Import Required Library</span>
+                    <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace"># Import Required Library</span>
                     </div>
                     <div class="col col-12 d-flex justify-content-start">
                         <code>import cv2</code>
@@ -157,7 +188,7 @@ $(document).ready(function () {
                         <code>import matplotlib.pyplot as plt</code>
                     </div>
                     <div class="mb-3"></div>
-                    <div class="col col-12 d-flex justify-content-start"><span># Read the image </span></div>
+                    <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace"># Read the image </span></div>
                     <div class="col col-12 d-flex justify-content-start">
                         <code>image = cv2.imread('path_to_your_image.jpg')</code>
                     </div>
@@ -165,14 +196,14 @@ $(document).ready(function () {
                         <code>image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)</code>
                     </div>
                     <div class="mb-3"></div>
-                    <div class="col col-12 d-flex justify-content-start"><span># Flatten the image array</span>
+                    <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace"># Flatten the image array</span>
                     </div>
                     <div class="col col-12 d-flex justify-content-start">
                         <code>pixels = image.reshape((-1, 3))
                             </code>
                     </div>
                     <div class="mb-3"></div>
-                    <div class="col col-12 d-flex justify-content-start"><span># Specify the number of clusters (adjust
+                    <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace"># Specify the number of clusters (adjust
                             as needed)</span>
                     </div>
                     <div class="col col-12 d-flex justify-content-start">
@@ -180,7 +211,7 @@ $(document).ready(function () {
                             </code>
                     </div>
                     <div class="mb-3"></div>
-                    <div class="col col-12 d-flex justify-content-start"><span># Perform K-means clustering</span>
+                    <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace"># Perform K-means clustering</span>
                     </div>
                     <div class="col col-12 d-flex justify-content-start">
                         <code>kmeans = KMeans(n_clusters=num_clusters, random_state=42)
@@ -191,7 +222,7 @@ $(document).ready(function () {
                             </code>
                     </div>
                     <div class="mb-3"></div>
-                    <div class="col col-12 d-flex justify-content-start"><span># Get cluster labels and centroids</span>
+                    <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace"># Get cluster labels and centroids</span>
                     </div>
                     <div class="col col-12 d-flex justify-content-start">
                         <code>labels = kmeans.labels_
@@ -202,14 +233,14 @@ $(document).ready(function () {
                             </code>
                     </div>
                     <div class="mb-3"></div>
-                    <div class="col col-12 d-flex justify-content-start"><span># Create the segmented image</span>
+                    <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace"># Create the segmented image</span>
                     </div>
                     <div class="col col-12 d-flex justify-content-start">
                         <code>segmented_image = centers[labels].reshape(image.shape)
                             </code>
                     </div>
                     <div class="mb-3"></div>
-                    <div class="col col-12 d-flex justify-content-start"><span>
+                    <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace">
                             # Display the original and clustered images
                         </span>
                     </div>
@@ -245,7 +276,7 @@ $(document).ready(function () {
         $('#clustering-python-code').remove();
         let content = `                <div class="container" id="clustering-matlab-code">
                     <div class="mb-1"></div>
-                    <div class="col col-12 d-flex justify-content-start"><span>% Read the original image</span>
+                    <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace">% Read the original image</span>
                     </div>
                     <div class="col col-12 d-flex justify-content-start">
                         <code>original_image = imread('path_to_your_image.jpg');</code>
@@ -255,7 +286,7 @@ $(document).ready(function () {
                         </code>
                     </div>
                     <div class="mb-3"></div>
-                    <div class="col col-12 d-flex justify-content-start"><span>% Flatten the image array</span></div>
+                    <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace">% Flatten the image array</span></div>
                     <div class="col col-12 d-flex justify-content-start">
                         <code>[rows, cols, channels] = size(image);
                             </code>
@@ -265,14 +296,14 @@ $(document).ready(function () {
                             </code>
                     </div>
                     <div class="mb-3"></div>
-                    <div class="col col-12 d-flex justify-content-start"><span>% Specify the number of clusters (adjust
+                    <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace">% Specify the number of clusters (adjust
                             as needed)</span></div>
                     <div class="col col-12 d-flex justify-content-start">
                         <code>num_clusters = 5;
                             </code>
                     </div>
                     <div class="mb-3"></div>
-                    <div class="col col-12 d-flex justify-content-start"><span>
+                    <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace">
                             % Perform K-means clustering
                         </span>
                     </div>
@@ -280,7 +311,7 @@ $(document).ready(function () {
                         <code>[idx, centers] = kmeans(pixels, num_clusters);</code>
                     </div>
                     <div class="mb-3"></div>
-                    <div class="col col-12 d-flex justify-content-start"><span>
+                    <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace">
                             % Reshape the pixel indices to form the clustered image
                         </span>
                     </div>
@@ -288,7 +319,7 @@ $(document).ready(function () {
                         <code>segmented_image = reshape(idx, rows, cols);</code>
                     </div>
                     <div class="mb-3"></div>
-                    <div class="col col-12 d-flex justify-content-start"><span>
+                    <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace">
                             % Display the original and clustered images
                         </span>
                     </div>

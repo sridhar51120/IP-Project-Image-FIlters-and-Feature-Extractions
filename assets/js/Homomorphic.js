@@ -22,10 +22,21 @@ $(document).ready(function () {
             $(submit_image).click(function () {
                 const input_image = document.getElementById('homomarphic-input-image');
                 if (input_image.files.length > 0) {
+                    const alert_msg = `
+                    <div class="toast bg-success alert-container-body" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="false">
+                        <div class="toast-body">
+                            <div class="container">
+                                <div class="text-center text-dark ">
+                                    <strong class="mr-auto">Processing<br>Please Wait a Few Seconds...</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>`;
+                    $('.alert-container').append(alert_msg);
+                    $('.alert-container-body').toast('show');
                     const fileName = input_image.files[0].name;
                     // alert(fileName);
                     if (/\.(jpg|png)$/i.test(fileName)) {
-                        $('#homomarphic-filter-image-modal').modal('hide');
                         $.ajax({
                             url: '/filters2/homomarphic_filter_output',
                             type: 'POST',
@@ -36,6 +47,8 @@ $(document).ready(function () {
                                 // console.log('Server response:', response);
                                 // console.log('Data : ', data);
 
+                                $('#homomarphic-filter-image-modal').modal('hide');
+                                $('#homomarphic-filter-image-modal').remove();
                                 $('.homomarphic-filter-input-image-collapse').append(data['template']);
                                 $('.output-homomarphic-filter-toggle-groups').collapse({
                                     toggle: false
@@ -77,14 +90,33 @@ $(document).ready(function () {
                                 });
                             },
                             error: function (xhr, status, error) {
-                                // console.log('XHR status:', status);
-                                // console.log('XHR error:', error);
+                                $('.alert-container-body').remove();
+                                const alert_msg = `
+                                    <div class="toast bg-primary alert-container-body" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-body">
+        <div class="container">
+            <div class="text-center text-dark ">
+                <strong class="mr-auto">
+                    An error occurred during the processing of your image.
+                    <br>Please provide another image to receive the output.
+                    <br>Your Image Doesn't support our Machine so provide another image to get the to receive the
+                    output</strong>
+            </div>
+        </div>
+    </div>
+</div>`;
+                                $('.alert-container').append(alert_msg);
+                                $('.alert-container-body').toast('show');
+                                $('.alert-container-body').on('hidden.bs.toast', function () {
+                                    $('.alert-container-body').remove();
+                                });
                             },
                             complete: function (xhr, status) {
                                 // console.log('Request complete. XHR status:', status);
                             }
                         });
                     } else {
+                        $('.alert-container-body').remove();
                         const alert_msg = `
                         <div class="toast bg-primary alert-container-body" role="alert" aria-live="assertive" aria-atomic="true">
                             <div class="toast-body">
@@ -141,7 +173,7 @@ $(document).ready(function () {
         $('#homomarphic-filter-matlab-code').remove();
         let content = ` <div class="container" id="homomarphic-filter-python-code">
                 <div class="mb-1"></div>
-                <div class="col col-12 d-flex justify-content-start"><span># Import Required Library</span>
+                <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace"># Import Required Library</span>
                 </div>
                 <div class="col col-12 d-flex justify-content-start">
                     <code>import cv2</code>
@@ -150,7 +182,7 @@ $(document).ready(function () {
                     <code>import numpy as np</code>
                 </div>
                 <div class="mb-3"></div>
-                <div class="col col-12 d-flex justify-content-start"><span># Read the image </span></div>
+                <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace"># Read the image </span></div>
                 <div class="col col-12 d-flex justify-content-start">
                     <code>input_image = 'input_image.jpg' </code>
                 </div>
@@ -171,12 +203,12 @@ $(document).ready(function () {
                     </code>
                 </div>
                 <div class="mb-3"></div>
-                <div class="col col-12 d-flex justify-content-start"><span># Read the image </span></div>
+                <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace"># Read the image </span></div>
                 <div class="col col-12 d-flex justify-content-start">
                     <code>image = cv2.imread('path_to_your_image.jpg', 0)</code>
                 </div>
                 <div class="mb-3"></div>
-                <div class="col col-12 d-flex justify-content-start"><span># Convert to float32 for further
+                <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace"># Convert to float32 for further
                         processing</span>
                 </div>
                 <div class="col col-12 d-flex justify-content-start">
@@ -184,7 +216,7 @@ $(document).ready(function () {
                     </code>
                 </div>
                 <div class="mb-3"></div>
-                <div class="col col-12 d-flex justify-content-start"><span>
+                <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace">
                         # Log-transform
                     </span>
                 </div>
@@ -192,7 +224,7 @@ $(document).ready(function () {
                     <code> img_log = np.log1p(img_float)</code>
                 </div>
                 <div class="mb-3"></div>
-                <div class="col col-12 d-flex justify-content-start"><span>
+                <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace">
                         # Apply Discrete Fourier Transform
                     </span>
                 </div>
@@ -200,7 +232,7 @@ $(document).ready(function () {
                     <code> dft = cv2.dft(img_log, flags=cv2.DFT_COMPLEX_OUTPUT)</code>
                 </div>
                 <div class="mb-3"></div>
-                <div class="col col-12 d-flex justify-content-start"><span>
+                <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace">
                         # Shift the zero frequency components to the center
                     </span>
                 </div>
@@ -209,7 +241,7 @@ $(document).ready(function () {
                     </code>
                 </div>
                 <div class="mb-3"></div>
-                <div class="col col-12 d-flex justify-content-start"><span>
+                <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace">
                         # Create a mask
                     </span>
                 </div>
@@ -229,7 +261,7 @@ $(document).ready(function () {
                     <code>mask[crow - cutoff_freq_high:crow + cutoff_freq_high, ccol - cutoff_freq_high:ccol + cutoff_freq_high] = 0</code>
                 </div>
                 <div class="mb-3"></div>
-                <div class="col col-12 d-flex justify-content-start"><span>
+                <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace">
                         # Apply the mask
                     </span>
                 </div>
@@ -237,7 +269,7 @@ $(document).ready(function () {
                     <code> dft_shift_filtered = dft_shift * mask</code>
                 </div>
                 <div class="mb-3"></div>
-                <div class="col col-12 d-flex justify-content-start"><span>
+                <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace">
                         # Shift the zero frequency components back to the corner
                     </span>
                 </div>
@@ -245,7 +277,7 @@ $(document).ready(function () {
                     <code>dft_shift_filtered = np.fft.ifftshift(dft_shift_filtered)</code>
                 </div>
                 <div class="mb-3"></div>
-                <div class="col col-12 d-flex justify-content-start"><span>
+                <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace">
                         # Inverse DFT
                     </span>
                 </div>
@@ -253,7 +285,7 @@ $(document).ready(function () {
                     <code>img_filtered = cv2.idft(dft_shift_filtered, flags=cv2.DFT_SCALE | cv2.DFT_REAL_OUTPUT)</code>
                 </div>
                 <div class="mb-3"></div>
-                <div class="col col-12 d-flex justify-content-start"><span>
+                <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace">
                         # Exponential transformation
                     </span>
                 </div>
@@ -264,7 +296,7 @@ $(document).ready(function () {
                     <code> img_filtered = np.uint8(np.round(img_filtered))</code>
                 </div>
                 <div class="mb-3"></div>
-                <div class="col col-12 d-flex justify-content-start"><span>
+                <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace">
                         # Apply gamma correction
                     </span>
                 </div>
@@ -275,7 +307,7 @@ $(document).ready(function () {
                     <code>img_filtered = np.uint8(img_filtered * 255.0)</code>
                 </div>
                 <div class="mb-3"></div>
-                <div class="col col-12 d-flex justify-content-start"><span>
+                <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace">
                         # Save the filtered image
                     </span>
                 </div>
@@ -284,7 +316,7 @@ $(document).ready(function () {
                     </code>
                 </div>
                 <div class="mb-3"></div>
-                <div class="col col-12 d-flex justify-content-start"><span>
+                <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace">
                         # Display the filtered image
                     </span>
                 </div>
@@ -305,14 +337,14 @@ $(document).ready(function () {
         $('#homomarphic-filter-python-code').remove();
         let content = `                <div class="container" id="homomarphic-filter-matlab-code">
                 <div class="mb-1"></div>
-                <div class="col col-12 d-flex justify-content-start"><span>% Read the image</span>
+                <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace">% Read the image</span>
                 </div>
                 <div class="col col-12 d-flex justify-content-start">
                     <code>input_image = imread('your_image.jpg');  % Replace 'your_image.jpg' with the path to your image
                     </code>
                 </div>
                 <div class="mb-3"></div>
-                <div class="col col-12 d-flex justify-content-start"><span>% Display the original image</span></div>
+                <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace">% Display the original image</span></div>
                 <div class="col col-12 d-flex justify-content-start">
                     <code>figure;</code>
                 </div>
@@ -323,7 +355,7 @@ $(document).ready(function () {
                     <code>title('Original Image');</code>
                 </div>
                 <div class="mb-3"></div>
-                <div class="col col-12 d-flex justify-content-start"><span>% Convert the image to double precision
+                <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace">% Convert the image to double precision
                         for processing</span>
                 </div>
                 <div class="col col-12 d-flex justify-content-start">
@@ -331,7 +363,7 @@ $(document).ready(function () {
                     </code>
                 </div>
                 <div class="mb-3"></div>
-                <div class="col col-12 d-flex justify-content-start"><span>
+                <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace">
                         % Parameters for homomorphic filtering
                     </span>
                 </div>
@@ -350,28 +382,28 @@ $(document).ready(function () {
                     </code>
                 </div>
                 <div class="mb-3"></div>
-                <div class="col col-12 d-flex justify-content-start"><span>% Convert image to log domain</span>
+                <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace">% Convert image to log domain</span>
                 </div>
                 <div class="col col-12 d-flex justify-content-start">
                     <code>log_image = log(1 + input_image);
                     </code>
                 </div>
                 <div class="mb-3"></div>
-                <div class="col col-12 d-flex justify-content-start"><span>% Apply Fourier Transform</span>
+                <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace">% Apply Fourier Transform</span>
                 </div>
                 <div class="col col-12 d-flex justify-content-start">
                     <code>fft_image = fft2(log_image);
                     </code>
                 </div>
                 <div class="mb-3"></div>
-                <div class="col col-12 d-flex justify-content-start"><span>% Center the FFT</span>
+                <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace">% Center the FFT</span>
                 </div>
                 <div class="col col-12 d-flex justify-content-start">
                     <code>fft_image_shifted = fftshift(fft_image);
                     </code>
                 </div>
                 <div class="mb-3"></div>
-                <div class="col col-12 d-flex justify-content-start"><span>% Create a Gaussian high-pass
+                <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace">% Create a Gaussian high-pass
                         filter</span>
                 </div>
                 <div class="col col-12 d-flex justify-content-start">
@@ -399,21 +431,21 @@ $(document).ready(function () {
                     </code>
                 </div>
                 <div class="mb-3"></div>
-                <div class="col col-12 d-flex justify-content-start"><span>% Apply the high-pass filter</span>
+                <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace">% Apply the high-pass filter</span>
                 </div>
                 <div class="col col-12 d-flex justify-content-start">
                     <code>fft_image_filtered = fft_image_shifted .* gaussian_filter;
                     </code>
                 </div>
                 <div class="mb-3"></div>
-                <div class="col col-12 d-flex justify-content-start"><span>% Inverse FFT</span>
+                <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace">% Inverse FFT</span>
                 </div>
                 <div class="col col-12 d-flex justify-content-start">
                     <code>filtered_image = ifft2(ifftshift(fft_image_filtered));
                     </code>
                 </div>
                 <div class="mb-3"></div>
-                <div class="col col-12 d-flex justify-content-start"><span>% Exponential to revert back from
+                <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace">% Exponential to revert back from
                         log</span>
                 </div>
                 <div class="col col-12 d-flex justify-content-start">
@@ -421,14 +453,14 @@ $(document).ready(function () {
                     </code>
                 </div>
                 <div class="mb-3"></div>
-                <div class="col col-12 d-flex justify-content-start"><span>% Apply gamma correction</span>
+                <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace">% Apply gamma correction</span>
                 </div>
                 <div class="col col-12 d-flex justify-content-start">
                     <code>filtered_image = filtered_image .^ gamma_h;
                     </code>
                 </div>
                 <div class="mb-3"></div>
-                <div class="col col-12 d-flex justify-content-start"><span>% Convert the image to the original
+                <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace">% Convert the image to the original
                         range</span>
                 </div>
                 <div class="col col-12 d-flex justify-content-start">
@@ -436,7 +468,7 @@ $(document).ready(function () {
                     </code>
                 </div>
                 <div class="mb-3"></div>
-                <div class="col col-12 d-flex justify-content-start"><span>% Display the filtered image</span>
+                <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace">% Display the filtered image</span>
                 </div>
                 <div class="col col-12 d-flex justify-content-start">
                     <code>figure;
@@ -451,7 +483,7 @@ $(document).ready(function () {
                     </code>
                 </div>
                 <div class="mb-3"></div>
-                <div class="col col-12 d-flex justify-content-start"><span>% Save the filtered image</span>
+                <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace">% Save the filtered image</span>
                 </div>
                 <div class="col col-12 d-flex justify-content-start">
                     <code>imwrite(filtered_image, 'homomorphic_filtered_image.jpg');  % Save the filtered image to a file

@@ -16,14 +16,25 @@ $(document).ready(function () {
             $('#btn-spatial-modal-close').click(function () {
                 $('#spatial-image-modal').modal('hide');
                 $('#spatial-image-modal').remove();
-            }); 
+            });
             const btn_spatial_filter_submit_image = document.getElementById('btn-spatial-filter-input-image-submit');
             $(btn_spatial_filter_submit_image).click(function () {
                 const spatial_filter_input_image = document.getElementById('spatial-filter-input-image');
                 if (spatial_filter_input_image.files.length > 0) {
+                    const alert_msg = `
+                    <div class="toast bg-success alert-container-body" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="false">
+                        <div class="toast-body">
+                            <div class="container">
+                                <div class="text-center text-dark ">
+                                    <strong class="mr-auto">Processing<br>Please Wait a Few Seconds...</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>`;
+                    $('.alert-container').append(alert_msg);
+                    $('.alert-container-body').toast('show');
                     const fileName = spatial_filter_input_image.files[0].name;
                     if (/\.(jpg|png)$/i.test(fileName)) {
-                        $('#spatial-image-modal').modal('hide');
                         $.ajax({
                             url: '/enhancement/Spatial_filtering_output',
                             type: 'POST',
@@ -34,6 +45,8 @@ $(document).ready(function () {
                                 // // console.log('Server response:', response);
                                 // // console.log('Data : ', data);
 
+                                $('#spatial-image-modal').modal('hide');
+                                $('#spatial-image-modal').remove();
                                 $('.spatial-filter-input-image-collapse').append(data['template']);
                                 $('#output-spatial-filter-toggle-groups').collapse({
                                     toggle: false
@@ -75,14 +88,33 @@ $(document).ready(function () {
                                 });
                             },
                             error: function (xhr, status, error) {
-                                // console.log('XHR status:', status);
-                                // console.log('XHR error:', error);
+                                $('.alert-container-body').remove();
+                                const alert_msg = `
+                                    <div class="toast bg-primary alert-container-body" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-body">
+        <div class="container">
+            <div class="text-center text-dark ">
+                <strong class="mr-auto">
+                    An error occurred during the processing of your image.
+                    <br>Please provide another image to receive the output.
+                    <br>Your Image Doesn't support our Machine so provide another image to get the to receive the
+                    output</strong>
+            </div>
+        </div>
+    </div>
+</div>`;
+                                $('.alert-container').append(alert_msg);
+                                $('.alert-container-body').toast('show');
+                                $('.alert-container-body').on('hidden.bs.toast', function () {
+                                    $('.alert-container-body').remove();
+                                });
                             },
                             complete: function (xhr, status) {
                                 // console.log('Request complete. XHR status:', status);
                             }
                         });
                     } else {
+                        $('.alert-container-body').remove();
                         const alert_msg = `
                         <div class="toast bg-primary alert-container-body" role="alert" aria-live="assertive" aria-atomic="true">
                             <div class="toast-body">
@@ -140,7 +172,7 @@ $(document).ready(function () {
         $('#spatial-filter-matlab').remove();
         let content = `<div class="container" id="spatial-filter-python">
                     <div class="mb-1"></div>
-                    <div class="col col-12 d-flex justify-content-start"><span># Import Required Libraies</span></div>
+                    <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace"># Import Required Libraies</span></div>
                     <div class="col col-12 d-flex justify-content-start">
                         <code>import cv2</code>
                     </div>
@@ -148,40 +180,40 @@ $(document).ready(function () {
                         <code>import numpy as np</code>
                     </div>
                     <div class="mb-3"></div>
-                    <div class="col col-12 d-flex justify-content-start"><span># Load the Image File</span></div>
+                    <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace"># Load the Image File</span></div>
                     <div class="col col-12 d-flex justify-content-start">
                         <code>image = cv2.imread("input_image.jpg")</code>
                     </div>
                     <div class="mb-3"></div>
-                    <div class="col col-12 d-flex justify-content-start"><span># Define a 3x3 averaging filter
+                    <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace"># Define a 3x3 averaging filter
                             kernel</span></div>
                     <div class="col col-12 d-flex justify-content-start">
                         <code>kernel = np.array([[1, 1, 1],[1, 1, 1],[1, 1, 1]]) / 9</code>
                     </div>
                     <div class="mb-3"></div>
-                    <div class="col col-12 d-flex justify-content-start"><span># Perform convolution</span></div>
+                    <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace"># Perform convolution</span></div>
                     <div class="col col-12 d-flex justify-content-start">
                         <code>output_image = cv2.filter2D(input_image, -1, kernel)</code>
                     </div>
                     <div class="mb-3"></div>
-                    <div class="col col-12 d-flex justify-content-start"><span># Define a 3x3 averaging filter
+                    <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace"># Define a 3x3 averaging filter
                             kernel</span></div>
                     <div class="col col-12 d-flex justify-content-start">
                         <code>kernel = np.array([[1, 1, 1],[1, 1, 1],[1, 1, 1]]) / 9</code>
                     </div>
                     <div class="mb-3"></div>
-                    <div class="col col-12 d-flex justify-content-start"><span># Save the output image</span></div>
+                    <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace"># Save the output image</span></div>
                     <div class="col col-12 d-flex justify-content-start">
                         <code>cv2.imwrite("output.jpg", output_image)</code>
                     </div>
                     <div class="mb-3"></div>
-                    <div class="col col-12 d-flex justify-content-start"><span># Define a 3x3 averaging filter
+                    <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace"># Define a 3x3 averaging filter
                             kernel</span></div>
                     <div class="col col-12 d-flex justify-content-start">
                         <code>kernel = np.array([[1, 1, 1],[1, 1, 1],[1, 1, 1]]) / 9</code>
                     </div>
                     <div class="mb-3"></div>
-                    <div class="col col-12 d-flex justify-content-start"><span># Display the output image</span></div>
+                    <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace"># Display the output image</span></div>
                     <div class="col col-12 d-flex justify-content-start">
                         <code>cv2.imshow("Filtered Image", output_image)</code>
                     </div>
@@ -199,18 +231,18 @@ $(document).ready(function () {
         $('#spatial-filter-python').remove();
         let content = `<div class="container" id="spatial-filter-matlab">
                     <div class="mb-1"></div>
-                    <div class="col col-12 d-flex justify-content-start"><span>% Read the image</span></div>
+                    <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace">% Read the image</span></div>
                     <div class="col col-12 d-flex justify-content-start">
                         <code>image = imread('path_to_your_image.jpg');</code>
                     </div>
                     <div class="mb-3"></div>
-                    <div class="col col-12 d-flex justify-content-start"><span>% Convert the image to grayscale
+                    <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace">% Convert the image to grayscale
                             (if it's a color image)</span></div>
                     <div class="col col-12 d-flex justify-content-start">
                         <code>gray_image = rgb2gray(image);</code>
                     </div>
                     <div class="mb-3"></div>
-                    <div class="col col-12 d-flex justify-content-start"><span>% Define Gaussian filter
+                    <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace">% Define Gaussian filter
                             parameters</span></div>
                     <div class="col col-12 d-flex justify-content-start">
                         <code>filter_size = 5; % Filter size (5x5 in this case)</code>
@@ -219,20 +251,20 @@ $(document).ready(function () {
                         <code>sigma = 1; % Standard deviation for Gaussian</code>
                     </div>
                     <div class="mb-3"></div>
-                    <div class="col col-12 d-flex justify-content-start"><span>% Create Gaussian filter kernel</span>
+                    <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace">% Create Gaussian filter kernel</span>
                     </div>
                     <div class="col col-12 d-flex justify-content-start">
                         <code>gaussian_filter = fspecial('gaussian', [filter_size, filter_size], sigma);
                         </code>
                     </div>
                     <div class="mb-3"></div>
-                    <div class="col col-12 d-flex justify-content-start"><span>% Apply the filter using imfilter</span>
+                    <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace">% Apply the filter using imfilter</span>
                     </div>
                     <div class="col col-12 d-flex justify-content-start">
                         <code>filtered_image = imfilter(gray_image, gaussian_filter, 'conv');</code>
                     </div>
                     <div class="mb-3"></div>
-                    <div class="col col-12 d-flex justify-content-start"><span>% Display the original and
+                    <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace">% Display the original and
                             filtered images</span></div>
                     <div class="col col-12 d-flex justify-content-start">
                         <code>figure;</code>

@@ -23,12 +23,23 @@ $(document).ready(function () {
             $(btn_constrain_submit_image).click(function () {
                 const deblur_input_image = document.getElementById('constraine-least-input-image');
                 if (deblur_input_image.files.length > 0) {
+                    const alert_msg = `
+                    <div class="toast bg-success alert-container-body" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="false">
+                        <div class="toast-body">
+                            <div class="container">
+                                <div class="text-center text-dark ">
+                                    <strong class="mr-auto">Processing<br>Please Wait a Few Seconds...</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>`;
+                    $('.alert-container').append(alert_msg);
+                    $('.alert-container-body').toast('show');
                     const fileName = deblur_input_image.files[0].name;
                     // alert(fileName);
                     if (/\.(jpg|png)$/i.test(fileName)) {
-                        $('#constraine-least-image-modal').modal('hide');
                         $.ajax({
-                            url: '/segmentation/Constrained_least_square_filtering_output',
+                            url: '/filter1/Constrained_least_square_filtering_output',
                             type: 'POST',
                             data: new FormData(document.getElementById('uploadForm')),
                             processData: false,
@@ -37,6 +48,8 @@ $(document).ready(function () {
                                 // console.log('Server response:', response);
                                 // console.log('Data : ', data);
 
+                                $('#constraine-least-image-modal').modal('hide');
+                                $('#constraine-least-image-modal').remove();
                                 $('.constrained-least_image_collapse').append(data['template']);
                                 $('#output-constraint-least-toggle-groups').collapse({
                                     toggle: false
@@ -77,14 +90,33 @@ $(document).ready(function () {
                                 });
                             },
                             error: function (xhr, status, error) {
-                                // console.log('XHR status:', status);
-                                // console.log('XHR error:', error);
+                                $('.alert-container-body').remove();
+                                const alert_msg = `
+                                    <div class="toast bg-primary alert-container-body" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-body">
+        <div class="container">
+            <div class="text-center text-dark ">
+                <strong class="mr-auto">
+                    An error occurred during the processing of your image.
+                    <br>Please provide another image to receive the output.
+                    <br>Your Image Doesn't support our Machine so provide another image to get the to receive the
+                    output</strong>
+            </div>
+        </div>
+    </div>
+</div>`;
+                                $('.alert-container').append(alert_msg);
+                                $('.alert-container-body').toast('show');
+                                $('.alert-container-body').on('hidden.bs.toast', function () {
+                                    $('.alert-container-body').remove();
+                                });
                             },
                             complete: function (xhr, status) {
                                 // console.log('Request complete. XHR status:', status);
                             }
                         });
                     } else {
+                        $('.alert-container-body').remove();
                         const alert_msg = `
                         <div class="toast bg-primary alert-container-body" role="alert" aria-live="assertive" aria-atomic="true">
                             <div class="toast-body">
@@ -141,7 +173,7 @@ $(document).ready(function () {
         $('#constrained-least-matlab-code').remove();
         let content = `                <div class="container" id="constrained-least-python-code">
                     <div class="mb-1"></div>
-                    <div class="col col-12 d-flex justify-content-start"><span># Import Required Library</span>
+                    <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace"># Import Required Library</span>
                     </div>
                     <div class="col col-12 d-flex justify-content-start">
                         <code>import cv2</code>
@@ -153,12 +185,12 @@ $(document).ready(function () {
                         <code>from scipy.optimize import minimize</code>
                     </div>
                     <div class="mb-3"></div>
-                    <div class="col col-12 d-flex justify-content-start"><span># Read the image </span></div>
+                    <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace"># Read the image </span></div>
                     <div class="col col-12 d-flex justify-content-start">
                         <code>image = cv2.imread('path_to_your_image.jpg', 0)                       </code>
                     </div>
                     <div class="mb-3"></div>
-                    <div class="col col-12 d-flex justify-content-start"><span># Add noise to the image for
+                    <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace"># Add noise to the image for
                             demonstration purposes</span>
                     </div>
                     <div class="col col-12 d-flex justify-content-start">
@@ -170,7 +202,7 @@ $(document).ready(function () {
                             </code>
                     </div>
                     <div class="mb-3"></div>
-                    <div class="col col-12 d-flex justify-content-start"><span>
+                    <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace">
                             # Function to minimize (Least squares with edge preservation)
                         </span>
                     </div>
@@ -181,7 +213,7 @@ $(document).ready(function () {
                         <code>&nbsp;&nbsp;return np.linalg.norm(x - noisy_image)**2 + lam * np.linalg.norm(np.gradient(x))**2                        </code>
                     </div>
                     <div class="mb-3"></div>
-                    <div class="col col-12 d-flex justify-content-start"><span>
+                    <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace">
                             # Initial guess for optimization (use the noisy image as a starting point)
                         </span>
                     </div>
@@ -189,7 +221,7 @@ $(document).ready(function () {
                         <code>x0 = noisy_image</code>
                     </div>
                     <div class="mb-3"></div>
-                    <div class="col col-12 d-flex justify-content-start"><span>
+                    <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace">
                             # Set the regularization parameter (edge preservation, adjust as needed)
                         </span>
                     </div>
@@ -197,7 +229,7 @@ $(document).ready(function () {
                         <code>lambda_param = 0.1</code>
                     </div>
                     <div class="mb-3"></div>
-                    <div class="col col-12 d-flex justify-content-start"><span>
+                    <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace">
                             # Perform optimization
                         </span>
                     </div>
@@ -206,7 +238,7 @@ $(document).ready(function () {
                         </code>
                     </div>
                     <div class="mb-3"></div>
-                    <div class="col col-12 d-flex justify-content-start"><span>
+                    <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace">
                             # Get the filtered image from the optimization result
                         </span>
                     </div>
@@ -214,7 +246,7 @@ $(document).ready(function () {
                         <code>filtered_image = result.x</code>
                     </div>
                     <div class="mb-3"></div>
-                    <div class="col col-12 d-flex justify-content-start"><span>
+                    <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace">
                             # Display the noisy and filtered images
                         </span>
                     </div>
@@ -239,13 +271,13 @@ $(document).ready(function () {
         $('#constrained-least-python-code').remove();
         let content = `                <div class="container" id="constrained-least-matlab-code">
                     <div class="mb-1"></div>
-                    <div class="col col-12 d-flex justify-content-start"><span>% Read the original image</span>
+                    <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace">% Read the original image</span>
                     </div>
                     <div class="col col-12 d-flex justify-content-start">
                         <code>original_image = imread('path_to_your_image.jpg');</code>
                     </div>
                     <div class="mb-3"></div>
-                    <div class="col col-12 d-flex justify-content-start"><span>% Convert the image to grayscale (if
+                    <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace">% Convert the image to grayscale (if
                             it's
                             a color image)</span></div>
                     <div class="col col-12 d-flex justify-content-start">
@@ -253,14 +285,14 @@ $(document).ready(function () {
                             </code>
                     </div>
                     <div class="mb-3"></div>
-                    <div class="col col-12 d-flex justify-content-start"><span>% Add noise to the image for
+                    <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace">% Add noise to the image for
                             demonstration purposes</span></div>
                     <div class="col col-12 d-flex justify-content-start">
                         <code>noisy_image = imnoise(gray_image, 'gaussian', 0, 0.01);
                             </code>
                     </div>
                     <div class="mb-3"></div>
-                    <div class="col col-12 d-flex justify-content-start"><span>
+                    <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace">
                             % Set the regularization parameter (adjust as needed)
                         </span>
                     </div>
@@ -268,7 +300,7 @@ $(document).ready(function () {
                         <code>lambda_param = 0.1;</code>
                     </div>
                     <div class="mb-3"></div>
-                    <div class="col col-12 d-flex justify-content-start"><span>
+                    <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace">
                             % Perform constrained least squares filtering
                         </span>
                     </div>
@@ -276,7 +308,7 @@ $(document).ready(function () {
                         <code>filtered_image = lsqnonneg(noisy_image, lambda_param);</code>
                     </div>
                     <div class="mb-3"></div>
-                    <div class="col col-12 d-flex justify-content-start"><span>
+                    <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace">
                             % Display the noisy and filtered images
                         </span>
                     </div>

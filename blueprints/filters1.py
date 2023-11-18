@@ -188,12 +188,12 @@ def geometric_mean_output():
             output_img = const.geometric_filter(img_dir)
             data = {
                 'img_url': img_path,
-                'median_img': output_img
+                'geometric_img': output_img
             }
             return {
                 'template': render_template('OutputCollapse/filters/geometric_mean.html', data=data),
                 'img_url': img_path.replace("assets", ""),
-                'median_img': output_img.replace("assets", "")
+                'geometric_img': output_img.replace("assets", "")
             }
         else:
             return 'No file part in the request'

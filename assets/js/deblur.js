@@ -23,10 +23,21 @@ $(document).ready(function () {
             $(btn_deblur_submit_image).click(function () {
                 const deblur_input_image = document.getElementById('deblur-input-image');
                 if (deblur_input_image.files.length > 0) {
+                    const alert_msg = `
+                    <div class="toast bg-success alert-container-body" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="false">
+                        <div class="toast-body">
+                            <div class="container">
+                                <div class="text-center text-dark ">
+                                    <strong class="mr-auto">Processing<br>Please Wait a Few Seconds...</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>`;
+                    $('.alert-container').append(alert_msg);
+                    $('.alert-container-body').toast('show');
                     const fileName = deblur_input_image.files[0].name;
                     // alert(fileName);
                     if (/\.(jpg|png)$/i.test(fileName)) {
-                        $('#deblur-image-modal').modal('hide');
                         $.ajax({
                             url: '/restoring/deblur_output',
                             type: 'POST',
@@ -37,6 +48,8 @@ $(document).ready(function () {
                                 // console.log('Server response:', response);
                                 // console.log('Data : ', data);
 
+                                $('#deblur-image-modal').modal('hide');
+                                $('#deblur-image-modal').remove();
                                 $('.deblur-image-collapse').append(data['template']);
                                 $('#output-deblur-toggle-groups').collapse({
                                     toggle: false
@@ -78,14 +91,33 @@ $(document).ready(function () {
                                 });
                             },
                             error: function (xhr, status, error) {
-                                // console.log('XHR status:', status);
-                                // console.log('XHR error:', error);
+                                $('.alert-container-body').remove();
+                                const alert_msg = `
+                                    <div class="toast bg-primary alert-container-body" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-body">
+        <div class="container">
+            <div class="text-center text-dark ">
+                <strong class="mr-auto">
+                    An error occurred during the processing of your image.
+                    <br>Please provide another image to receive the output.
+                    <br>Your Image Doesn't support our Machine so provide another image to get the to receive the
+                    output</strong>
+            </div>
+        </div>
+    </div>
+</div>`;
+                                $('.alert-container').append(alert_msg);
+                                $('.alert-container-body').toast('show');
+                                $('.alert-container-body').on('hidden.bs.toast', function () {
+                                    $('.alert-container-body').remove();
+                                });
                             },
                             complete: function (xhr, status) {
                                 // console.log('Request complete. XHR status:', status);
                             }
                         });
                     } else {
+                        $('.alert-container-body').remove();
                         const alert_msg = `
                         <div class="toast bg-primary alert-container-body" role="alert" aria-live="assertive" aria-atomic="true">
                             <div class="toast-body">
@@ -132,7 +164,7 @@ $(document).ready(function () {
             $('.deblur-user-video-tutorial-modal-close').click(function () {
                 $('#deblur-user-video-tutorial-modal').modal('hide');
                 $('#deblur-user-video-tutorial-modal').remove();
-               // location.reload();
+                // location.reload();
             });
         });
     })
@@ -143,7 +175,7 @@ $(document).ready(function () {
         $('#deblur-matlab-code').remove();
         let content = `                <div class="container" id="deblur-python-code">
                     <div class="mb-1"></div>
-                    <div class="col col-12 d-flex justify-content-start"><span># Import Required Library</span>
+                    <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace"># Import Required Library</span>
                     </div>
                     <div class="col col-12 d-flex justify-content-start">
                         <code>import cv2</code>
@@ -158,12 +190,12 @@ $(document).ready(function () {
                         <code>import matplotlib.pyplot as plt</code>
                     </div>
                     <div class="mb-3"></div>
-                    <div class="col col-12 d-flex justify-content-start"><span># Read the image </span></div>
+                    <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace"># Read the image </span></div>
                     <div class="col col-12 d-flex justify-content-start">
                         <code>image = cv2.imread('path_to_your_image.jpg')</code>
                     </div>
                     <div class="mb-3"></div>
-                    <div class="col col-12 d-flex justify-content-start"><span># Convert the image to float for
+                    <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace"># Convert the image to float for
                             deconvolution</span>
                     </div>
                     <div class="col col-12 d-flex justify-content-start">
@@ -171,7 +203,7 @@ $(document).ready(function () {
                         </code>
                     </div>
                     <div class="mb-3"></div>
-                    <div class="col col-12 d-flex justify-content-start"><span>
+                    <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace">
                             # Generate a blurry version of the image (simulating motion blur)
                         </span>
                     </div>
@@ -182,7 +214,7 @@ $(document).ready(function () {
                         <code>image_blurred = cv2.filter2D(image, -1, psf)</code>
                     </div>
                     <div class="mb-3"></div>
-                    <div class="col col-12 d-flex justify-content-start"><span>
+                    <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace">
                             # Perform Richardson-Lucy deconvolution
                         </span>
                     </div>
@@ -190,7 +222,7 @@ $(document).ready(function () {
                         <code>deconvolved_image, _ = restoration.richardson_lucy(image_blurred, psf, iterations=30)</code>
                     </div>
                     <div class="mb-3"></div>
-                    <div class="col col-12 d-flex justify-content-start"><span>
+                    <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace">
                             # Display the images
                         </span>
                     </div>
@@ -226,20 +258,20 @@ $(document).ready(function () {
         $('deblur-python-code').remove();
         let content = `                <div class="container" id="deblur-matlab-code">
                     <div class="mb-1"></div>
-                    <div class="col col-12 d-flex justify-content-start"><span>% Read the original image</span>
+                    <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace">% Read the original image</span>
                     </div>
                     <div class="col col-12 d-flex justify-content-start">
                         <code>original_image = imread('path_to_your_image.jpg');</code>
                     </div>
                     <div class="mb-3"></div>
-                    <div class="col col-12 d-flex justify-content-start"><span>% Convert the image to grayscale (if it's
+                    <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace">% Convert the image to grayscale (if it's
                             a color image)</span></div>
                     <div class="col col-12 d-flex justify-content-start">
                         <code>gray_image = rgb2gray(original_image);
                         </code>
                     </div>
                     <div class="mb-3"></div>
-                    <div class="col col-12 d-flex justify-content-start"><span>% Generate a blurry version of the image
+                    <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace">% Generate a blurry version of the image
                             (simulating motion blur)</span></div>
                     <div class="col col-12 d-flex justify-content-start">
                         <code>psf = fspecial('motion', 25, 45); % Creating a motion blur PSF
@@ -250,7 +282,7 @@ $(document).ready(function () {
                         </code>
                     </div>
                     <div class="mb-3"></div>
-                    <div class="col col-12 d-flex justify-content-start"><span>
+                    <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace">
                             % Perform Richardson-Lucy deconvolution
                         </span>
                     </div>
@@ -258,7 +290,7 @@ $(document).ready(function () {
                         <code>deblurred_image = deconvlucy(blurred_image, psf, 10); % Adjust iterations as needed                        </code>
                     </div>
                     <div class="mb-3"></div>
-                    <div class="col col-12 d-flex justify-content-start"><span>
+                    <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace">
                             % Display the images
                         </span>
                     </div>

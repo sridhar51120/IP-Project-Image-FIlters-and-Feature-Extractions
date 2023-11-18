@@ -31,7 +31,7 @@
         $('.sidebar, .content').toggleClass("open");
         return false;
     });
-    
+
     // For Changing Background Theme
     $('.btn-change-background-theme').on('click', function () {
         if ($('#code-block').hasClass('bg-dark')) {
@@ -47,3 +47,6 @@
 
 
 
+setTimeout(function () {
+
+}, 1000);

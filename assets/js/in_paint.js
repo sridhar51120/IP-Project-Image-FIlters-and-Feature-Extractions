@@ -22,10 +22,21 @@ $(document).ready(function () {
             $(btn_inpaint_submit_image).click(function () {
                 const inpaint_input_image = document.getElementById('inpaint-input-image');
                 if (inpaint_input_image.files.length > 0) {
+                    const alert_msg = `
+                    <div class="toast bg-success alert-container-body" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="false">
+                        <div class="toast-body">
+                            <div class="container">
+                                <div class="text-center text-dark ">
+                                    <strong class="mr-auto">Processing<br>Please Wait a Few Seconds...</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>`;
+                    $('.alert-container').append(alert_msg);
+                    $('.alert-container-body').toast('show');
                     const fileName = inpaint_input_image.files[0].name;
                     // alert(fileName);
                     if (/\.(jpg|png)$/i.test(fileName)) {
-                        $('#inpaint-image-modal').modal('hide');
                         $.ajax({
                             url: '/restoring/in_paint_output',
                             type: 'POST',
@@ -36,6 +47,8 @@ $(document).ready(function () {
                                 // // console.log('Server response:', response);
                                 // // console.log('Data : ', data);
 
+                                $('#inpaint-image-modal').modal('hide');
+                                $('#inpaint-image-modal').remove();
                                 $('.inpaint-input-image-collapse').append(data['template']);
                                 $('#output-inpainting-toggle-groups').collapse({
                                     toggle: false
@@ -77,14 +90,33 @@ $(document).ready(function () {
                                 });
                             },
                             error: function (xhr, status, error) {
-                                // console.log('XHR status:', status);
-                                // console.log('XHR error:', error);
+                                $('.alert-container-body').remove();
+                                const alert_msg = `
+                                    <div class="toast bg-primary alert-container-body" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-body">
+        <div class="container">
+            <div class="text-center text-dark ">
+                <strong class="mr-auto">
+                    An error occurred during the processing of your image.
+                    <br>Please provide another image to receive the output.
+                    <br>Your Image Doesn't support our Machine so provide another image to get the to receive the
+                    output</strong>
+            </div>
+        </div>
+    </div>
+</div>`;
+                                $('.alert-container').append(alert_msg);
+                                $('.alert-container-body').toast('show');
+                                $('.alert-container-body').on('hidden.bs.toast', function () {
+                                    $('.alert-container-body').remove();
+                                });
                             },
                             complete: function (xhr, status) {
                                 // console.log('Request complete. XHR status:', status);
                             }
                         });
                     } else {
+                        $('.alert-container-body').remove();
                         const alert_msg = `
                         <div class="toast bg-primary alert-container-body" role="alert" aria-live="assertive" aria-atomic="true">
                             <div class="toast-body">
@@ -142,20 +174,20 @@ $(document).ready(function () {
         $('#in-paint-python-code').remove();
         let content = `                <div class="container" id="in-paint-matlab-code">
                     <div class="mb-1"></div>
-                    <div class="col col-12 d-flex justify-content-start"><span>% Read the original image</span>
+                    <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace">% Read the original image</span>
                     </div>
                     <div class="col col-12 d-flex justify-content-start">
                         <code>original_image = imread('path_to_your_image.jpg');</code>
                     </div>
                     <div class="mb-3"></div>
-                    <div class="col col-12 d-flex justify-content-start"><span>% Convert the image to grayscale (if it's
+                    <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace">% Convert the image to grayscale (if it's
                             a color image)</span></div>
                     <div class="col col-12 d-flex justify-content-start">
                         <code>gray_image = rgb2gray(original_image);
                         </code>
                     </div>
                     <div class="mb-3"></div>
-                    <div class="col col-12 d-flex justify-content-start"><span>
+                    <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace">
                             % Display the original image
                         </span>
                     </div>
@@ -166,7 +198,7 @@ $(document).ready(function () {
                         <code>subplot(1, 2, 1), imshow(gray_image), title('Original Image');</code>
                     </div>
                     <div class="mb-3"></div>
-                    <div class="col col-12 d-flex justify-content-start"><span>
+                    <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace">
                             % Create a Laplacian filter
                         </span>
                     </div>
@@ -175,7 +207,7 @@ $(document).ready(function () {
                             </code>
                     </div>
                     <div class="mb-3"></div>
-                    <div class="col col-12 d-flex justify-content-start"><span>% Apply the Laplacian filter using
+                    <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace">% Apply the Laplacian filter using
                             imfilter</span>
                     </div>
                     <div class="col col-12 d-flex justify-content-start">
@@ -183,7 +215,7 @@ $(document).ready(function () {
                         </code>
                     </div>
                     <div class="mb-3"></div>
-                    <div class="col col-12 d-flex justify-content-start"><span>% Display the Laplacian image</span>
+                    <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace">% Display the Laplacian image</span>
                     </div>
                     <div class="col col-12 d-flex justify-content-start">
                         <code>subplot(1, 2, 2), imshow(laplacian_image), title('Laplacian Image');
@@ -197,7 +229,7 @@ $(document).ready(function () {
         $('#in-paint-matlab-code').remove();
         let content = `                <div class="container" id="in-paint-python-code">
                     <div class="mb-1"></div>
-                    <div class="col col-12 d-flex justify-content-start"><span># Import Required Library</span>
+                    <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace"># Import Required Library</span>
                     </div>
                     <div class="col col-12 d-flex justify-content-start">
                         <code>import cv2</code>
@@ -210,19 +242,19 @@ $(document).ready(function () {
                         </code>
                     </div>
                     <div class="mb-3"></div>
-                    <div class="col col-12 d-flex justify-content-start"><span># Read the image </span></div>
+                    <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace"># Read the image </span></div>
                     <div class="col col-12 d-flex justify-content-start">
                         <code>image = cv2.imread('path_to_your_image.jpg')</code>
                     </div>
                     <div class="mb-3"></div>
-                    <div class="col col-12 d-flex justify-content-start"><span># Convert the image to grayscale</span>
+                    <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace"># Convert the image to grayscale</span>
                     </div>
                     <div class="col col-12 d-flex justify-content-start">
                         <code>gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
                         </code>
                     </div>
                     <div class="mb-3"></div>
-                    <div class="col col-12 d-flex justify-content-start"><span>
+                    <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace">
                             # Display the original image
                         </span>
                     </div>
@@ -236,7 +268,7 @@ $(document).ready(function () {
                         <code>plt.axis('off')</code>
                     </div>
                     <div class="mb-3"></div>
-                    <div class="col col-12 d-flex justify-content-start"><span>
+                    <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace">
                             # Define the region to be inpainted (create a mask)
                         </span>
                     </div>
@@ -247,7 +279,7 @@ $(document).ready(function () {
                         <code>cv2.rectangle(mask, (100, 200), (250, 150), 255, -1)</code>
                     </div>
                     <div class="mb-3"></div>
-                    <div class="col col-12 d-flex justify-content-start"><span>
+                    <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace">
                             # Inpaint the masked region
                         </span>
                     </div>
@@ -256,7 +288,7 @@ $(document).ready(function () {
                         </code>
                     </div>
                     <div class="mb-3"></div>
-                    <div class="col col-12 d-flex justify-content-start"><span>
+                    <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace">
                             # Display the inpainted image
                         </span>
                     </div>

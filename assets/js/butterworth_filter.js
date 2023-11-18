@@ -22,10 +22,21 @@ $(document).ready(function () {
             $(submit_image).click(function () {
                 const input_image = document.getElementById('butterworth-input-image');
                 if (input_image.files.length > 0) {
+                    const alert_msg = `
+                    <div class="toast bg-success alert-container-body" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="false">
+                        <div class="toast-body">
+                            <div class="container">
+                                <div class="text-center text-dark ">
+                                    <strong class="mr-auto">Processing<br>Please Wait a Few Seconds...</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>`;
+                    $('.alert-container').append(alert_msg);
+                    $('.alert-container-body').toast('show');
                     const fileName = input_image.files[0].name;
                     // alert(fileName);
                     if (/\.(jpg|png)$/i.test(fileName)) {
-                        $('#butterworth-filter-image-modal').modal('hide');
                         $.ajax({
                             url: '/filters2/butterworth_filter_output',
                             type: 'POST',
@@ -35,7 +46,8 @@ $(document).ready(function () {
                             success: function (data, response) {
                                 // console.log('Server response:', response);
                                 // console.log('Data : ', data);
-
+                                $('#butterworth-filter-image-modal').modal('hide');
+                                $('#butterworth-filter-image-modal').remove();
                                 $('.butterworth-filter-input-image-collapse').append(data['template']);
                                 $('.output-butterworth-filter-toggle-groups').collapse({
                                     toggle: false
@@ -76,14 +88,33 @@ $(document).ready(function () {
                                 });
                             },
                             error: function (xhr, status, error) {
-                                // console.log('XHR status:', status);
-                                // console.log('XHR error:', error);
+                                $('.alert-container-body').remove();
+                                const alert_msg = `
+                                    <div class="toast bg-primary alert-container-body" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-body">
+        <div class="container">
+            <div class="text-center text-dark ">
+                <strong class="mr-auto">
+                    An error occurred during the processing of your image.
+                    <br>Please provide another image to receive the output.
+                    <br>Your Image Doesn't support our Machine so provide another image to get the to receive the
+                    output</strong>
+            </div>
+        </div>
+    </div>
+</div>`;
+                                $('.alert-container').append(alert_msg);
+                                $('.alert-container-body').toast('show');
+                                $('.alert-container-body').on('hidden.bs.toast', function () {
+                                    $('.alert-container-body').remove();
+                                });
                             },
                             complete: function (xhr, status) {
                                 // console.log('Request complete. XHR status:', status);
                             }
                         });
                     } else {
+                        $('.alert-container-body').remove();
                         const alert_msg = `
                         <div class="toast bg-primary alert-container-body" role="alert" aria-live="assertive" aria-atomic="true">
                             <div class="toast-body">
@@ -141,7 +172,7 @@ $(document).ready(function () {
         $('#butterworth-filter-python-code').remove();
         let content = `                <div class="container" id="butterworth-filter-matlab-code">
                     <div class="mb-1"></div>
-                    <div class="col col-12 d-flex justify-content-start"><span>% Read the original image</span>
+                    <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace">% Read the original image</span>
                     </div>
                     <div class="col col-12 d-flex justify-content-start">
                         <code>original_image = imread('path_to_your_image.jpg');</code>
@@ -151,13 +182,13 @@ $(document).ready(function () {
                         </code>
                     </div>
                     <div class="mb-3"></div>
-                    <div class="col col-12 d-flex justify-content-start"><span>% Apply Fourier Transform</span></div>
+                    <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace">% Apply Fourier Transform</span></div>
                     <div class="col col-12 d-flex justify-content-start">
                         <code>f_image = fft2(double(gray_image));
                             </code>
                     </div>
                     <div class="mb-3"></div>
-                    <div class="col col-12 d-flex justify-content-start"><span>% Define cutoff frequencies and order for
+                    <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace">% Define cutoff frequencies and order for
                             the Butterworth filter</span></div>
                     <div class="col col-12 d-flex justify-content-start">
                         <code>D0 = 0.1; % lower cutoff frequency
@@ -172,7 +203,7 @@ $(document).ready(function () {
                             </code>
                     </div>
                     <div class="mb-3"></div>
-                    <div class="col col-12 d-flex justify-content-start"><span>
+                    <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace">
                             % Create the Butterworth filter in the frequency domain
                         </span>
                     </div>
@@ -190,7 +221,7 @@ $(document).ready(function () {
                         <code>H = 1 ./ (1 + (D ./ D0).^(2 * n)) .* (1 - 1 ./ (1 + (D ./ D1).^(2 * n)));</code>
                     </div>
                     <div class="mb-3"></div>
-                    <div class="col col-12 d-flex justify-content-start"><span>
+                    <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace">
                             % Apply the filter to the Fourier transformed image
                         </span>
                     </div>
@@ -198,7 +229,7 @@ $(document).ready(function () {
                         <code>filtered_image = abs(ifft2(f_image .* H));</code>
                     </div>
                     <div class="mb-3"></div>
-                    <div class="col col-12 d-flex justify-content-start"><span>
+                    <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace">
                             % Display the original and filtered images
                         </span>
                     </div>
@@ -219,7 +250,7 @@ $(document).ready(function () {
         $('#butterworth-filter-matlab-code').remove();
         let content = `                <div class="container" id="butterworth-filter-python-code">
                     <div class="mb-1"></div>
-                    <div class="col col-12 d-flex justify-content-start"><span># Import Required Library</span>
+                    <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace"># Import Required Library</span>
                     </div>
                     <div class="col col-12 d-flex justify-content-start">
                         <code>import cv2</code>
@@ -234,19 +265,19 @@ $(document).ready(function () {
                         <code>import matplotlib.pyplot as plt</code>
                     </div>
                     <div class="mb-3"></div>
-                    <div class="col col-12 d-flex justify-content-start"><span># Read the image </span></div>
+                    <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace"># Read the image </span></div>
                     <div class="col col-12 d-flex justify-content-start">
                         <code>image = cv2.imread('path_to_your_image.jpg', 0)</code>
                     </div>
                     <div class="mb-3"></div>
-                    <div class="col col-12 d-flex justify-content-start"><span># Get the size of the image</span>
+                    <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace"># Get the size of the image</span>
                     </div>
                     <div class="col col-12 d-flex justify-content-start">
                         <code>rows, cols = image.shape
                             </code>
                     </div>
                     <div class="mb-3"></div>
-                    <div class="col col-12 d-flex justify-content-start"><span># Create a Butterworth band-pass
+                    <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace"># Create a Butterworth band-pass
                             filter</span>
                     </div>
                     <div class="col col-12 d-flex justify-content-start">
@@ -282,7 +313,7 @@ $(document).ready(function () {
                             </code>
                     </div>
                     <div class="mb-3"></div>
-                    <div class="col col-12 d-flex justify-content-start"><span># Define the cutoff frequencies and order
+                    <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace"># Define the cutoff frequencies and order
                             for the Butterworth filter</span>
                     </div>
                     <div class="col col-12 d-flex justify-content-start">
@@ -298,14 +329,14 @@ $(document).ready(function () {
                             </code>
                     </div>
                     <div class="mb-3"></div>
-                    <div class="col col-12 d-flex justify-content-start"><span># Create the Butterworth filter</span>
+                    <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace"># Create the Butterworth filter</span>
                     </div>
                     <div class="col col-12 d-flex justify-content-start">
                         <code>butterworth_filter = butterworth_bandpass_filter((rows, cols), low_cutoff, high_cutoff, order)
                             </code>
                     </div>
                     <div class="mb-3"></div>
-                    <div class="col col-12 d-flex justify-content-start"><span># Apply the filter to the image in the
+                    <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace"># Apply the filter to the image in the
                             frequency domain</span>
                     </div>
                     <div class="col col-12 d-flex justify-content-start">
@@ -317,7 +348,7 @@ $(document).ready(function () {
                             </code>
                     </div>
                     <div class="mb-3"></div>
-                    <div class="col col-12 d-flex justify-content-start"><span>
+                    <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace">
                             # Display the original and filtered images
                         </span>
                     </div>

@@ -4,7 +4,7 @@
 <div class="container-fluid pt-4 px-4">
     <div class="card bg-secondary">
         <div class="card-body">
-            <h4 class="text-primary">{{ data.title }}</h4>
+            <h4 class="text-primary fw-bold fs-5 font-monospace">{{ data.title }}</h4>
         </div>
     </div>
 </div>
@@ -12,13 +12,13 @@
     <div class="bg-secondary text-center rounded p-4">
         <div class="card card-body bg-dark text-secondary">
             <div class="d-flex align-items-center justify-content-between">
-                <h6 class="mb-0 text-primary">Definition</h6>
+                <h6 class="text-primary fw-normal fs-5 font-monospace mb-0">Definition</h6>
             </div>
         </div>
         <div class="mb-3"></div>
         <div class="bg-secondary ">
             <div class="card card-body bg-dark text-secondary">
-                <p class="text-muted text-left lead">
+                <p class="text-muted text-center fs-6 fw-normal font-monospace">
                     {{ data.def }}
                 </p>
             </div>
@@ -31,17 +31,18 @@
 
             <div class="card card-body bg-dark text-secondary">
                 <div class="d-flex align-items-center justify-content-between">
-                    <h6 class="mb-0 text-primary"> {{ workflowtitle }}</h6>
+                    <h6 class="text-primary fw-normal fs-5 font-monospace"> {{ workflowtitle }}</h6>
                 </div>
             </div>
             <div class="mb-3"></div>
             {% for workflow in workflows %}
             <div class="card card-body bg-dark text-secondary">
-                <h6 class="mb-0 d-flex justify-content-start">{{ workflow['title'] }}</h6>
+                <h6 class="mb-0 d-flex justify-content-start text-primary fw-normal fs-6 font-monospace">{{
+                    workflow['title'] }}</h6>
             </div>
             <div class="mb-1"></div>
             <div class="card card-body bg-dark text-secondary">
-                <p class="text-muted text-left lead">
+                <p class="text-muted text-center fs-6 fw-normal font-monospace">
                     {{ workflow['description'] }}
                 </p>
             </div>
@@ -55,25 +56,26 @@
         <div class="bg-secondary text-center rounded p-4">
             <div class="card card-body bg-dark text-secondary">
                 <div class="d-flex align-items-center justify-content-between">
-                    <h6 class="mb-0 text-primary">Tutorial Video(youtube)</h6>
+                    <h6 class="mb-0 d-flex justify-content-start text-primary fw-normal fs-5 font-monospace">Tutorial
+                        Video(youtube)</h6>
                 </div>
             </div>
             <div class="mb-2"></div>
             <div class="bg-secondary ">
                 <div class="card card-body bg-dark text-secondary">
-                    <p class="lead text-muted text-left">
+                    <p class="text-muted text-center fs-6 fw-normal font-monospace">
                         The following page will take a live video tutorial.Video Tutorial Helps to improve the
                         Understanding of the perticular image processing algorithms
                     </p>
-                </div>
-            </div>
-            <div class="bg-secondary ">
-                <div class="card card-body bg-dark text-secondary">
+                    <div class="mb-2"></div>
                     <div class="d-flex justify-content-center">
-                        <button class="btn btn-success btn-sm btn-load-video-tutorial-edge-detection">Lets Start the Video Tutorials</button>
+                        <button class="btn btn-success btn-sm btn-load-video-tutorial-edge-detection">Let's Start the
+                            Video
+                            Tutorials</button>
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 </div>
@@ -82,7 +84,7 @@
         <div class="card bg-dark text-secondary">
             <div class="card-header">
                 <div class="row">
-                    <div class="col-6 text-primary font-weight-bold toast-clipboard-msg">Code Snippet</div>
+                    <div class="col-6 text-primary font-weight-bold fs-5">Code Snippet</div>
                     <div class="col-6 d-flex justify-content-end">
                         <button class="btn btn-sm btn-change-background-theme btn-primary me-2"
                             title="Change Background"><i class="bi bi-brightness-high"></i>
@@ -117,7 +119,9 @@
             <div class="card bg-dark" id="code-block">
                 <div class="container" id="edge-detected-python-code">
                     <div class="mb-1"></div>
-                    <div class="col col-12 d-flex justify-content-start"><span># Import Required Library</span>
+                    <div class="col col-12 d-flex justify-content-start"><span
+                            class="text-muted text-center fs-6 fw-normal font-monospace"># Import Required
+                            Library</span>
                     </div>
                     <div class="col col-12 d-flex justify-content-start">
                         <code>import cv2</code>
@@ -126,19 +130,23 @@
                         <code>import numpy as np</code>
                     </div>
                     <div class="mb-3"></div>
-                    <div class="col col-12 d-flex justify-content-start"><span># Read the image </span></div>
+                    <div class="col col-12 d-flex justify-content-start"><span
+                            class="text-muted text-center fs-6 fw-normal font-monospace"># Read the image </span></div>
                     <div class="col col-12 d-flex justify-content-start">
                         <code>image = cv2.imread('path_to_your_image.jpg', 0)                       </code>
                     </div>
                     <div class="mb-3"></div>
-                    <div class="col col-12 d-flex justify-content-start"><span># Apply Canny edge detection</span>
+                    <div class="col col-12 d-flex justify-content-start"><span
+                            class="text-muted text-center fs-6 fw-normal font-monospace"># Apply Canny edge
+                            detection</span>
                     </div>
                     <div class="col col-12 d-flex justify-content-start">
                         <code>edges = cv2.Canny(image, 100, 200)
                         </code>
                     </div>
                     <div class="mb-3"></div>
-                    <div class="col col-12 d-flex justify-content-start"><span>
+                    <div class="col col-12 d-flex justify-content-start"><span
+                            class="text-muted text-center fs-6 fw-normal font-monospace">
                             # Display the original and edge-detected images
                         </span>
                     </div>
@@ -167,22 +175,20 @@
         <div class="bg-secondary text-center rounded p-4">
             <div class="card card-body bg-dark text-secondary">
                 <div class="d-flex align-items-center justify-content-between">
-                    <h6 class="mb-0 text-primary">Live Demo</h6>
+                    <h6 class="mb-0 d-flex justify-content-start text-primary fw-normal fs-5 font-monospace">Live Demo
+                    </h6>
                 </div>
             </div>
             <div class="mb-3"></div>
             <div class="bg-secondary ">
                 <div class="card card-body bg-dark text-secondary">
-                    <p class="lead text-muted text-left">
+                    <p class="text-muted text-center fs-6 fw-normal font-monospace">
                         The following code will take a live image feed from your machine and apply Edge Detection to
                         it, then display both original frame as well as its
                     </p>
-                </div>
-            </div>
-            <div class="bg-secondary ">
-                <div class="card card-body bg-dark text-secondary">
+                    <div class="mb-2"></div>
                     <div class="d-flex justify-content-center">
-                        <button class="btn btn-success btn-sm  btn-load-img-edge-detection">Lets Start Live
+                        <button class="btn btn-success btn-sm  btn-load-img-edge-detection">Let's Start Live
                             Demo</button>
                     </div>
                 </div>

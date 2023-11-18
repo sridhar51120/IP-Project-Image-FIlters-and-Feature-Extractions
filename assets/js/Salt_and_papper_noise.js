@@ -24,10 +24,21 @@ $(document).ready(function () {
             $(submit_image).click(function () {
                 const input_image = document.getElementById('salt-and-papper-noise-input-image');
                 if (input_image.files.length > 0) {
+                    const alert_msg = `
+                    <div class="toast bg-success alert-container-body" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="false">
+                        <div class="toast-body">
+                            <div class="container">
+                                <div class="text-center text-dark ">
+                                    <strong class="mr-auto">Processing<br>Please Wait a Few Seconds...</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>`;
+                    $('.alert-container').append(alert_msg);
+                    $('.alert-container-body').toast('show');
                     const fileName = input_image.files[0].name;
                     // alert(fileName);
                     if (/\.(jpg|png)$/i.test(fileName)) {
-                        $('#salt-and-papper-noise-image-modal').modal('hide');
                         $.ajax({
                             url: '/filter1/salt_and_papper_noise_output',
                             type: 'POST',
@@ -38,6 +49,8 @@ $(document).ready(function () {
                                 // console.log('Server response:', response);
                                 // console.log('Data : ', data);
 
+                                $('#salt-and-papper-noise-image-modal').modal('hide');
+                                $('#salt-and-papper-noise-image-modal').remove();
                                 $('.salt-and-papper-noise_image_collapse').append(data['template']);
                                 $('.output-salt-and-papper-noise-toggle-groups').collapse({
                                     toggle: false
@@ -79,14 +92,33 @@ $(document).ready(function () {
                                 });
                             },
                             error: function (xhr, status, error) {
-                                // console.log('XHR status:', status);
-                                // console.log('XHR error:', error);
+                                $('.alert-container-body').remove();
+                                const alert_msg = `
+                                    <div class="toast bg-primary alert-container-body" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-body">
+        <div class="container">
+            <div class="text-center text-dark ">
+                <strong class="mr-auto">
+                    An error occurred during the processing of your image.
+                    <br>Please provide another image to receive the output.
+                    <br>Your Image Doesn't support our Machine so provide another image to get the to receive the
+                    output</strong>
+            </div>
+        </div>
+    </div>
+</div>`;
+                                $('.alert-container').append(alert_msg);
+                                $('.alert-container-body').toast('show');
+                                $('.alert-container-body').on('hidden.bs.toast', function () {
+                                    $('.alert-container-body').remove();
+                                });
                             },
                             complete: function (xhr, status) {
                                 // console.log('Request complete. XHR status:', status);
                             }
                         });
                     } else {
+                        $('.alert-container-body').remove();
                         const alert_msg = `
                         <div class="toast bg-primary alert-container-body" role="alert" aria-live="assertive" aria-atomic="true">
                             <div class="toast-body">
@@ -144,7 +176,7 @@ $(document).ready(function () {
         $('#salt_and_papper_noise_matlab_code').remove();
         let content = `            <div class="container" id="salt_and_papper_noise_python_code">
                 <div class="mb-1"></div>
-                <div class="col col-12 d-flex justify-content-start"><span># Import Required Libraies</span></div>
+                <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace"># Import Required Libraies</span></div>
                 <div class="col col-12 d-flex justify-content-start">
                     <code>import cv2</code>
                 </div>
@@ -152,7 +184,7 @@ $(document).ready(function () {
                     <code>import numpy as np</code>
                 </div>
                 <div class="mb-3"></div>
-                <div class="col col-12 d-flex justify-content-start"><span># Check for color image</span></div>
+                <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace"># Check for color image</span></div>
                 <div class="col col-12 d-flex justify-content-start">
                     <code>if len(image.shape) == 3:</code>
                 </div>
@@ -160,7 +192,7 @@ $(document).ready(function () {
                     <code>image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)</code>
                 </div>
                 <div class="mb-3"></div>
-                <div class="col col-12 d-flex justify-content-start"><span># Extract image dimensions</span></div>
+                <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace"># Extract image dimensions</span></div>
                 <div class="col col-12 d-flex justify-content-start">
                     <code>if len(image.shape) == 2</code>
                 </div>
@@ -175,7 +207,7 @@ $(document).ready(function () {
                 </div>
 
                 <div class="mb-3"></div>
-                <div class="col col-12 d-flex justify-content-start"><span># Add salt and pepper noise</span></div>
+                <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace"># Add salt and pepper noise</span></div>
                 <div class="col col-12 d-flex justify-content-start">
                     <code>num_salt = np.ceil(amount * image.size * 0.5)</code>
                 </div>
@@ -183,7 +215,7 @@ $(document).ready(function () {
                     <code>num_pepper = np.ceil(amount * image.size * 0.5)</code>
                 </div>
                 <div class="mb-3"></div>
-                <div class="col col-12 d-flex justify-content-start"><span># Add salt noise</span></div>
+                <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace"># Add salt noise</span></div>
                 <div class="col col-12 d-flex justify-content-start">
                     <code>salt_coords = [np.random.randint(0, i - 1, int(num_salt)) for i in image.shape]</code>
                 </div>
@@ -191,7 +223,7 @@ $(document).ready(function () {
                     <code>image[salt_coords[0], salt_coords[1]] = 255</code>
                 </div>
                 <div class="mb-3"></div>
-                <div class="col col-12 d-flex justify-content-start"><span># Add pepper noise</span></div>
+                <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace"># Add pepper noise</span></div>
                 <div class="col col-12 d-flex justify-content-start">
                     <code>pepper_coords = [np.random.randint(0, i - 1, int(num_pepper)) for i in image.shape]</code>
                 </div>
@@ -199,7 +231,7 @@ $(document).ready(function () {
                     <code>image[pepper_coords[0], pepper_coords[1]] = 0</code>
                 </div>
                 <div class="mb-3"></div>
-                <div class="col col-12 d-flex justify-content-start"><span># Display the noisy image</span></div>
+                <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace"># Display the noisy image</span></div>
                 <div class="col col-12 d-flex justify-content-start">
                     <code>cv2.imshow('Noisy Image', image)</code>
                 </div>
@@ -210,7 +242,7 @@ $(document).ready(function () {
                     <code>cv2.destroyAllWindows()</code>
                 </div>
                 <div class="mb-3"></div>
-                <div class="col col-12 d-flex justify-content-start"><span># Save the resulting image</span></div>
+                <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace"># Save the resulting image</span></div>
                 <div class="col col-12 d-flex justify-content-start">
                     <code>cv2.imwrite("noisy_image.png", image)</code>
                 </div>
@@ -223,18 +255,18 @@ $(document).ready(function () {
         $('#salt_and_papper_noise_python_code').remove();
         let content = `            <div class="container" id="salt_and_papper_noise_matlab_code">
                 <div class="mb-1"></div>
-                <div class="col col-12 d-flex justify-content-start"><span>% Read the original image</span> </div>
+                <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace">% Read the original image</span> </div>
                 <div class="col col-12 d-flex justify-content-start">
                     <code>original_image = imread('path_to_your_image.jpg');</code>
                 </div>
                 <div class="mb-3"></div>
-                <div class="col col-12 d-flex justify-content-start"><span>% Convert the image to grayscale (if it's
+                <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace">% Convert the image to grayscale (if it's
                         a color image)</span></div>
                 <div class="col col-12 d-flex justify-content-start">
                     <code>gray_image = rgb2gray(original_image);</code>
                 </div>
                 <div class="mb-3"></div>
-                <div class="col col-12 d-flex justify-content-start"><span>% Display the original image</span></div>
+                <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace">% Display the original image</span></div>
                 <div class="col col-12 d-flex justify-content-start">
                     <code>figure;</code>
                 </div>
@@ -243,7 +275,7 @@ $(document).ready(function () {
                     </code>
                 </div>
                 <div class="mb-3"></div>
-                <div class="col col-12 d-flex justify-content-start"><span>% Introduce salt-and-pepper noise</span>
+                <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace">% Introduce salt-and-pepper noise</span>
                 </div>
                 <div class="col col-12 d-flex justify-content-start">
                     <code>noise_density = 0.05;  % Adjust the noise density (percentage of pixels to be affected)
@@ -254,7 +286,7 @@ $(document).ready(function () {
                     </code>
                 </div>
                 <div class="mb-3"></div>
-                <div class="col col-12 d-flex justify-content-start"><span>% Display the noisy image</span>
+                <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace">% Display the noisy image</span>
                 </div>
                 <div class="col col-12 d-flex justify-content-start">
                     <code>subplot(1, 2, 2), imshow(noisy_image), title('Salt-and-Pepper Noisy Image');</code>

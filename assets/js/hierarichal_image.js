@@ -22,10 +22,21 @@ $(document).ready(function () {
             $(submit_image).click(function () {
                 const input_image = document.getElementById('hierarchical-image-input-image');
                 if (input_image.files.length > 0) {
+                    const alert_msg = `
+                    <div class="toast bg-success alert-container-body" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="false">
+                        <div class="toast-body">
+                            <div class="container">
+                                <div class="text-center text-dark ">
+                                    <strong class="mr-auto">Processing<br>Please Wait a Few Seconds...</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>`;
+                    $('.alert-container').append(alert_msg);
+                    $('.alert-container-body').toast('show');
                     const fileName = input_image.files[0].name;
                     // alert(fileName);
                     if (/\.(jpg|png)$/i.test(fileName)) {
-                        $('#hierarchical-image-image-modal').modal('hide');
                         $.ajax({
                             url: '/filters3/hierarichal_image_output',
                             type: 'POST',
@@ -36,6 +47,8 @@ $(document).ready(function () {
                                 // console.log('Server response:', response);
                                 // console.log('Data : ', data);
 
+                                $('#hierarchical-image-image-modal').modal('hide');
+                                $('#hierarchical-image-image-modal').remove();
                                 $('.hierarchical-input-image-collapse').append(data['template']);
                                 $('.output-hierarchical-filter-toggle-groups').collapse({
                                     toggle: false
@@ -77,14 +90,33 @@ $(document).ready(function () {
                                 });
                             },
                             error: function (xhr, status, error) {
-                                // console.log('XHR status:', status);
-                                // console.log('XHR error:', error);
+                                $('.alert-container-body').remove();
+                                const alert_msg = `
+                                    <div class="toast bg-primary alert-container-body" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-body">
+        <div class="container">
+            <div class="text-center text-dark ">
+                <strong class="mr-auto">
+                    An error occurred during the processing of your image.
+                    <br>Please provide another image to receive the output.
+                    <br>Your Image Doesn't support our Machine so provide another image to get the to receive the
+                    output</strong>
+            </div>
+        </div>
+    </div>
+</div>`;
+                                $('.alert-container').append(alert_msg);
+                                $('.alert-container-body').toast('show');
+                                $('.alert-container-body').on('hidden.bs.toast', function () {
+                                    $('.alert-container-body').remove();
+                                });
                             },
                             complete: function (xhr, status) {
                                 // console.log('Request complete. XHR status:', status);
                             }
                         });
                     } else {
+                        $('.alert-container-body').remove();
                         const alert_msg = `
                         <div class="toast bg-primary alert-container-body" role="alert" aria-live="assertive" aria-atomic="true">
                             <div class="toast-body">
@@ -142,7 +174,7 @@ $(document).ready(function () {
         $('#hierarchical-image-matlab-code').remove();
         let content = `                <div class="container" id="hierarchical-image-python-code">
                 <div class="mb-1"></div>
-                <div class="col col-12 d-flex justify-content-start"><span># Import Required Library</span>
+                <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace"># Import Required Library</span>
                 </div>
                 <div class="col col-12 d-flex justify-content-start">
                     <code>import cv2</code>
@@ -151,19 +183,19 @@ $(document).ready(function () {
                     <code>from skimage import io, color</code>
                 </div>
                 <div class="mb-3"></div>
-                <div class="col col-12 d-flex justify-content-start"><span># Read the image </span></div>
+                <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace"># Read the image </span></div>
                 <div class="col col-12 d-flex justify-content-start">
                     <code>image = io.imread('path_to_your_image.jpg')</code>
                 </div>
                 <div class="mb-3"></div>
-                <div class="col col-12 d-flex justify-content-start"><span># Convert the image to grayscale</span>
+                <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace"># Convert the image to grayscale</span>
                 </div>
                 <div class="col col-12 d-flex justify-content-start">
                     <code>gray_image = color.rgb2gray(image)
                     </code>
                 </div>
                 <div class="mb-3"></div>
-                <div class="col col-12 d-flex justify-content-start"><span>
+                <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace">
                         # Function for quadtree decomposition
                     </span>
                 </div>
@@ -214,7 +246,7 @@ $(document).ready(function () {
                     </code>
                 </div>
                 <div class="mb-3"></div>
-                <div class="col col-12 d-flex justify-content-start"><span>
+                <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace">
                         % Set the level of decomposition
                     </span>
                 </div>
@@ -222,7 +254,7 @@ $(document).ready(function () {
                     <code>decomposition_level = 4;</code>
                 </div>
                 <div class="mb-3"></div>
-                <div class="col col-12 d-flex justify-content-start"><span>
+                <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace">
                         % Perform quadtree decomposition
                     </span>
                 </div>
@@ -230,7 +262,7 @@ $(document).ready(function () {
                     <code>hierarchical_img = quadtree_decomposition(gray_image, decomposition_level);</code>
                 </div>
                 <div class="mb-3"></div>
-                <div class="col col-12 d-flex justify-content-start"><span>
+                <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace">
                         % Display the hierarchical image
                     </span>
                 </div>
@@ -248,20 +280,20 @@ $(document).ready(function () {
         $('#hierarchical-image-python-code').remove();
         let content = `                <div class="container" id="hierarchical-image-matlab-code">
                 <div class="mb-1"></div>
-                <div class="col col-12 d-flex justify-content-start"><span>% Read the image</span>
+                <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace">% Read the image</span>
                 </div>
                 <div class="col col-12 d-flex justify-content-start">
                     <code>image = imread('path_to_your_image.jpg');</code>
                 </div>
                 <div class="mb-3"></div>
-                <div class="col col-12 d-flex justify-content-start"><span>% Convert the image to grayscale</span>
+                <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace">% Convert the image to grayscale</span>
                 </div>
                 <div class="col col-12 d-flex justify-content-start">
                     <code>gray_image = rgb2gray(image);
                     </code>
                 </div>
                 <div class="mb-3"></div>
-                <div class="col col-12 d-flex justify-content-start"><span>% Perform quadtree decomposition
+                <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace">% Perform quadtree decomposition
                         function</span>
                 </div>
                 <div class="col col-12 d-flex justify-content-start">
@@ -317,7 +349,7 @@ $(document).ready(function () {
                     </code>
                 </div>
                 <div class="mb-3"></div>
-                <div class="col col-12 d-flex justify-content-start"><span>
+                <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace">
                         % Set the level of decomposition
                     </span>
                 </div>
@@ -325,7 +357,7 @@ $(document).ready(function () {
                     <code>decomposition_level = 4;</code>
                 </div>
                 <div class="mb-3"></div>
-                <div class="col col-12 d-flex justify-content-start"><span>
+                <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace">
                         % Perform quadtree decomposition
                     </span>
                 </div>
@@ -333,7 +365,7 @@ $(document).ready(function () {
                     <code>hierarchical_img = quadtree_decomposition(gray_image, decomposition_level);</code>
                 </div>
                 <div class="mb-3"></div>
-                <div class="col col-12 d-flex justify-content-start"><span>
+                <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace">
                         % Display the hierarchical image
                     </span>
                 </div>

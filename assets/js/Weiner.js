@@ -23,10 +23,21 @@ $(document).ready(function () {
             $(submit_image).click(function () {
                 const input_image = document.getElementById('weiner-input-image');
                 if (input_image.files.length > 0) {
+                    const alert_msg = `
+                    <div class="toast bg-success alert-container-body" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="false">
+                        <div class="toast-body">
+                            <div class="container">
+                                <div class="text-center text-dark ">
+                                    <strong class="mr-auto">Processing<br>Please Wait a Few Seconds...</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>`;
+                    $('.alert-container').append(alert_msg);
+                    $('.alert-container-body').toast('show');
                     const fileName = input_image.files[0].name;
                     // alert(fileName);
                     if (/\.(jpg|png)$/i.test(fileName)) {
-                        $('#weiner-filter-image-modal').modal('hide');
                         $.ajax({
                             url: '/filters2/weiner_filter_output',
                             type: 'POST',
@@ -37,6 +48,8 @@ $(document).ready(function () {
                                 // console.log('Server response:', response);
                                 // console.log('Data : ', data);
 
+                                $('#weiner-filter-image-modal').modal('hide');
+                                $('#weiner-filter-image-modal').remove();
                                 $('.weiner-input-image-collapse').append(data['template']);
                                 $('.output-weiner-filter-toggle-groups').collapse({
                                     toggle: false
@@ -45,9 +58,9 @@ $(document).ready(function () {
                                 $('.weiner-user-image').remove();
 
                                 var image_template = `
-                            <img src="${data['img_url']}" id="${data['img_url']}" alt="original Image" style="display:none;">
-                            <img src="${data['weiner_filter']}" id="${data['weiner_filter']}" alt="Weiner Filter Image" style="display:none;">
-                            `;
+                                <img src="${data['img_url']}" id="${data['img_url']}" alt="original Image" style="display:none;">
+                                <img src="${data['weiner_filter']}" id="${data['weiner_filter']}" alt="Weiner Filter Image" style="display:none;">
+                                `;
                                 $(document.body).append(image_template);
 
                                 $('.btn-weiner-filter-output-original-image-show').click(function () {
@@ -78,14 +91,31 @@ $(document).ready(function () {
                                 });
                             },
                             error: function (xhr, status, error) {
-                                // console.log('XHR status:', status);
-                                // console.log('XHR error:', error);
+                                $('.alert-container-body').remove();
+                                const alert_msg = `
+                                    <div class="toast bg-primary alert-container-body" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="false">
+                                        <div class="toast-body">
+                                        <div class="container">
+                                        <div class="text-center text-dark ">
+                                        <strong class="mr-auto">An error occurred during the processing of your image.<br>Please provide another image to
+                                                receive the output.</strong>
+                                        </div>
+                                    </div>
+                                        </div>
+                                    </div>`;
+                                $('.alert-container').append(alert_msg);
+                                $('.alert-container-body').toast('show');
+                                $('.alert-container-body').on('hidden.bs.toast', function () {
+                                    $('.alert-container-body').remove();
+                                });
                             },
                             complete: function (xhr, status) {
                                 // console.log('Request complete. XHR status:', status);
                             }
                         });
                     } else {
+                        $('.alert-container-body').remove();
+                        $('.alert-container-body').remove();
                         const alert_msg = `
                         <div class="toast bg-primary alert-container-body" role="alert" aria-live="assertive" aria-atomic="true">
                             <div class="toast-body">
@@ -178,7 +208,7 @@ $(document).ready(function () {
             <div class="container" id="weiner-python-code-snippet">
                     <div class="mb-1"></div>
                     <div class="col-12 d-flex justify-content-start">
-                        <span>#Import Required Library</span>
+                        <span class="text-muted text-center fs-6 fw-normal font-monospace">#Import Required Library</span>
                     </div>
                     <div class="col-12 d-flex justify-content-start">
                         <code>import numpy as np</code>
@@ -189,26 +219,26 @@ $(document).ready(function () {
                     <div class="mb-3"></div>
 
                     <div class="col-12 d-flex justify-content-start">
-                        <span># Load the degraded image</span>
+                        <span class="text-muted text-center fs-6 fw-normal font-monospace"># Load the degraded image</span>
                     </div>
                     <div class="row">
                         <div class="col col-8 d-flex justify-content-start">
                             <code>degraded_image = cv2.imread('degraded_image.jpg', 0)</code>
                         </div>
                         <div class="col col-4 justify-content-start">
-                            <span># Load as grayscale (0)</span>
+                            <span class="text-muted text-center fs-6 fw-normal font-monospace"># Load as grayscale (0)</span>
                         </div>
                     </div>
                     <div class="mb-3"></div>
 
                     <div class="col-12 d-flex justify-content-start">
-                        <span># Compute the point spread function (PSF) or create a simulated PSF</span>
+                        <span class="text-muted text-center fs-6 fw-normal font-monospace"># Compute the point spread function (PSF) or create a simulated PSF</span>
                     </div>
                     <div class="col-12 d-flex justify-content-start">
-                        <span># PSF represents the blur in the image caused by the system</span>
+                        <span class="text-muted text-center fs-6 fw-normal font-monospace"># PSF represents the blur in the image caused by the system</span>
                     </div>
                     <div class="col-12 d-flex justify-content-start">
-                        <span># For simplicity, you can create a simple averaging filter (use a suitable PSF for real
+                        <span class="text-muted text-center fs-6 fw-normal font-monospace"># For simplicity, you can create a simple averaging filter (use a suitable PSF for real
                             images)</span>
                     </div>
                     <div class="row">
@@ -216,13 +246,13 @@ $(document).ready(function () {
                             <code>PSF = np.ones((5, 5)) / 25</code>
                         </div>
                         <div class="col col-4 justify-content-start">
-                            <span># Example: 5x5 averaging filter</span>
+                            <span class="text-muted text-center fs-6 fw-normal font-monospace"># Example: 5x5 averaging filter</span>
                         </div>
                     </div>
                     <div class="mb-3"></div>
 
                     <div class="col-12 d-flex justify-content-start">
-                        <span># Apply Wiener deconvolution</span>
+                        <span class="text-muted text-center fs-6 fw-normal font-monospace"># Apply Wiener deconvolution</span>
                     </div>
                     <div class="col-12 d-flex justify-content-start">
                         <code>restored_image = cv2.filter2D(degraded_image, -1, PSF)</code>
@@ -230,14 +260,14 @@ $(document).ready(function () {
                     <div class="mb-3"></div>
 
                     <div class="col-12 d-flex justify-content-start">
-                        <span># Estimate the noise variance in the degraded image</span>
+                        <span class="text-muted text-center fs-6 fw-normal font-monospace"># Estimate the noise variance in the degraded image</span>
                     </div>
                     <div class="col-12 d-flex justify-content-start">
-                        <span># In practice, this could be estimated from the known noise characteristics or using
+                        <span class="text-muted text-center fs-6 fw-normal font-monospace"># In practice, this could be estimated from the known noise characteristics or using
                             statistical methods</span>
                     </div>
                     <div class="col-12 d-flex justify-content-start">
-                        <span># For this example, let's assume a known variance</span>
+                        <span class="text-muted text-center fs-6 fw-normal font-monospace"># For this example, let's assume a known variance</span>
                     </div>
                     <div class="col-12 d-flex justify-content-start">
                         <code>noise_var = 0.1</code>
@@ -245,7 +275,7 @@ $(document).ready(function () {
                     <div class="mb-3"></div>
 
                     <div class="col col-12 justify-content-start">
-                        <span># Apply Wiener deconvolution to restore the image using the estimated noise
+                        <span class="text-muted text-center fs-6 fw-normal font-monospace"># Apply Wiener deconvolution to restore the image using the estimated noise
                             variance</span>
                     </div>
                     <div class="col col-12 d-flex justify-content-start">
@@ -254,7 +284,7 @@ $(document).ready(function () {
                     <div class="mb-3"></div>
 
                     <div class="col col-12 justify-content-start">
-                        <span># Normalize the restored image</span>
+                        <span class="text-muted text-center fs-6 fw-normal font-monospace"># Normalize the restored image</span>
                     </div>
                     <div class="col col-12 d-flex justify-content-start">
                         <code>wiener_restoration = np.uint8(wiener_restoration)</code>
@@ -262,14 +292,14 @@ $(document).ready(function () {
                     <div class="mb-3"></div>
 
                     <div class="col col-12 justify-content-start">
-                        <span># Display the original, degraded, and Wiener-restored images</span>
+                        <span class="text-muted text-center fs-6 fw-normal font-monospace"># Display the original, degraded, and Wiener-restored images</span>
                     </div>
                     <div class="row">
                         <div class="col col-8 d-flex justify-content-start">
                             <code>cv2.imshow('Original Image', cv2.imread('original_image.jpg'))</code>
                         </div>
                         <div class="col col-4 justify-content-start">
-                            <span># Display original image</span>
+                            <span class="text-muted text-center fs-6 fw-normal font-monospace"># Display original image</span>
                         </div>
                     </div>
                     <div class="row">
@@ -277,7 +307,7 @@ $(document).ready(function () {
                             <code>cv2.imshow('Degraded Image', degraded_image)</code>
                         </div>
                         <div class="col col-4 justify-content-start">
-                            <span># Display Degraded image</span>
+                            <span class="text-muted text-center fs-6 fw-normal font-monospace"># Display Degraded image</span>
                         </div>
                     </div>
                     <div class="row">
@@ -285,7 +315,7 @@ $(document).ready(function () {
                             <code>cv2.imshow('Wiener-Restored Image', wiener_restoration)</code>
                         </div>
                         <div class="col col-4 justify-content-start">
-                            <span># Display Wiener-Restored image</span>
+                            <span class="text-muted text-center fs-6 fw-normal font-monospace"># Display Wiener-Restored image</span>
                         </div>
                     </div>
                     <div class="col col-8 d-flex justify-content-start">
@@ -297,7 +327,7 @@ $(document).ready(function () {
                     <div class="mb-3"></div>
 
                     <div class="col col-12 justify-content-start">
-                        <span># Save the Wiener-restored image</span>
+                        <span class="text-muted text-center fs-6 fw-normal font-monospace"># Save the Wiener-restored image</span>
                     </div>
                     <div class="col col-12 d-flex justify-content-start">
                         <code>cv2.imwrite('wiener_restored_image.jpg', wiener_restoration)</code>

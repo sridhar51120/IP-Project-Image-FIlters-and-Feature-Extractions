@@ -27,7 +27,7 @@ $(document).ready(function () {
                                             packages on
                                             your system.</p>
                                         <div class="card">
-                                            <div class="card-body btn btn-download-requirements-file-system-requirements d-flex justify-content-start text-dark" data-toggle="tooltip" data-placement="top" title="Shows the What all are the requirements needed to run the particular code in our System" >
+                                            <div class="card-body btn btn-download-requirements-file-system-requirements d-flex justify-content-start text-dark border border-success" data-toggle="tooltip" data-placement="top" title="Shows the What all are the requirements needed to run the particular code in our System" >
                                             <b>Show Requirements</b>
                                             </div>
                                         </div>
@@ -65,13 +65,16 @@ $(document).ready(function () {
                                                     requirement.txt File</button>
     
                                             </div>
-                                            <br>
                                             <div class="card card-body">
-                                                Copy the ablove Content and create <b>requirement.txt</b> and Paste it to
-                                                that
-                                                file and
-                                                run the below command in our
-                                                system
+                                                <p>Copy the ablove Content and create <b>requirement.txt</b> and Paste it to that file and run the below command in
+                                                    our system </p>
+                                                <br>
+                                                <div class="d-flex justify-content-center">
+                                                    ( or )
+                                                </div>
+                                                <br>
+                                                <p> Download the <b> requirement.txt </b> file execute the Below command ti install the required packages to run the codes
+                                                </p>
                                             </div>
                                             <br>
                                             <div class="card card-body">

@@ -22,10 +22,21 @@ $(document).ready(function () {
             $(submit_image).click(function () {
                 const input_image = document.getElementById('hough-tansform-input-image');
                 if (input_image.files.length > 0) {
+                    const alert_msg = `
+                    <div class="toast bg-success alert-container-body" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="false">
+                        <div class="toast-body">
+                            <div class="container">
+                                <div class="text-center text-dark ">
+                                    <strong class="mr-auto">Processing<br>Please Wait a Few Seconds...</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>`;
+                    $('.alert-container').append(alert_msg);
+                    $('.alert-container-body').toast('show');
                     const fileName = input_image.files[0].name;
                     // alert(fileName);
                     if (/\.(jpg|png)$/i.test(fileName)) {
-                        $('#hough-tansform-image-modal').modal('hide');
                         $.ajax({
                             url: '/filters3/hough_trasform_output',
                             type: 'POST',
@@ -36,6 +47,8 @@ $(document).ready(function () {
                                 // console.log('Server response:', response);
                                 // console.log('Data : ', data);
 
+                                $('#hough-tansform-image-modal').modal('hide');
+                                $('#hough-tansform-image-modal').remove();
                                 $('.hough-transform-input-image-collapse').append(data['template']);
                                 $('.output-hough-transform-toggle-groups').collapse({
                                     toggle: false
@@ -77,14 +90,33 @@ $(document).ready(function () {
                                 });
                             },
                             error: function (xhr, status, error) {
-                                // console.log('XHR status:', status);
-                                // console.log('XHR error:', error);
+                                $('.alert-container-body').remove();
+                                const alert_msg = `
+                                    <div class="toast bg-primary alert-container-body" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-body">
+        <div class="container">
+            <div class="text-center text-dark ">
+                <strong class="mr-auto">
+                    An error occurred during the processing of your image.
+                    <br>Please provide another image to receive the output.
+                    <br>Your Image Doesn't support our Machine so provide another image to get the to receive the
+                    output</strong>
+            </div>
+        </div>
+    </div>
+</div>`;
+                                $('.alert-container').append(alert_msg);
+                                $('.alert-container-body').toast('show');
+                                $('.alert-container-body').on('hidden.bs.toast', function () {
+                                    $('.alert-container-body').remove();
+                                });
                             },
                             complete: function (xhr, status) {
                                 // console.log('Request complete. XHR status:', status);
                             }
                         });
                     } else {
+                        $('.alert-container-body').remove();
                         const alert_msg = `
                         <div class="toast bg-primary alert-container-body" role="alert" aria-live="assertive" aria-atomic="true">
                             <div class="toast-body">
@@ -142,7 +174,7 @@ $(document).ready(function () {
         $('#hough-transform-matlab-code').remove();
         let content = `                <div class="container" id="hough-transform-python-code">
                 <div class="mb-1"></div>
-                <div class="col col-12 d-flex justify-content-start"><span># Import Required Library</span>
+                <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace"># Import Required Library</span>
                 </div>
                 <div class="col col-12 d-flex justify-content-start">
                     <code>import cv2</code>
@@ -154,12 +186,12 @@ $(document).ready(function () {
                     <code>from matplotlib import pyplot as plt</code>
                 </div>
                 <div class="mb-3"></div>
-                <div class="col col-12 d-flex justify-content-start"><span># Read the image </span></div>
+                <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace"># Read the image </span></div>
                 <div class="col col-12 d-flex justify-content-start">
                     <code>image = cv2.imread('path_to_your_image.jpg', 0)                       </code>
                 </div>
                 <div class="mb-3"></div>
-                <div class="col col-12 d-flex justify-content-start"><span># Apply edge detection (can use Canny or
+                <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace"># Apply edge detection (can use Canny or
                         other edge detectors)</span>
                 </div>
                 <div class="col col-12 d-flex justify-content-start">
@@ -167,7 +199,7 @@ $(document).ready(function () {
                     </code>
                 </div>
                 <div class="mb-3"></div>
-                <div class="col col-12 d-flex justify-content-start"><span>
+                <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace">
                         # Apply Hough Line Transform
                     </span>
                 </div>
@@ -175,7 +207,7 @@ $(document).ready(function () {
                     <code>lines = cv2.HoughLines(edges, 1, np.pi / 180, 200)  # Adjust parameters as needed</code>
                 </div>
                 <div class="mb-3"></div>
-                <div class="col col-12 d-flex justify-content-start"><span>
+                <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace">
                         # Draw detected lines on a copy of the original image
                     </span>
                 </div>
@@ -230,7 +262,7 @@ $(document).ready(function () {
                     </code>
                 </div>
                 <div class="mb-3"></div>
-                <div class="col col-12 d-flex justify-content-start"><span>
+                <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace">
                         # Display the Hough Transform image
                     </span>
                 </div>
@@ -257,19 +289,19 @@ $(document).ready(function () {
         $('#hough-transform-python-code').remove();
         let content = `                <div class="container" id="hough-transform-matlab-code">
                 <div class="mb-1"></div>
-                <div class="col col-12 d-flex justify-content-start"><span>% Read the image</span>
+                <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace">% Read the image</span>
                 </div>
                 <div class="col col-12 d-flex justify-content-start">
                     <code>image = imread('path_to_your_image.jpg');</code>
                 </div>
                 <div class="mb-3"></div>
-                <div class="col col-12 d-flex justify-content-start"><span>% Convert the image to grayscale</span>
+                <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace">% Convert the image to grayscale</span>
                 </div>
                 <div class="col col-12 d-flex justify-content-start">
                     <code>gray_image = rgb2gray(image);                      </code>
                 </div>
                 <div class="mb-3"></div>
-                <div class="col col-12 d-flex justify-content-start"><span>% Apply edge detection (e.g., Canny or
+                <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace">% Apply edge detection (e.g., Canny or
                         other edge detectors)</span>
                 </div>
                 <div class="col col-12 d-flex justify-content-start">
@@ -277,7 +309,7 @@ $(document).ready(function () {
                     </code>
                 </div>
                 <div class="mb-3"></div>
-                <div class="col col-12 d-flex justify-content-start"><span>
+                <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace">
                         % Apply Hough Transform for lines
                     </span>
                 </div>
@@ -285,7 +317,7 @@ $(document).ready(function () {
                     <code>[H, theta, rho] = hough(edges);</code>
                 </div>
                 <div class="mb-3"></div>
-                <div class="col col-12 d-flex justify-content-start"><span>
+                <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace">
                         % Find peaks in Hough space
                     </span>
                 </div>
@@ -293,7 +325,7 @@ $(document).ready(function () {
                     <code>P = houghpeaks(H, 10);  % Adjust the number of peaks as needed</code>
                 </div>
                 <div class="mb-3"></div>
-                <div class="col col-12 d-flex justify-content-start"><span>
+                <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace">
                         % Extract lines from Hough space using peak values
                     </span>
                 </div>
@@ -301,7 +333,7 @@ $(document).ready(function () {
                     <code>lines = houghlines(edges, theta, rho, P);</code>
                 </div>
                 <div class="mb-3"></div>
-                <div class="col col-12 d-flex justify-content-start"><span>
+                <div class="col col-12 d-flex justify-content-start"><span class="text-muted text-center fs-6 fw-normal font-monospace">
                         % Display the detected lines on the original image
                     </span>
                 </div>
