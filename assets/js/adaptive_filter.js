@@ -79,6 +79,7 @@ $(document).ready(function () {
                                         interval: 500
                                     }).show();
                                 });
+
                                 $('.btn-download-img-adaptive-filter').click(function () {
                                     const a = document.createElement("a");
                                     a.href = `${data['Adaptive_filter']}`;
@@ -87,6 +88,7 @@ $(document).ready(function () {
                                     a.click();
                                     document.body.removeChild(a);
                                 });
+
                                 $('.btn-window-localtion-reload').click(function () {
                                     location.reload();
                                     $('html, body').animate({
